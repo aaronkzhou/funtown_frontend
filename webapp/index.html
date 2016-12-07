@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- build:css assets/css/funtown.min.css -->
+        <link rel="stylesheet" type="text/css" href="assets/lib/font-awesome/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/lib/bootstrap/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/funtown.css">
+        <!-- endbuild -->
+    </head>
+    <body ng-cloak>
+        <div>            
+            <header class="ft-header">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="/">Funtown</a>
+                    </div>
+                    <div class="header-right">
+                        <div class="ft-top-nav">
+                            <a class="ft-cart" ui-sref="cart">          
+                                <img class="icon" src="assets/images/cart.png">                          
+                                <span class="ft-cart-text sm-hidden">Cart</span>
+                                <span class="ft-badge ft-badge-cart">0</span>
+                            </a>
+                            <a ui-sref="login">
+                                <img class="icon" src="assets/images/user.png">Login
+                            </a>    
+                        </div>                        
+                    </div>
+                    <div class="header-middle">                        
+                            <div class="search-box">                                
+                                <input type="text" placeholder="Search funtown">
+                                <div class="search-button">
+                                    <i class="fa fa-lg fa-search"></i>
+                                </div>
+                            </div>                        
+                    </div>
+                </div>
+            </header>    
+            <nav class="navbar navbar-default" role="navigation" bs-navbar>                    
+                <div class="collapse navbar-collapse">
+                    <div class="container">
+                        <ul class="navbar-nav nav">     
+                            <li class="col-md-3" ui-sref-active="active"><a ui-sref="buy">Buy</a></li>
+                            <li class="col-md-3" ui-sref-active="active"><a ui-sref="manage.addProduct">Sell</a></li>
+                            <li class="col-md-3"  ui-sref-active="active"><a ui-sref="look"="">Look For</a></li>
+                            <li class="col-md-3" ui-sref-active="active"><a ui-sref="manage.home">My Funtown</a></li>
+                        </ul>   
+                    </div>
+                </div>
+            </nav>                                 
+            <main>            
+                <div data-ui-view></div>
+            </main>
+        </div>
+        <!--build:js assets/js/funtown.min.js -->            
+            <script src="assets/lib/angular/angular.js"></script>
+            <script src="assets/lib/angular-strap/angular-strap.js"></script>
+            <script src="assets/lib/angular/angular-ui-router.js"></script>            
+
+            <script src="app/application.js"></script>
+
+            <script src="app/modules/manage/manage.module.js"></script>    
+            <script src="app/modules/manage/manage.routes.js"></script>
+
+            <script src="app/modules/account/account.module.js"></script>    
+            <script src="app/modules/account/account.routes.js"></script>
+
+            <script src="app/modules/buying/buying.module.js"></script>    
+            <script src="app/modules/buying/buying.routes.js"></script>
+
+            <script src="app/modules/selling/selling.module.js"></script> 
+            <script src="app/modules/selling/controllers/products-view.controller.js"></script> 
+
+        <!-- endbuild -->
+    </body>
+</html>
