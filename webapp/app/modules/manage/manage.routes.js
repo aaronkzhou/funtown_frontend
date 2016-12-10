@@ -26,7 +26,7 @@ angular.module('manage').config(['$stateProvider',
 		})
 		.state('manage.watchlist',{
 			url:'/watchlist',
-			templateUrl:'app/modules/buying/views/orders.view.html'
+			templateUrl:'app/modules/buying/views/watchlist.view.html'
 		})
 		.state('manage.shippingAddress',{
 			url:'/shippingAddress',
