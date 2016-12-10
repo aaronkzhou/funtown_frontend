@@ -1,3 +1,4 @@
 # Funtown Web Project
 
-[Project Wiki] (https://gitlab.com/funtown/funtown-wiki/wikis/home)
+Project documentation can be found in 
+[Project Wiki (funtown-wiki project)] (https://gitlab.com/funtown/funtown-wiki/wikis/home)
