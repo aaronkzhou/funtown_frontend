@@ -1,0 +1,22 @@
+<h3>Category</h3>
+<div class="title">
+	<h5>Choose category</h4>
+</div>
+<div class="content">
+	<div class="path">
+		<ul>
+			<li data-ng-repeat="categoryList in categoryPath"><a data-ng-click="showCategory(categoryList)"><span data-ng-bind="categoryList.categoryName"></span></a></li>
+		</ul>
+	</div><br><br>
+	<div class="options">
+		<ul>
+			<li data-ng-repeat="category in categories"><a data-ng-click="selectCategory(category)" ><span data-ng-bind="category.categoryName"></span></a></li>
+		</ul>
+	</div>
+	<div class="result">
+		<h3>You choose: <span data-ng-bind="product.category.categoryName" data-ng-model="finalCategory" data-ng-change="checkFinish()"></span></h3>
+	</div>
+</div>
+<div class="submit">
+	<button class="btn btn-default" data-ng-disabled="finishButton" ui-sref="manage.addProduct.step2">Next</button>
+</div>
