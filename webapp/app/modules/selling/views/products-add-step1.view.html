@@ -1,22 +1,33 @@
-<h3>Category</h3>
-<div class="title">
-	<h5>Choose category</h4>
-</div>
-<div class="content">
-	<div class="path">
-		<ul>
-			<li data-ng-repeat="categoryList in categoryPath"><a data-ng-click="showCategory(categoryList)"><span data-ng-bind="categoryList.categoryName"></span></a></li>
-		</ul>
-	</div><br><br>
-	<div class="options">
-		<ul>
-			<li data-ng-repeat="category in categories"><a data-ng-click="selectCategory(category)" ><span data-ng-bind="category.categoryName"></span></a></li>
-		</ul>
-	</div>
-	<div class="result">
-		<h3>You choose: <span data-ng-bind="product.category.categoryName" data-ng-model="finalCategory" data-ng-change="checkFinish()"></span></h3>
-	</div>
-</div>
-<div class="submit">
-	<button class="btn btn-default" data-ng-disabled="finishButton" ui-sref="manage.addProduct.step2">Next</button>
+<div class="col-md-12">
+    <div class="ft-card ft-card-no-margin">
+        <h4>
+            Category
+        </h4>
+        <div class="ft-multiselect col-md-6">
+            <div class="ft-multiselect-title">
+                Choose a category for your listing
+            </div>
+            <ul class="ft-multiselect-selected">
+                <li data-ng-repeat="categoryList in categoryPath">
+                	<i class="fa fa-angle-right" data-ng-if="$index"></i>
+                    <a  href="" data-ng-click="showCategory(categoryList)" data-ng-disabled="isLast($index)">
+                        <span data-ng-bind="categoryList.categoryName"></span>
+                    </a>                    
+                </li>
+            </ul>
+            <ul class="ft-multiselect-options">
+                <li data-ng-repeat="category in categories">
+                    <a data-ng-click="selectCategory(category)" href="" data-ng-class="{active:isSelectCategory(category.categoryId)}">
+                        <span data-ng-bind="category.categoryName"></span>
+                        <i class="fa fa-chevron-right pull-right" data-ng-if="category.childrenCount" ></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-default" data-ng-disabled="finishButton" ui-sref="manage.addProduct.step2">
+                Next
+            </button>
+        </div>
+    </div>
 </div>

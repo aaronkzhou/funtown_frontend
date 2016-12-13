@@ -13,7 +13,7 @@ a{
 	color: #333;
 	position: relative;
 	background: transparent;
-	&:hover,&:focus,&:active{
+	&:hover,&:focus,&:active,&.active{
 		text-decoration: none;
 		color: #f60;
 	}	
@@ -148,7 +148,7 @@ a{
 	padding-left: 250px;
 
 	h3{
-		padding: 0 15px;
+		padding: 0px;
 	}
 
 	.ft-main-title{
@@ -161,9 +161,10 @@ a{
 }
 
 .ft-card{	
+	display: table;
+	width: 100%;
 	margin:15px 0;
-	background: #fff;
-	 
+	background: #fff;	 
 	border: 1px solid #e9e9e9;
 	.ft-card-title{
 		text-align: center;
@@ -179,6 +180,11 @@ a{
 		min-height: 250px;
 	}
 
+	&.ft-card-no-margin{
+		margin:0;
+		padding: 15px;
+	}
+
 	.ft-profile{
 		padding: 15px;		
 	}
@@ -192,6 +198,50 @@ a{
 		padding: 5px 15px; 
 	}
 
+}
+
+.ft-steps{
+	background: #fafafa;
+	padding: 15px;
+	display: table;
+    width: 100%;
+    border: 1px solid #e9e9e9;
+
+    a{
+    	display: inline-block;
+    	border-right: 1px solid #e6e6e6;
+    	font-size: 0.8em;
+    	text-align: center;
+    }
+    a:last-child{
+    	border-right: 0;
+    }
+
+    .ft-step-num{
+		display: block;
+		vertical-align: middle;
+		text-align: center;
+		width: 25px;
+		height: 25px;	
+    	line-height: 1.6em;
+		border: 1px solid #e6e6e6;
+		border-radius:50%; 
+		margin: auto;		
+    }    
+	.ft-step-text{
+		margin-top: 5px;
+		display: block;
+	}
+	.active {
+		.ft-step-num{
+			background: #f60;
+			border: 1px solid #f60;
+			color:#fff;
+		}
+		.ft-step-text{
+			color: #f60;
+		}
+	}
 }
 
 .ft-badge{
@@ -244,4 +294,53 @@ a{
 }
 .nav-tab-body{
 	border-top: 2px solid #e62e04;	
+}
+.ft-multiselect{
+	margin: 10px -15px;
+	.ft-multiselect-title{
+		background: #e9e9e9;		
+		padding:15px;		
+	}	
+	.ft-multiselect-options {
+		list-style: none;
+		border:1px solid #e9e9e9;
+    	padding: 0;
+    	max-height: 300px;
+    	overflow: hidden;
+    	overflow: scroll; 
+
+		li {
+			padding:0;
+			a{			
+				display: block;
+				width: 100%;
+				border-bottom:1px solid #e9e9e9;
+				padding:15px;
+			}
+			a.active{
+		    	background-color: #f2f2f2;		
+    			color:#f60;
+			}			
+		}	
+	}
+	.ft-multiselect-selected{
+		background: #fafafa;
+		list-style: none;
+		border:1px solid #e9e9e9;
+		margin: 0;
+		padding: 0;
+		padding: 0 10px; 
+		li {
+			padding:0;
+			display: inline-block;
+			a{			
+				display: inline-block;
+				padding:15px 5px;
+			}		
+			a[disabled]{
+				color: #f60;
+				cursor: default;
+			}				
+		}		
+	}
 }

@@ -12,7 +12,7 @@ a {
   color: #333;
   position: relative;
   background: transparent; }
-  a:hover, a:focus, a:active {
+  a:hover, a:focus, a:active, a.active {
     text-decoration: none;
     color: #f60; }
 
@@ -110,7 +110,7 @@ a {
 .ft-main-content {
   padding-left: 250px; }
   .ft-main-content h3 {
-    padding: 0 15px; }
+    padding: 0px; }
   .ft-main-content .ft-main-title {
     height: 40px;
     line-height: 2;
@@ -119,6 +119,8 @@ a {
     width: 100%; }
 
 .ft-card {
+  display: table;
+  width: 100%;
   margin: 15px 0;
   background: #fff;
   border: 1px solid #e9e9e9; }
@@ -132,6 +134,9 @@ a {
     color: #fff; }
   .ft-card.ft-card-ht {
     min-height: 250px; }
+  .ft-card.ft-card-no-margin {
+    margin: 0;
+    padding: 15px; }
   .ft-card .ft-profile {
     padding: 15px; }
   .ft-card .ft-profile-member {
@@ -140,6 +145,39 @@ a {
     border-right: 1px solid #e9e9e9; }
   .ft-card li {
     padding: 5px 15px; }
+
+.ft-steps {
+  background: #fafafa;
+  padding: 15px;
+  display: table;
+  width: 100%;
+  border: 1px solid #e9e9e9; }
+  .ft-steps a {
+    display: inline-block;
+    border-right: 1px solid #e6e6e6;
+    font-size: 0.8em;
+    text-align: center; }
+  .ft-steps a:last-child {
+    border-right: 0; }
+  .ft-steps .ft-step-num {
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    line-height: 1.6em;
+    border: 1px solid #e6e6e6;
+    border-radius: 50%;
+    margin: auto; }
+  .ft-steps .ft-step-text {
+    margin-top: 5px;
+    display: block; }
+  .ft-steps .active .ft-step-num {
+    background: #f60;
+    border: 1px solid #f60;
+    color: #fff; }
+  .ft-steps .active .ft-step-text {
+    color: #f60; }
 
 .ft-badge {
   float: right;
@@ -180,3 +218,42 @@ a {
 
 .nav-tab-body {
   border-top: 2px solid #e62e04; }
+
+.ft-multiselect {
+  margin: 10px -15px; }
+  .ft-multiselect .ft-multiselect-title {
+    background: #e9e9e9;
+    padding: 15px; }
+  .ft-multiselect .ft-multiselect-options {
+    list-style: none;
+    border: 1px solid #e9e9e9;
+    padding: 0;
+    max-height: 300px;
+    overflow: hidden;
+    overflow: scroll; }
+    .ft-multiselect .ft-multiselect-options li {
+      padding: 0; }
+      .ft-multiselect .ft-multiselect-options li a {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #e9e9e9;
+        padding: 15px; }
+      .ft-multiselect .ft-multiselect-options li a.active {
+        background-color: #f2f2f2;
+        color: #f60; }
+  .ft-multiselect .ft-multiselect-selected {
+    background: #fafafa;
+    list-style: none;
+    border: 1px solid #e9e9e9;
+    margin: 0;
+    padding: 0;
+    padding: 0 10px; }
+    .ft-multiselect .ft-multiselect-selected li {
+      padding: 0;
+      display: inline-block; }
+      .ft-multiselect .ft-multiselect-selected li a {
+        display: inline-block;
+        padding: 15px 5px; }
+      .ft-multiselect .ft-multiselect-selected li a[disabled] {
+        color: #f60;
+        cursor: default; }

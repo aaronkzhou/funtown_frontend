@@ -2,7 +2,7 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
 	function($scope,$http) {	
 	$scope.product = {};
 	// disable the submit button
-	finishButton = true;
+	$scope.finishButton = true;
 	// define the root category
 	$scope.categoryPath = [
 		{
@@ -36,7 +36,11 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
 			$scope.product.category = category;
 		}	
     }
-    	//when click the categories from path div
+
+    $scope.isSelectCategory = function(id){
+    	return $scope.product.category && $scope.product.category.categoryId === id;
+    }
+    //when click the categories from path div
     $scope.showCategory = function(categoryList){
 
     	$scope.product.category ={} ;
@@ -51,12 +55,16 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
 			})
     }
 
+    $scope.isLast = function(index){
+    	return index === $scope.categoryPath.length-1;
+    }
+
     checkFinish = function(finalCategory){
 
     	if(finalCategory) {
-    		finishButton = false;
+    		$scope.finishButton = false;
     	} 
-    	return finishButton;
+    	return $scope.finishButton;
     }
 
  }
