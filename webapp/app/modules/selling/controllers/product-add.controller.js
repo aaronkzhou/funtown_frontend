@@ -1,6 +1,9 @@
 angular.module('selling').controller('AddProduct', ['$scope','$http',
 	function($scope,$http) {	
+	// define the new product	
 	$scope.product = {};
+	// define a varible to store the final category customer chose
+	var finalCategory ;
 	// disable the submit button
 	$scope.finishButton = true;
 	// define the root category
@@ -17,13 +20,15 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
 
 		$scope.categories = response.data;
 	})
-	
-		// when click the categories from option div
+
+	// when click the categories from option div
 	$scope.selectCategory = function(category){	
 
 		if(category.childrenCount > 0){
 
 			$scope.product.category ={} ;
+			finalCategory = false;
+			checkFinish(finalCategory);
 
 			$scope.categoryPath.push(category);
 
@@ -34,6 +39,8 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
 		}else {
 
 			$scope.product.category = category;
+			finalCategory = category.categoryName;
+			checkFinish(finalCategory);
 		}	
     }
 
@@ -44,6 +51,8 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
     $scope.showCategory = function(categoryList){
 
     	$scope.product.category ={} ;
+		finalCategory = false;
+		checkFinish(finalCategory);
 
     	var index = $scope.categoryPath.indexOf(categoryList);
     	
@@ -63,10 +72,10 @@ angular.module('selling').controller('AddProduct', ['$scope','$http',
 
     	if(finalCategory) {
     		$scope.finishButton = false;
-    	} 
-    	return $scope.finishButton;
+    	} else {
+    		$scope.finishButton = true;
+    	}
+    	return $scope.finishButton;   	
     }
-
  }
-
 ])
