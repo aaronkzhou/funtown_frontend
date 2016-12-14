@@ -8,16 +8,16 @@
                 Choose a category for your listing
             </div>
             <ul class="ft-multiselect-selected">
-                <li data-ng-repeat="categoryList in categoryPath">
+                <li data-ng-repeat="path in categoryPath">
                 	<i class="fa fa-angle-right" data-ng-if="$index"></i>
-                    <a  href="" data-ng-click="showCategory(categoryList)" data-ng-disabled="isLast($index)">
-                        <span data-ng-bind="categoryList.categoryName"></span>
+                    <a  href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)">
+                        <span data-ng-bind="path.categoryName"></span>
                     </a>                    
                 </li>
             </ul>
             <ul class="ft-multiselect-options">
                 <li data-ng-repeat="category in categories">
-                    <a data-ng-click="selectCategory(category)" href="" data-ng-class="{active:isSelectCategory(category.categoryId)}">
+                    <a data-ng-click="selectCategory(category)" href="" data-ng-class="{active:isSelected(category.categoryId)}">
                         <span data-ng-bind="category.categoryName"></span>
                         <i class="fa fa-chevron-right pull-right" data-ng-if="category.childrenCount" ></i>
                     </a>
@@ -25,7 +25,7 @@
             </ul>
         </div>
         <div class="col-md-12">
-            <button class="btn btn-default" data-ng-disabled="finishButton" ui-sref="manage.addProduct.step2">
+            <button class="btn btn-default" data-ng-disabled="enableNext()" ui-sref="manage.addProduct.step2">
                 Next
             </button>
         </div>

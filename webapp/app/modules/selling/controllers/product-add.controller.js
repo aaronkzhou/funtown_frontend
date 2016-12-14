@@ -1,81 +1,58 @@
-angular.module('selling').controller('AddProduct', ['$scope','$http',
-	function($scope,$http) {	
-	// define the new product	
-	$scope.product = {};
-	// define a varible to store the final category customer chose
-	var finalCategory ;
-	// disable the submit button
-	$scope.finishButton = true;
-	// define the root category
+angular.module('selling').controller('AddProduct', ['$scope','$http','AddProductService',
+	function($scope,$http,AddProductService) {	
+	
+	$scope.product = {};	
+		
+	// root category
 	$scope.categoryPath = [
 		{
 			categoryId:0,
-			categoryName:'All categories',
-			parentId:99,
-			childrenCount:2
+			categoryName:'All categories'
 		}
 	];
-		// get the level one categories from server
-	$http.get('/rest/api/categories').then(function(response){
 
-		$scope.categories = response.data;
-	})
+	AddProductService.getRootCategories().then(function(categories){
+		$scope.categories  = categories
+	});
 
-	// when click the categories from option div
+
+	// select the category if no children present or drill down to child categories
 	$scope.selectCategory = function(category){	
-
+		$scope.product.category = null;
 		if(category.childrenCount > 0){
-
-			$scope.product.category ={} ;
-			finalCategory = false;
-			checkFinish(finalCategory);
-
 			$scope.categoryPath.push(category);
-
-			$http.get('/rest/api/categories/' + category.categoryId).then(function(response){
-				
-				$scope.categories = response.data;
-			})
+			AddProductService.getCategories(category).then(function(categories){
+				$scope.categories  = categories
+			});
 		}else {
-
 			$scope.product.category = category;
-			finalCategory = category.categoryName;
-			checkFinish(finalCategory);
 		}	
     }
 
-    $scope.isSelectCategory = function(id){
+    // goTo the selected parent category and show its child categories
+    $scope.goTo = function(path){    	
+    	$scope.product.category = null;
+    	var index = $scope.categoryPath.indexOf(path);
+    	$scope.categoryPath.splice(index+1, $scope.categoryPath.length - index);     	
+		AddProductService.getCategories(path).then(function(categories){
+			$scope.categories  = categories
+		});
+    }
+
+    // check if the category is selected
+    $scope.isSelected = function(id){
     	return $scope.product.category && $scope.product.category.categoryId === id;
     }
-    //when click the categories from path div
-    $scope.showCategory = function(categoryList){
 
-    	$scope.product.category ={} ;
-		finalCategory = false;
-		checkFinish(finalCategory);
-
-    	var index = $scope.categoryPath.indexOf(categoryList);
-    	
-    	$scope.categoryPath.splice(index+1, 1);
-    	
-    	$http.get('/rest/api/categories/' + categoryList.categoryId).then(function(response){
-				
-				$scope.categories = response.data;
-			})
-    }
-
-    $scope.isLast = function(index){
+	// check if the path is last
+    $scope.isLastPath = function(index){
     	return index === $scope.categoryPath.length-1;
     }
 
-    checkFinish = function(finalCategory){
-
-    	if(finalCategory) {
-    		$scope.finishButton = false;
-    	} else {
-    		$scope.finishButton = true;
-    	}
-    	return $scope.finishButton;   	
+    // check if the next button should be enabled
+    $scope.enableNext = function(){
+    	console.log($scope.product.category)
+    	return !($scope.product.category && $scope.product.category.categoryId);
     }
  }
 ])
