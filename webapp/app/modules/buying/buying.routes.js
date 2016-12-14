@@ -1,3 +1,4 @@
+'use strict';
 angular.module('buying').config(['$stateProvider',
 	function($stateProvider) {
 		$stateProvider

@@ -1,40 +1,40 @@
-angular.module('selling').service('AddProductService', ['$http', '$q',
-	function($http,$q){
+'use strict';
+angular.module('selling').service('AddProductService', ['$log','$http', '$q',
+	function($log,$http,$q){
 		var categories = [];
 
 		this.getRootCategories = function(){
-			console.log("getRootCategories");
 			var deferred = $q.defer();
 			if(categories.length){
-				console.log("returning from cache");
-				children = getChildren(0);
+				$log.debug("returning root categories from cache");
+				//the root categories have a parentId of zero 0
+				var children = getChildren(0);
 				deferred.resolve(children); 
 			}else{
-				console.log("obtaining from server");
+				$log.debug("obtaining root categories from server");
 				$http.get('/rest/api/categories').then(function(response) {
+	            	deferred.resolve(response.data);     	
 	            	categories = response.data; 
-	            	console.log(categories);  
-	            	deferred.resolve(categories);     	
+	            	$log.debug("AddProductService::categories=",categories);  
 	        	})		
 			}
         	return deferred.promise;
 		}	
 
 		this.getCategories = function(category){	
-			console.log("getCategories");	
 			var deferred = $q.defer();			
 			var children = getChildren(category.categoryId);
 			
-			if(children.length){
-				console.log("returning from cache");
-				console.log(children);				
+			if(children && children.length){
+				$log.debug("returning child categories from cache");
+				$log.debug(children);				
 				deferred.resolve(children);
 			}else if(category){				
-				console.log("obtaining from server");	
+				$log.debug("obtaining child categories from server");	
 				$http.get('/rest/api/categories/' + category.categoryId).then(function(response){
 					deferred.resolve(response.data);
 					categories.push.apply(categories,response.data); 
-					console.log(categories);
+					$log.debug("AddProductService::categories=" , categories);
 				})
 			}	
 			return deferred.promise;		

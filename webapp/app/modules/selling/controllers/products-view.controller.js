@@ -1,3 +1,4 @@
+'use strict';
 angular.module('selling').controller('ProductsView', ['$scope', 
 	function($scope){
 		var productsViewCtrl = this;
