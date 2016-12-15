@@ -16,6 +16,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','$http'
 		$scope.selectCategory = function(category){	
 			$log.debug('selectCategory');
 			$scope.product.category = null;
+			$scope.updoStepCompleted(1);
 			if(category.childrenCount > 0){
 				$scope.categoryPath.push(category);
 				AddProductService.getCategories(category).then(function(categories){
@@ -23,12 +24,14 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','$http'
 				});
 			}else {
 				$scope.product.category = category;
+				$scope.stepCompleted(1);
 			}	
 	    }
 
 	    // goTo the selected parent category and show its child categories
 	    $scope.goTo = function(path){    	
 	    	$scope.product.category = null;
+	    	$scope.updoStepCompleted(1);
 	    	var index = $scope.categoryPath.indexOf(path);
 	    	$scope.categoryPath.splice(index+1, $scope.categoryPath.length - index);     	
 			getPathCategories(path);

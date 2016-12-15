@@ -8,6 +8,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Add
 			$log.debug('Init AddProduct controller');
 			$scope.product = {};	
 			$scope.categories = [];			
+			$scope.stepsCompleted =0;
 			// root category. The root categories have a parentId of zero 0
 			$scope.categoryPath = [
 				{
@@ -19,6 +20,20 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Add
 			AddProductService.getRootCategories().then(function(categories){
 				$scope.categories  = categories
 			});
+		}
+
+		$scope.updoStepCompleted = function(step){
+			$scope.stepsCompleted = step-1;	
+		}
+
+		$scope.stepCompleted = function(step){
+			if($scope.stepsCompleted < step){
+				$scope.stepsCompleted = step;	
+			}			
+		}
+
+		$scope.isStepDeactive = function(step){
+			return step > $scope.stepsCompleted+1;
 		}
 
 		init();

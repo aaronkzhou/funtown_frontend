@@ -15,6 +15,10 @@ a {
   a:hover, a:focus, a:active, a.active {
     text-decoration: none;
     color: #f60; }
+  a[disabled] {
+    color: #e6e6e6;
+    cursor: not-allowed;
+    pointer-events: none; }
 
 .ft-header {
   position: relative;
@@ -157,27 +161,28 @@ a {
     border-right: 1px solid #e6e6e6;
     font-size: 0.8em;
     text-align: center; }
+    .ft-steps a .ft-step-num {
+      display: block;
+      vertical-align: middle;
+      text-align: center;
+      width: 25px;
+      height: 25px;
+      line-height: 1.6em;
+      background: #f2f2f2;
+      border: 1px solid #e6e6e6;
+      border-radius: 50%;
+      margin: auto; }
+    .ft-steps a .ft-step-text {
+      margin-top: 5px;
+      display: block; }
+    .ft-steps a.active .ft-step-num, .ft-steps a.active:hover .ft-step-num {
+      background: #f60;
+      border: 1px solid #f60;
+      color: #fff; }
+    .ft-steps a.active .ft-step-text, .ft-steps a.active:hover .ft-step-text {
+      color: #f60; }
   .ft-steps a:last-child {
     border-right: 0; }
-  .ft-steps .ft-step-num {
-    display: block;
-    vertical-align: middle;
-    text-align: center;
-    width: 25px;
-    height: 25px;
-    line-height: 1.6em;
-    border: 1px solid #e6e6e6;
-    border-radius: 50%;
-    margin: auto; }
-  .ft-steps .ft-step-text {
-    margin-top: 5px;
-    display: block; }
-  .ft-steps .active .ft-step-num {
-    background: #f60;
-    border: 1px solid #f60;
-    color: #fff; }
-  .ft-steps .active .ft-step-text {
-    color: #f60; }
 
 .ft-badge {
   float: right;
@@ -255,5 +260,4 @@ a {
         display: inline-block;
         padding: 15px 5px; }
       .ft-multiselect .ft-multiselect-selected li a[disabled] {
-        color: #f60;
-        cursor: default; }
+        color: #f60; }
