@@ -13,5 +13,11 @@
 				<li><span data-ng-bind="attribute.attributeType"></span> : <span data-ng-bind="attribute.attributeValue"></span></li>
 			</ul>
 		</div>
+		<div class="col-md-12">
+			<button class="btn btn-default" ui-sref="manage.addProduct.step1">Prev</button>
+            <button class="btn btn-default" data-ng-disabled="enableNext()" ui-sref="manage.addProduct.step3">
+                Next
+            </button>
+        </div>
 	</div>
 </div>		
