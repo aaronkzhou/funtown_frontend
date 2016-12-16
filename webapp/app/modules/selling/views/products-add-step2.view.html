@@ -4,7 +4,11 @@
 		<h5><span data-ng-bind="product.category.categoryName"></span>&nbsp;&nbsp;Catalogue</h5><br>
 		<div class="form-group">
 			<label>Search for your catalogue</label>
-			<input type="text" class="form-control" data-ng-model="selectedCatalogue" data-min-length="1" data-auto-select="true" bs-options="catalogue.title as catalogue.title for catalogue in getCatalogue($viewValue)" placeholder="Enter catalogue" onSelect=showDetail() bs-typeahead>
+			<input type="text" class="form-control" data-ng-model="selectedCatalogue" data-min-length="1" data-auto-select="true" bs-options="catalogue as catalogue.title for catalogue in getCatalogue($viewValue)" placeholder="Enter catalogue" bs-typeahead>
+		</div>
+		<div data-ng-show="isCatalogue(selectedCatalogue)">
+			<h3>Title: <span data-ng-bind="selectedCatalogue.title"></span></h3>
+			<h4>CatalogueId: <span data-ng-bind="selectedCatalogue.catalogId"></span></h4>
 		</div>
 	</div>
 </div>		

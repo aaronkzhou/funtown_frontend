@@ -12,15 +12,13 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			var params = viewValue;
 			return $http.get('/rest/api/catalogues/search?catId=' + selectedCategory + '&title=' + params)
 			.then(function(response){
-				return response.data;
-				
+				return response.data;		
 			})
 		}
-		
-		$scope.showDetail = function(){
-			return true;
-			console.log("result")
-		}		
-		
+				
+		$scope.isCatalogue = function(selectedCategory){
+			return $scope.selectedCatalogue.title && $scope.selectedCatalogue.catalogId; 
+		}
+	
 	}
 ])
