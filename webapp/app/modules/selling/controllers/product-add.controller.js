@@ -1,12 +1,13 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','AddProductService',
-	function($log,$scope,$http,AddProductService) {	
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','AddProductService','AttributeService',
+	function($log,$scope,$http,AddProductService,AttributeService) {	
 
 		$log.debug("AddProduct controller");
 		
 		function init(){		
-			$log.debug('Init AddProduct controller');
+			$log.debug('AddProduct controller::init');
 			$scope.product = {};	
+
 			$scope.categories = [];	
 			$scope.catalogueDetail = [];		
 			$scope.stepsCompleted =0;
@@ -25,16 +26,25 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Add
 
 		$scope.updoStepCompleted = function(step){
 			$scope.stepsCompleted = step-1;	
-		}
+		}		
 
 		$scope.stepCompleted = function(step){
 			if($scope.stepsCompleted < step){
 				$scope.stepsCompleted = step;	
-			}			
+			}
 		}
 
 		$scope.isStepDeactive = function(step){
 			return step > $scope.stepsCompleted+1;
+		}
+
+		$scope.cancel = function(){
+			$log.debug("cancel");
+			$scope.product = {};			
+		}
+
+		$scope.saveDraft = function(){
+			$log.debug("saveDraft");
 		}
 
 		init();

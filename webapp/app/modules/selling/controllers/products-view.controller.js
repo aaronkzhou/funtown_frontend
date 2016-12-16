@@ -1,6 +1,9 @@
 'use strict';
-angular.module('selling').controller('ProductsView', ['$scope', 
-	function($scope){
+angular.module('selling').controller('ProductsView', ['$log','$scope',
+	function($log,$scope){
+
+		$log.debug("ProductsView controller");
+
 		var productsViewCtrl = this;
 
 		$scope.tabs = [

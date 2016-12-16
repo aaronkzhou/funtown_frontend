@@ -1,5 +1,77 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Information</h4>
+		<h4>Product Information</h4>
+		<div class="ft-data-form">			
+			<div class="row">
+				<label class="col-md-3">
+					Code
+				</label>
+				<input size="25" type="text" class="form-control" name="code" ng-model="product.code" placeholder="Auto-generated if left blank">
+			</div>
+			<div class="row">
+				<label class="col-md-3">
+					SKU
+				</label>
+				<input size="25" type="text" class="form-control" name="sku" ng-model="product.code" placeholder="Optional">
+			</div>
+			<div class="row">
+				<label class="col-md-3">
+					Stock
+				</label>
+				<input type="text" size="5" class="form-control" name="stock" ng-model="product.stock">
+				&nbsp;&nbsp; or &nbsp;&nbsp; 
+				<input type="checkbox" size="5" name="unlimited" ng-model="product.unlimited"> &nbsp;&nbsp;Unlimited
+			</div>
+			<div class="separator"></div>
+			<div class="row">
+				<label class="col-md-3">
+					Description
+				</label>
+				<textarea class="form-control" cols="40" rows="6" name="description" ng-model="product.description"></textarea>
+			</div>		
+			<div class="separator"></div>
+			<div class="row">
+				<label class="col-md-3">
+					Region
+				</label>
+				<button type="button" class="btn btn-select" ng-model="product.region" bs-options="region.value as region.display for region in regions" bs-select>
+  				 Region<span class="caret"></span>
+			</div>
+			<div class="row">
+				<label class="col-md-3">
+					No. of discs
+				</label>
+				<button type="button" class="btn btn-select" ng-model="product.discs" bs-options="disc as disc for disc in discs" bs-select>
+  				 Discs<span class="caret"></span>
+			</div>
+			<div class="row">
+				<label class="col-md-3">
+					Condition
+				</label>
+				<button type="button" class="btn btn-select" ng-model="product.condition" bs-options="condition.value as condition.display for condition in conditions" bs-select>
+  				 Condition<span class="caret"></span>
+			</div>
+			<div class="row">
+				<label class="col-md-3">
+					NZ Classification
+				</label>
+				<button type="button" class="btn btn-select" ng-model="product.classification" bs-options="classification.value as classification.display for classification in classifications" bs-select>
+  				 NZ Classifications<span class="caret"></span>
+			</div>
+		</div>	
+		<div class="ft-card-footer col-md-12 text-center">
+            <button class="btn" ui-sref="manage.addProduct.step2">
+                <i class="fa fa-chevron-left"></i> Previous 
+            </button>
+            <button class="btn" data-ng-click="saveDraft()">
+                <i class="fa fa-file-text"></i> Save Draft 
+            </button>
+            <button class="btn" data-ng-click="cancel()">
+                <i class="fa fa-trash"></i> Cancel
+            </button>
+            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step4">
+                Next <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
 	</div>
 </div>

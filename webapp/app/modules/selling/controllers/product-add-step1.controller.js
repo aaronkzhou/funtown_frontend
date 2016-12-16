@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('AddProductStep1', ['$log','$scope','$http','AddProductService',
-	function($log,$scope,$http,AddProductService) {	
+angular.module('selling').controller('AddProductStep1', ['$log','$scope','AddProductService',
+	function($log,$scope,AddProductService) {	
 		$log.debug('AddProductStep1 controller');
 		$log.debug('AddProductStep1',$scope.categories);
 
@@ -55,7 +55,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','$http'
 	    }
 
 	    // check if the next button should be enabled
-	    $scope.enableNext = function(){
+	    $scope.isNextDisabled = function(){
 	    	return !($scope.product.category && $scope.product.category.categoryId);
 	    }
 

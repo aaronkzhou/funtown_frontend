@@ -66,27 +66,29 @@ angular.module('manage').config(['$stateProvider',
 			abstract : true,
 			templateUrl:'app/modules/selling/views/products-add.view.html'
 		})
-		.state('manage.addProduct.step1',{
-			url:'/step1',	
+		.state('manage.addProduct.step1',{	
+			url:'/addProduct/step1',
 			controller:'AddProductStep1',		
 			templateUrl:'app/modules/selling/views/products-add-step1.view.html'
 		})
 		.state('manage.addProduct.step2',{
-			url:'/step2',
-			controller:'AddProductStep2',
+			url:'/addProduct/step2',
+			controller:'AddProductStep2',	
 			templateUrl:'app/modules/selling/views/products-add-step2.view.html'
 		})
 		.state('manage.addProduct.step3',{
-			url:'/step3',
+			url:'/addProduct/step3',
+			controller:'AddProductStep3',
 			templateUrl:'app/modules/selling/views/products-add-step3.view.html'
 		})
 		.state('manage.addProduct.step4',{
-			url:'/step4',
 			templateUrl:'app/modules/selling/views/products-add-step4.view.html'
 		})
 		.state('manage.addProduct.step5',{
-			url:'/step5',
 			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
+		})
+		.state('manage.addProduct.step6',{
+			templateUrl:'app/modules/selling/views/products-add-step6.view.html'
 		})
 	}
 ])

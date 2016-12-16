@@ -2,7 +2,7 @@
 angular.module('selling').service('AddProductService', ['$log','$http', '$q',
 	function($log,$http,$q){
 		var categories = [];
-
+		
 		this.getRootCategories = function(){
 			var deferred = $q.defer();
 			if(categories.length){

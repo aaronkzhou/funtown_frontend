@@ -24,9 +24,15 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-12">
-            <button class="btn btn-default" data-ng-disabled="enableNext()" ui-sref="manage.addProduct.step2">
-                Next
+        <div class="ft-card-footer col-md-12 text-center">
+            <button class="btn" data-ng-click="saveDraft()">
+                <i class="fa fa-file-text"></i> Save Draft 
+            </button>
+            <button class="btn" data-ng-click="cancel()">
+                <i class="fa fa-trash"></i> Cancel
+            </button>
+            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step2">
+                Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>
     </div>

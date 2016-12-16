@@ -24,12 +24,61 @@ a{
 			}	
 }
 
+label{
+	color: #333;
+}
+
+.form-control{
+	width: auto;
+}
+.dropdown-menu > li{
+	padding: 0px!important;
+}
+.dropdown-menu > li a{
+	cursor: pointer;
+
+	&:hover{		
+		background: transparent;
+		color:#f60;
+	}
+}
+.dropdown-menu > li.active{
+	a, a:hover{		
+		background-color: #f2f2f2;		
+	   	color:#f60;
+	}
+}
+.btn , .btn:focus,.btn:hover,.btn[diabled]:hover{
+	background: #e62e04;
+    color: #fff;
+    border: 1px solid #e62e04;
+    border-radius:0 
+}
+.btn-select,.btn-select:focus,.btn-select:hover,.btn-select[diabled]:hover{
+	background: #fff;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	min-width: 175px;
+	text-align: left;
+	.caret{
+		float: right;
+		margin-top: 9px;
+	}
+}
+.form-control{
+	box-shadow: none;
+	border: 1px solid #ccc;
+	display: inline-block;
+}
+
+
 .ft-header{
 	position: relative;
 	width: 100%;
 	height: 70px;
 	background-color:#fff;
-	border-bottom: 1px solid #e8e8e8; 
+	border-bottom: 1px solid #e9e9e9; 
 
 	.header-left{
 		position: relative;
@@ -94,7 +143,7 @@ a{
 	background: #fff;
 	border-radius: 0;
 	border: 0;
-	border-bottom: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e9e9e9;
 	margin-bottom: 0;
 	.navbar-nav{
 		width: 100%;
@@ -150,7 +199,10 @@ a{
 }
 
 .ft-main-content{
+	display: table;
+	width: 100%;
 	padding-left: 250px;
+	padding-bottom: 60px;
 
 	h3{
 		padding: 0px;
@@ -181,6 +233,14 @@ a{
 	    color: #fff;
 	}
 
+	.ft-card-footer{
+		padding: 15px;
+		width: calc(100% + 30px);
+		margin: 30px 0px -15px -15px;	
+		border-top: 2px solid #e9e9e9;
+		background: #fafafa;
+	}
+
 	&.ft-card-ht{
 		min-height: 250px;
 	}
@@ -201,6 +261,13 @@ a{
 
 	li{
 		padding: 5px 15px; 
+	}
+
+	.separator{
+		margin: 15px 0;
+		width: 100%;
+		display: block;
+		border-bottom: 1px solid #e9e9e9; 
 	}
 
 }
@@ -311,8 +378,19 @@ a{
 .nav-tab-body{
 	border-top: 2px solid #e62e04;	
 }
+.ft-data-form{
+	padding: 15px;
+
+	.row{
+		padding:10px 0;
+
+		label{
+
+		}
+	}
+}
 .ft-multiselect{
-	margin: 10px -15px;
+	margin: 10px 0px;
 	.ft-multiselect-title{
 		background: #e9e9e9;		
 		padding:15px;		
