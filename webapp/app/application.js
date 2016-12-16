@@ -3,7 +3,7 @@
 var applicationName = "funtown"
 
 
-var mainModule = angular.module(applicationName,['mgcrea.ngStrap.tab','ui.router','manage','account','buying','selling']);
+var mainModule = angular.module(applicationName,['mgcrea.ngStrap.typeahead','ui.router','manage','account','buying','selling']);
 
 	
 mainModule.config(['$locationProvider', '$urlRouterProvider', '$logProvider','$provide',

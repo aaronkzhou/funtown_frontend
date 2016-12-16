@@ -1,5 +1,10 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Title</h4>
+		<h4>Title</h4><hr>
+		<h5><span data-ng-bind="product.category.categoryName"></span>&nbsp;&nbsp;Catalogue</h5><br>
+		<div class="form-group">
+			<label>Search for your catalogue</label>
+			<input type="text" class="form-control" data-ng-model="selectedCatalogue" data-min-length="1" data-auto-select="true" bs-options="catalogue.title as catalogue.title for catalogue in getCatalogue($viewValue)" placeholder="Enter catalogue" onSelect=showDetail() bs-typeahead>
+		</div>
 	</div>
 </div>		
