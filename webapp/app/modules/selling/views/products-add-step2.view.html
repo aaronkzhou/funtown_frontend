@@ -6,17 +6,25 @@
 			<label>Search for your catalogue</label>
 			<input type="text" class="form-control" data-ng-model="selectedCatalogue" data-min-length="1" data-auto-select="true" bs-options="catalogue as catalogue.title for catalogue in getCatalogue($viewValue)" placeholder="Enter catalogue" bs-on-select="showDetail" bs-typeahead>
 		</div>
-		<div data-ng-show="isCatalogue(selectedCatalogue)">
-			<h4>Title: <span data-ng-bind="catalogueDetail[0].title"></span></h4>
-			<h4>Description: <span data-ng-bind="catalogueDetail[0].description"></span></h4>
-			<ul data-ng-repeat="attribute in catalogueDetail[0].catalogAttributes">
+		<div data-ng-show="isCatalogue()">
+			<h4>Title: <span data-ng-bind="product.catalogueDetail[0].title"></span></h4>
+			<h4>Description: <span data-ng-bind="product.catalogueDetail[0].description"></span></h4>
+			<ul data-ng-repeat="attribute in product.catalogueDetail[0].catalogAttributes">
 				<li><span data-ng-bind="attribute.attributeType"></span> : <span data-ng-bind="attribute.attributeValue"></span></li>
 			</ul>
 		</div>
-		<div class="col-md-12">
-			<button class="btn btn-default" ui-sref="manage.addProduct.step1">Prev</button>
-            <button class="btn btn-default" data-ng-disabled="enableNext()" ui-sref="manage.addProduct.step3">
-                Next
+		<div class="ft-card-footer col-md-12 text-center">
+			<button class="btn" ui-sref="manage.addProduct.step1">
+                <i class="fa fa-chevron-left"></i> Previous 
+            </button>
+            <button class="btn" data-ng-click="saveDraft()">
+                <i class="fa fa-file-text"></i> Save Draft 
+            </button>
+            <button class="btn" data-ng-click="cancel()">
+                <i class="fa fa-trash"></i> Cancel
+            </button>
+            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step3">
+                Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>
 	</div>

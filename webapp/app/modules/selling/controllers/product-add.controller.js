@@ -8,8 +8,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Add
 			$log.debug('AddProduct controller::init');
 			$scope.product = {};	
 
-			$scope.categories = [];	
-			$scope.catalogueDetail = [];		
+			$scope.categories = [];			
 			$scope.stepsCompleted =0;
 			// root category. The root categories have a parentId of zero 0
 			$scope.categoryPath = [
