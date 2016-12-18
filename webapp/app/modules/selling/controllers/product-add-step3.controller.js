@@ -25,7 +25,7 @@ angular.module('selling').controller('AddProductStep3', ['$log','$scope','Attrib
 		// check if the next button should be enabled
 	    $scope.isNextDisabled = function(){
 	    	$log.debug('isNextDisabled controller');
-	    	return true;
+	    	return false;
 	    }
 
 	    function getDiscAttribute(max){
