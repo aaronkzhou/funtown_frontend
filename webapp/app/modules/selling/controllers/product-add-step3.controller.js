@@ -1,13 +1,13 @@
 'use strict';
 angular.module('selling').controller('AddProductStep3', ['$log','$scope','AttributeService',
 	function($log,$scope,AttributeService){
+		var STEP_NO = 3;
 		$log.debug('AddProductStep3 controller');
 
 		function init(){		
 			$log.debug("AddProductStep3::init");		
-			$scope.discs=getDiscAttribute(10);		
-			
-			$log.debug("discs",$scope.discs);
+			$scope.discs=getDiscAttribute(10);
+
 			if($scope.product.category){
 				$scope.regions = AttributeService.getAttributesFor('region',$scope.product.category.categoryId);
 				$scope.conditions = AttributeService.getAttributesFor('condition',$scope.product.category.categoryId);

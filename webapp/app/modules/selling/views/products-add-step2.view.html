@@ -1,18 +1,58 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Title</h4><hr>
-		<h5><span data-ng-bind="product.category.categoryName"></span>&nbsp;&nbsp;Catalogue</h5><br>
-		<div class="form-group">
-			<label>Search for your catalogue</label>
-			<input type="text" class="form-control" data-ng-model="selectedCatalogue" data-min-length="1" data-auto-select="true" bs-options="catalogue as catalogue.title for catalogue in getCatalogue($viewValue)" placeholder="Enter catalogue" bs-on-select="showDetail" bs-typeahead>
+		<h4 data-ng-bind="product.category.categoryName + ' Catalog'"></h4>
+		<div class="ft-data-form">
+			<div class="row">
+				<label class="col-md-12">
+					<input type="radio" name="catalogType" value="auto" data-ng-model="product.catalogType" checked data-ng-click="catalogTypeChange()"> Search the funtown <span data-ng-bind="product.category.categoryName"> </span> catalog
+				</label>
+				<div class="col-md-12">
+					<input type="text" size="50" class="form-control" data-ng-model="selectedCatalog" data-min-length="1" data-auto-select="true" bs-options="catalog as catalog.title for catalog in getCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" bs-on-select="showCatalogDetail" bs-typeahead>
+				</div>
+			</div>
+			<div class="row">	
+				<label class="col-md-12">
+					<input type="radio" name="catalogType" value="manual" data-ng-model="product.catalogType" data-ng-click="catalogTypeChange()"> Setup product manually
+				</label>
+			</div>		
+			<!-- Auto Details-->
+			<div data-ng-if="showAutoDetails()">
+				<div class="separator"></div>				
+				<div class="row">	
+					<label class="col-md-3">
+						Title
+					</label>
+					<div data-ng-bind="product.catalog.title"></div>
+				</div>
+				<div class="row" data-ng-repeat="attribute in product.catalog.catalogAttributes">	
+					<label class="col-md-3" data-ng-bind="attribute.attributeType"></label>
+					<input size="50" type="text" class="form-control" name="title" ng-model="attribute.attributeValue">
+				</div>
+			</div>
+			<!-- Manuall details form-->
+			<div data-ng-if="showManualDetails()">
+				<div class="separator"></div>				
+				<div class="row">	
+					<label class="col-md-3">
+						Title
+					</label>
+					<input size="50" type="text" class="form-control" name="title" ng-model="product.catalog.title">
+				</div>
+				<div class="row">	
+					<label class="col-md-3">
+						Description
+					</label>
+					<textarea class="form-control" cols="48" rows="6" name="description" ng-model="product.catalog.description"></textarea>
+				</div>
+			</div>
 		</div>
-		<div data-ng-show="isCatalogue()">
-			<h4>Title: <span data-ng-bind="product.catalogueDetail[0].title"></span></h4>
-			<h4>Description: <span data-ng-bind="product.catalogueDetail[0].description"></span></h4>
-			<ul data-ng-repeat="attribute in product.catalogueDetail[0].catalogAttributes">
+		<!-- <div data-ng-show="hasCatalogue()">
+			<h4>Title: <span data-ng-bind="product.catalog.title"></span></h4>
+			<h4>Description: <span data-ng-bind="product.catalog.description"></span></h4>
+			<ul data-ng-repeat="attribute in product.catalog.catalogAttributes">
 				<li><span data-ng-bind="attribute.attributeType"></span> : <span data-ng-bind="attribute.attributeValue"></span></li>
 			</ul>
-		</div>
+		</div> -->
 		<div class="ft-card-footer col-md-12 text-center">
 			<button class="btn" ui-sref="manage.addProduct.step1">
                 <i class="fa fa-chevron-left"></i> Previous 

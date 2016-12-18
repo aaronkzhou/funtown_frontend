@@ -1,54 +1,24 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Pricing & Fixed Price Offer</h4>
-		<div class="ft-data-form">
-			<div class="row">
-				<div class="col-md-offset-3">	
-					<input type="radio" checked="checked" class="form-control" data-ng-model="isBuynowOnly" data-ng-value="pricingOption.buyNowOnly">&nbsp;&nbsp;List as buy now only
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-offset-3">	
-					<input type="radio" class="form-control" data-ng-model="isBuynowOnly" data-ng-value="pricingOption.bid">&nbsp;&nbsp;List as auction
-				</div>
-			</div>	
-			<div class="row" data-ng-if="!isBuynowOnly">
+		<h4>Pricing & Payment</h4>
+		<div class="ft-data-form">		
+			<div class="row">				
 				<label class="col-md-3">
-					Start price
-				</label>
-				<input type="text" size="15" class="form-control" name="startPrice" data-ng-model="product.startPrice">	
-			</div>
-			<div class="row" data-ng-if="!isBuynowOnly">
-				<label class="col-md-3">
-					Specify reserve 
-				</label>
-				<input type="text" size="15" class="form-control" name="reservePrice" data-ng-model="product.reservePrice" placeholder="Same as start">
-			</div>
-			<div class="row">
-				<label class="col-md-3">
-					Buy now
+					Product Price
 				</label>
 				<input type="text" size="15" class="form-control" name="buyNowPrice" data-ng-model="product.buyNowPrice" required>
-			</div>
+			</div>					
+			<div class="separator"></div>		
 			<div class="row">
-				<div class="col-md-offset-3">
-					<label>
-						<input type="checkbox" class="form-control" data-ng-model="product.isAuthenticatedOnly">
-						&nbsp;&nbsp;<span>Only allow bids from Authenticated members</span>
-					</label>
-				</div>
-			</div>
-			<div class="separator"></div>
-			<h4>Accepted Payment Types</h4>
-			<div class="row">
-				<div class="col-md-offset-3" data-ng-repeat="paymentMethod in paymentMethods">
-					<input type="checkbox" class="form-control" data-ng-model="paymentMethod.value" ng-click="addpaymentMethod()">&nbsp;&nbsp;
+				<label class="col-md-12">Accepted Payment Types</label>	
+				<div class="col-md-12" data-ng-repeat="paymentMethod in paymentMethods">
+					<input type="checkbox" data-ng-model="product.paymentMethods[paymentMethod.value]" ng-click="addpaymentMethod()">&nbsp;&nbsp;
 					<span data-ng-bind="paymentMethod.display"></span>
-					{{paymentMethod.display}}
 				</div>
-			</div>			
-		</div>
-		<div class="ft-card-footer col-md-12 text-center">
+			</div>				
+			{{product}}
+	    </div>    
+	    <div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step3">
                 <i class="fa fa-chevron-left"></i> Previous 
             </button>

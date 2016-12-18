@@ -3,26 +3,30 @@
         <h4>
             Category
         </h4>
-        <div class="ft-multiselect col-md-6">
-            <div class="ft-multiselect-title">
-                Choose a category for your listing
-            </div>
-            <ul class="ft-multiselect-selected">
-                <li data-ng-repeat="path in categoryPath">
-                	<i class="fa fa-angle-right" data-ng-if="$index"></i>
-                    <a  href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)">
-                        <span data-ng-bind="path.categoryName"></span>
-                    </a>                    
-                </li>
-            </ul>
-            <ul class="ft-multiselect-options">
-                <li data-ng-repeat="category in categories">
-                    <a data-ng-click="selectCategory(category)" href="" data-ng-class="{active:isSelected(category.categoryId)}">
-                        <span data-ng-bind="category.categoryName"></span>
-                        <i class="fa fa-chevron-right pull-right" data-ng-if="category.childrenCount" ></i>
-                    </a>
-                </li>
-            </ul>
+        <div class="ft-data-form">
+            <div class="row">
+                <div class="ft-multiselect col-md-6">                
+                    <div class="ft-multiselect-title">
+                        Choose a category for your listing
+                    </div>
+                    <ul class="ft-multiselect-selected">
+                        <li data-ng-repeat="path in categoryPath">
+                        	<i class="fa fa-angle-right" data-ng-if="$index"></i>
+                            <a  href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)">
+                                <span data-ng-bind="path.categoryName"></span>
+                            </a>                    
+                        </li>
+                    </ul>
+                    <ul class="ft-multiselect-options">
+                        <li data-ng-repeat="category in categories">
+                            <a data-ng-click="selectCategory(category)" href="" data-ng-class="{active:isSelected(category.categoryId)}">
+                                <span data-ng-bind="category.categoryName"></span>
+                                <i class="fa fa-chevron-right pull-right" data-ng-if="category.childrenCount" ></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
         </div>
         <div class="ft-card-footer col-md-12 text-center">
             <button class="btn" data-ng-click="saveDraft()">
