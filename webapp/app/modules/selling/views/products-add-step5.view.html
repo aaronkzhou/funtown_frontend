@@ -1,0 +1,20 @@
+<div class="col-md-12">
+	<div class="ft-card ft-card-no-margin">
+		<h4>Shipping options</h4>
+		
+	</div>
+	<div class="ft-card-footer col-md-12 text-center">
+            <button class="btn" ui-sref="manage.addProduct.step4">
+                <i class="fa fa-chevron-left"></i> Previous 
+            </button>
+            <button class="btn" data-ng-click="saveDraft()">
+                <i class="fa fa-file-text"></i> Save Draft 
+            </button>
+            <button class="btn" data-ng-click="cancel()">
+                <i class="fa fa-trash"></i> Cancel
+            </button>
+            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step6">
+                Next <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+</div>

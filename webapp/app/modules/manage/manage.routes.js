@@ -87,6 +87,8 @@ angular.module('manage').config(['$stateProvider',
 			templateUrl:'app/modules/selling/views/products-add-step4.view.html'
 		})
 		.state('manage.addProduct.step5',{
+			url:'/addProduct/step5',
+			controller:'AddProductStep5',
 			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
 		})
 		.state('manage.addProduct.step6',{

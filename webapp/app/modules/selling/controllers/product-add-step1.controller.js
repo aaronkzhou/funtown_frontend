@@ -41,7 +41,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','AddPro
 	    	$scope.product.catalog = null;
 	    	$scope.updoStepCompleted(STEP_NO);
 	    	var index = $scope.categoryPath.indexOf(path);
-	    	$scope.categoryPath.splice(index+1, $scope.categoryPath.length - index);     	
+	    	$scope.categoryPath.splice(index+1, $scope.categoryPath.length - index -1);     	
 			getPathCategories(path);
 	    }
 
