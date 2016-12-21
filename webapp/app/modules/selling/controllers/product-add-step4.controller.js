@@ -8,7 +8,7 @@ angular.module('selling').controller('AddProductStep4', ['$log','$scope','Attrib
 			
 			if($scope.product.category){
 				$scope.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.product.category.categoryId);
-				$log.debug($scope.paymentMethods);
+				$scope.offerDurations = AttributeService.getAttributesFor('offerDurations',$scope.product.category.categoryId);
 			}else{
 				$log.warn("Category not yet set.");
 			}	

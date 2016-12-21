@@ -172,6 +172,8 @@ label {
   margin: 15px 0;
   background: #fff;
   border: 1px solid #e9e9e9; }
+  .ft-card h4 {
+    text-transform: capitalize; }
   .ft-card .ft-card-title {
     text-align: center;
     margin: 0;
@@ -285,6 +287,8 @@ label {
   width: 100%; }
   .ft-data-form .row {
     padding: 10px 0; }
+  .ft-data-form .ft-form-list {
+    padding: 5px 15px; }
   .ft-data-form b {
     max-width: 100%;
     margin-bottom: 5px; }
@@ -339,6 +343,10 @@ label {
 
 .ft-details-data {
   display: table-cell; }
+  .ft-details-data.starring:after {
+    content: ', et al.';
+    color: #cccccc;
+    display: inline-block; }
 
 .ft-catalog-poster {
   border: 1px solid #e9e9e9; }

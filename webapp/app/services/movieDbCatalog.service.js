@@ -1,6 +1,10 @@
 'use strict';
 angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q','$filter',
 	function($log,$http,$q,$filter){		
+		var MAX_CAST_COUNT = 3;
+		var DIRECTOR_DEPARTMENT = 'Directing';
+		var DIRECTOR_JOB = 'Director'
+
 		//search the title in themoviedb.org
 		this.getCatalog = function(search) {
 			$log.debug("movieDbCatalogService::getCatalogue - ",search);			
@@ -11,10 +15,9 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 		this.getCatalogDetails = function(catalogId) {
 			$log.debug("movieDbCatalogService::getCatalogDetails - ",catalogId);			
 			var deferred = $q.defer();
-			$http.get('http://api.themoviedb.org/3/movie/'+ catalogId + ' +?api_key=2f789345b59491d1513056e609ee3c84')
+			$http.get('http://api.themoviedb.org/3/movie/'+ catalogId + ' +?append_to_response=credits&api_key=2f789345b59491d1513056e609ee3c84')
 			.then(function(response){				
 				var catalog = processResult(response);
-				$log.debug("Resolving")
 				deferred.resolve(catalog);	
 			})
 			return deferred.promise;
@@ -24,13 +27,12 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 			title:{tag:'title',isAttribute:false},
 			movieDbId:{tag:'id',isAttribute:false},
 			year:{tag:'release_date',isAttribute:true,preProcessor:formatYear},
+			genres:{tag:'genres',isAttribute:true,preProcessor:processGenres},			
 			plot:{tag:'overview',isAttribute:true},
-			genres:{tag:'genres',isAttribute:true},			
+			director:{tag:'credits',isAttribute:true,preProcessor:processDirector},
+			starring:{tag:'credits',isAttribute:true,preProcessor:processCast},
+			runtime:{tag:'runtime',isAttribute:true,preProcessor:suffixRunTime},
 			poster:{tag:'poster_path',isAttribute:true},
-			runtime:{tag:'runtime',isAttribute:true},			
-			budget:{tag:'budget',isAttribute:true},
-			revenue:{tag:'revenue',isAttribute:true},
-			imdbId:{tag:'imdb_id',isAttribute:true},
 		}
 
 		function processResult(response){
@@ -55,8 +57,34 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 			return catalog;
 		}	
 
-		function formatYear(value){
-			return $filter('date')(value.replace('-',''),'yyyy');			
+		function formatYear(year){
+			return $filter('date')(year.replace('-',''),'yyyy');			
+		}
+
+		function suffixRunTime(runtime){
+			return runtime + " mins";
+		}
+
+		function processGenres(genres){			
+			return genres.map(function(genre){
+				return genre.name;
+			})
+		}
+
+		function processCast(credits){
+			return credits.cast.filter(function(actor,index){
+				return index < MAX_CAST_COUNT;
+			}).map(function(actor){
+				return actor.name;
+			})
+		}
+
+		function processDirector(credits){
+			return credits.crew.filter(function(person){
+				return person.department === DIRECTOR_DEPARTMENT && person.job === DIRECTOR_JOB;
+			}).map(function(director){
+				return director.name;
+			})
 		}
 
 	}

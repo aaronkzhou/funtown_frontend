@@ -34,7 +34,7 @@
 				<label class="col-md-3">
 					Region
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.region" bs-options="region.value as region.display for region in regions" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" bs-select>
   				 Region<span class="caret"></span>
 			</div>
 			<div class="row">
@@ -48,14 +48,14 @@
 				<label class="col-md-3">
 					Condition
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.condition" bs-options="condition.value as condition.display for condition in conditions" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" bs-select>
   				 Condition<span class="caret"></span>
 			</div>
 			<div class="row">
 				<label class="col-md-3">
 					NZ Classification
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.classification" bs-options="classification.value as classification.display for classification in classifications" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" bs-select>
   				 NZ Classifications<span class="caret"></span>
 			</div>
 		</div>	

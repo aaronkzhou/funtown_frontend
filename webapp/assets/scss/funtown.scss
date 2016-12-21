@@ -223,6 +223,10 @@ label{
 	margin:15px 0;
 	background: #fff;	 
 	border: 1px solid #e9e9e9;
+
+	h4{
+		text-transform: capitalize;
+	}
 	.ft-card-title{
 		text-align: center;
 	    margin: 0;
@@ -385,10 +389,9 @@ label{
 
 	.row{
 		padding:10px 0;
-
-		label{
-
-		}
+	}
+	.ft-form-list{
+		padding: 5px 15px;
 	}
 
 	b{
@@ -456,6 +459,12 @@ label{
 }
 .ft-details-data{
 	display: table-cell;
+
+	&.starring:after{
+		content: ', et al.';
+    	color: #cccccc;
+		display: inline-block;
+	}
 }
 .ft-catalog-poster{
 	border: 1px solid #e9e9e9;    

@@ -7,11 +7,24 @@
 					Product Price
 				</label>
 				<input type="text" size="15" class="form-control" name="buyNowPrice" data-ng-model="product.buyNowPrice" required>
+			</div>
+			<div class="row">				
+				<label class="col-md-3">
+					Offer Price
+				</label>
+				<input type="text" size="15" class="form-control" name="offerPrice" data-ng-model="product.offerPrice" required>
+			</div>	
+			<div class="row">				
+				<label class="col-md-3">
+					Offer Duration
+				</label>
+				<button type="button" class="btn btn-select" ng-model="product.offerDuration" bs-options="offerDuration.attributeId as offerDuration.display for offerDuration in offerDurations" bs-select>
+  				 Offer Duration<span class="caret"></span>
 			</div>					
 			<div class="separator"></div>		
 			<div class="row">
 				<label class="col-md-12">Accepted Payment Types</label>	
-				<div class="col-md-12" data-ng-repeat="paymentMethod in paymentMethods">
+				<div class="ft-form-list col-md-12" data-ng-repeat="paymentMethod in paymentMethods">
 					<input type="checkbox" data-ng-model="product.paymentMethods[paymentMethod.value]" ng-click="addpaymentMethod()">&nbsp;&nbsp;
 					<span data-ng-bind="paymentMethod.display"></span>
 				</div>

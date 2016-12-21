@@ -7,7 +7,7 @@
 					<input type="radio" name="catalogType" value="auto" data-ng-model="product.catalogType" checked data-ng-click="catalogTypeChange()"> Search product in funtown <span data-ng-bind="product.category.categoryName"> </span> catalog
 				</b>
 				<div class="col-md-12">
-					<input type="text" size="50" class="form-control" data-ng-model="selectedCatalog" data-auto-select="false" data-limit="8" bs-options="catalog as catalog.title for catalog in searchCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" data-ng-disabled="showManualDetails()" bs-on-select="showCatalogDetail" bs-typeahead>
+					<input type="text" size="50" class="form-control" data-ng-model="selectedCatalog" bs-options="catalog as catalog.title for catalog in searchCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" data-ng-disabled="showManualDetails()" bs-on-select="showCatalogDetail" data-auto-select="true"  data-limit="8" data-trim-value="false" ng-trim="false" bs-typeahead>
 					<small class="credit">Powered by themoviedb</small>
 				</div>
 			</div>
@@ -26,9 +26,9 @@
 						</label>
 						<div class="ft-details-data" data-ng-bind="product.catalog.title"></div>
 					</div>
-					<div class="row" data-ng-repeat="attribute in product.catalog.catalogAttributes" data-ng-if="isNotPoster(attribute)">	
+					<div class="row" data-ng-repeat="attribute in product.catalog.catalogAttributes" data-ng-if="isDisplayable(attribute)">	
 						<label class="col-md-3 ft-details-label" data-ng-bind="attribute.attributeType"></label>
-						<div class="ft-details-data" data-ng-bind="attribute.attributeValue"></div>
+						<div class="ft-details-data" data-ng-class="attribute.attributeType" data-ng-bind="attribute.attributeValue"></div>
 					</div>
 				</div>	
 				<div class="ft-catalog-preview col-md-4">

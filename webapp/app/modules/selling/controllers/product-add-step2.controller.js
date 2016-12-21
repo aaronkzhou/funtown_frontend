@@ -7,7 +7,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var rootCategory,catalogProcessor;
 
 		function init(){			
-			rootCategory = $scope.product.rootCategory
+			rootCategory = 'Movies'//$scope.product.rootCategory
 			$scope.selectedCatalog = {};	
 			
 			//Get the correct catalog processor
@@ -20,7 +20,9 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		// search title
 		$scope.searchCatalogue = function(search) {		
-			return catalogProcessor.searchCatalogue(search,rootCategory)				
+			if(search.length > 0){
+				return catalogProcessor.searchCatalogue(search,rootCategory);	
+			}	
 		}
 
 		
@@ -38,18 +40,20 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		function getPoster(){
 			$log.debug("getPoster");
+			$scope.poster = '';
 			if($scope.product.catalog && $scope.product.catalog.catalogAttributes){
 				$scope.product.catalog.catalogAttributes.forEach(function(catalogAttribute){					
 					if(catalogAttribute.attributeType === 'poster'){
 						$scope.poster = "http://image.tmdb.org/t/p/w185/" + catalogAttribute.attributeValue;
 					}
 				})
-			}			
+			}	
+			$log.debug($scope.poster);		
 		}
 
 		//show the row only if it is not a poster
-		$scope.isNotPoster = function(attribute){
-			return attribute.attributeType != 'poster';
+		$scope.isDisplayable = function(attribute){
+			return (attribute.attributeType != 'poster' && attribute.attributeType != 'imdbId');
 		}
 
 		// clear the selected catalog as another option is choosen
