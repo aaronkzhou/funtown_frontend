@@ -14,6 +14,10 @@ angular.module('selling').controller('AddProductStep4', ['$log','$scope','Attrib
 			}	
 		}
 		
+		$scope.showProduct = function(){
+			$log.debug($scope.product)
+		}
+
 		init();
 	}
 ])

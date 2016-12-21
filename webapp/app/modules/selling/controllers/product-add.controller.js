@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','AddProductService','AttributeService',
-	function($log,$scope,$http,AddProductService,AttributeService) {	
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
+	function($log,$scope,$http) {	
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		

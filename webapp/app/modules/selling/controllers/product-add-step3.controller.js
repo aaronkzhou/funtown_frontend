@@ -18,16 +18,16 @@ angular.module('selling').controller('AddProductStep3', ['$log','$scope','Attrib
 			}			
 		}
 
-		$scope.show = function(){
-			$log.debug("Showing");
+		// check if the catalog is created manual or using existing catalog (auto)
+		$scope.isAutoMode = function(){
+			return $scope.product.catalogType === 'auto' 
 		}
-
 		// check if the next button should be enabled
 	    $scope.isNextDisabled = function(){
-	    	$log.debug('isNextDisabled controller');
 	    	return false;
 	    }
 
+	    // create discs array 
 	    function getDiscAttribute(max){
 	    	var d =0;
 	    	var discs=[];

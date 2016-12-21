@@ -15,8 +15,7 @@
 					<input type="checkbox" data-ng-model="product.paymentMethods[paymentMethod.value]" ng-click="addpaymentMethod()">&nbsp;&nbsp;
 					<span data-ng-bind="paymentMethod.display"></span>
 				</div>
-			</div>				
-			{{product}}
+			</div>
 	    </div>    
 	    <div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step3">
@@ -28,7 +27,7 @@
             <button class="btn" data-ng-click="cancel()">
                 <i class="fa fa-trash"></i> Cancel
             </button>
-            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step5">
+            <button class="btn" data-ng-disabled="isNextDisabled()" data-ng-click="showProduct()" ui-sref="manage.addProduct.step5">
                 Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>

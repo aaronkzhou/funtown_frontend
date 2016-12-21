@@ -1,44 +1,70 @@
 'use strict';
-angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http','AddProductService',
-	function($log,$scope,$http,AddProductService) {
+angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http','CatalogFactory',
+	function($log,$scope,$http,CatalogFactory) {
+		$log.debug('AddProductStep2::controller',$scope.product);
+		
 		var STEP_NO = 2;
-		$log.debug('AddProductStep2 controller');
-		$log.debug('AddProductStep2',$scope.product.catalog);
-		
-		if($scope.product.category){
-			var selectedCategory = $scope.product.category.categoryId;
-			$scope.selectedCatalog = {};
+		var rootCategory,catalogProcessor;
+
+		function init(){			
+			rootCategory = $scope.product.rootCategory
+			$scope.selectedCatalog = {};	
+			
+			//Get the correct catalog processor
+			catalogProcessor = new CatalogFactory(rootCategory);	
+
+			if($scope.product.catalog){
+				getPoster(); 
+			}
 		}
 
-		$scope.getCatalogue = function(viewValue) {
-			var params = viewValue;
-			return $http.get('/rest/api/catalogues/search?catId=' + selectedCategory + '&title=' + params)
-			.then(function(response){
-				return response.data;		
-			})
+		// search title
+		$scope.searchCatalogue = function(search) {		
+			return catalogProcessor.searchCatalogue(search,rootCategory)				
 		}
+
 		
+		// get catalog details for the selected catalog Id
 		$scope.showCatalogDetail = function(){
-			$scope.updoStepCompleted(STEP_NO);
-			$http.get('/rest/api/catalogues/' + $scope.selectedCatalog.catalogId)
-			.then(function(response){
-					$scope.product.catalog = response.data;						
-					$scope.stepCompleted(STEP_NO);									
-			})
+			$log.debug("AddProductStep2::showCatalogDetail ",$scope.selectedCatalog);
+			catalogProcessor.getCatalogDetails($scope.selectedCatalog)
+				.then(function(catalog){		
+					$log.debug("AddProductStep2::showCatalogDetail - catalog " ,catalog);			
+					$scope.product.catalog = catalog;
+					getPoster();
+					$scope.stepCompleted(STEP_NO);
+				})
 		}
 
+		function getPoster(){
+			$log.debug("getPoster");
+			if($scope.product.catalog && $scope.product.catalog.catalogAttributes){
+				$scope.product.catalog.catalogAttributes.forEach(function(catalogAttribute){					
+					if(catalogAttribute.attributeType === 'poster'){
+						$scope.poster = "http://image.tmdb.org/t/p/w185/" + catalogAttribute.attributeValue;
+					}
+				})
+			}			
+		}
+
+		//show the row only if it is not a poster
+		$scope.isNotPoster = function(attribute){
+			return attribute.attributeType != 'poster';
+		}
+
+		// clear the selected catalog as another option is choosen
 		$scope.catalogTypeChange = function(){
 			$scope.product.catalog = null;
 			$scope.selectedCatalog = {};
 		}
 
+		// check if the database catalog details should be shown
 		$scope.showAutoDetails = function(){
-			$log.debug("showAutoDetails ",$scope.product.catalogType);
 			return $scope.product.catalogType === 'auto' && $scope.product.catalog;	
 		}
 
+		// check if the manual details form should be shown
 		$scope.showManualDetails = function(){
-			$log.debug("showManualDetails ",$scope.product.catalogType);
 			return $scope.product.catalogType === 'manual';	
 		}
 
@@ -52,5 +78,6 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			return $scope.product.catalog; 
 		}
 
+		init();
 	 }
 ])

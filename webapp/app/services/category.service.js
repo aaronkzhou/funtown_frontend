@@ -1,5 +1,5 @@
 'use strict';
-angular.module('selling').service('AddProductService', ['$log','$http', '$q',
+angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 	function($log,$http,$q){
 		var categories = [];
 		

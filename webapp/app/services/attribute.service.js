@@ -25,6 +25,7 @@ angular.module('funtown').service('AttributeService', ['$log','$http',
 		//get attributes matching the name and includesMatch has the matchId or includesMatch is none
 		this.getAttributesFor =  function(name,matchId){
 			$log.debug("getAttributesFor - ",name,matchId)
+			$log.debug(attributes);
 			if(attributes[name]){
 				return attributes[name].filter(function(atribute){
 					return (atribute.includeMatches==='None' || atribute.includeMatches.indexOf(matchId) > -1); 

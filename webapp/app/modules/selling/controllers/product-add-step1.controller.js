@@ -1,10 +1,9 @@
 'use strict';
-angular.module('selling').controller('AddProductStep1', ['$log','$scope','AddProductService',
-	function($log,$scope,AddProductService) {	
+angular.module('selling').controller('AddProductStep1', ['$log','$scope','CategoryService',
+	function($log,$scope,CategoryService) {	
+		$log.debug('AddProductStep1::controller');
+		
 		var STEP_NO = 1;
-		$log.debug('AddProductStep1 controller');
-		$log.debug('AddProductStep1',$scope.categories);
-
 
 		function init(){
 			//if category is alreday set get the child categories for the last path 
@@ -12,7 +11,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','AddPro
 			if($scope.product.category){
 				getPathCategories($scope.categoryPath[$scope.categoryPath.length-1]);
 			}else{
-				AddProductService.getRootCategories().then(function(categories){
+				CategoryService.getRootCategories().then(function(categories){
 					$scope.categories  = categories
 				});
 			}			
@@ -20,13 +19,18 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','AddPro
 
 		// select the category if no children present or drill down to child categories
 		$scope.selectCategory = function(category){	
-			$log.debug('selectCategory');
+			$log.debug('AddProductStep1::selectCategory - ',category);
 			$scope.product.category = null;
 			$scope.product.catalog = null;
 			$scope.updoStepCompleted(STEP_NO);
+
+			//if this is the root category set it on product
+			if(category.parentId===0){
+				$scope.product.rootCategory = category.categoryName;
+			}
 			if(category.childrenCount > 0){
 				$scope.categoryPath.push(category);
-				AddProductService.getCategories(category).then(function(categories){
+				CategoryService.getCategories(category).then(function(categories){
 					$scope.categories  = categories
 				});
 			}else {
@@ -47,7 +51,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','AddPro
 
 	    // get categories for a path
 	    function getPathCategories(path){
-	    	AddProductService.getCategories(path).then(function(categories){
+	    	CategoryService.getCategories(path).then(function(categories){
 				$scope.categories  = categories
 			});
 	    }				

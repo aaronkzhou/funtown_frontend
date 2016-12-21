@@ -6,13 +6,13 @@
 				<label class="col-md-3">
 					Code
 				</label>
-				<input size="25" type="text" class="form-control" name="code" ng-model="product.code" placeholder="Auto-generated if left blank">
+				<input size="25" type="text" class="form-control" name="code" ng-model="product.productCode" placeholder="Auto-generated if left blank">
 			</div>
 			<div class="row">
 				<label class="col-md-3">
 					SKU
 				</label>
-				<input size="25" type="text" class="form-control" name="sku" ng-model="product.code" placeholder="Optional">
+				<input size="25" type="text" class="form-control" name="sku" ng-model="product.SKU" placeholder="Optional">
 			</div>
 			<div class="row">
 				<label class="col-md-3">
@@ -22,40 +22,40 @@
 				&nbsp;&nbsp; or &nbsp;&nbsp; 
 				<input type="checkbox" size="5" name="unlimited" ng-model="product.unlimited"> &nbsp;&nbsp;Unlimited
 			</div>
-			<div class="separator"></div>
-			<div class="row">
+			<div class="separator" data-ng-if="isAutoMode()"></div>
+			<div class="row" data-ng-if="isAutoMode()">
 				<label class="col-md-3">
-					Description
+					Extra details
 				</label>
-				<textarea class="form-control" cols="40" rows="6" name="description" ng-model="product.description"></textarea>
+				<textarea class="form-control" cols="40" rows="6" name="extraDetails" ng-model="product.extraDetails"></textarea>
 			</div>		
 			<div class="separator"></div>
 			<div class="row">
 				<label class="col-md-3">
 					Region
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.region" bs-options="region.value as region.display for region in regions" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.region" bs-options="region.value as region.display for region in regions" bs-select>
   				 Region<span class="caret"></span>
 			</div>
 			<div class="row">
 				<label class="col-md-3">
 					No. of discs
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.discs" bs-options="disc as disc for disc in discs" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.discs" bs-options="disc as disc for disc in discs" bs-select>
   				 Discs<span class="caret"></span>
 			</div>
 			<div class="row">
 				<label class="col-md-3">
 					Condition
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.condition" bs-options="condition.value as condition.display for condition in conditions" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.condition" bs-options="condition.value as condition.display for condition in conditions" bs-select>
   				 Condition<span class="caret"></span>
 			</div>
 			<div class="row">
 				<label class="col-md-3">
 					NZ Classification
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.classification" bs-options="classification.value as classification.display for classification in classifications" bs-select>
+				<button type="button" class="btn btn-select" ng-model="product.productAttributes.classification" bs-options="classification.value as classification.display for classification in classifications" bs-select>
   				 NZ Classifications<span class="caret"></span>
 			</div>
 		</div>	

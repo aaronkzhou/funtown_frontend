@@ -390,6 +390,11 @@ label{
 
 		}
 	}
+
+	b{
+	    max-width: 100%;
+		margin-bottom: 5px;
+	}
 }
 .ft-multiselect{
 	margin: 0px 0px;
@@ -438,4 +443,27 @@ label{
 			}				
 		}		
 	}
+}
+.credit{
+	display: block;
+    font-size: 0.6em;
+    padding: 2px 13px;
+    color: #cccccc;
+}
+.ft-details-label{
+	display: table-cell;
+	text-transform: capitalize;
+}
+.ft-details-data{
+	display: table-cell;
+}
+.ft-catalog-poster{
+	border: 1px solid #e9e9e9;    
+}
+.ft-catalog-preview{
+	display: table-cell;
+    text-align: center;
+    margin: auto;
+    vertical-align: middle;
+    color:#e6e6e6;
 }
