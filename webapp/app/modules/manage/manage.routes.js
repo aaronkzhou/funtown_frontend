@@ -64,7 +64,12 @@ angular.module('manage').config(['$stateProvider',
 			url:'/addProduct',
 			controller:'AddProduct',
 			abstract : true,
-			templateUrl:'app/modules/selling/views/products-add.view.html'
+			templateUrl:'app/modules/selling/views/products-add.view.html',
+			resolve:{
+				AttributeService: function(AttributeService){
+					return AttributeService;
+				}
+			}
 		})
 		.state('manage.addProduct.step1',{	
 			url:'/addProduct/step1',

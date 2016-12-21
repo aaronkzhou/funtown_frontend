@@ -25,6 +25,8 @@ var MoviesCatalog = function(movieDbCatalogService,funtownCatalogService,log,q){
 	//Get details for selected catalog and process it
 	moviesCatalog.getCatalogDetails = function(selectedCatalog){
 		log.debug("MoviesCatalog::getCatalogueDetails" , selectedCatalog);
+		
+		//themoviedb.org had id while funtown has catalogId
 		if(selectedCatalog.id){
 			return movieDbCatalogService.getCatalogDetails(selectedCatalog.id);		
 		}else{
