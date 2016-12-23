@@ -4,16 +4,16 @@
 		<div class="ft-data-form">
 			<div class="row">
 				<b class="col-md-12">
-					<input type="radio" name="catalogType" value="auto" data-ng-model="stepsCache.catalogType" checked data-ng-click="catalogTypeChange()"> Search product in funtown <span data-ng-bind="product.category.categoryName"> </span> catalog
+					<input type="radio" name="catalogType" value="auto" data-ng-model="cache.state.catalogType" checked data-ng-click="catalogTypeChange()"> Search product in funtown <span data-ng-bind="cache.product.category.categoryName"> </span> catalog
 				</b>
 				<div class="col-md-12">
-					<input type="text" size="50" class="form-control" data-ng-model="stepsCache.selectedCatalog" bs-options="catalog as catalog.title for catalog in searchCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" data-ng-disabled="showManualDetails()" bs-on-select="showCatalogDetail" data-auto-select="true"  data-limit="8" data-trim-value="false" ng-trim="false" bs-typeahead>
+					<input type="text" size="50" class="form-control" data-ng-model="cache.state.selectedCatalog" bs-options="catalog as catalog.title for catalog in searchCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" data-ng-disabled="showManualDetails()" bs-on-select="showCatalogDetail" data-auto-select="true"  data-limit="8" data-trim-value="false" ng-trim="false" bs-typeahead>
 					<small class="credit">Powered by themoviedb</small>
 				</div>
 			</div>
 			<div class="row">	
 				<b class="col-md-12">
-					<input type="radio" name="catalogType" value="manual" data-ng-model="stepsCache.catalogType" data-ng-click="catalogTypeChange()"> Setup product manually
+					<input type="radio" name="catalogType" value="manual" data-ng-model="cache.state.catalogType" data-ng-click="catalogTypeChange()"> Setup product manually
 				</b>
 			</div>		
 			<!-- Auto Details-->
@@ -24,9 +24,9 @@
 						<label class="col-md-3 ft-details-label">
 							Title
 						</label>
-						<div class="ft-details-data" data-ng-bind="product.catalog.title"></div>
+						<div class="ft-details-data" data-ng-bind="cache.product.catalog.title"></div>
 					</div>
-					<div class="row" data-ng-repeat="attribute in product.catalog.catalogAttributes" data-ng-if="isDisplayable(attribute)">	
+					<div class="row" data-ng-repeat="attribute in cache.product.catalog.catalogAttributes" data-ng-if="isDisplayable(attribute)">	
 						<label class="col-md-3 ft-details-label" data-ng-bind="attribute.attributeType"></label>
 						<div class="ft-details-data" data-ng-class="attribute.attributeType" data-ng-bind="attribute.attributeValue"></div>
 					</div>
@@ -43,13 +43,13 @@
 						<label class="col-md-3">
 							Title
 						</label>
-						<input size="50" type="text" class="form-control" name="title" ng-model="product.catalog.title">
+						<input size="50" type="text" class="form-control" name="title" ng-model="cache.product.catalog.title">
 					</div>
 					<div class="row">	
 						<label class="col-md-3">
 							Description
 						</label>
-						<textarea class="form-control" cols="48" rows="6" name="description" ng-model="product.catalog.description"></textarea>
+						<textarea class="form-control" cols="48" rows="6" name="description" ng-model="cache.product.catalog.description"></textarea>
 					</div>
 				</div>
 				<div class="ft-catalog-preview"></div>

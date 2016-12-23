@@ -10,10 +10,10 @@ angular.module('selling').controller('AddProductStep3', ['$log','$scope','Attrib
 			$log.debug("AddProductStep3::init");		
 			$scope.discs=getDiscAttribute(MAX_DISCS_COUNT);
 
-			if($scope.product.category){
-				$scope.regions = AttributeService.getAttributesFor('region',$scope.product.category.categoryId);
-				$scope.conditions = AttributeService.getAttributesFor('condition',$scope.product.category.categoryId);
-				$scope.classifications = AttributeService.getAttributesFor('NZClassification',$scope.product.category.categoryId);
+			if($scope.cache.product.category){
+				$scope.regions = AttributeService.getAttributesFor('region',$scope.cache.product.category.categoryId);
+				$scope.conditions = AttributeService.getAttributesFor('condition',$scope.cache.product.category.categoryId);
+				$scope.classifications = AttributeService.getAttributesFor('NZClassification',$scope.cache.product.category.categoryId);
 				$scope.discs=getDiscAttribute(10);
 			}else{
 				$log.warn("Category not yet set.");
@@ -22,7 +22,7 @@ angular.module('selling').controller('AddProductStep3', ['$log','$scope','Attrib
 
 		// check if the catalog is created manual or using existing catalog (auto)
 		$scope.isAutoMode = function(){
-			return $scope.stepsCache.catalogType === 'auto' 
+			return $scope.cache.state.catalogType === 'auto' 
 		}
 
 		// check if the next button should be enabled

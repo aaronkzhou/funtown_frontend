@@ -15,8 +15,8 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		function init(){
 			$log.debug("AddProductStep5::init");
 			
-			if($scope.product.category){
-				$scope.shippingRates = AttributeService.getAttributesFor('shippingRate',$scope.product.category.categoryId);
+			if($scope.cache.product.category){
+				$scope.shippingRates = AttributeService.getAttributesFor('shippingRate',$scope.cache.product.category.categoryId);
 				$log.debug($scope.shippingRates);
 			}else{
 				$log.warn("Category not yet set.");
@@ -24,15 +24,15 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 		// check if allow pick up only
 		$scope.pickUp = function(){
-			if($scope.product.allowPickUp === 2){
+			if($scope.cache.product.allowPickUp === 2){
 				// disable other shipping options
 				$scope.mustPickUp = true;
-				$scope.product.shippingCosts = [{
+				$scope.cache.product.shippingCosts = [{
 					cost: 0,
 					description: "onlyPickUp"
 				}];
 			}else {
-				$scope.product.shippingCosts = $scope.product.shippingCosts.filter(function(cost){
+				$scope.cache.product.shippingCosts = $scope.cache.product.shippingCosts.filter(function(cost){
 					return cost.description !== "onlyPickUp";
 				})
 				$scope.mustPickUp = false;
@@ -41,7 +41,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 
 		$scope.freeShipping = function(){
-			$scope.product.shippingCosts = [{
+			$scope.cache.product.shippingCosts = [{
 					cost: 0,
 					description: "freeShipping"
 				}];
@@ -50,18 +50,18 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 		$scope.specifyCost = function(){
 			$scope.specifyDisabled = false;
-			$scope.product.shippingCosts = [{}];
+			$scope.cache.product.shippingCosts = [{}];
 		}
 
 		$scope.addShippingCost = function(){
-			$scope.product.shippingCosts.push({});
+			$scope.cache.product.shippingCosts.push({});
 		}
 
 		$scope.removeShippingCost = function(shippingCost){
-			var index = $scope.product.shippingCosts.indexOf(shippingCost);
-			$scope.product.shippingCosts.splice(index, 1);
+			var index = $scope.cache.product.shippingCosts.indexOf(shippingCost);
+			$scope.cache.product.shippingCosts.splice(index, 1);
 		}
-	    $log.debug('product', $scope.product)
+	    $log.debug('product', $scope.cache.product)
 		init();
 	}
 

@@ -1,18 +1,18 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
 		<h4>Product Information</h4>		
-		<form name="productInfo" class="ft-data-form">
+		<form name="productInfo" class="ft-data-form" novalidate>
 			<div class="row">
 				<label class="col-md-3" for="code">
 					Code
 				</label>
-				<input size="25" type="text" class="form-control" name="code" ng-model="product.productCode" placeholder="Auto-generated if left blank">
+				<input size="25" type="text" class="form-control" name="code" ng-model="cache.product.productCode" placeholder="Auto-generated if left blank">
 			</div>
 			<div class="row">
 				<label class="col-md-3" for="sku">
 					SKU
 				</label>
-				<input size="25" type="text" class="form-control" name="sku" ng-model="product.SKU" placeholder="Optional">
+				<input size="25" type="text" class="form-control" name="sku" ng-model="cache.product.SKU" placeholder="Optional">
 			</div>
 			<div class="row">
 				<label class="col-md-3 required" for="stock">
@@ -22,16 +22,16 @@
 			    		<p ng-message="min">Should be greater than zero.</p>
 					</div>
 				</label>
-				<input type="number" class="form-control" name="stock" ng-model="product.stock"  min="1" max="1000" ng-disabled="product.unlimited" ng-required="!product.unlimited" placeholder="Qty.">
+				<input type="number" class="form-control" name="stock" ng-model="cache.product.stock"  ng-disabled="cache.product.unlimited" ng-required="!cache.product.unlimited" min="1" number-input  integers-only=true placeholder="Qty.">
 				&nbsp;&nbsp; or &nbsp;&nbsp; 
-				<input type="checkbox" name="unlimited" ng-model="product.unlimited"> &nbsp;&nbsp;Unlimited				
+				<input type="checkbox" name="unlimited" ng-model="cache.product.unlimited"> &nbsp;&nbsp;Unlimited				
 			</div>
 			<div class="separator" data-ng-if="isAutoMode()"></div>
 			<div class="row" data-ng-if="isAutoMode()">
 				<label class="col-md-3" for="extraDetails">
 					Extra details
 				</label>
-				<textarea class="form-control" cols="40" rows="6" name="extraDetails" ng-model="product.extraDetails"></textarea>
+				<textarea class="form-control" cols="40" rows="6" name="extraDetails" ng-model="cache.product.extraDetails"></textarea>
 			</div>		
 			<div class="separator"></div>
 			<div class="row">
@@ -41,7 +41,7 @@
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button"  name="region" class="btn btn-select" ng-model="product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" required bs-select>
+				<button type="button"  name="region" class="btn btn-select" ng-model="cache.product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" required bs-select>
   				 Region<span class="caret"></span>  				
 			</div>
 			<div class="row">
@@ -51,7 +51,7 @@
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button" name="discs" class="btn btn-select" ng-model="product.productAttributes.discs" bs-options="disc as disc for disc in discs" required bs-select>
+				<button type="button" name="discs" class="btn btn-select" ng-model="cache.product.productAttributes.discs" bs-options="disc as disc for disc in discs" required bs-select>
   				 Discs<span class="caret"></span>
   				 <div class="row" ng-messages="productInfo.discs.$error">
 		    		<p ng-message="required">This field is required</p>
@@ -64,7 +64,7 @@
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button" name="condition" class="btn btn-select" ng-model="product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" required bs-select>
+				<button type="button" name="condition" class="btn btn-select" ng-model="cache.product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" required bs-select>
   				 Condition<span class="caret"></span>
 			</div>
 			<div class="row">
@@ -74,7 +74,7 @@
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button" name="classification" class="btn btn-select" ng-model="product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" required bs-select>
+				<button type="button" name="classification" class="btn btn-select" ng-model="cache.product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" required bs-select>
   				 NZ Classifications<span class="caret"></span>
 			</div>
 		</form>	

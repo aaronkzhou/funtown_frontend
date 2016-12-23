@@ -4,14 +4,14 @@
 		<div class="ft-data-form">		
 			<div class="row">
 				<div class="col-md-offset-3">
-					<button type="button" class="btn btn-select" data-ng-model="product.shippingRate" bs-options="shippingRate.value as shippingRate.display for shippingRate in shippingRates" bs-select>Shipping rate<span class="caret"></span></button>
+					<button type="button" class="btn btn-select" data-ng-model="cache.product.shippingRate" bs-options="shippingRate.value as shippingRate.display for shippingRate in shippingRates" bs-select>Shipping rate<span class="caret"></span></button>
 				</div>
 			</div>
 			<div class="row">
 				<label class="col-md-3">
 					Pick up
 				</label>
-				<button class="btn btn-select" type="button" data-ng-model="product.allowPickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="pickUp">abc<span class="caret"></span></button>
+				<button class="btn btn-select" type="button" data-ng-model="cache.product.allowPickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="pickUp">abc<span class="caret"></span></button>
 			</div>
 			<fieldset data-ng-disabled="mustPickUp" class="row col-md-offset-3" >
 				<div class="row">
@@ -25,7 +25,7 @@
 					</label>
 				</div>
 				<fieldset data-ng-disabled="specifyDisabled">
-					<fieldset data-ng-repeat="shippingCost in product.shippingCosts">
+					<fieldset data-ng-repeat="shippingCost in cache.product.shippingCosts">
 						<div class="row">
 							<div class="col-md-4">
 								<span>$ </span>
@@ -42,7 +42,7 @@
 					<button class="btn" data-ng-click="addShippingCost()">Add another shipping option</button>		
 				</fieldset>
 			</fieldset>
-			{{product}}
+			{{cache.product}}
 		</div>	
 		<div class="ft-card-footer col-md-12 text-center">
 	            <button class="btn" ui-sref="manage.addProduct.step4">

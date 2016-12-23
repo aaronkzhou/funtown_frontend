@@ -1,25 +1,24 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
 		<h4>Pricing & Payment</h4>
-		<form name="priceInfo" class="ft-data-form">		
+		<form name="priceInfo" class="ft-data-form" novalidate>		
 			<div class="row">				
 				<label class="col-md-3">
 					Product Price
 					<div class="error" ng-messages="priceInfo.buyNowPrice.$error">
 			    		<p ng-message="required">Required</p>
-			    		<p ng-message="min">Should be positive value.</p>
 			    	</div>	
 				</label>
-				<input type="number" size="15" class="form-control" name="buyNowPrice" data-ng-model="product.buyNowPrice" min="0" required >
+				<input type="number" class="form-control" name="buyNowPrice" data-ng-model="cache.product.buyNowPrice" min="0" number-input required >
 			</div>
 			<div class="row">				
 				<label class="col-md-3">
-					Offer Price
+					Offer Price			
 					<div class="error" ng-messages="priceInfo.offerPrice.$error">
-			    		<p ng-message="min">Should be positive value.</p>
-			    	</div>	
+			    		<p ng-message="max">Should less than product price</p>			    		
+			    	</div>		
 				</label>
-				<input type="number" size="15" class="form-control" name="offerPrice" data-ng-model="product.offerPrice" min="0">
+				<input type="number" ng-max="cache.product.buyNowPrice-0.0001" class="form-control" name="offerPrice" data-ng-model="cache.product.offerPrice" number-input>
 			</div>	
 			<div class="row">				
 				<label class="col-md-3">
@@ -28,7 +27,7 @@
 			    		<p ng-message="required">Required</p>			    		
 			    	</div>
 				</label>
-				<button type="button" class="btn btn-select" name="offerDuration" ng-model="product.offerDuration" bs-options="offerDuration.attributeId as offerDuration.display for offerDuration in offerDurations" ng-required="product.offerPrice >=0 " bs-select>
+				<button type="button" class="btn btn-select" name="offerDuration" ng-model="cache.product.offerDuration" bs-options="offerDuration.attributeId as offerDuration.display for offerDuration in offerDurations" ng-required="isOfferPresent()" bs-select>
   				 Offer Duration<span class="caret"></span>
 			</div>					
 			<div class="separator"></div>		
@@ -39,8 +38,8 @@
 			    		<p ng-message="required">Required</p>
 			    	</div>
 				</label>
-				<div class="ft-form-list col-md-12" data-ng-repeat="paymentMethod in paymentMethods">
-					<input type="checkbox" required name="paymentType" data-ng-model="product.paymentMethods[paymentMethod.value]" ng-click="addpaymentMethod()">&nbsp;&nbsp;
+				<div class="ft-form-list col-md-12" data-ng-repeat="paymentMethod in cache.product.paymentMethods">
+					<input type="checkbox" ng-required="atleastOneChecked()" name="paymentType" data-ng-model="paymentMethod.selected" ng-checked="paymentMethod.selected">&nbsp;&nbsp;
 					<span data-ng-bind="paymentMethod.display"></span>
 				</div>
 			</div>
