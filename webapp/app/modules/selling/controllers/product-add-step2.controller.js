@@ -7,9 +7,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var rootCategory,catalogProcessor;
 
 		function init(){			
-			rootCategory = 'Movies'//$scope.product.rootCategory
-			$scope.selectedCatalog = {};	
-			
+			rootCategory = $scope.stepsCache.rootCategory
+			$log.debug('AddProductStep2::init - ',rootCategory);
 			//Get the correct catalog processor
 			catalogProcessor = new CatalogFactory(rootCategory);	
 
@@ -28,13 +27,12 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		
 		// get catalog details for the selected catalog Id
 		$scope.showCatalogDetail = function(){
-			$log.debug("AddProductStep2::showCatalogDetail ",$scope.selectedCatalog);
-			catalogProcessor.getCatalogDetails($scope.selectedCatalog)
+			$log.debug("AddProductStep2::showCatalogDetail ",$scope.stepsCache.selectedCatalog);
+			catalogProcessor.getCatalogDetails($scope.stepsCache.selectedCatalog)
 				.then(function(catalog){		
 					$log.debug("AddProductStep2::showCatalogDetail - catalog " ,catalog);			
 					$scope.product.catalog = catalog;
-					getPoster();
-					$scope.stepCompleted(STEP_NO);
+					getPoster();					
 				})
 		}
 
@@ -51,30 +49,36 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			$log.debug($scope.poster);		
 		}
 
-		//show the row only if it is not a poster
+		//check if the attribute should be shown on the screen
 		$scope.isDisplayable = function(attribute){
-			return (attribute.attributeType != 'poster' && attribute.attributeType != 'imdbId');
+			return attribute.attributeType != 'poster';
 		}
 
 		// clear the selected catalog as another option is choosen
 		$scope.catalogTypeChange = function(){
 			$scope.product.catalog = null;
-			$scope.selectedCatalog = {};
+			$scope.stepsCache.selectedCatalog = {};
 		}
 
 		// check if the database catalog details should be shown
 		$scope.showAutoDetails = function(){
-			return $scope.product.catalogType === 'auto' && $scope.product.catalog;	
+			return $scope.stepsCache.catalogType === 'auto' && $scope.product.catalog;	
 		}
 
 		// check if the manual details form should be shown
 		$scope.showManualDetails = function(){
-			return $scope.product.catalogType === 'manual';	
+			return $scope.stepsCache.catalogType === 'manual';	
 		}
 
 		// check if the next button should be enabled
 		$scope.isNextDisabled = function(){
-			return !($scope.product.catalog);
+			if($scope.product.catalog && $scope.product.catalog.title.length > 0){
+				$scope.stepCompleted(STEP_NO);
+				return false;
+			}else{
+				$scope.updoStepCompleted(STEP_NO);
+				return true;	
+			}			
 		}
 
 		//check if the catalogue has been chosen

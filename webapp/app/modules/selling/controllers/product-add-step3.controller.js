@@ -2,11 +2,13 @@
 angular.module('selling').controller('AddProductStep3', ['$log','$scope','AttributeService',
 	function($log,$scope,AttributeService){
 		var STEP_NO = 3;
+		var MAX_DISCS_COUNT = 10;
+
 		$log.debug('AddProductStep3 controller');
 
 		function init(){		
 			$log.debug("AddProductStep3::init");		
-			$scope.discs=getDiscAttribute(10);
+			$scope.discs=getDiscAttribute(MAX_DISCS_COUNT);
 
 			if($scope.product.category){
 				$scope.regions = AttributeService.getAttributesFor('region',$scope.product.category.categoryId);
@@ -20,13 +22,21 @@ angular.module('selling').controller('AddProductStep3', ['$log','$scope','Attrib
 
 		// check if the catalog is created manual or using existing catalog (auto)
 		$scope.isAutoMode = function(){
-			return $scope.product.catalogType === 'auto' 
+			return $scope.stepsCache.catalogType === 'auto' 
 		}
-		// check if the next button should be enabled
-	    $scope.isNextDisabled = function(){
-	    	return false;
-	    }
 
+		// check if the next button should be enabled
+		$scope.$watch("productInfo.$valid",function(validity){
+			if($scope.productInfo.$valid){
+	    		$scope.stepCompleted(STEP_NO);
+	    		$scope.isNextDisabled = false;
+	    	}else{
+	    		$scope.updoStepCompleted(STEP_NO);	    	
+	    		$scope.isNextDisabled = true;
+	    	}	
+		}) 
+		
+	  
 	    // create discs array 
 	    function getDiscAttribute(max){
 	    	var d =0;

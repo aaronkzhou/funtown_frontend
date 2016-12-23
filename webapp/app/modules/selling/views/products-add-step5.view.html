@@ -1,61 +1,61 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
 		<h4>Shipping options</h4>
-		<div class="row">
-			<div class="col-md-offset-3">
-				<button type="button" class="btn btn-select" data-ng-model="product.shippingRate" bs-options="shippingRate.value as shippingRate.display for shippingRate in shippingRates" bs-select>Shipping rate<span class="caret"></span></button>
-			</div>
-		</div>
-		<div class="row">
-			<label class="col-md-3">
-				Pick up
-			</label>
-			<button class="btn btn-select" type="button" data-ng-model="product.allowPickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="pickUp">abc<span class="caret"></span></button>
-		</div>
-		{{product.allowPickUp}}
-		<fieldset data-ng-disabled="mustPickUp" class="row col-md-offset-3" >
+		<div class="ft-data-form">		
 			<div class="row">
-				<label>
-					<input type="radio" name="shippingCost" data-ng-click="freeShipping()">&nbsp;&nbsp;<span>Free shipping within New Zealand</span>
-				</label>
+				<div class="col-md-offset-3">
+					<button type="button" class="btn btn-select" data-ng-model="product.shippingRate" bs-options="shippingRate.value as shippingRate.display for shippingRate in shippingRates" bs-select>Shipping rate<span class="caret"></span></button>
+				</div>
 			</div>
 			<div class="row">
-				<label>
-					<input type="radio" name="shippingCost" data-ng-click="specifyCost()" >&nbsp;&nbsp;<span>Specify shipping costs</span>
+				<label class="col-md-3">
+					Pick up
 				</label>
+				<button class="btn btn-select" type="button" data-ng-model="product.allowPickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="pickUp">abc<span class="caret"></span></button>
 			</div>
-			<fieldset data-ng-disabled="specifyDisabled">
-				<fieldset data-ng-repeat="shippingCost in product.shippingCosts">
-					<div class="row">
-						<div class="col-md-4">
-							<span>$ </span>
-							<input type="number" size="5" placeholder="Cost" data-ng-model="shippingCost.cost">
-						</div>
-						<div class="col-md-4">
-							<input type="text" size="25" placeholder="Description" data-ng-model="shippingCost.description">
-						</div>
-						<div class="col-md-2">
-							<button class="btn btn-danger" data-ng-click="removeShippingCost(shippingCost)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
-						</div>
-					</div>	
+			<fieldset data-ng-disabled="mustPickUp" class="row col-md-offset-3" >
+				<div class="row">
+					<label>
+						<input type="radio" name="shippingCost" data-ng-click="freeShipping()">&nbsp;&nbsp;<span>Free shipping within New Zealand</span>
+					</label>
+				</div>
+				<div class="row">
+					<label>
+						<input type="radio" name="shippingCost" data-ng-click="specifyCost()" >&nbsp;&nbsp;<span>Specify shipping costs</span>
+					</label>
+				</div>
+				<fieldset data-ng-disabled="specifyDisabled">
+					<fieldset data-ng-repeat="shippingCost in product.shippingCosts">
+						<div class="row">
+							<div class="col-md-4">
+								<span>$ </span>
+								<input type="number" size="5" placeholder="Cost" data-ng-model="shippingCost.cost">
+							</div>
+							<div class="col-md-4">
+								<input type="text" size="25" placeholder="Description" data-ng-model="shippingCost.description">
+							</div>
+							<div class="col-md-2">
+								<button class="btn btn-danger" data-ng-click="removeShippingCost(shippingCost)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+							</div>
+						</div>	
+					</fieldset>
+					<button class="btn" data-ng-click="addShippingCost()">Add another shipping option</button>		
 				</fieldset>
-				<button class="btn" data-ng-click="addShippingCost()">Add another shipping option</button>		
 			</fieldset>
-		</fieldset>
-		{{product}}
-	</div>
-	<div class="ft-card-footer col-md-12 text-center">
-            <button class="btn" ui-sref="manage.addProduct.step4">
-                <i class="fa fa-chevron-left"></i> Previous 
-            </button>
-            <button class="btn" data-ng-click="saveDraft()">
-                <i class="fa fa-file-text"></i> Save Draft 
-            </button>
-            <button class="btn" data-ng-click="cancel()">
-                <i class="fa fa-trash"></i> Cancel
-            </button>
-            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step6">
-                Next <i class="fa fa-chevron-right"></i>
-            </button>
-    </div>
+			{{product}}
+		</div>	
+		<div class="ft-card-footer col-md-12 text-center">
+	            <button class="btn" ui-sref="manage.addProduct.step4">
+	                <i class="fa fa-chevron-left"></i> Previous 
+	            </button>
+	            <button class="btn" data-ng-click="saveDraft()">
+	                <i class="fa fa-file-text"></i> Save Draft 
+	            </button>
+	            <button class="btn" data-ng-click="cancel()">
+	                <i class="fa fa-trash"></i> Cancel
+	            </button>
+	            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step6">
+	                Next <i class="fa fa-chevron-right"></i>
+	            </button>
+	    </div>
 </div>

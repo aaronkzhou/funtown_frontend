@@ -1,35 +1,50 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
 		<h4>Pricing & Payment</h4>
-		<div class="ft-data-form">		
+		<form name="priceInfo" class="ft-data-form">		
 			<div class="row">				
 				<label class="col-md-3">
 					Product Price
+					<div class="error" ng-messages="priceInfo.buyNowPrice.$error">
+			    		<p ng-message="required">Required</p>
+			    		<p ng-message="min">Should be positive value.</p>
+			    	</div>	
 				</label>
-				<input type="text" size="15" class="form-control" name="buyNowPrice" data-ng-model="product.buyNowPrice" required>
+				<input type="number" size="15" class="form-control" name="buyNowPrice" data-ng-model="product.buyNowPrice" min="0" required >
 			</div>
 			<div class="row">				
 				<label class="col-md-3">
 					Offer Price
+					<div class="error" ng-messages="priceInfo.offerPrice.$error">
+			    		<p ng-message="min">Should be positive value.</p>
+			    	</div>	
 				</label>
-				<input type="text" size="15" class="form-control" name="offerPrice" data-ng-model="product.offerPrice" required>
+				<input type="number" size="15" class="form-control" name="offerPrice" data-ng-model="product.offerPrice" min="0">
 			</div>	
 			<div class="row">				
 				<label class="col-md-3">
 					Offer Duration
+					<div class="error" ng-messages="priceInfo.offerDuration.$error">
+			    		<p ng-message="required">Required</p>			    		
+			    	</div>
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.offerDuration" bs-options="offerDuration.attributeId as offerDuration.display for offerDuration in offerDurations" bs-select>
+				<button type="button" class="btn btn-select" name="offerDuration" ng-model="product.offerDuration" bs-options="offerDuration.attributeId as offerDuration.display for offerDuration in offerDurations" ng-required="product.offerPrice >=0 " bs-select>
   				 Offer Duration<span class="caret"></span>
 			</div>					
 			<div class="separator"></div>		
 			<div class="row">
-				<label class="col-md-12">Accepted Payment Types</label>	
+				<label class="col-md-12">
+					Accepted Payment Types
+					<div class="error" ng-messages="priceInfo.paymentType.$error">
+			    		<p ng-message="required">Required</p>
+			    	</div>
+				</label>
 				<div class="ft-form-list col-md-12" data-ng-repeat="paymentMethod in paymentMethods">
-					<input type="checkbox" data-ng-model="product.paymentMethods[paymentMethod.value]" ng-click="addpaymentMethod()">&nbsp;&nbsp;
+					<input type="checkbox" required name="paymentType" data-ng-model="product.paymentMethods[paymentMethod.value]" ng-click="addpaymentMethod()">&nbsp;&nbsp;
 					<span data-ng-bind="paymentMethod.display"></span>
 				</div>
 			</div>
-	    </div>    
+	    </form>    
 	    <div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step3">
                 <i class="fa fa-chevron-left"></i> Previous 
@@ -40,7 +55,7 @@
             <button class="btn" data-ng-click="cancel()">
                 <i class="fa fa-trash"></i> Cancel
             </button>
-            <button class="btn" data-ng-disabled="isNextDisabled()" data-ng-click="showProduct()" ui-sref="manage.addProduct.step5">
+            <button class="btn" data-ng-disabled="isNextDisabled" ui-sref="manage.addProduct.step5">
                 Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>

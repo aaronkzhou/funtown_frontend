@@ -20,6 +20,11 @@ a {
     cursor: not-allowed;
     pointer-events: none; }
 
+.error {
+  color: #e62e04;
+  font-size: 0.8em;
+  font-weight: 100; }
+
 label {
   color: #333; }
 

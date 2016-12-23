@@ -1,64 +1,83 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Product Information</h4>
-		<div class="ft-data-form">			
+		<h4>Product Information</h4>		
+		<form name="productInfo" class="ft-data-form">
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3" for="code">
 					Code
 				</label>
 				<input size="25" type="text" class="form-control" name="code" ng-model="product.productCode" placeholder="Auto-generated if left blank">
 			</div>
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3" for="sku">
 					SKU
 				</label>
 				<input size="25" type="text" class="form-control" name="sku" ng-model="product.SKU" placeholder="Optional">
 			</div>
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3 required" for="stock">
 					Stock
+					<div class="error" ng-messages="productInfo.stock.$error">
+			    		<p ng-message="required">Required</p>
+			    		<p ng-message="min">Should be greater than zero.</p>
+					</div>
 				</label>
-				<input type="text" size="5" class="form-control" name="stock" ng-model="product.stock">
+				<input type="number" class="form-control" name="stock" ng-model="product.stock"  min="1" max="1000" ng-disabled="product.unlimited" ng-required="!product.unlimited" placeholder="Qty.">
 				&nbsp;&nbsp; or &nbsp;&nbsp; 
-				<input type="checkbox" size="5" name="unlimited" ng-model="product.unlimited"> &nbsp;&nbsp;Unlimited
+				<input type="checkbox" name="unlimited" ng-model="product.unlimited"> &nbsp;&nbsp;Unlimited				
 			</div>
 			<div class="separator" data-ng-if="isAutoMode()"></div>
 			<div class="row" data-ng-if="isAutoMode()">
-				<label class="col-md-3">
+				<label class="col-md-3" for="extraDetails">
 					Extra details
 				</label>
 				<textarea class="form-control" cols="40" rows="6" name="extraDetails" ng-model="product.extraDetails"></textarea>
 			</div>		
 			<div class="separator"></div>
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3 required" for="region">
 					Region
+					<div class="error" ng-messages="productInfo.region.$error">
+			    		<p ng-message="required">Required</p>
+					</div>
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" bs-select>
-  				 Region<span class="caret"></span>
+				<button type="button"  name="region" class="btn btn-select" ng-model="product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" required bs-select>
+  				 Region<span class="caret"></span>  				
 			</div>
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3 required" for="discs">
 					No. of discs
+					<div class="error" ng-messages="productInfo.discs.$error">
+			    		<p ng-message="required">Required</p>
+					</div>
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.discs" bs-options="disc as disc for disc in discs" bs-select>
+				<button type="button" name="discs" class="btn btn-select" ng-model="product.productAttributes.discs" bs-options="disc as disc for disc in discs" required bs-select>
   				 Discs<span class="caret"></span>
+  				 <div class="row" ng-messages="productInfo.discs.$error">
+		    		<p ng-message="required">This field is required</p>
+				</div>
 			</div>
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3 required" for="condition">
 					Condition
+					<div class="error" ng-messages="productInfo.condition.$error">
+			    		<p ng-message="required">Required</p>
+					</div>
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" bs-select>
+				<button type="button" name="condition" class="btn btn-select" ng-model="product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" required bs-select>
   				 Condition<span class="caret"></span>
 			</div>
 			<div class="row">
-				<label class="col-md-3">
+				<label class="col-md-3 required" for="classification">
 					NZ Classification
+					<div class="error" ng-messages="productInfo.classification.$error">
+			    		<p ng-message="required">Required</p>
+					</div>
 				</label>
-				<button type="button" class="btn btn-select" ng-model="product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" bs-select>
+				<button type="button" name="classification" class="btn btn-select" ng-model="product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" required bs-select>
   				 NZ Classifications<span class="caret"></span>
 			</div>
-		</div>	
+		</form>	
 		<div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step2">
                 <i class="fa fa-chevron-left"></i> Previous 
@@ -69,7 +88,7 @@
             <button class="btn" data-ng-click="cancel()">
                 <i class="fa fa-trash"></i> Cancel
             </button>
-            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step4">
+            <button class="btn"  data-ng-disabled="isNextDisabled" ui-sref="manage.addProduct.step4">
                 Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>

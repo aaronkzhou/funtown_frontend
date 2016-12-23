@@ -9,7 +9,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 			//if category is alreday set get the child categories for the last path 
 			//else get the root categories.
 			if($scope.product.category){
-				getPathCategories($scope.categoryPath[$scope.categoryPath.length-1]);
+				getPathCategories($scope.stepsCache.categoryPath[$scope.stepsCache.categoryPath.length-1]);
 			}else{
 				CategoryService.getRootCategories().then(function(categories){
 					$scope.categories  = categories
@@ -19,33 +19,27 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 
 		// select the category if no children present or drill down to child categories
 		$scope.selectCategory = function(category){	
-			$log.debug('AddProductStep1::selectCategory - ',category);
-			$scope.product.category = null;
-			$scope.product.catalog = null;
-			$scope.updoStepCompleted(STEP_NO);
-
+			$log.debug('AddProductStep1::selectCategory - ',category);				
+			$scope.resetProduct();
 			//if this is the root category set it on product
 			if(category.parentId===0){
-				$scope.product.rootCategory = category.categoryName;
+				$scope.stepsCache.rootCategory = category.categoryName;
 			}
 			if(category.childrenCount > 0){
-				$scope.categoryPath.push(category);
+				$scope.stepsCache.categoryPath.push(category);
 				CategoryService.getCategories(category).then(function(categories){
 					$scope.categories  = categories
 				});
 			}else {
 				$scope.product.category = category;
-				$scope.stepCompleted(STEP_NO);
 			}	
 	    }
 
 	    // goTo the selected parent category and show its child categories
-	    $scope.goTo = function(path){    	
-	    	$scope.product.category = null;
-	    	$scope.product.catalog = null;
-	    	$scope.updoStepCompleted(STEP_NO);
-	    	var index = $scope.categoryPath.indexOf(path);
-	    	$scope.categoryPath.splice(index+1, $scope.categoryPath.length - index -1);     	
+	    $scope.goTo = function(path){
+	    	$scope.resetProduct();
+	    	var index = $scope.stepsCache.categoryPath.indexOf(path);
+	    	$scope.stepsCache.categoryPath.splice(index+1, $scope.stepsCache.categoryPath.length - index -1);     	
 			getPathCategories(path);
 	    }
 
@@ -63,12 +57,18 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 
 		// check if the path is last
 	    $scope.isLastPath = function(index){
-	    	return index === $scope.categoryPath.length-1;
+	    	return index === $scope.stepsCache.categoryPath.length-1;
 	    }
 
 	    // check if the next button should be enabled
 	    $scope.isNextDisabled = function(){
-	    	return !($scope.product.category && $scope.product.category.categoryId);
+	    	if($scope.product.category && $scope.product.category.categoryId){
+	    		$scope.stepCompleted(STEP_NO);
+	    		return false;
+	    	}else{
+	    		$scope.updoStepCompleted(STEP_NO);
+	    		return true;
+	    	}
 	    }
 
 	    init();

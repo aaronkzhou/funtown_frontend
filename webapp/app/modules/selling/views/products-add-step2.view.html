@@ -4,16 +4,16 @@
 		<div class="ft-data-form">
 			<div class="row">
 				<b class="col-md-12">
-					<input type="radio" name="catalogType" value="auto" data-ng-model="product.catalogType" checked data-ng-click="catalogTypeChange()"> Search product in funtown <span data-ng-bind="product.category.categoryName"> </span> catalog
+					<input type="radio" name="catalogType" value="auto" data-ng-model="stepsCache.catalogType" checked data-ng-click="catalogTypeChange()"> Search product in funtown <span data-ng-bind="product.category.categoryName"> </span> catalog
 				</b>
 				<div class="col-md-12">
-					<input type="text" size="50" class="form-control" data-ng-model="selectedCatalog" bs-options="catalog as catalog.title for catalog in searchCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" data-ng-disabled="showManualDetails()" bs-on-select="showCatalogDetail" data-auto-select="true"  data-limit="8" data-trim-value="false" ng-trim="false" bs-typeahead>
+					<input type="text" size="50" class="form-control" data-ng-model="stepsCache.selectedCatalog" bs-options="catalog as catalog.title for catalog in searchCatalogue($viewValue)" placeholder="Enter title to search in funtown catalog" data-ng-disabled="showManualDetails()" bs-on-select="showCatalogDetail" data-auto-select="true"  data-limit="8" data-trim-value="false" ng-trim="false" bs-typeahead>
 					<small class="credit">Powered by themoviedb</small>
 				</div>
 			</div>
 			<div class="row">	
 				<b class="col-md-12">
-					<input type="radio" name="catalogType" value="manual" data-ng-model="product.catalogType" data-ng-click="catalogTypeChange()"> Setup product manually
+					<input type="radio" name="catalogType" value="manual" data-ng-model="stepsCache.catalogType" data-ng-click="catalogTypeChange()"> Setup product manually
 				</b>
 			</div>		
 			<!-- Auto Details-->

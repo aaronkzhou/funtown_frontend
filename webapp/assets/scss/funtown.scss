@@ -23,10 +23,20 @@ a{
 				pointer-events: none;	
 			}	
 }
-
+.error{
+	color: #e62e04;
+	font-size: 0.8em;
+	font-weight: 100;
+}
 label{
 	color: #333;
+
+	// &.required:after{
+	// 	content: ' * ';
+	// 	color:#e62e04;
+	// }
 }
+
 
 .form-control{
 	width: auto;
