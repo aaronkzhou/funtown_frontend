@@ -9,8 +9,11 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 
 			//Cache object
 			$scope.cache = {}
+			//only for keeping data in view
+			$scope.cache.shippingCosts = [{}];
 			//Cache product
 			$scope.cache.product = {};
+			$scope.cache.product.shippingCosts = [];
 			//Cache states across steps
 			$scope.cache.state = {};
 			$scope.cache.state.catalogType = 'auto';
