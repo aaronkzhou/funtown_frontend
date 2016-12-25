@@ -3,7 +3,7 @@
 		<h4>Shipping options</h4>
 		<form name="shippingInfo" class="ft-data-form" novalidate>		
 			<div class="row">
-				<label class="required col-md-3" for="shippingRates">
+				<label class="col-md-3" for="shippingRates">
 					Shipping Rate
 					<div class="error" ng-messages="shippingInfo.shippingRates.$error">
 			    		<p ng-message="required">Required</p>
@@ -12,65 +12,78 @@
 				<button type="button" class="btn btn-select" name="shippingRates" data-ng-model="cache.product.shippingRate" bs-options="shippingRate.value as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>				
 			</div>
 			<div class="row">
-				<label class="required col-md-3" for="pickUp">
+				<label class="col-md-3" for="pickUp">
 					Pick up
 					<div class="error" ng-messages="shippingInfo.pickUp.$error">
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button class="btn btn-select" type="button" name="pickUp" data-ng-model="cache.allowPickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="checkPickUp" required><span class="caret"></span></button>
+				<button class="btn btn-select" type="button" name="pickUp" data-ng-model="cache.state.pickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="processPickUp" required><span class="caret"></span></button>
 			</div>
-			<fieldset data-ng-disabled="mustPickUp" data-ng-if="!mustPickUp" class="row col-md-offset-3" >
-				<div class="row">
-					<label>
-						<div class="error" ng-messages="shippingInfo.shippingOptions.$error">
-			    			<p ng-message="required">Required</p>
-						</div>
-						<input data-ng-disabled="freeShippingDisabled" type="radio" name="shippingType" data-ng-model="cache.shippingType" value="free" data-ng-click="processFreeShipping()" ng-required="check()">&nbsp;&nbsp;<span>Free shipping within New Zealand</span>
-						
-					</label>
-				</div>
-				<div class="row">
-					<label>
-						<div class="error" ng-messages="shippingInfo.shippingOptions.$error">
-			    			<p ng-message="required">Required</p>
-						</div>
-						<input type="radio" name="shippingType" data-ng-model="cache.shippingType" value="specify" data-ng-click="processSpecifyCost()" ng-required="check()">&nbsp;&nbsp;<span>Specify shipping costs</span>
-						
-					</label>
-				</div>
-				<fieldset data-ng-disabled="specifyDisabled">
-					<fieldset data-ng-repeat="shippingCost in cache.shippingCosts">
-						<div class="row">
-							<div class="col-md-4">
-								<span>$ </span>
-								<input type="number" size="5" placeholder="Cost" data-ng-model="shippingCost.cost">
+			<div class="row">
+				<label class="col-md-3" for="shippingRates">
+					Costs
+					<div class="error" ng-messages="shippingInfo.shippingType.$error">
+			    		<p ng-message="required">Required</p>
+					</div>
+				</label>					
+				<fieldset class="ft-shipping-costs col-md-9" data-ng-disabled="shippingDisabled">
+					<div class="row">
+						<label>							
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="free" ng-required="isNotOnlyPick()" data-ng-click="processFreeShipping()" >&nbsp;&nbsp;<span>Free shipping within New Zealand</span>							
+						</label>
+						<br>
+						<label>
+							<div class="error" ng-messages="shippingInfo.shippingOptions.$error">
+				    			<p ng-message="required">Required</p>
 							</div>
-							<div class="col-md-4">
-								<input type="text" size="25" placeholder="Description" data-ng-model="shippingCost.description">
-							</div>
-							<div class="col-md-2">
-								<button class="btn btn-danger" data-ng-click="removeShippingCost(shippingCost)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
-							</div>
-						</div>	
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" ng-required="isNotOnlyPick()"  data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>							
+						</label>
+					</div>
+					<fieldset data-ng-if="hasSpecificShipping()">
+						<fieldset data-ng-repeat="shippingCost in cache.state.shippingCosts">
+							<div>
+								<div class="ft-col">
+									$
+									<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>		
+									<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
+						    			<p ng-message="required">Required</p>
+									</span>
+								</div>
+								<div class="ft-col">									
+									<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
+									<span class="error" ng-messages="shippingInfo['desc' + $index].$error">
+						    			<p ng-message="required">Required</p>
+									</span>										
+								</div>
+								<div class="ft-col" data-ng-if="$index>0">
+									<a href="" data-ng-click="removeCostOption(shippingCost)">
+										<i class="icon fa fa-minus-circle"></i>
+									</a>									
+								</div>
+							</div>	
+						</fieldset>
+						<a href="" data-ng-click="addCostOption()">
+							<i class="icon fa fa-plus-circle"></i>
+							Add another shipping option
+						</a>		
 					</fieldset>
-					<button class="btn" data-ng-click="addShippingCost()">Add another shipping option</button>		
 				</fieldset>
-			</fieldset>
-			{{ cache.product.shippingCosts}}<br>
-			{{ cache.shippingCosts}}
+			</div>	
+			product = {{ cache.product.shippingCosts}}<br>
+			shippingCosts = {{ cache.state.shippingCosts}}
 		</form>	
 		<div class="ft-card-footer col-md-12 text-center">
 	            <button class="btn" ui-sref="manage.addProduct.step4">
 	                <i class="fa fa-chevron-left"></i> Previous 
 	            </button>
-	            <button class="btn" data-ng-click="saveDraft();joinShippingCosts();">
+	            <button class="btn" data-ng-click="storeShippingCosts()">
 	                <i class="fa fa-file-text"></i> Save Draft 
 	            </button>
 	            <button class="btn" data-ng-click="cancel()">
 	                <i class="fa fa-trash"></i> Cancel
 	            </button>
-	            <button class="btn" data-ng-disabled="isNextDisabled()" data-ng-click="joinShippingCosts()" ui-sref="manage.addProduct.step6">
+	            <button class="btn" data-ng-disabled="isNextDisabled" data-ng-click="storeShippingCosts()" ui-sref="manage.addProduct.step6">
 	                Next <i class="fa fa-chevron-right"></i>
 	            </button>
 	    </div>

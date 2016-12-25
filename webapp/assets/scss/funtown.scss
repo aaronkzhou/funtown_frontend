@@ -37,10 +37,6 @@ label{
 	// }
 }
 
-
-.form-control{
-	width: auto;
-}
 .dropdown-menu > li{
 	padding: 0px!important;
 }
@@ -80,8 +76,8 @@ label{
 	box-shadow: none;
 	border: 1px solid #ccc;
 	display: inline-block;
+	width: auto;
 }
-
 
 .ft-header{
 	position: relative;
@@ -485,4 +481,15 @@ label{
     margin: auto;
     vertical-align: middle;
     color:#e6e6e6;
+}
+.ft-col{
+	display: table-cell;
+	padding: 0 8px;
+	.error{
+		display: block;
+		margin-top:2px; 
+	}
+}
+.ft-shipping-costs[disabled]{
+	opacity: 0.3;
 }

@@ -6,7 +6,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var STEP_NO = 2;
 		var rootCategory,catalogProcessor;
 
-		function init(){			
+		function init(){						
 			rootCategory = $scope.cache.state.rootCategory
 			$log.debug('AddProductStep2::init - ',rootCategory);
 			//Get the correct catalog processor
@@ -57,7 +57,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		// clear the selected catalog as another option is choosen
 		$scope.catalogTypeChange = function(){
 			$scope.cache.product.catalog = null;
-			$scope.cache.state.selectedCatalog = {};
+			$scope.cache.state.selectedCatalog = null;
 		}
 
 		// check if the database catalog details should be shown
@@ -72,7 +72,10 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		// check if the next button should be enabled
 		$scope.isNextDisabled = function(){
-			if($scope.cache.product.catalog && $scope.cache.product.catalog.title.length > 0){
+			if($scope.cache.state.catalogType === 'auto' && $scope.cache.state.selectedCatalog!== null){
+				$scope.stepCompleted(STEP_NO);
+				return false;
+			}else if($scope.cache.state.catalogType === 'manual' && $scope.configProduct && $scope.configProduct.$valid){
 				$scope.stepCompleted(STEP_NO);
 				return false;
 			}else{

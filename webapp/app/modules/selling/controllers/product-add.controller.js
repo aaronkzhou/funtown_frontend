@@ -8,16 +8,15 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 			$log.debug('AddProduct controller::init');
 
 			//Cache object
-			$scope.cache = {}
-			//only for keeping data in view
-			$scope.cache.shippingCosts = [{}];
+			$scope.cache = {}			
 			//Cache product
 			$scope.cache.product = {};
-			$scope.cache.product.shippingCosts = [];
+
 			//Cache states across steps
 			$scope.cache.state = {};
+
 			$scope.cache.state.catalogType = 'auto';
-			$scope.cache.state.selectedCatalog = {};
+			$scope.cache.state.selectedCatalog = null;
 
 			$scope.stepsCompleted =STEP_NO;
 			// root category. The root categories have a parentId of zero 0
@@ -44,12 +43,12 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 		}
 
 		$scope.resetProduct = function(){
-			$scope.product = {};
+			$scope.cache.product = {};
 		}
 
 		$scope.cancel = function(){
 			$log.debug("cancel");
-			$scope.product = {};		
+			$scope.cache.product = {};		
 			$scope.cache.state.categoryPath = [
 				{
 					categoryId:0,

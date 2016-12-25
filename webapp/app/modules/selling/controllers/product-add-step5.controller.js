@@ -10,113 +10,120 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		function init(){
 			$log.debug("AddProductStep5::init");
 
-			// disable the inputs for adding shipping cost
-			$scope.specifyDisabled = true;
-			$scope.pickUps = [
-				{value: 0, display: "No pick-up"},
-				{value: 1, display: "Buyer can pick-up"},
-				{value: 2, display: "Buyer must pick-up"}
-			]
-
 			if($scope.cache.product.category){
 				$scope.shippingRates = AttributeService.getAttributesFor('shippingRates',$scope.cache.product.category.categoryId);
-				$log.debug($scope.shippingRates);
 			}else{
 				$log.warn("Category not yet set.");
+			}			
+			
+			//Add inital object if not present
+			if(!$scope.cache.product.shippingCosts){
+				//Shipping options in final product
+				$scope.cache.product.shippingCosts = [];
+				//Shipping cost options added by user - state level
+				$scope.cache.state.shippingCosts = []	
 			}
-
+			
+			$scope.pickUps = [
+				{value: 'noPickUp', display: "No pick-up"},
+				{value: 'canPickUp', display: "Buyer can pick-up"},
+				{value: 'mustPickup', display: "Buyer must pick-up"}
+			]
+			
 			//hide shipping options if chose "must pick-up" in last version
-			if($scope.cache.allowPickUp === 2){
-				$scope.mustPickUp = true;
+			if($scope.cache.state.pickUp === 'mustPickup'){
+				$scope.shippingDisabled = true;
 			}	
 		}
 
-		// check if allow pick up only
-		$scope.checkPickUp = function(){
-	//		$log.debug($scope.cache.product.shippingCosts.indexOf(pickUpOption))
-
-			if($scope.cache.allowPickUp === 0){
-				$scope.removeShippingOptionFromProduct(pickUpOption);
-				$scope.mustPickUp = false;
-				}
-				// can pick-up and pickUpOption is not existed in product
-				else if($scope.cache.allowPickUp === 1){
-					if($scope.cache.product.shippingCosts.indexOf(pickUpOption) === -1){
-						$scope.addShippingOptionToProduct(pickUpOption);
-					}					
-					$scope.mustPickUp = false;										
-				}
-				else if($scope.cache.allowPickUp === 2){
-					//hide other shipping options
-					$scope.mustPickUp = true;
-					//reset the shippintType to prevent adding costs to product from specify
-					$scope.cache.shippingType = "";
-					$scope.resetShippingOptionToProduct();
-					$scope.addShippingOptionToProduct(pickUpOption);
-				}
+		$scope.hasSpecificShipping = function(){
+			return $scope.cache.state.shippingType === "specific";
 		}
 
-		$scope.addShippingOptionToProduct = function(shippingOption){
-			$scope.cache.product.shippingCosts.push(shippingOption);
+		$scope.isNotOnlyPick = function(){
+			return $scope.cache.state.pickUp !== 'mustPickup';
 		}
 
-		$scope.removeShippingOptionFromProduct = function(shippingOption){
-			var shippingOptionIndex = $scope.cache.product.shippingCosts.indexOf(shippingOption);
-			if(shippingOptionIndex !== -1){
-				$scope.cache.product.shippingCosts.splice(shippingOptionIndex,1);
+		$scope.processPickUp = function(){
+			if($scope.cache.state.pickUp === 'noPickUp'){
+				$scope.shippingDisabled = false;
+				removeShippingOptions(pickUpOption)
+			}				
+			else if($scope.cache.state.pickUp === 'canPickUp'){
+				$scope.shippingDisabled = false;										
+				addShippingOptions(pickUpOption)
+			}
+			else if($scope.cache.state.pickUp === 'mustPickup'){
+				$scope.shippingDisabled = true;
+				//reset product shipping options and add only pickup option
+				resetShippingOptions();
+				addShippingOptions(pickUpOption)
+			}
+		}
+		
+		$scope.processFreeShipping = function(){
+			addShippingOptions(freeShippingOption);
+		}
+
+		$scope.processSpecificCost = function(){
+			if($scope.cache.state.shippingCosts.length === 0){
+				$scope.cache.state.shippingCosts.push({});
+			}
+			removeShippingOptions(freeShippingOption);		
+		}
+
+		$scope.addCostOption = function(){
+			$scope.cache.state.shippingCosts.push({});
+		}
+
+		$scope.removeCostOption = function(shippingCost){
+			var index = $scope.cache.state.shippingCosts.indexOf(shippingCost);
+			$scope.cache.state.shippingCosts.splice(index, 1);
+		}
+
+		var removeShippingOptions = function(option){
+			var index = $scope.cache.product.shippingCosts.indexOf(option);
+			if(index !== -1){
+				$scope.cache.product.shippingCosts.splice(index,1);
 			}
 		}
 
-		$scope.resetShippingOptionToProduct = function(){
+		var addShippingOptions = function(option){			
+			var index = $scope.cache.product.shippingCosts.indexOf(option);
+			if(index === -1){
+				$scope.cache.product.shippingCosts.push(option);
+			}
+		}
+
+		var resetShippingOptions = function(option){
 			$scope.cache.product.shippingCosts = [];
 		}
 
-		$scope.filterShippingOptionToProduct = function(){
-			$scope.cache.product.shippingCosts = $scope.cache.product.shippingCosts.filter(function(shippingOption){
-				return shippingOption.description === "pickUp";
-			})
-		}
-
-		$scope.processFreeShipping = function(){
-			//remove all specify costs in cache.product
-			$scope.filterShippingOptionToProduct();
-			$scope.addShippingOptionToProduct(freeShippingOption);
-			$scope.specifyDisabled = true;
-		}
-
-		$scope.processSpecifyCost = function(){
-			$scope.specifyDisabled = false;
-			$scope.removeShippingOptionFromProduct(freeShippingOption);
-			
-		}
-
-		$scope.addShippingCost = function(){
-			$scope.cache.shippingCosts.push({});
-		}
-
-		$scope.removeShippingCost = function(shippingCost){
-			var index = $scope.cache.shippingCosts.indexOf(shippingCost);
-			$scope.cache.shippingCosts.splice(index, 1);
-		}
-
-		// when click "save" or "next", join the "cache.shippingCosts" into product
-		$scope.joinShippingCosts = function(){
-			if($scope.cache.shippingCosts[0].cost && $scope.cache.shippingType === "specify"){
+		// when click "save" or "next", add the "cache.shippingCosts" into product
+		$scope.storeShippingCosts = function(){
+			$log.debug("storeShippingCosts");
+			if($scope.cache.state.shippingType === "specific"){
 				//filter for the distinct costs options
-				$scope.cache.distinctCosts = $scope.cache.shippingCosts.filter(function(shippingCost){
+				$scope.cache.state.shippingCosts.filter(function(shippingCost){
 					return $scope.cache.product.shippingCosts.indexOf(shippingCost) === -1;
+				}).forEach(function(distinctCost){
+					$scope.cache.product.shippingCosts.push(distinctCost);
 				})
-				$scope.cache.product.shippingCosts = $scope.cache.product.shippingCosts.concat($scope.cache.distinctCosts);
-				}			
+			}			
+			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
 		}
 
-		//check if free shipping or specify costs are required
-		$scope.check = function(){
-			$log.debug("check", $scope.cache.allowPickUp, "type",$scope.cache.shippingType)
-			if(($scope.cache.allowPickUp == 0 || $scope.cache.allowPickUp == 1) && !$scope.cache.shippingType){
-				return true;
-			}
-		}
+		// check if the next button should be enabled
+		$scope.$watch("shippingInfo.$valid",function(validity){
+			$log.debug($scope.shippingInfo.$valid);
+			if($scope.shippingInfo.$valid){
+	    		$scope.stepCompleted(STEP_NO);
+	    		$scope.isNextDisabled = false;
+	    	}else{
+	    		$scope.updoStepCompleted(STEP_NO);	    	
+	    		$scope.isNextDisabled = true;
+	    	}	
+		}) 
 	  
 		init();
 	}
