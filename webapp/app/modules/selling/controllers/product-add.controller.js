@@ -17,6 +17,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 
 			$scope.cache.state.catalogType = 'auto';
 			$scope.cache.state.selectedCatalog = null;
+			$scope.cache.state.productAttributes = [];
 
 			$scope.stepsCompleted =STEP_NO;
 			// root category. The root categories have a parentId of zero 0
@@ -26,6 +27,11 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 					categoryName:'All categories'
 				}
 			];
+			$scope.pickUps = [
+				{value: 'noPickUp', display: "No pick-up"},
+				{value: 'canPickUp', display: "Buyer can pick-up"},
+				{value: 'mustPickup', display: "Buyer must pick-up"}
+			]
 		}
 
 		$scope.updoStepCompleted = function(step){

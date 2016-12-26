@@ -5,7 +5,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 		var STEP_NO = 5;		
 		var pickUpOption       = {cost: 0,description: "pickUp"};
-		var freeShippingOption = {cost: 0,description: "freeShipping"};
+		var freeShippingOption = {cost: 0,description: "freeShipping",freeLabel: true};
 		
 		function init(){
 			$log.debug("AddProductStep5::init");
@@ -23,13 +23,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				//Shipping cost options added by user - state level
 				$scope.cache.state.shippingCosts = []	
 			}
-			
-			$scope.pickUps = [
-				{value: 'noPickUp', display: "No pick-up"},
-				{value: 'canPickUp', display: "Buyer can pick-up"},
-				{value: 'mustPickup', display: "Buyer must pick-up"}
-			]
-			
+						
 			//hide shipping options if chose "must pick-up" in last version
 			if($scope.cache.state.pickUp === 'mustPickup'){
 				$scope.shippingDisabled = true;
@@ -55,6 +49,8 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}
 			else if($scope.cache.state.pickUp === 'mustPickup'){
 				$scope.shippingDisabled = true;
+//reset the shippintType to prevent adding costs to product from specify
+				$scope.cache.state.shippingType = "";
 				//reset product shipping options and add only pickup option
 				resetShippingOptions();
 				addShippingOptions(pickUpOption)
@@ -62,6 +58,10 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 		
 		$scope.processFreeShipping = function(){
+			//when specified costs in product, if cost change to free shipping
+			$scope.cache.product.shippingCosts = $scope.cache.product.shippingCosts.filter(function(shippingCost){
+				return shippingCost.cost === 0;
+			})
 			addShippingOptions(freeShippingOption);
 		}
 
@@ -111,6 +111,8 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				})
 			}			
 			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
+			$log.debug("product", $scope.cache.product);
+			$log.debug("cache", $scope.cache.state);
 		}
 
 		// check if the next button should be enabled

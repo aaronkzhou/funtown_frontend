@@ -1,6 +1,125 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Confirm</h4>
+		<h4>Confirm the information of product:</h4>        
+        <div class="ft-data-form">
+            <div class="row">
+                <label class="col-md-2 ft-details-label">
+                    Category
+                </label>
+                <div class="ft-details-data">
+                    <ul>
+                        <li data-ng-repeat="path in cache.state.categoryPath">
+                            <span data-ng-bind="path.categoryName"></span>
+                            <i class="fa fa-angle-right"></i> 
+                        </li>
+                        <li>
+                            <span data-ng-bind="cache.product.category.categoryName"></span>
+                        </li>
+                    </ul> 
+                </div>        
+            </div>
+            <div class="separator"></div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                             Title
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="cache.product.catalog.title"></div>
+                    </div>
+                    <div class="row" data-ng-repeat="attribute in cache.product.catalog.catalogAttributes" data-ng-if="isDisplayable(attribute)">
+                        <label class="col-md-4 ft-details-label" data-ng-bind="attribute.attributeType"></label>
+                        <div class="ft-details-data" data-ng-class="attribute.attributeType" data-ng-bind="attribute.attributeValue"></div>
+                    </div>
+                </div>
+                <div class="ft-catalog-preview col-md-4">
+                    <img class="ft-catalog-poster" data-ng-src="{{poster}}">
+                </div>      
+            </div>
+            <div class="separator"></div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Code
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.productCode"></div>
+            </div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    SKU
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.SKU"></div>
+            </div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Stock
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.stock"></div>
+            </div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Extra Details
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.extraDetails"></div>
+            </div>
+            <div class="row" data-ng-repeat="atribute in cache.state.productAttributes">
+                    <label class="col-md-3 ft-details-label" data-ng-bind="atribute.name"></label>
+                    <div class="ft-details-data" data-ng-bind="atribute.display"></div>
+            </div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    No. of discs
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.productAttributes.discs"></div>
+            </div>
+            <div class="separator"></div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Product Price
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.buyNowPrice"></div>
+            </div>
+            <div class="row" data-ng-if="cache.product.offerPrice">   
+                <label class="col-md-3 ft-details-label">
+                    Offer Price
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.product.offerPrice"></div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 ft-details-label">
+                    Accepted Payment Types
+                </label>
+                <div class="ft-details-data">
+                    <ul>
+                        <li data-ng-repeat="payment in cache.product.paymentMethods" data-ng-if="payment.selected"><span data-ng-bind="payment.display"></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="separator"></div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Shipping Rate
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.state.shippingRate"></div>
+            </div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Pick up
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.state.pickUpDisplay"></div>
+            </div>
+            <div class="row">   
+                <label class="col-md-3 ft-details-label">
+                    Costs
+                </label>
+                <div class="ft-details-data">
+                    <ul>
+                        <li data-ng-if="cache.state.shippingType==='free'"><span>Free shipping within New Zealand</span></li>
+                        <li data-ng-if="cache.state.shippingType==='specific'"><span>Specify shipping costs</span></li>
+                        <li data-ng-repeat="cost in cache.product.shippingCosts" data-ng-if="cost.cost!==0"><span>Cost: </span><span data-ng-bind="cost.cost">&nbsp;&nbsp;</span><span>Description: </span><span data-ng-bind="cost.discription"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 		<div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step5">
                 <i class="fa fa-chevron-left"></i> Previous 
