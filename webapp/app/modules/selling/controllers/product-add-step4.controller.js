@@ -40,7 +40,7 @@ angular.module('selling').controller('AddProductStep4', ['$log','$scope','Attrib
 
 		//check if offer price is entered
 		$scope.isOfferPresent = function(){
-			var val = $scope.cache.product.offerPrice;
+			var val = $scope.cache.product.productPrice && $scope.cache.product.productPrice.offerPrice;
 			return val || val === 0;			
 		}
 		

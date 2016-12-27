@@ -9,7 +9,7 @@
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button" class="btn btn-select" name="shippingRates" data-ng-model="cache.product.shippingRate" bs-options="shippingRate.value as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>				
+				<button type="button" class="btn btn-select" name="shippingRates" data-ng-model="cache.product.shippingRate" bs-options="shippingRate.attributeId as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>				
 			</div>
 			<div class="row">
 				<label class="col-md-3" for="pickUp">

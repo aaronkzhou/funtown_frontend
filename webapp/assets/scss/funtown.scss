@@ -54,6 +54,7 @@ label{
 	   	color:#f60;
 	}
 }
+
 .btn , .btn:focus,.btn:hover,.btn[diabled]:hover{
 	background: #e62e04;
     color: #fff;
@@ -71,6 +72,9 @@ label{
 		float: right;
 		margin-top: 9px;
 	}
+}
+.btn-select[disabled]{
+	background: #eee;
 }
 .form-control{
 	box-shadow: none;

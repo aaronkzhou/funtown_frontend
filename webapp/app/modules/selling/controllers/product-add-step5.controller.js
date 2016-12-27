@@ -48,20 +48,15 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				addShippingOptions(pickUpOption)
 			}
 			else if($scope.cache.state.pickUp === 'mustPickup'){
-				$scope.shippingDisabled = true;
-//reset the shippintType to prevent adding costs to product from specify
-				$scope.cache.state.shippingType = "";
+				$scope.shippingDisabled = true;				
 				//reset product shipping options and add only pickup option
 				resetShippingOptions();
+				$scope.cache.state.shippingType = null;
 				addShippingOptions(pickUpOption)
 			}
 		}
 		
 		$scope.processFreeShipping = function(){
-			//when specified costs in product, if cost change to free shipping
-			$scope.cache.product.shippingCosts = $scope.cache.product.shippingCosts.filter(function(shippingCost){
-				return shippingCost.cost === 0;
-			})
 			addShippingOptions(freeShippingOption);
 		}
 
@@ -82,14 +77,20 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 
 		var removeShippingOptions = function(option){
-			var index = $scope.cache.product.shippingCosts.indexOf(option);
+			var index = $scope.cache.product.shippingCosts.findIndex(function(shippingCost){				
+				return (shippingCost.cost === option.cost && shippingCost.description === option.description );
+			});
+			
 			if(index !== -1){
 				$scope.cache.product.shippingCosts.splice(index,1);
 			}
 		}
 
 		var addShippingOptions = function(option){			
-			var index = $scope.cache.product.shippingCosts.indexOf(option);
+			var index = $scope.cache.product.shippingCosts.findIndex(function(shippingCost){
+				return (shippingCost.cost === option.cost && shippingCost.description === option.description );
+			});
+			
 			if(index === -1){
 				$scope.cache.product.shippingCosts.push(option);
 			}
@@ -103,7 +104,6 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		$scope.storeShippingCosts = function(){
 			$log.debug("storeShippingCosts");
 			if($scope.cache.state.shippingType === "specific"){
-				//filter for the distinct costs options
 				$scope.cache.state.shippingCosts.filter(function(shippingCost){
 					return $scope.cache.product.shippingCosts.indexOf(shippingCost) === -1;
 				}).forEach(function(distinctCost){
@@ -111,13 +111,11 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				})
 			}			
 			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
-			$log.debug("product", $scope.cache.product);
-			$log.debug("cache", $scope.cache.state);
+			$log.debug("product",$scope.cache.product);
 		}
 
 		// check if the next button should be enabled
 		$scope.$watch("shippingInfo.$valid",function(validity){
-			$log.debug($scope.shippingInfo.$valid);
 			if($scope.shippingInfo.$valid){
 	    		$scope.stepCompleted(STEP_NO);
 	    		$scope.isNextDisabled = false;

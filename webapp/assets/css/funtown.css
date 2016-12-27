@@ -58,6 +58,9 @@ label {
     float: right;
     margin-top: 9px; }
 
+.btn-select[disabled] {
+  background: #eee; }
+
 .form-control {
   box-shadow: none;
   border: 1px solid #ccc;
