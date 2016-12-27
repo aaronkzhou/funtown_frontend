@@ -68,7 +68,7 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 		function processGenres(genres){			
 			return genres.map(function(genre){
 				return genre.name;
-			})
+			}).join();
 		}
 
 		function processCast(credits){
@@ -76,7 +76,7 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 				return index < MAX_CAST_COUNT;
 			}).map(function(actor){
 				return actor.name;
-			})
+			}).join();
 		}
 
 		function processDirector(credits){
@@ -84,7 +84,7 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 				return person.department === DIRECTOR_DEPARTMENT && person.job === DIRECTOR_JOB;
 			}).map(function(director){
 				return director.name;
-			})
+			}).join();
 		}
 
 	}

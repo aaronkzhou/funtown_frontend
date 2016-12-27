@@ -110,8 +110,8 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 					$scope.cache.product.shippingCosts.push(distinctCost);
 				})
 			}			
-			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
-			$log.debug("product",$scope.cache.product);
+			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);			
+			$scope.saveDraft();
 		}
 
 		// check if the next button should be enabled

@@ -65,6 +65,35 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 
 		$scope.saveDraft = function(){
 			$log.debug("saveDraft");
+			$log.debug("product",$scope.cache.product);
+
+			var productAttributes = [];	
+			var product = JSON.parse(JSON.stringify($scope.cache.product));
+
+			var productAttributesObj =  $scope.cache.product.productAttributes;
+
+			for(var property  in productAttributesObj){
+				productAttributes.push({attributeType:property,attributeValue:productAttributesObj[property]});
+			}
+			product.productAttributes = productAttributes;
+			product.productPriceDetails = [$scope.cache.product.productPriceDetails];
+			product.catalog.category = $scope.cache.product.category;
+			delete product.category
+			productAttributesObj = null;
+			
+			$log.debug("request",product);
+			// var paymentMethods = [];	
+			// $scope.cache.product.paymentMethods.map(function(paymentMethod)){
+			// 	if(paymentMethod.selected){
+			// 		paymentMethods.push({paymentMethodId:paymentMethod.attributeId})
+			// 	}
+			// };
+			
+
+
+			$http.post('/rest/api/product',product).then(function(response){
+				$log.debug("saveDraft::response : ",response);
+			})
 		}
 
 		init();

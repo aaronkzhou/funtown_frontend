@@ -3,13 +3,13 @@
 		<h4>Shipping options</h4>
 		<form name="shippingInfo" class="ft-data-form" novalidate>		
 			<div class="row">
-				<label class="col-md-3" for="shippingRates">
+				<label class="col-md-3" for="shippingRateId">
 					Shipping Rate
-					<div class="error" ng-messages="shippingInfo.shippingRates.$error">
+					<div class="error" ng-messages="shippingInfo.shippingRateId.$error">
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button" class="btn btn-select" name="shippingRates" data-ng-model="cache.product.shippingRate" bs-options="shippingRate.attributeId as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>				
+				<button type="button" class="btn btn-select" name="shippingRateId" data-ng-model="cache.product.shippingRateId" bs-options="shippingRate.attributeId as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>				
 			</div>
 			<div class="row">
 				<label class="col-md-3" for="pickUp">

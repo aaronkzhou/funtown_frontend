@@ -47,7 +47,7 @@
                 <label class="col-md-3 ft-details-label">
                     SKU
                 </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.SKU"></div>
+                <div class="ft-details-data" data-ng-bind="cache.product.sku"></div>
             </div>
             <div class="row">   
                 <label class="col-md-3 ft-details-label">
@@ -59,7 +59,7 @@
                 <label class="col-md-3 ft-details-label">
                     Extra Details
                 </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.extraDetails"></div>
+                <div class="ft-details-data" data-ng-bind="cache.product.extraDetail"></div>
             </div>
             <div class="row" data-ng-repeat="atribute in cache.state.productAttributes">
                     <label class="col-md-3 ft-details-label" data-ng-bind="atribute.name"></label>
@@ -76,13 +76,13 @@
                 <label class="col-md-3 ft-details-label">
                     Product Price
                 </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.productPrice.buyNowPrice"></div>
+                <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.buyNowPrice"></div>
             </div>
-            <div class="row" data-ng-if="cache.product.offerPrice">   
+            <div class="row" data-ng-if="cache.product.productPriceDetails.offerPrice">   
                 <label class="col-md-3 ft-details-label">
                     Offer Price
                 </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.productPrice.offerPrice"></div>
+                <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.offerPrice"></div>
             </div>
             <div class="row">
                 <label class="col-md-3 ft-details-label">
@@ -115,7 +115,7 @@
                     <ul>
                         <li data-ng-if="cache.state.shippingType==='free'"><span>Free shipping within New Zealand</span></li>
                         <li data-ng-if="cache.state.shippingType==='specific'"><span>Specify shipping costs</span></li>
-                        <li data-ng-repeat="cost in cache.product.shippingCosts" data-ng-if="cost.cost!==0"><span>Cost: </span><span data-ng-bind="cost.cost">&nbsp;&nbsp;</span><span>Description: </span><span data-ng-bind="cost.discription"></span></li>
+                        <li data-ng-repeat="cost in cache.product.shippingCosts" data-ng-if="cost.cost!==0"><span>Cost: </span><span data-ng-bind="cost.cost">&nbsp;&nbsp;</span><span>Description: </span><span data-ng-bind="cost.description"></span></li>
                     </ul>
                 </div>
             </div>
