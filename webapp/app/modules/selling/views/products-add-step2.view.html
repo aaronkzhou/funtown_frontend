@@ -55,17 +55,17 @@
 			    					<p ng-message="required">Required</p>
 			    				</div>
 							</label>
-							<button type="button"  name="genre" class="btn btn-select" ng-model="cache.state.manualcatalog.genre" bs-options="genre.value as genre.value for genre in genres" required bs-select>
+							<button type="button"  name="genre" class="btn btn-select" ng-model="cache.state.manualcatalog.genre" bs-options="genre.value as genre.display for genre in genres" required bs-select>
   				 			Genre<span class="caret"></span>
 						</div>
 						<div class="row">	
 							<label class="col-md-3">
 								Description
+								<div class="error" ng-messages="configProduct.description.$error">
+				    				<p ng-message="required">Required</p>
+				    			</div>
 							</label>
 							<textarea class="form-control" cols="48" rows="6" name="description" ng-model="cache.state.manualcatalog.description" required></textarea>
-							<div class="error" ng-messages="configProduct.description.$error">
-			    				<p ng-message="required">Required</p>
-			    			</div>
 						</div>
 					</div>
 					<div class="ft-catalog-preview"></div>
@@ -75,13 +75,13 @@
 			<button class="btn" ui-sref="manage.addProduct.step1">
                 <i class="fa fa-chevron-left"></i> Previous 
             </button>
-            <button class="btn" data-ng-click="saveDraft(); storeManualCatalog();">
+            <button class="btn" data-ng-click="saveDraft()" data-ng-disabled="isDraftDisabled()">
                 <i class="fa fa-file-text"></i> Save Draft 
             </button>
             <button class="btn" data-ng-click="cancel()">
                 <i class="fa fa-trash"></i> Cancel
             </button>
-            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step3" data-ng-click="storeManualCatalog()">
+            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step3">
                 Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>

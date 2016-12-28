@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
-	function($log,$scope,$http) {	
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','ProductService',
+	function($log,$scope,$http,ProductService) {	
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
@@ -11,6 +11,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 			$scope.cache = {}			
 			//Cache product
 			$scope.cache.product = {};
+			$scope.cache.product.status = "in-draft";
 
 			//Cache states across steps
 			$scope.cache.state = {};
@@ -48,6 +49,10 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 			return step > $scope.stepsCompleted+1;
 		}
 
+		$scope.isDraftDisabled = function(){
+			return $scope.stepsCompleted < 2;
+		}
+
 		$scope.resetProduct = function(){
 			$scope.cache.product = {};
 		}
@@ -66,35 +71,9 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 
 		$scope.saveDraft = function(){
 			$log.debug("saveDraft");
-			$log.debug("product",$scope.cache.product);
-
-			var productAttributes = [];	
-			var product = JSON.parse(JSON.stringify($scope.cache.product));
-
-			var productAttributesObj =  $scope.cache.product.productAttributes;
-
-			for(var property  in productAttributesObj){
-				productAttributes.push({attributeType:property,attributeValue:productAttributesObj[property]});
-			}
-			product.productAttributes = productAttributes;
-			product.productPriceDetails = [$scope.cache.product.productPriceDetails];
-			product.catalog.category = $scope.cache.product.category;
-			delete product.category
-			productAttributesObj = null;
-			
-			$log.debug("request",product);
-			// var paymentMethods = [];	
-			// $scope.cache.product.paymentMethods.map(function(paymentMethod)){
-			// 	if(paymentMethod.selected){
-			// 		paymentMethods.push({paymentMethodId:paymentMethod.attributeId})
-			// 	}
-			// };
-			
-
-
-			$http.post('/rest/api/product',product).then(function(response){
-				$log.debug("saveDraft::response : ",response);
-			})
+			ProductService.saveProduct($scope.cache.product).then(function(response){
+				$scope.cache.product.productId = response.data;
+			})			
 		}
 
 		init();

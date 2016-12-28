@@ -4,6 +4,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 		$log.debug('AddProductStep1::controller');
 		
 		var STEP_NO = 1;
+		var rootCategory = null;
 
 		function init(){
 			//if category is alreday set get the child categories for the last path 
@@ -24,6 +25,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 			//if this is the root category set it on product
 			if(category.parentId===0){
 				$scope.cache.state.rootCategory = category.categoryName;
+				rootCategory = category;
 			}
 			if(category.childrenCount > 0){
 				$scope.cache.state.categoryPath.push(category);
@@ -32,6 +34,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 				});
 			}else {
 				$scope.cache.product.category = category;
+				$scope.cache.product.rootCategory = rootCategory;
 			}	
 	    }
 
