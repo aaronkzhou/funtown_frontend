@@ -1,20 +1,20 @@
-angular.module('selling').controller('AddProductStep6', ['$log','$scope', '$http', 'AttributeService', 
-	function($log,$scope,$http,AttributeService){
-		$log.debug('AddProductStep6 controller', $scope.cache.product);
-
-		var STEP_NO = 6;
-		$scope.cache.state.attributesList = [];
+angular.module('selling').controller('AddProductStep6', ['$log','$scope','AttributeService', 
+	function($log,$scope,AttributeService){
+		$log.debug('AddProductStep6 controller', 'product',$scope.cache.product);
+		$log.debug('cache', $scope.cache.state);
+		var STEP_NO = 6;		
+		var attributes = AttributeService.getAttributes();
 
 		function init(){
-			$http.get('/rest/api/attributes').then(function(response){
-				$scope.cache.state.attributesList = response.data;
 				getPoster();
 				$scope.getProductAttributesById();
-				$scope.cache.state.shippingRate = $scope.getProductAttributesByValue($scope.cache.product.shippingRate);
+				$scope.cache.state.shippingRate = $scope.getProductAttributesById("shippingRates",$scope.cache.product.shippingRateId);
+				$scope.cache.state.region = $scope.getProductAttributesById("region",$scope.cache.product.productAttributes.region);
+				$scope.cache.state.condition = $scope.getProductAttributesById("condition",$scope.cache.product.productAttributes.condition);
+				$scope.cache.state.NZClassification = $scope.getProductAttributesById("NZClassification",$scope.cache.product.productAttributes.classification);
+				$scope.cache.state.offerDuration = $scope.getProductAttributesById("offerDurations",$scope.cache.product.productPriceDetails.offerDuration);							
 				$scope.cache.state.pickUpDisplay = $scope.getPickUpDisplay($scope.cache.state.pickUp);
-			});
-			
-		}
+			};
 
 		function getPoster(){
 			$log.debug("getPoster");
@@ -34,38 +34,19 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope', '$http
 			return attribute.attributeType != 'poster';
 		}
 
-		$scope.getProductAttributesByValue = function(attributeValue){
-			$log.debug("getProductAttributesByValue - ",attributeValue);
-			if(attributeValue){
-				var specificAttribute = $scope.cache.state.attributesList.filter(function(attribute){
-					return attribute.value === attributeValue;
-				})				
-			}
-			return specificAttribute[0].display;
-		}
-
 		$scope.getPickUpDisplay = function(pickUpValue){
-			var pickUp = $scope.pickUps.filter(function(pickUp){
+			$log.debug($scope.pickUps);
+			return $scope.pickUps.find(function(pickUp){
 				return pickUp.value === pickUpValue;
-			})
-			return pickUp[0].display;
+			}).display;
 		}
 
-		$scope.getProductAttributesById = function(){
-			$scope.cache.state.productAttributes.push($scope.getProductAttributesFor('regions', $scope.cache.product.productAttributes.region));
-			$scope.cache.state.productAttributes.push($scope.getProductAttributesFor('conditions', $scope.cache.product.productAttributes.condition));
-			$scope.cache.state.productAttributes.push($scope.getProductAttributesFor('classifications', $scope.cache.product.productAttributes.classification));
-		}
-
-		//get attributes detail for the confirm step
-		$scope.getProductAttributesFor = function(name, attributeValue){
-			$log.debug("getProductAttributesFor - ",name,attributeValue);
-			if(attributeValue){
-				var specificAttribute = $scope.cache.state.attributesList.filter(function(attribute){
-					return attribute.attributeId === attributeValue;
-				})				
+		$scope.getProductAttributesById = function(attributeName, attributeId){		
+			if(attributeId){
+				return attributes[attributeName].find(function(attribute){
+					return attribute.attributeId === attributeId;
+				}).display;
 			}
-			return specificAttribute[0];
 		}
 
 		init();		

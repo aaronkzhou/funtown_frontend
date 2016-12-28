@@ -55,21 +55,35 @@
                 </label>
                 <div class="ft-details-data" data-ng-bind="cache.product.stock"></div>
             </div>
-            <div class="row">   
+            <div class="row" data-ng-if="cache.product.extraDetail">   
                 <label class="col-md-3 ft-details-label">
                     Extra Details
                 </label>
                 <div class="ft-details-data" data-ng-bind="cache.product.extraDetail"></div>
             </div>
-            <div class="row" data-ng-repeat="atribute in cache.state.productAttributes">
-                    <label class="col-md-3 ft-details-label" data-ng-bind="atribute.name"></label>
-                    <div class="ft-details-data" data-ng-bind="atribute.display"></div>
+            <div class="row">
+                <label class="col-md-3 ft-details-label">
+                    Region
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.state.region"></div>
             </div>
             <div class="row">   
                 <label class="col-md-3 ft-details-label">
                     No. of discs
                 </label>
                 <div class="ft-details-data" data-ng-bind="cache.product.productAttributes.discs"></div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 ft-details-label">
+                    Condition
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.state.condition"></div>
+            </div>
+            <div class="row">
+                <label class="col-md-3 ft-details-label">
+                    NZ Classification
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.state.NZClassification"></div>
             </div>
             <div class="separator"></div>
             <div class="row">   
@@ -83,6 +97,12 @@
                     Offer Price
                 </label>
                 <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.offerPrice"></div>
+            </div>
+            <div class="row" data-ng-if="cache.product.productPriceDetails.offerDuration">   
+                <label class="col-md-3 ft-details-label">
+                    Offer Duration
+                </label>
+                <div class="ft-details-data" data-ng-bind="cache.state.offerDuration"></div>
             </div>
             <div class="row">
                 <label class="col-md-3 ft-details-label">
@@ -115,10 +135,14 @@
                     <ul>
                         <li data-ng-if="cache.state.shippingType==='free'"><span>Free shipping within New Zealand</span></li>
                         <li data-ng-if="cache.state.shippingType==='specific'"><span>Specify shipping costs</span></li>
-                        <li data-ng-repeat="cost in cache.product.shippingCosts" data-ng-if="cost.cost!==0"><span>Cost: </span><span data-ng-bind="cost.cost">&nbsp;&nbsp;</span><span>Description: </span><span data-ng-bind="cost.description"></span></li>
+                        <li data-ng-repeat="cost in cache.product.shippingCosts" data-ng-if="cost.cost!==0"><span>Cost: </span><span data-ng-bind="cost.cost"></span>&nbsp;&nbsp;<span>Description: </span><span data-ng-bind="cost.description"></span></li>
                     </ul>
                 </div>
             </div>
+            <div class="separator"></div>
+                <div class="text-center">
+                    <input type="checkbox" ng-model="cache.product.active" value="true" checked>&nbsp;&nbsp;<span>Create it as an active product</span>
+                </div>
         </div>
 		<div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step5">
@@ -129,6 +153,9 @@
             </button>
             <button class="btn" data-ng-click="cancel()">
                 <i class="fa fa-trash"></i> Cancel
+            </button>
+            <button class="btn" data-ng-click="create()">
+                <i class="fa fa-check-circle"></i> Confirm
             </button>
     	</div>
 	</div>

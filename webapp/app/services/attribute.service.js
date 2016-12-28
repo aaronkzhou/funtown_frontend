@@ -35,6 +35,10 @@ angular.module('funtown').service('AttributeService', ['$log','$http',
 			}			
 		}
 
+		this.getAttributes = function(){
+			return attributes;
+		}
+
 		init();
 	}
 ])
