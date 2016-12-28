@@ -54,7 +54,8 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http',
 
 		$scope.cancel = function(){
 			$log.debug("cancel");
-			$scope.cache.product = {};		
+			$scope.cache.product = {};
+			$scope.cache.state = {};		
 			$scope.cache.state.categoryPath = [
 				{
 					categoryId:0,

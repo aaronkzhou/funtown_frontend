@@ -1,16 +1,24 @@
 'use strict';
-angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http','CatalogFactory',
-	function($log,$scope,$http,CatalogFactory) {
+angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http','CatalogFactory','AttributeService',
+	function($log,$scope,$http,CatalogFactory,AttributeService) {
 		$log.debug('AddProductStep2::controller',$scope.cache.product);
 		
 		var STEP_NO = 2;
 		var rootCategory,catalogProcessor;
 
 		function init(){						
-			rootCategory = $scope.cache.state.rootCategory
+			rootCategory = $scope.cache.state.rootCategory;
+			//store the manual catalog attributes
+			$scope.cache.state.manualcatalog = {};
 			$log.debug('AddProductStep2::init - ',rootCategory);
 			//Get the correct catalog processor
-			catalogProcessor = new CatalogFactory(rootCategory);	
+			catalogProcessor = new CatalogFactory(rootCategory);
+
+			if($scope.cache.product.category){
+				$scope.genres = AttributeService.getAttributesFor('genre',$scope.cache.product.category.categoryId);
+			}else{
+				$log.warn("Category not yet set.");
+			}	
 
 			if($scope.cache.product.catalog){
 				getPoster(); 
@@ -87,6 +95,18 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		//check if the catalogue has been chosen
 		$scope.hasCatalogue = function(){
 			return $scope.cache.product.catalog; 
+		}
+
+		//store the manualcatalog into product
+		$scope.storeManualCatalog = function(){
+			if($scope.cache.state.catalogType === 'manual'){
+				$scope.cache.product.catalog.catalogAttributes = [];
+				for(var attribute in $scope.cache.state.manualcatalog){
+					var catalogAttribute = {"attributeType": attribute, "attributeValue": $scope.cache.state.manualcatalog[attribute]};
+					$scope.cache.product.catalog.catalogAttributes.push(catalogAttribute);
+				}
+			}
+			
 		}
 
 		init();
