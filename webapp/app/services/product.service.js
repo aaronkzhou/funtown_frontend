@@ -6,7 +6,7 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 		this.saveProduct = function(product){
 			$log.debug("ProductService::saveProduct - ",product);
 
-			return $http.post('/rest/api/products',product,{
+			return $http.post('/rest/api/selling/products',product,{
 				transformRequest:doTransformRequest
 			})
 		}
@@ -55,6 +55,8 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 					return shippingCost;
 				})
 			}
+
+			product.status = request.status || "IN_DRAFT";
 			
 			$log.debug("doTransformRequest:: transformed product - ",product);
 			$log.debug("doTransformRequest:: transformed product - ",JSON.stringify(product));

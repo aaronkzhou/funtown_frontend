@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','ProductService',
-	function($log,$scope,$http,ProductService) {	
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','ProductService','$state',
+	function($log,$scope,$http,ProductService,$state) {	
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
@@ -10,8 +10,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
-			$scope.cache.product = {};
-			$scope.cache.product.status = "in-draft";
+			$scope.cache.product = {};			
 
 			//Cache states across steps
 			$scope.cache.state = {};
@@ -61,12 +60,14 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 			$log.debug("cancel");
 			$scope.cache.product = {};
 			$scope.cache.state = {};		
+			$scope.cache.state.catalogType = 'auto';
 			$scope.cache.state.categoryPath = [
 				{
 					categoryId:0,
 					categoryName:'All categories'
 				}
 			];	
+			$state.go('manage.addProduct.step1');
 		}
 
 		$scope.saveDraft = function(){

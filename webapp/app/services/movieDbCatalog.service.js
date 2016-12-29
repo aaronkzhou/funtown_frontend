@@ -19,13 +19,15 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 			.then(function(response){				
 				var catalog = processResult(response);
 				deferred.resolve(catalog);	
+			},function(error){
+				deferred.reject(error);	
 			})
 			return deferred.promise;
 		}
 
 		var movieDbMapping = {
 			title:{tag:'title',isAttribute:false},
-			movieDbId:{tag:'id',isAttribute:false},
+			refId:{tag:'id',isAttribute:false},
 			year:{tag:'release_date',isAttribute:true,preProcessor:formatYear},
 			genres:{tag:'genres',isAttribute:true,preProcessor:processGenres},			
 			plot:{tag:'overview',isAttribute:true},

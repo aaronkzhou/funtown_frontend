@@ -17,6 +17,12 @@ var MoviesCatalog = function(movieDbCatalogService,funtownCatalogService,log,q){
 					deferred.resolve(response.data);
 				})
 			}
+		},function(error){
+			log.error(error);
+			log.debug("checking funtown...");
+			funtownCatalogService.getCatalog(search,rootCategory).then(function(response){
+				deferred.resolve(response.data);
+			})
 		});
 
 		return deferred.promise;

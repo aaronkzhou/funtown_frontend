@@ -8,6 +8,7 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 		function init(){
 				getPoster();
 				$scope.getProductAttributesById();
+				$scope.cache.product.status="ACTIVE";
 				$scope.cache.state.shippingRate = $scope.getProductAttributesById("shippingRates",$scope.cache.product.shippingRateId);
 				$scope.cache.state.region = $scope.getProductAttributesById("region",$scope.cache.product.productAttributes.region);
 				$scope.cache.state.condition = $scope.getProductAttributesById("condition",$scope.cache.product.productAttributes.condition);

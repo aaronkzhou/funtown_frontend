@@ -141,7 +141,9 @@
             </div>
             <div class="separator"></div>
                 <div class="text-center">
-                    <input type="checkbox" ng-model="cache.product.active" value="true" checked>&nbsp;&nbsp;<span>Create it as an active product</span>
+                    <input type="radio" name="status" ng-model="cache.product.status" value="ACTIVE">&nbsp;&nbsp;<span>Start selling (Active)</span> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="status" ng-model="cache.product.status" value="DE_ACTIVE">&nbsp;&nbsp;<span>Don't sell (De-active)</span>
                 </div>
         </div>
 		<div class="ft-card-footer col-md-12 text-center">
