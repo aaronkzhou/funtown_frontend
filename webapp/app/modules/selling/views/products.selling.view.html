@@ -1,0 +1,92 @@
+<br>
+<div>
+	<button class="btn btn-lg" data-ng-click="activateProduct()" ng-disabled="productsChosen.length === 0">
+		Activate
+	</button>
+	<button class="btn btn-lg" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0">
+		Deactivate
+	</button>
+	<button class="btn btn-lg" data-ng-click="deleteProducts()" ng-disabled="productsChosen.length === 0">
+		Delete
+	</button>
+</div>
+<div>
+	<p>Show all <b><span data-ng-bind="products.activeCount"></span></b>&nbsp;products</p>
+</div>
+<table class="table table-hover table-bordered">
+	<thead>
+		<tr class="row">			
+			<th class="col-md-1">
+				<div><input type="checkbox" data-ng-model="chooseAll"></div>		
+			</th>
+			<th class="col-md-3">
+				Product
+			</th>
+			<th class="col-md-2">
+				Status
+			</th>
+			<th class="col-md-1">
+				Stock
+			</th>
+			<th class="col-md-1">
+				Buy now
+			</th>
+			<th class="col-md-1">
+				FPO
+			</th>
+			<th class="col-md-2">
+				Duration
+			</th>
+			<th class="col-md-1">
+				<div></div>
+			</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-ng-repeat="product in products.active" class="row">
+			<td class="col-md-1">
+				<input type="checkbox" data-ng-model="product.selected"" ng-checked="chooseAll" data-ng-click="changeSelectedProducts(product)">
+			</td>
+			<td class="col-md-3">
+				<div>
+					<a href="#"><span data-ng-bind="product.title"></span></a>
+				</div>
+				<div>
+					<p>Code: <span data-ng-bind="product.productCode"></span></p>
+				</div>
+				<div>
+					<p>SKU: <span data-ng-bind="product.sku"></span></p>
+				</div>
+			</td>
+			<td class="col-md-2">
+				<div>
+					<span data-ng-bind="product.status"></span>
+				</div>
+			</td>
+			<td class="col-md-1">
+				<div>
+					<span data-ng-bind="product.stock"></span>
+				</div>
+			</td>
+			<td class="col-md-1">
+				<div>
+					<span data-ng-bind="product.buyNowPrice"></span>
+				</div>
+			</td>
+			<td class="col-md-1">
+				<div>
+					<span data-ng-bind="product.offerPrice"></span>
+				</div>
+			</td>
+			<td class="col-md-2">
+				<div>
+					<span data-ng-bind="product.offerDuration"></span>
+				</div>
+			</td>
+			<td class="col-md-1">
+				<button class="btn">Edit</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+

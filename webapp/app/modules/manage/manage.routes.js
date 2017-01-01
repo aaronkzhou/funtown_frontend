@@ -41,7 +41,8 @@ angular.module('manage').config(['$stateProvider',
 		})
 		.state('manage.products.selling',{
 			url:'/selling',
-			templateUrl:'app/modules/selling/views/products.view.html'
+			controller:'ProductsSellingView',
+			templateUrl:'app/modules/selling/views/products.selling.view.html'
 		})
 		.state('manage.products.sold',{
 			url:'/sold',
@@ -49,15 +50,18 @@ angular.module('manage').config(['$stateProvider',
 		})
 		.state('manage.products.outOfStock',{
 			url:'/outOfStock',
-			templateUrl:'app/modules/selling/views/products.view.html'
+			controller:'ProductsOutOfStockView',
+			templateUrl:'app/modules/selling/views/products.outOfStock.view.html'
 		})
 		.state('manage.products.deactive',{
 			url:'/deactive',
-			templateUrl:'app/modules/selling/views/products.view.html'
+			controller:'ProductsDeactiveView',
+			templateUrl:'app/modules/selling/views/products.deactive.view.html'
 		})
 		.state('manage.products.inDraft',{
 			url:'/indraft',
-			templateUrl:'app/modules/selling/views/products.view.html'
+			controller:'ProductsInDraftView',
+			templateUrl:'app/modules/selling/views/products.inDraft.view.html'
 		})
 		//addProduct
 		.state('manage.addProduct',{

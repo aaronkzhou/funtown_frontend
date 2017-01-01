@@ -4,6 +4,8 @@ angular.module('selling').controller('ProductsView', ['$log','$scope',
 
 		$log.debug("ProductsView controller");
 
+		$scope.products = {};
+
 		var productsViewCtrl = this;
 
 		$scope.tabs = [
