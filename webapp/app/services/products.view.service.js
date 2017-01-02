@@ -3,6 +3,14 @@ angular.module('funtown').service('ProductsViewService', ['$log','$http',
 	function($log,$http){
 		$log.debug('ProductsViewService');
 
+		this.getTablist = function(){
+			$log.debug('getTablist');
+			return $http.get('/rest/api/selling/products/count')
+					.then(function(response){
+						return response.data;
+					});
+		}
+
 		//get products of different status
 		this.getProductsOfStatus = function(statusName){
 			$log.debug('getProductsOfStatus',statusName);
@@ -11,6 +19,7 @@ angular.module('funtown').service('ProductsViewService', ['$log','$http',
 					.then(function(response){
 						return response.data;
 			})
+					$log.debug('$scope.products',$scope.products)
 		}
 
 		//get count of different status

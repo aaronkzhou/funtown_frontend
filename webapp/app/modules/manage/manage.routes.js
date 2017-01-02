@@ -41,27 +41,28 @@ angular.module('manage').config(['$stateProvider',
 		})
 		.state('manage.products.selling',{
 			url:'/selling',
-			controller:'ProductsSellingView',
-			templateUrl:'app/modules/selling/views/products.selling.view.html'
+			controller:'ProductsView',
+			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
 		.state('manage.products.sold',{
 			url:'/sold',
-			templateUrl:'app/modules/selling/views/products.view.html'
+			controller:'ProductsView',
+			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
 		.state('manage.products.outOfStock',{
 			url:'/outOfStock',
-			controller:'ProductsOutOfStockView',
-			templateUrl:'app/modules/selling/views/products.outOfStock.view.html'
+			controller:'ProductsView',
+			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
 		.state('manage.products.deactive',{
 			url:'/deactive',
-			controller:'ProductsDeactiveView',
-			templateUrl:'app/modules/selling/views/products.deactive.view.html'
+			controller:'ProductsView',
+			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
 		.state('manage.products.inDraft',{
 			url:'/indraft',
-			controller:'ProductsInDraftView',
-			templateUrl:'app/modules/selling/views/products.inDraft.view.html'
+			controller:'ProductsView',
+			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
 		//addProduct
 		.state('manage.addProduct',{
