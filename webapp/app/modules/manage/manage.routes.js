@@ -39,27 +39,32 @@ angular.module('manage').config(['$stateProvider',
 			controller:'ProductsView',
 			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
-		.state('manage.products.selling',{
+		.state('manage.products.ACTIVE',{
 			url:'/selling',
 			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html'
+			templateUrl:'app/modules/selling/views/products-home.view.html',
+			resolve:{
+				products: function(ProductsViewService){
+					return ProductsViewService.getProductsOfStatus("ACTIVE");
+				}
+			}
 		})
-		.state('manage.products.sold',{
+		.state('manage.products.SOLD',{
 			url:'/sold',
 			controller:'ProductsView',
 			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
-		.state('manage.products.outOfStock',{
+		.state('manage.products.OUT_OF_STOCK',{
 			url:'/outOfStock',
 			controller:'ProductsView',
 			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
-		.state('manage.products.deactive',{
+		.state('manage.products.DE_ACTIVE',{
 			url:'/deactive',
 			controller:'ProductsView',
 			templateUrl:'app/modules/selling/views/products-home.view.html'
 		})
-		.state('manage.products.inDraft',{
+		.state('manage.products.IN_DRAFT',{
 			url:'/indraft',
 			controller:'ProductsView',
 			templateUrl:'app/modules/selling/views/products-home.view.html'

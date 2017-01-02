@@ -1,9 +1,11 @@
 <div class="col-md-12">
 	<h3 class="ft-main-content-title">My Products</h3>
-	<div class="btn-group" data-ng-repeat="tab in products.tabs" role="tablist">	
-		<button data-ng-bind="tab.status" data-ng-click="getProductsListOf(tab.statusCode)"></button>
-		<div class="ft-badge" data-ng-bind="tab.productCount"></div>
-	</div>
+	<ul class="nav nav-tabs" role="tablist">
+		<li  data-ng-repeat="tab in tabs" ui-sref-active="active">
+			<a data-ui-sref="{{tab.state}}" data-toggle="tab" data-ng-bind="tab.status"></a>
+			<div class="ft-badge" data-ng-bind="tab.productCount"></div>
+		</li>
+	</ul>
 	<div class="nav-tab-body">
 		<br>
 		<div>
@@ -47,7 +49,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr data-ng-repeat="product in showProduct" class="row">
+				<tr data-ng-repeat="product in products" class="row">
 					<td class="col-md-1">
 						<input type="checkbox" data-ng-model="product.selected"" ng-checked="chooseAll" data-ng-click="changeSelectedProducts(product)">
 					</td>

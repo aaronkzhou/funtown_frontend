@@ -1,13 +1,12 @@
 'use strict';
 angular.module('selling').controller('ProductsView', ['$log','$scope','ProductsViewService',
-	function($log,$scope,ProductsViewService){
+	function($log,$scope,ProductsViewService,products){
 
 		$log.debug("ProductsView controller");
+$log.debug('products',products)
+		$scope.products = products ;
 
-		$scope.products = {};
-		$scope.products.tabs = [];
-		var allProducts = [];
-		//var productsViewCtrl = this;
+		$scope.tabs = [];
 
 		$scope.productsChosen = [];
 
@@ -19,24 +18,16 @@ angular.module('selling').controller('ProductsView', ['$log','$scope','ProductsV
 
 		//get original data from database
 		$scope.getTablist = function(){
-			if($scope.products.tabs.length === 0){
-				ProductsViewService.getTablist().then(function(response){
-					$scope.products.tabs = response;
-					$scope.products.tabs.forEach(function(status){
-						ProductsViewService.getProductsOfStatus(status.statusCode)
-						.then(function(response){
-							$scope.products[status.statusCode] = response;
-						})
-					})
-				})
-			}else{
-
-			}
+			ProductsViewService.getTablist().then(function(response){
+				$scope.tabs = response;
+				$scope.tabs.forEach(function(eachTab){
+					eachTab.state = "manage.products." + eachTab.statusCode;
+				});
+			});
 		}
 
 		$scope.getProductsListOf = function(status){
-			$scope.showProduct = $scope.products[status];
-			$log.debug('$scope.products[status]',$scope.products[status])
+			ProductsViewService.getProductsOfStatus
 		}
 
 		$scope.changeSelectedProducts = function(product){

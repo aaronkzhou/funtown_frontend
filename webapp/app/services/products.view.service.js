@@ -17,21 +17,11 @@ angular.module('funtown').service('ProductsViewService', ['$log','$http',
 
 			return $http.get('/rest/api/selling/products?status=' + statusName)
 					.then(function(response){
+						$log.debug('response.data',response.data)
 						return response.data;
 			})
-					$log.debug('$scope.products',$scope.products)
+					
 		}
 
-		//get count of different status
-		this.getCountOfStatus = function(statusName){
-			$log.debug('getCountOfStatus',statusName);
-
-			return $http.get('/rest/api/selling/products/count')
-					.then(function(response){
-						return response.data.find(function(statusCount){
-									return statusCount.statusCode === statusName;
-								}).productCount;
-			})
-		}
 	}
 ])
