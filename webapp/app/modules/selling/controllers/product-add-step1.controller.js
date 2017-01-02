@@ -72,7 +72,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 	    		$scope.updoStepCompleted(STEP_NO);
 	    		return true;
 	    	}
-	    }
+	    }	   
 
 	    init();
 	}

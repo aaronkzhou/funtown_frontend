@@ -30,9 +30,6 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}	
 		}
 
-		$scope.hasSpecificShipping = function(){
-			return $scope.cache.state.shippingType === "specific";
-		}
 
 		$scope.isNotOnlyPick = function(){
 			return $scope.cache.state.pickUp !== 'mustPickup';

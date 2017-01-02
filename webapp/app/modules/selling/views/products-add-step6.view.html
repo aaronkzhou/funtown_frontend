@@ -1,26 +1,33 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Confirm the information of product:</h4>        
+		<h4>Confirm product details</h4>        
         <div class="ft-data-form">
-            <div class="row">
-                <label class="col-md-2 ft-details-label">
-                    Category
-                </label>
-                <div class="ft-details-data">
-                    <ul>
-                        <li data-ng-repeat="path in cache.state.categoryPath">
-                            <span data-ng-bind="path.categoryName"></span>
-                            <i class="fa fa-angle-right"></i> 
-                        </li>
-                        <li>
-                            <span data-ng-bind="cache.product.category.categoryName"></span>
-                        </li>
-                    </ul> 
-                </div>        
-            </div>
-            <div class="separator"></div>
-            <div class="row">
+            <div class="row">                         
                 <div class="col-md-8">
+                    <div class="row">
+                        <label class="col-md-4 ft-details-label">
+                            <a class="active" ui-sref="manage.addProduct.step1">Category</a>
+                        </label>
+                        <div class="ft-details-data">
+                            <ul class="ft-multiselect-selected">
+                                <li data-ng-repeat="path in cache.state.categoryPath">
+                                    <span data-ng-bind="path.categoryName"></span>
+                                    <i class="fa fa-angle-right"></i>
+                                </li>
+                                <li>
+                                    <span data-ng-bind="cache.product.category.categoryName"></span>
+                                </li>
+                            </ul> 
+                        </div>        
+                    </div>
+                </div>
+            </div>        
+            <div class="separator"></div>
+            <div>
+                <b><a class="active" ui-sref="manage.addProduct.step2">Product</a></b><br>
+            </div>       
+            <div class="row">                         
+                <div class="col-md-8">                    
                     <div class="row">   
                         <label class="col-md-4 ft-details-label">
                              Title
@@ -37,114 +44,147 @@
                 </div>      
             </div>
             <div class="separator"></div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    Code
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.productCode"></div>
-            </div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    SKU
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.sku"></div>
-            </div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    Stock
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.stock"></div>
-            </div>
-            <div class="row" data-ng-if="cache.product.extraDetail">   
-                <label class="col-md-3 ft-details-label">
-                    Extra Details
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.extraDetail"></div>
-            </div>
-            <div class="row">
-                <label class="col-md-3 ft-details-label">
-                    Region
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.state.region"></div>
-            </div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    No. of discs
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.productAttributes.discs"></div>
-            </div>
-            <div class="row">
-                <label class="col-md-3 ft-details-label">
-                    Condition
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.state.condition"></div>
-            </div>
-            <div class="row">
-                <label class="col-md-3 ft-details-label">
-                    NZ Classification
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.state.NZClassification"></div>
-            </div>
-            <div class="separator"></div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    Product Price
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.buyNowPrice"></div>
-            </div>
-            <div class="row" data-ng-if="cache.product.productPriceDetails.offerPrice">   
-                <label class="col-md-3 ft-details-label">
-                    Offer Price
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.offerPrice"></div>
-            </div>
-            <div class="row" data-ng-if="cache.product.productPriceDetails.offerDuration">   
-                <label class="col-md-3 ft-details-label">
-                    Offer Duration
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.state.offerDuration"></div>
-            </div>
-            <div class="row">
-                <label class="col-md-3 ft-details-label">
-                    Accepted Payment Types
-                </label>
-                <div class="ft-details-data">
-                    <ul>
-                        <li data-ng-repeat="payment in cache.product.paymentMethods" data-ng-if="payment.selected"><span data-ng-bind="payment.display"></span></li>
-                    </ul>
-                </div>
+            <div>
+                <b><a class="active" ui-sref="manage.addProduct.step3">Product Information</a></b><br>
+            </div>       
+            <div class="row">                         
+                <div class="col-md-8">   
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            Code
+                        </label>
+                        <div class="ft-details-data" data-ng-bind-html="getProductCode()"></div>
+                    </div>
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            SKU
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="cache.product.sku"></div>
+                    </div>
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            Stock
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="getStock()"></div>
+                    </div>
+                    <div class="row" data-ng-if="cache.product.extraDetail">   
+                        <label class="col-md-4 ft-details-label">
+                            Extra Details
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="cache.product.extraDetail"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 ft-details-label">
+                            Region
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="region"></div>
+                    </div>
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            No. of discs
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="cache.product.productAttributes.discs"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 ft-details-label">
+                            Condition
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="condition"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 ft-details-label">
+                            NZ Classification
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="NZClassification"></div>
+                    </div>
+                </div>  
             </div>
             <div class="separator"></div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    Shipping Rate
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.state.shippingRate"></div>
-            </div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    Pick up
-                </label>
-                <div class="ft-details-data" data-ng-bind="cache.state.pickUpDisplay"></div>
-            </div>
-            <div class="row">   
-                <label class="col-md-3 ft-details-label">
-                    Costs
-                </label>
-                <div class="ft-details-data">
-                    <ul>
-                        <li data-ng-if="cache.state.shippingType==='free'"><span>Free shipping within New Zealand</span></li>
-                        <li data-ng-if="cache.state.shippingType==='specific'"><span>Specify shipping costs</span></li>
-                        <li data-ng-repeat="cost in cache.product.shippingCosts" data-ng-if="cost.cost!==0"><span>Cost: </span><span data-ng-bind="cost.cost"></span>&nbsp;&nbsp;<span>Description: </span><span data-ng-bind="cost.description"></span></li>
-                    </ul>
+            <div>
+                <b><a class="active" ui-sref="manage.addProduct.step4">Pricing & Payment</a></b><br>
+            </div>       
+            <div class="row">                         
+                <div class="col-md-8">   
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            Product Price
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.buyNowPrice"></div>
+                    </div>
+                    <div class="row" data-ng-if="cache.product.productPriceDetails.offerPrice">   
+                        <label class="col-md-4 ft-details-label">
+                            Offer Price
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="cache.product.productPriceDetails.offerPrice"></div>
+                    </div>
+                    <div class="row" data-ng-if="cache.product.productPriceDetails.offerDuration">   
+                        <label class="col-md-4 ft-details-label">
+                            Offer Duration
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="offerDuration"></div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-4 ft-details-label">
+                            Accepted Payment Types
+                        </label>
+                        <div class="ft-details-data">
+                            <ol>
+                                <li data-ng-repeat="payment in cache.product.paymentMethods" data-ng-if="payment.selected"><span data-ng-bind="payment.display"></span></li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>        
             <div class="separator"></div>
-                <div class="text-center">
-                    <input type="radio" name="status" ng-model="cache.product.status" value="ACTIVE">&nbsp;&nbsp;<span>Start selling (Active)</span> 
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="status" ng-model="cache.product.status" value="DE_ACTIVE">&nbsp;&nbsp;<span>Don't sell (De-active)</span>
+            <div>
+                <b><a class="active" ui-sref="manage.addProduct.step5">Shipping Options</a></b><br>
+            </div>       
+            <div class="row">                         
+                <div class="col-md-8">   
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            Shipping Rate
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="shippingRate"></div>
+                    </div>
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            Pick up
+                        </label>
+                        <div class="ft-details-data" data-ng-bind="pickUp"></div>
+                    </div>
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                            Costs
+                        </label>
+                        <div class="ft-details-data col-md-8 no-padding">
+                            <div data-ng-if="hasFreeShipping()">Free shipping within New Zealand</div>                                
+                            <div data-ng-if="hasSpecificShipping()">Specific shipping costs
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th class="text-right">
+                                            Cost (NZ$)
+                                        </th>
+                                    </tr>
+                                    <tr data-ng-repeat="cost in cache.product.shippingCosts | filter: specificCost()" >
+                                        <td data-ng-bind="cost.description"  class="text-capitalize"></td>
+                                        <td data-ng-bind="cost.cost | currency:''" class="text-right"></td>
+                                    </tr>
+                                </table>
+                            </div>    
+                        </div>
+                    </div>
                 </div>
+            </div>        
+            <div class="separator"></div>
+            <div class="text-center">
+                <input type="radio" name="status" ng-model="cache.product.status" value="ACTIVE">&nbsp;&nbsp;<span>Start selling (Active)</span> 
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="status" ng-model="cache.product.status" value="DE_ACTIVE">&nbsp;&nbsp;<span>Don't sell (De-active)</span>
+            </div>
         </div>
 		<div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.addProduct.step5">
@@ -153,7 +193,7 @@
             <button class="btn" data-ng-click="saveDraft()">
                 <i class="fa fa-file-text"></i> Save Draft 
             </button>
-            <button class="btn" data-ng-click="cancel()">
+            <button class="btn"  confirm-alert>
                 <i class="fa fa-trash"></i> Cancel
             </button>
             <button class="btn" data-ng-click="create()">

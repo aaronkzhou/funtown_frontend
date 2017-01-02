@@ -13,7 +13,7 @@
 			</div>
 			<div class="row">	
 				<b class="col-md-12">
-					<input type="radio" name="catalogType" value="manual" data-ng-model="cache.state.catalogType" data-ng-click="catalogTypeChange()"> Setup product manually
+					<input type="radio" name="catalogType" value="manual" data-ng-model="cache.state.catalogType" data-ng-click="catalogTypeChange()"> Create product manually
 				</b>
 			</div>		
 			<!-- Auto Details-->
@@ -36,8 +36,7 @@
 				</div>
 			</div>
 			<!-- Manual details form-->
-			<div data-ng-if="showManualDetails()">				
-					<div class="separator"></div>				
+			<div data-ng-if="showManualDetails()">								
 					<div  class="col-md-8">
 						<div class="row">	
 							<label class="col-md-3">
@@ -70,6 +69,14 @@
 					</div>
 					<div class="ft-catalog-preview"></div>
 			</div>			
+			<div class="col-md-12 separator"></div>
+			<div class="col-md-12">								
+				<div class="row">
+					<label class="col-md-3 no-padding" for="extraDetails">
+						Photos
+					</label>					
+				</div>
+			</div>
 		</form>
 		<div class="ft-card-footer col-md-12 text-center">
 			<button class="btn" ui-sref="manage.addProduct.step1">
@@ -78,7 +85,7 @@
             <button class="btn" data-ng-click="saveDraft()" data-ng-disabled="isDraftDisabled()">
                 <i class="fa fa-file-text"></i> Save Draft 
             </button>
-            <button class="btn" data-ng-click="cancel()">
+            <button class="btn" confirm-alert>
                 <i class="fa fa-trash"></i> Cancel
             </button>
             <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step3">

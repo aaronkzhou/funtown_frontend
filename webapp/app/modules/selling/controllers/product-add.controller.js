@@ -7,6 +7,8 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 		function init(){		
 			$log.debug('AddProduct controller::init');
 
+			$scope.alertMessage={};
+			$scope.alertMessage.confirm = "You will loose all unsaved changes."
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
@@ -56,8 +58,20 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 			$scope.cache.product = {};
 		}
 
-		$scope.cancel = function(){
-			$log.debug("cancel");
+
+		$scope.hasSpecificShipping = function(){
+			return $scope.cache.state.shippingType === "specific";
+		}
+
+
+		$scope.hasFreeShipping = function(){
+			return $scope.cache.state.shippingType === "free";
+		}
+
+		$scope.cancelChanges = function(){
+			$log.debug("cancelChanges");
+			$log.debug("currentstate ",$state.current.name)
+			
 			$scope.cache.product = {};
 			$scope.cache.state = {};		
 			$scope.cache.state.catalogType = 'auto';
@@ -67,7 +81,13 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 					categoryName:'All categories'
 				}
 			];	
-			$state.go('manage.addProduct.step1');
+			$log.debug("$scope.cache.product ",$scope.cache)
+			if($state.current.name ==="manage.addProduct.step1"){
+				$state.reload();	
+			}else{
+				$state.go('manage.addProduct.step1');
+			}
+			
 		}
 
 		$scope.saveDraft = function(){

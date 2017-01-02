@@ -20,6 +20,28 @@ a {
     cursor: not-allowed;
     pointer-events: none; }
 
+.alert {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  left: 0;
+  margin: 0;
+  bottom: 0;
+  border: 0;
+  border-top: 2px solid;
+  line-height: 2; }
+  .alert.alert-warning {
+    border-top: 2px solid #faebcc; }
+
+.suppress {
+  color: #cccccc; }
+
+.no-padding {
+  padding: 0; }
+
+.table {
+  margin-top: 20px; }
+
 .error {
   color: #e62e04;
   font-size: 0.8em;
@@ -46,6 +68,9 @@ label {
   color: #fff;
   border: 1px solid #e62e04;
   border-radius: 0; }
+
+.btn-sm, .btn-sm:focus, .btn-sm:hover, .btn-sm[diabled]:hover {
+  border-radius: 30px; }
 
 .btn-select, .btn-select:focus, .btn-select:hover, .btn-select[diabled]:hover {
   background: #fff;
@@ -307,6 +332,7 @@ label {
   .ft-multiselect .ft-multiselect-options {
     list-style: none;
     border: 1px solid #e9e9e9;
+    border-bottom: 0;
     padding: 0;
     max-height: 300px;
     overflow: hidden;
@@ -323,19 +349,23 @@ label {
         color: #f60; }
   .ft-multiselect .ft-multiselect-selected {
     background: #fafafa;
-    list-style: none;
     border: 1px solid #e9e9e9;
-    margin: 0;
-    padding: 0;
     padding: 0 10px; }
     .ft-multiselect .ft-multiselect-selected li {
-      padding: 0;
-      display: inline-block; }
+      padding: 0; }
       .ft-multiselect .ft-multiselect-selected li a {
         display: inline-block;
-        padding: 15px 5px; }
+        padding: 15px 5px 15px 0; }
       .ft-multiselect .ft-multiselect-selected li a[disabled] {
         color: #f60; }
+
+.ft-multiselect-selected {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .ft-multiselect-selected li {
+    padding: 0px 5px 0 0;
+    display: inline-block; }
 
 .credit {
   display: block;
@@ -373,3 +403,9 @@ label {
 
 .ft-shipping-costs[disabled] {
   opacity: 0.3; }
+
+ol {
+  padding: 0px;
+  list-style-position: inside; }
+  ol li {
+    padding: 5px 0 !important; }

@@ -44,7 +44,7 @@
 						<fieldset data-ng-repeat="shippingCost in cache.state.shippingCosts">
 							<div>
 								<div class="ft-col">
-									$
+									NZ$
 									<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>		
 									<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
 						    			<p ng-message="required">Required</p>
@@ -78,7 +78,7 @@
 	            <button class="btn" data-ng-click="storeShippingCosts()">
 	                <i class="fa fa-file-text"></i> Save Draft 
 	            </button>
-	            <button class="btn" data-ng-click="cancel()">
+	            <button class="btn"  confirm-alert>
 	                <i class="fa fa-trash"></i> Cancel
 	            </button>
 	            <button class="btn" data-ng-disabled="isNextDisabled" data-ng-click="storeShippingCosts()" ui-sref="manage.addProduct.step6">

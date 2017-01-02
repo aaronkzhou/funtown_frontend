@@ -2,20 +2,22 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 	function($log,$scope,AttributeService){
 		$log.debug('AddProductStep6 controller', 'product',$scope.cache.product);
 		$log.debug('cache', $scope.cache.state);
-		var STEP_NO = 6;		
-		var attributes = AttributeService.getAttributes();
+		var STEP_NO = 6;				
+		var attributes =[];
 
-		function init(){
-				getPoster();
-				$scope.getProductAttributesById();
-				$scope.cache.product.status="ACTIVE";
-				$scope.cache.state.shippingRate = $scope.getProductAttributesById("shippingRates",$scope.cache.product.shippingRateId);
-				$scope.cache.state.region = $scope.getProductAttributesById("region",$scope.cache.product.productAttributes.region);
-				$scope.cache.state.condition = $scope.getProductAttributesById("condition",$scope.cache.product.productAttributes.condition);
-				$scope.cache.state.NZClassification = $scope.getProductAttributesById("NZClassification",$scope.cache.product.productAttributes.classification);
-				$scope.cache.state.offerDuration = $scope.getProductAttributesById("offerDurations",$scope.cache.product.productPriceDetails.offerDuration);							
-				$scope.cache.state.pickUpDisplay = $scope.getPickUpDisplay($scope.cache.state.pickUp);
-			};
+		function init(){		
+			attributes = AttributeService.getAttributes();		
+						
+			$scope.region = $scope.cache.product.productAttributes && getProductAttributesById("region",$scope.cache.product.productAttributes.region);
+			$scope.condition = $scope.cache.product.productAttributes && getProductAttributesById("condition",$scope.cache.product.productAttributes.condition);
+			$scope.NZClassification = $scope.cache.product.productAttributes && getProductAttributesById("NZClassification",$scope.cache.product.productAttributes.classification);
+			$scope.offerDuration = $scope.cache.product.productPriceDetails && getProductAttributesById("offerDurations",$scope.cache.product.productPriceDetails.offerDuration);							
+			$scope.shippingRate = getProductAttributesById("shippingRates",$scope.cache.product.shippingRateId);
+			$scope.pickUp = getPickUpDisplay($scope.cache.state.pickUp);
+			$scope.cache.product.status="ACTIVE";
+			
+			getPoster();
+		};
 
 		function getPoster(){
 			$log.debug("getPoster");
@@ -35,15 +37,32 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 			return attribute.attributeType != 'poster';
 		}
 
-		$scope.getPickUpDisplay = function(pickUpValue){
-			$log.debug($scope.pickUps);
-			return $scope.pickUps.find(function(pickUp){
-				return pickUp.value === pickUpValue;
-			}).display;
+		$scope.getStock = function(){		
+			return $scope.cache.product.unlimited  ? 'Unlimited' :  $scope.cache.product.stock; 
 		}
 
-		$scope.getProductAttributesById = function(attributeName, attributeId){		
+		$scope.getProductCode = function(){
+			return ($scope.cache.product.productCode && $scope.cache.product.productCode.length() >0) ? $scope.cache.product.productCode : '<span class="suppress">Auto-generated</span>';
+		}
+
+		$scope.specificCost = function(){
+			return function(shippingCost){				
+				return shippingCost.description !=='freeShipping' && shippingCost.description !=='pickUp'
+			}
+		}	
+
+		function getPickUpDisplay(pickUpId){
+			if(pickUpId){				
+				return $scope.pickUps.find(function(pickUp){
+					return pickUp.value === pickUpId;
+				}).display;
+			}
+		}
+
+		function getProductAttributesById(attributeName, attributeId){		
+			$log.debug("attributeId",attributeId);
 			if(attributeId){
+				$log.debug("attributeId",attributeId);
 				return attributes[attributeName].find(function(attribute){
 					return attribute.attributeId === attributeId;
 				}).display;

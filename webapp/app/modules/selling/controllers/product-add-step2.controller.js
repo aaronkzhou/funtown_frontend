@@ -8,8 +8,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		function init(){						
 			rootCategory = $scope.cache.state.rootCategory;
-			//store the manual catalog attributes
-			$scope.cache.state.manualcatalog = {};
+			
 			$log.debug('AddProductStep2::init - ',rootCategory);
 			//Get the correct catalog processor
 			catalogProcessor = new CatalogFactory(rootCategory);
@@ -66,6 +65,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		$scope.catalogTypeChange = function(){
 			$scope.cache.product.catalog = null;
 			$scope.cache.state.selectedCatalog = null;
+			//initalize the manual catalog attributes storage
+			$scope.cache.state.manualcatalog = {};
 		}
 
 		// check if the database catalog details should be shown
@@ -80,11 +81,13 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		// check if the next button should be enabled
 		$scope.isNextDisabled = function(){
-			if($scope.cache.state.catalogType === 'auto' && $scope.cache.state.selectedCatalog!== null){
+			$log.debug("isNextDisabled",$scope.cache.product.catalog)
+			if($scope.cache.state.catalogType === 'auto' && $scope.cache.product.catalog && $scope.cache.product.catalog!==null){
 				$scope.stepCompleted(STEP_NO);
 				return false;
 			}else if($scope.cache.state.catalogType === 'manual' && $scope.configProduct && $scope.configProduct.$valid){
 				$scope.stepCompleted(STEP_NO);
+				storeManualCatalog();
 				return false;
 			}else{
 				$scope.updoStepCompleted(STEP_NO);
@@ -98,9 +101,12 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		}
 
 		//store the manualcatalog into product
-		$scope.storeManualCatalog = function(){
+		function storeManualCatalog(){
+			$log.debug("storeManualCatalog");
 			if($scope.cache.state.catalogType === 'manual'){
-				$scope.cache.product.catalog.catalogAttributes = [];
+				if($scope.cache.product.catalog){
+					$scope.cache.product.catalog.catalogAttributes = [];					
+				}
 				for(var attribute in $scope.cache.state.manualcatalog){
 					var catalogAttribute = {"attributeType": attribute, "attributeValue": $scope.cache.state.manualcatalog[attribute]};
 					$scope.cache.product.catalog.catalogAttributes.push(catalogAttribute);
