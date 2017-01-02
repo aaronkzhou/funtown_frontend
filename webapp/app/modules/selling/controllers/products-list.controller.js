@@ -1,30 +1,25 @@
 'use strict';
-angular.module('selling').controller('ProductsView', ['$log','$scope','ProductsViewService',
+angular.module('selling').controller('ProductsList', ['$log','$scope','ProductsListService','products',
 	function($log,$scope,ProductsViewService,products){
 
 		$log.debug("ProductsView controller");
-$log.debug('products',products)
-		$scope.products = products ;
+		$scope.products = products;
 
 		$scope.tabs = [];
 
 		$scope.productsChosen = [];
 
-		function init(){
-			$log.debug("ProductsView controller::init");
-			$scope.getTablist();
-			
-		}
+		$log.debug("ProductsView controller::init");			
 
-		//get original data from database
-		$scope.getTablist = function(){
-			ProductsViewService.getTablist().then(function(response){
-				$scope.tabs = response;
-				$scope.tabs.forEach(function(eachTab){
-					eachTab.state = "manage.products." + eachTab.statusCode;
-				});
-			});
-		}
+		// //get original data from database
+		// $scope.getTablist = function(){
+		// 	ProductsViewService.getTablist().then(function(response){
+		// 		$scope.tabs = response;
+		// 		$scope.tabs.forEach(function(eachTab){
+		// 			eachTab.state = "manage.products." + eachTab.statusCode;
+		// 		});
+		// 	});
+		// }
 
 		$scope.getProductsListOf = function(status){
 			ProductsViewService.getProductsOfStatus
@@ -99,7 +94,5 @@ $log.debug('products',products)
 
 		// 	$scope.productsChosen = [];
 		// }
-
-		init();
 	}
 ])

@@ -1,0 +1,12 @@
+<div class="col-md-12">
+	<h3 class="ft-main-content-title">My Products</h3>
+	<ul class="nav nav-tabs">
+		<li  data-ng-repeat="tab in tabs" ui-sref-active="active">
+			<a data-ui-sref="{{tab.state}}">
+				<span data-ng-bind="tab.status"></span>
+				<span class="ft-badge" data-ng-bind="tab.productCount"></span>
+			</a>			
+		</li>
+	</ul>	
+	<div ui-view></div>
+</div>

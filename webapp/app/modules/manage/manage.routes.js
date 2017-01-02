@@ -33,42 +33,77 @@ angular.module('manage').config(['$stateProvider',
 			url:'/shippingAddress',
 			templateUrl:'app/modules/buying/views/shippingAddress.view.html'
 		})
+
 		//Selling
+
+		//Products List
 		.state('manage.products',{
 			url:'/products',
-			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html'
-		})
-		.state('manage.products.ACTIVE',{
-			url:'/selling',
-			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html',
+			templateUrl:'app/modules/selling/views/products-list-tabs.view.html',
 			resolve:{
-				products: function(ProductsViewService){
-					return ProductsViewService.getProductsOfStatus("ACTIVE");
+				tabs : function(ProductsListService){
+					return ProductsListService.getTablist()
 				}
+			},
+			controller:function($scope,tabs){
+				$scope.tabs = tabs;
+				$scope.tabs.forEach(function(tab){
+					tab.state = "manage.products." + tab.statusCode;
+				});
 			}
 		})
+		.state('manage.products.ACTIVE',{
+			url:'/selling',			
+			templateUrl:'app/modules/selling/views/products-list.view.html',
+			resolve:{
+				products: function(ProductsListService){
+					return ProductsListService.getProductsOfStatus("ACTIVE");
+				}
+			},
+			controller:'ProductsList'
+			
+		})
 		.state('manage.products.SOLD',{
-			url:'/sold',
-			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html'
+			url:'/sold',			
+			templateUrl:'app/modules/selling/views/products-list.view.html',
+			resolve:{
+				products: function(ProductsListService){
+					return ProductsListService.getProductsOfStatus("SOLD");
+				}
+			},
+			controller:'ProductsList'
 		})
 		.state('manage.products.OUT_OF_STOCK',{
 			url:'/outOfStock',
-			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html'
+			templateUrl:'app/modules/selling/views/products-list.view.html',
+			resolve:{
+				products: function(ProductsListService){
+					return ProductsListService.getProductsOfStatus("OUT_OF_STOCK");
+				}
+			},
+			controller:'ProductsList'
 		})
 		.state('manage.products.DE_ACTIVE',{
 			url:'/deactive',
-			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html'
+			templateUrl:'app/modules/selling/views/products-list.view.html',
+			resolve:{
+				products: function(ProductsListService){
+					return ProductsListService.getProductsOfStatus("DE_ACTIVE");
+				}
+			},
+			controller:'ProductsList'
 		})
 		.state('manage.products.IN_DRAFT',{
 			url:'/indraft',
-			controller:'ProductsView',
-			templateUrl:'app/modules/selling/views/products-home.view.html'
+			templateUrl:'app/modules/selling/views/products-list.view.html',
+			resolve:{
+				products: function(ProductsListService){
+					return ProductsListService.getProductsOfStatus("IN_DRAFT");
+				}
+			},
+			controller:'ProductsList'
 		})
+		
 		//addProduct
 		.state('manage.addProduct',{
 			url:'/addProduct',

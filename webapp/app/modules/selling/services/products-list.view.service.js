@@ -1,7 +1,7 @@
 'use strict';
-angular.module('funtown').service('ProductsViewService', ['$log','$http', 
+angular.module('funtown').service('ProductsListService', ['$log','$http', 
 	function($log,$http){
-		$log.debug('ProductsViewService');
+		$log.debug('ProductsListService');
 
 		this.getTablist = function(){
 			$log.debug('getTablist');

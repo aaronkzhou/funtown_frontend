@@ -87,7 +87,7 @@ label{
     border: 1px solid #e62e04;
     border-radius:0 
 }
-.btn-sm,.btn-sm:focus,.btn-sm:hover,.btn-sm[diabled]:hover{
+.btn-rounded,.btn-rounded:focus,.btn-rounded:hover,.btn-rounded[diabled]:hover{
 	border-radius:30px 
 }
 .btn-select,.btn-select:focus,.btn-select:hover,.btn-select[diabled]:hover{
@@ -382,6 +382,11 @@ label{
     font-size: 12px; 
 }
 
+.active .ft-badge{
+	background-color: #fff;
+    color: #e62e04;
+}
+
 .ft-badge-cart{
 	position: absolute;
     left: 3px;
@@ -540,3 +545,19 @@ ol{
 		padding: 5px 0!important;
 	}
 }
+.drop-zone{
+	border: 2px dashed #ccc;
+	padding: 15px;
+	text-align: center;
+	color: #ccc;
+	text-transform: capitalize;
+
+	h4{
+		font-size: 1.2em;	    
+	    padding: 35px;	
+	}
+}
+
+	.drop-enter{
+		border: 2px dashed #f60;
+	}

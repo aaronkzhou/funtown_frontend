@@ -70,11 +70,20 @@
 					<div class="ft-catalog-preview"></div>
 			</div>			
 			<div class="col-md-12 separator"></div>
-			<div class="col-md-12">								
+			<div class="col-md-8">								
 				<div class="row">
 					<label class="col-md-3 no-padding" for="extraDetails">
 						Photos
-					</label>					
+					</label>
+					<div class="col-md-9 drop-zone" flow-init="{target: '/upload'}" flow-drag-enter="style={borderColor:'#f60',color:'#f60'}" flow-drag-leave="style={}" ng-style="style">
+						<h4>Drag And Drop your product images here</h4>
+						<span class="btn btn-rounded" flow-btn>Upload Image
+							<input type="file" multiple="multiple" style="visibility: hidden; position: absolute;">
+						</span>
+						<span class="btn btn-rounded" flow-btn flow-directory data-ng-show="$flow.supportDirectory">Upload Folder of Images
+							<input type="file" multiple="multiple" webkitdirectory="webkitdirectory" style="visibility: hidden; position: absolute;">
+						</span>
+					</div>					
 				</div>
 			</div>
 		</form>
