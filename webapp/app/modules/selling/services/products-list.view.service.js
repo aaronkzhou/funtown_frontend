@@ -19,8 +19,19 @@ angular.module('funtown').service('ProductsListService', ['$log','$http',
 					.then(function(response){
 						$log.debug('response.data',response.data)
 						return response.data;
-			})
-					
+			});					
+		}
+
+		this.activateProduct = function(product){
+			$log.debug('ProductsListService-activateProduct',product);
+		}
+
+		this.deactivateProduct = function(product){
+			$log.debug('ProductsListService-deactivateProduct',product);
+		}
+
+		this.deleteProducts = function(product){
+			$log.debug('ProductsListService-deleteProducts',product);
 		}
 
 	}

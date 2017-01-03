@@ -1,98 +1,101 @@
 'use strict';
-angular.module('selling').controller('ProductsList', ['$log','$scope','ProductsListService','products',
-	function($log,$scope,ProductsViewService,products){
-
-		$log.debug("ProductsView controller");
+angular.module('selling').controller('ProductsList', ['$log','$scope','$state','ProductsListService','products',
+	function($log,$scope,$state,ProductsListService,products){
+		$log.debug("ProductsList controller::init");
 		$scope.products = products;
-
-		$scope.tabs = [];
-
+		$scope.btnIsVisible = true;
 		$scope.productsChosen = [];
 
-		$log.debug("ProductsView controller::init");			
-
-		// //get original data from database
-		// $scope.getTablist = function(){
-		// 	ProductsViewService.getTablist().then(function(response){
-		// 		$scope.tabs = response;
-		// 		$scope.tabs.forEach(function(eachTab){
-		// 			eachTab.state = "manage.products." + eachTab.statusCode;
-		// 		});
-		// 	});
-		// }
-
-		$scope.getProductsListOf = function(status){
-			ProductsViewService.getProductsOfStatus
+		$scope.init = function(){
+			var status = $scope.products[0].status;
+			if(status === "In-Draft"){
+				$scope.btnIsVisible = false;
+			}
+			$scope.alertMessage={};
+			$scope.alertMessage.confirm = "You will delete these products."
 		}
 
-		$scope.changeSelectedProducts = function(product){
+		$scope.changeSelectedProducts = function(product){			
 			//select one product
 			if(product.selected === true && $scope.productsChosen.indexOf(product) === -1){
 				$scope.productsChosen.push(product);
-				$log.debug('SelectedProducts',$scope.productsChosen);	
+				$log.debug('SelectedProducts',$scope.productsChosen);
+				//select all products
+				if($scope.productsChosen.length === $scope.products.length){
+					$scope.chooseAll = true;
+				}
 			//unselect products
 			}else if(product.selected === false && $scope.productsChosen.indexOf(product) !== -1){
 				$scope.productsChosen.splice($scope.productsChosen.indexOf(product),1);
+				$scope.chooseAll = false;
 				$log.debug('unSelectedProducts',$scope.productsChosen);
 			}			
 		}
 
-		// $scope.selectAll = function(){
-		// 	if()
-		// }
-
+		$scope.selectAll = function(){
+			if($scope.chooseAll === true){
+				$scope.products.forEach(function(element){
+					//for unselected products:
+					if($scope.productsChosen.indexOf(element) === -1){
+						$scope.productsChosen.push(element);
+						element.selected = true;
+					}
+				})
+				$log.debug("$scope.productsChosen",$scope.productsChosen);	
+			}else if($scope.chooseAll === false){
+				$scope.productsChosen.forEach(function(element){
+					element.selected = false;
+				})
+				$scope.productsChosen = [];
+				$log.debug("$scope.productsChosen",$scope.productsChosen);
+			}				
+		}
+		
 		$scope.activateProduct = function(){
-			$scope.productsChosen.forEach(function(eachProduct){
-
-				if(eachProduct.status === 'De-Active'){
-					changeProductStatus("DE_ACTIVE", "ACTIVE", eachProduct);
-				}else if(eachProduct.status === 'out of stock'){
-					changeProductStatus("OUT_OF_STOCK", "ACTIVE", eachProduct)
+			$log.debug('activateProduct',$scope.productsChosen);
+			$scope.productsChosen.forEach(function(product){
+				if(product.status !== "Selling"){
+					$scope.products.splice($scope.products.indexOf(product),1);
+					$scope.chooseAll = false;
+					ProductsListService.activateProduct(product);
+					$scope.productsChosen = [];
+				}else{					
+					alert("they are already active.");
+					event.preventDefault();
 				}
-				eachProduct.status = "Selling";
-			})
+			});	
 			
 		}
 
 		$scope.deactivateProduct = function(){
-			$scope.productsChosen.forEach(function(eachProduct){
-				changeProductStatus("ACTIVE", "DE_ACTIVE", eachProduct);
-				eachProduct.status = "De-Active";
-			})			
+			$log.debug('deactivateProduct',$scope.productsChosen);
+			$scope.productsChosen.forEach(function(product){
+				if(product.status !== "De-Active"){
+					$scope.products.splice($scope.products.indexOf(product),1);
+					$scope.chooseAll = false;
+					ProductsListService.deactivateProduct(product);	
+					$scope.productsChosen = [];
+				}else{					
+					alert("they are already deactive.");
+					event.preventDefault();
+				}
+			});	
+		}
+
+		$scope.cancelChanges = function(){
+			$scope.deleteProducts();
+			$state.reload();
 		}
 		
-		function changeProductStatus(prevStatus, currentStatus, product){
-			$log.debug('changeProductStatus to', currentStatus);
-			$scope.products[prevStatus].splice($scope.products[prevStatus].indexOf(product),1);
-			if(!$scope.products[currentStatus]){
-				$scope.products[currentStatus] = [];
-				$scope.products[currentStatus].push(product);
-			}else{
-				$scope.products[currentStatus].push(product);
-			}
-
-			$scope.products.tabs.find(function(tab){
-				return tab.statusCode === prevStatus;
-			}).productCount -= 1;
-
-			$scope.products.tabs.find(function(tab){
-				return tab.statusCode === currentStatus;
-			}).productCount += 1;
-
-			$scope.productsChosen = [];
+		$scope.deleteProducts = function(){
+			$log.debug('deleteProducts',$scope.productsChosen);
+			$scope.productsChosen.forEach(function(product){
+				$scope.products.splice($scope.products.indexOf(product),1);
+				ProductsListService.deleteProducts(product);
+				$scope.chooseAll = false;
+			});
+			$scope.productsChosen = [];			
 		}
-
-		// $scope.deleteProducts = function(){
-		// 	$log.debug('deleteProducts',$scope.productsChosen);
-
-		// 	$scope.productsChosen.forEach(function(product){
-		// 		var productDelete = $scope.products.[product.].findIndex(function(product){
-		// 			return product.productId === productId;
-		// 		});
-		// 		$scope.products.ACTIVE.splice(productDelete,1);
-		// 	});
-
-		// 	$scope.productsChosen = [];
-		// }
+		$scope.init();
 	}
 ])

@@ -65,7 +65,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		$scope.catalogTypeChange = function(){
 			$scope.cache.product.catalog = null;
 			$scope.cache.state.selectedCatalog = null;
-			//initalize the manual catalog attributes storage
+			//initialize the manual catalog attributes storage
 			$scope.cache.state.manualcatalog = {};
 		}
 

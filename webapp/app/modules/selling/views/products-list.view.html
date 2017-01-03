@@ -1,21 +1,22 @@
 <div class="nav-tab-body">
 	<br>
 	<div>
-		<button class="btn btn-lg" data-ng-click="activateProduct()" ng-disabled="productsChosen.length === 0">
+		<button class="btn btn-lg" data-ng-click="activateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
 			Activate
 		</button>
-		<button class="btn btn-lg" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0">
+		<button class="btn btn-lg" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
 			Deactivate
 		</button>
-		<button class="btn btn-lg" data-ng-click="deleteProducts()" ng-disabled="productsChosen.length === 0">
+		<button class="btn btn-lg"  ng-disabled="productsChosen.length === 0" confirm-alert>
 			Delete
 		</button>
 	</div>
+	<div>
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr class="row">			
 				<th class="col-md-1">
-					<div><input type="checkbox" data-ng-model="chooseAll" data-ng-click="selectAll()"></div>		
+					<div><input type="checkbox" data-ng-model="chooseAll" data-ng-click="selectAll()" data-ng-selected="chooseAll"></div>	
 				</th>
 				<th class="col-md-3">
 					Product
@@ -43,7 +44,7 @@
 		<tbody>
 			<tr data-ng-repeat="product in products" class="row">
 				<td class="col-md-1">
-					<input type="checkbox" data-ng-model="product.selected"" ng-checked="chooseAll" data-ng-click="changeSelectedProducts(product)">
+					<input type="checkbox" data-ng-model="product.selected" data-ng-checked="product.selected" data-ng-click="changeSelectedProducts(product)">
 				</td>
 				<td class="col-md-3">
 					<div>
@@ -87,4 +88,5 @@
 			</tr>
 		</tbody>
 	</table>
+	</div>
 </div>
