@@ -54,6 +54,11 @@ a {
 .table-topped {
   margin-top: 20px; }
 
+.table-hover > tbody tr:hover {
+  color: #f60;
+  background: transparent;
+  cursor: pointer; }
+
 .error {
   color: #e62e04;
   font-size: 0.8em;

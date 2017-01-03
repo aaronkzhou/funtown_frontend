@@ -14,7 +14,7 @@
 				<i class="fa fa-trash"></i> Delete
 			</button>
 		</div>
-		<table class="table">
+		<table class="table table-hover">
 			<thead class="ft-table-header">
 				<tr class="row">			
 					<th>
@@ -46,9 +46,9 @@
 						<input type="checkbox" data-ng-model="product.selected" data-ng-checked="product.selected" data-ng-click="changeSelectedProducts(product)">
 					</td>
 					<td>
-						<a href="#" data-ng-bind="product.title"></a>				
-						<p class="no-margin">Code: <span data-ng-bind="product.productCode"></span></p>
-						<p class="no-margin">SKU: <span data-ng-bind="product.sku"></span></p>
+						<b class="no-margin" data-ng-bind="product.title"></b>				
+						<p class="small no-margin">Code: <span data-ng-bind="product.productCode"></span></p>
+						<p class="small no-margin">SKU: <span data-ng-bind="product.sku"></span></p>
 					</td>
 					<td data-ng-bind="product.status"></td>
 					<td data-ng-bind="product.stock" class="text-right"></td>
