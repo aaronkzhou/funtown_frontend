@@ -4,14 +4,14 @@
 	</div>
 	<div  class="ft-card ft-card-padded">
 		<div class="alerts-container">
-			<button class="btn btn-sm" data-ng-click="activateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
-				Activate
+			<button class="btn" data-ng-click="activateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
+				<i class="fa fa-play"></i> Activate
 			</button>
-			<button class="btn btn-sm" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
-				Deactivate
+			<button class="btn" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
+				<i class="fa fa-stop"></i> De-Activate
 			</button>
-			<button class="btn btn-sm"  ng-disabled="productsChosen.length === 0" confirm-alert>
-				Delete
+			<button class="btn"  ng-disabled="productsChosen.length === 0" confirm-alert>
+				<i class="fa fa-trash"></i> Delete
 			</button>
 		</div>
 		<table class="table">
