@@ -1,4 +1,4 @@
-angular.module('selling').controller('AddProductStep6', ['$log','$scope','AttributeService', 
+angular.module('selling').controller('AddProductStep6', ['$log','$scope','AttributeService',
 	function($log,$scope,AttributeService){
 		$log.debug('AddProductStep6 controller', 'product',$scope.cache.product);
 		$log.debug('cache', $scope.cache.state);
@@ -51,6 +51,7 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 			}
 		}	
 
+
 		function getPickUpDisplay(pickUpId){
 			if(pickUpId){				
 				return $scope.pickUps.find(function(pickUp){
@@ -68,6 +69,8 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 				}).display;
 			}
 		}
+
+
 
 		init();		
 	}

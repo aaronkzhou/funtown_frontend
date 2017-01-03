@@ -100,6 +100,17 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 			}
 		}
 
+
+		$scope.create = function(){
+			$log.debug("create");
+			ProductService.saveProduct($scope.cache.product).then(function(response){
+				$state.go('manage.products.' + $scope.cache.product.status);
+			})			
+			if($scope.cache.state.photosFlow){
+				$scope.cache.state.photosFlow.upload();
+			}
+		}
+
 		init();
 	
  	}
