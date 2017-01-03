@@ -6,7 +6,8 @@ body {
   line-height: 1.3;
   position: relative;
   min-height: 100%;
-  top: 0px; }
+  top: 0px;
+  overflow-x: hidden; }
 
 a {
   color: #333;
@@ -19,6 +20,14 @@ a {
     color: #e6e6e6;
     cursor: not-allowed;
     pointer-events: none; }
+
+.ft-card-padded {
+  padding: 15px; }
+
+.alerts-container {
+  position: relative;
+  padding: 15px 0;
+  margin-bottom: 5px; }
 
 .alert {
   position: absolute;
@@ -36,10 +45,13 @@ a {
 .suppress {
   color: #cccccc; }
 
+.no-margin {
+  margin: 0; }
+
 .no-padding {
   padding: 0; }
 
-.table {
+.table-topped {
   margin-top: 20px; }
 
 .error {
@@ -198,7 +210,7 @@ label {
     width: 100%; }
 
 .ft-card {
-  display: table;
+  display: block;
   width: 100%;
   margin: 15px 0;
   background: #fff;
@@ -216,12 +228,13 @@ label {
   .ft-card .ft-card-footer {
     padding: 15px;
     width: calc(100% + 30px);
-    margin: 30px 0px -15px -15px;
+    margin: 15px 0px -15px -15px;
     border-top: 2px solid #e9e9e9;
     background: #fafafa; }
   .ft-card.ft-card-ht {
     min-height: 250px; }
   .ft-card.ft-card-no-margin {
+    display: table;
     margin: 0;
     padding: 15px; }
   .ft-card .ft-profile {
@@ -391,6 +404,13 @@ label {
 .ft-catalog-poster {
   border: 1px solid #e9e9e9; }
 
+.ft-catalog-photo {
+  width: 120px;
+  height: 180px;
+  display: inline-block;
+  margin-right: 10px;
+  border: 1px solid #e9e9e9; }
+
 .ft-catalog-preview {
   display: table-cell;
   text-align: center;
@@ -421,8 +441,21 @@ ol {
   color: #ccc;
   text-transform: capitalize; }
   .drop-zone h4 {
-    font-size: 1.2em;
-    padding: 35px; }
+    font-size: 1.3em;
+    padding: 25px;
+    line-height: 1.5; }
+  .drop-zone small {
+    display: inline-block;
+    color: #ccc;
+    margin: 10px 0; }
 
 .drop-enter {
-  border: 2px dashed #f60; }
+  border-color: #f60;
+  color: #f60; }
+
+.file-upload {
+  visibility: hidden;
+  position: absolute; }
+
+.ft-table-header {
+  background: #f2f2f2; }

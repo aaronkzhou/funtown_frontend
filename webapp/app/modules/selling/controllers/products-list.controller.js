@@ -12,7 +12,7 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 				$scope.btnIsVisible = false;
 			}
 			$scope.alertMessage={};
-			$scope.alertMessage.confirm = "You will delete these products."
+			$scope.alertMessage.confirm = "You want to delete the selected products permanently."
 		}
 
 		$scope.changeSelectedProducts = function(product){			

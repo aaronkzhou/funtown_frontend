@@ -70,22 +70,37 @@
 					<div class="ft-catalog-preview"></div>
 			</div>			
 			<div class="col-md-12 separator"></div>
-			<div class="col-md-8">								
+			<div class="col-md-12" flow-init			
+				flow-file-added="photoAdded($file, $event, $flow)"				
+			>								
 				<div class="row">
-					<label class="col-md-3 no-padding" for="extraDetails">
+					<label class="col-md-2 no-padding" for="extraDetails">
 						Photos
+						<br>
+						<small>Max: <span data-ng-bind="maxPhotos"></span>. Current: <span data-ng-bind="photoCount"></span></small>
 					</label>
-					<div class="col-md-9 drop-zone" flow-init="{target: '/upload'}" flow-drag-enter="style={borderColor:'#f60',color:'#f60'}" flow-drag-leave="style={}" ng-style="style">
-						<h4>Drag And Drop your product images here</h4>
+					<div class="ft-catalog-preview  no-padding col-md-5">						
+						<div class="ft-catalog-photo" data-ng-repeat="photo in cache.product.photos">
+							<img flow-img="photo.file" class="img-responsive" data-ng-if="photo.file.file"/>
+						</div>
+					</div>
+					<div class="col-md-5 drop-zone" flow-drop ng-class="dropClass" data-ng-if="photoCount < maxPhotos">
+						<h4>
+							Drag And Drop your product images here.							
+						</h4>
+
+						<small>Png, Jpg, Jpeg files only.</small>
+						<small>Max 3 photos per product.</small>
+
 						<span class="btn btn-rounded" flow-btn>Upload Image
-							<input type="file" multiple="multiple" style="visibility: hidden; position: absolute;">
+							<input type="file" multiple="multiple" class="file-upload">
 						</span>
 						<span class="btn btn-rounded" flow-btn flow-directory data-ng-show="$flow.supportDirectory">Upload Folder of Images
-							<input type="file" multiple="multiple" webkitdirectory="webkitdirectory" style="visibility: hidden; position: absolute;">
+							<input type="file" multiple="multiple" webkitdirectory="webkitdirectory" class="file-upload">
 						</span>
-					</div>					
+					</div>										
 				</div>
-			</div>
+			</div>			
 		</form>
 		<div class="ft-card-footer col-md-12 text-center">
 			<button class="btn" ui-sref="manage.addProduct.step1">

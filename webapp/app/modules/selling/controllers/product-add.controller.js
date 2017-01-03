@@ -95,6 +95,9 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 			ProductService.saveProduct($scope.cache.product).then(function(response){
 				$scope.cache.product.productId = response.data;
 			})			
+			if($scope.cache.state.photosFlow){
+				$scope.cache.state.photosFlow.upload();
+			}
 		}
 
 		init();

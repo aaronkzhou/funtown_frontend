@@ -15,7 +15,7 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			$log.debug("doTransformRequest");
 
 			var productAttributes = [];	
-			var product = JSON.parse(JSON.stringify(request));
+			var product = angular.copy(request);//JSON.parse(JSON.stringify(request));
 
 			var productAttributesObj =  request.productAttributes;
 
@@ -41,23 +41,26 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				product.catalog = {}				
 			}
 			product.catalog.rootCategory = request.rootCategory;
-			delete product.rootCategory;
+			delete product.rootCategory;			
 
 			
-			product.stock = product.unlimited ? -1 : product.stock;
+			product.stock = request.unlimited ? -1 : request.stock;
 
 			//Add shipping cost if not present
 			if(!product.shippingCosts){
 				product.shippingCosts = [];
-			}else if(product.productId){ // Add product id if present
+			}else if(request.productId){ // Add product id if present
 				product.shippingCosts = request.shippingCosts.map(function(shippingCost){
-					shippingCost.productId = product.productId;
+					shippingCost.productId = request.productId;
 					return shippingCost;
 				})
 			}
 
 			product.status = request.status || "IN_DRAFT";
 			
+
+			delete product.photos;	
+
 			$log.debug("doTransformRequest:: transformed product - ",product);
 			$log.debug("doTransformRequest:: transformed product - ",JSON.stringify(product));
 

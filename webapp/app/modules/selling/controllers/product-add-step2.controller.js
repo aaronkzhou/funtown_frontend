@@ -4,6 +4,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		$log.debug('AddProductStep2::controller',$scope.cache.product);
 		
 		var STEP_NO = 2;
+		var MAX_PHOTO_COUNT = 3;
 		var rootCategory,catalogProcessor;
 
 		function init(){						
@@ -22,6 +23,13 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			if($scope.cache.product.catalog){
 				getPoster(); 
 			}
+			if(!$scope.cache.product.photos){
+				$scope.cache.product.photos =[{},{},{}];
+				$scope.photoCount = 0;				
+			}else{
+				$scope.photoCount = getPhotoCount();
+			}
+			$scope.maxPhotos = MAX_PHOTO_COUNT;
 		}
 
 		// search title
@@ -56,6 +64,11 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			$log.debug($scope.poster);		
 		}
 
+		//check if the catalogue has been chosen
+		$scope.hasCatalogue = function(){
+			return $scope.cache.product.catalog; 
+		}
+
 		//check if the attribute should be shown on the screen
 		$scope.isDisplayable = function(attribute){
 			return attribute.attributeType != 'poster';
@@ -81,7 +94,6 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		// check if the next button should be enabled
 		$scope.isNextDisabled = function(){
-			$log.debug("isNextDisabled",$scope.cache.product.catalog)
 			if($scope.cache.state.catalogType === 'auto' && $scope.cache.product.catalog && $scope.cache.product.catalog!==null){
 				$scope.stepCompleted(STEP_NO);
 				return false;
@@ -93,11 +105,6 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 				$scope.updoStepCompleted(STEP_NO);
 				return true;	
 			}			
-		}
-
-		//check if the catalogue has been chosen
-		$scope.hasCatalogue = function(){
-			return $scope.cache.product.catalog; 
 		}
 
 		//store the manualcatalog into product
@@ -113,6 +120,35 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 				}
 			}
 			
+		}		
+
+		//event hadler for photo add
+		$scope.photoAdded = function(file,event,flow) {
+			$log.debug("photoAdded",file);
+
+			var photos = $scope.cache.product.photos;
+			//store the flow so that it can be used to call upload when product is saved.
+			if(!$scope.cache.state.photosFlow){
+				$scope.cache.state.photosFlow = flow;
+			}
+			//add uploaded files to photos for quick display
+			photos.some(function(photo){
+				if(!photo.file){
+					photo.file = file;
+					$scope.photoCount++;
+					return true;
+				}				
+				return false;
+			})
+			$log.debug("photo count: ",$scope.photoCount);
+		  	event.preventDefault();//prevent file from uploading
+		}	
+
+		//get the count of photos product has
+		function getPhotoCount(){
+			 return $scope.cache.product.photos.filter(function(photo){
+			 	 return photo.file;
+			 }).length
 		}
 
 		init();

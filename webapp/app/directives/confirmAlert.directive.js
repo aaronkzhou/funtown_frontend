@@ -4,7 +4,6 @@ angular.module('funtown').directive('confirmAlert', ['$alert',function($alert){
 		restrict: 'A',			
 		link:function(scope,element,attr){
 			//stick the alert container to the parent 
-			console.log(scope);
 			angular.element(element[0]).parent().attr("id","alerts-container");
 			var confirmAlert = $alert({
 				title : "Are you sure?",
