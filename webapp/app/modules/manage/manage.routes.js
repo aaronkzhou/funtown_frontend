@@ -146,5 +146,47 @@ angular.module('manage').config(['$stateProvider',
 			controller:'AddProductStep6',
 			templateUrl:'app/modules/selling/views/products-add-step6.view.html'
 		})
+		//edit product
+		.state('manage.editProduct',{
+			url:'/editProduct',
+			controller:'AddProduct',
+			abstract : true,
+			templateUrl:'app/modules/selling/views/products-add.view.html',
+			resolve:{
+				AttributeService: function(AttributeService){
+					return AttributeService;
+				}
+			}
+		})
+		.state('manage.editProduct.step1',{
+			url:'/editProduct/step1',
+			controller:'AddProductStep1',
+			templateUrl:'app/modules/selling/views/products-add-step1.view.html'
+		})
+		.state('manage.editProduct.step2',{
+			url:'/editProduct/step2',
+			controller:'AddProductStep2',
+			templateUrl:'app/modules/selling/views/products-add-step2.view.html'
+		})
+		.state('manage.editProduct.step3',{
+			url:'/editProduct/step3',
+			controller:'AddProductStep3',
+			templateUrl:'app/modules/selling/views/products-add-step3.view.html'
+		})
+		.state('manage.editProduct.step4',{
+			url:'/editProduct/step4',
+			controller:'AddProductStep4',
+			templateUrl:'app/modules/selling/views/products-add-step4.view.html'
+		})
+		.state('manage.editProduct.step5',{
+			url:'/editProduct/step4',
+			controller:'AddProductStep5',
+			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
+		})
+		.state('manage.editProduct.step6',{
+			url:'/editProduct/step4',
+			controller:'AddProductStep6',
+			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
+		})
 	}
 ])
