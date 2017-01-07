@@ -80,8 +80,11 @@
 						<small>Max: <span data-ng-bind="maxPhotos"></span>. Current: <span data-ng-bind="photoCount"></span></small>
 					</label>
 					<div class="ft-catalog-preview  no-padding col-md-5">						
-						<div class="ft-catalog-photo" data-ng-repeat="photo in cache.product.photos">
+						<div class="ft-catalog-photo" data-ng-repeat="photo in cache.product.productPhotos">
 							<img flow-img="photo.file" class="img-responsive" data-ng-if="photo.file.file"/>
+							<a href="" data-ng-click="photoRemove($index)" data-ng-if="photo.file.file">
+								<small><i class="icon fa fa-sm fa-minus-circle"></i> Remove</small>
+							</a>
 						</div>
 					</div>
 					<div class="col-md-5 drop-zone" flow-drop ng-class="dropClass" data-ng-if="photoCount < maxPhotos">

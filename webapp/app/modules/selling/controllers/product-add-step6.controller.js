@@ -1,3 +1,4 @@
+'use strict';
 angular.module('selling').controller('AddProductStep6', ['$log','$scope','AttributeService',
 	function($log,$scope,AttributeService){
 		$log.debug('AddProductStep6 controller', 'product',$scope.cache.product);

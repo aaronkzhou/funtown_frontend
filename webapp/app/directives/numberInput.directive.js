@@ -1,3 +1,4 @@
+'use strict';
 angular.module('funtown').directive('numberInput', [function(){
 	return {
 		restrict: 'A',

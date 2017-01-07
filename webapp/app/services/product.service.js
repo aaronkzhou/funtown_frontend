@@ -6,8 +6,14 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 		this.saveProduct = function(product){
 			$log.debug("ProductService::saveProduct - ",product);
 
-			return $http.post('/rest/api/selling/products',product,{
-				transformRequest:doTransformRequest
+			return $http({
+				method:'POST',
+				url: '/rest/api/selling/products',
+				data:product,
+				transformRequest:doTransformRequest,
+				headers:{
+					'Content-Type':undefined
+				}
 			})
 		}
 
@@ -59,12 +65,28 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			product.status = request.status || "IN_DRAFT";
 			
 
-			delete product.photos;	
+			$log.debug("product.productPhotos 	",product.productPhotos);					
 
-			$log.debug("doTransformRequest:: transformed product - ",product);
-			$log.debug("doTransformRequest:: transformed product - ",JSON.stringify(product));
+			delete product.productPhotos;	
 
-			return JSON.stringify(product);
+			var formData = new FormData();
+			
+			if(request.productPhotos){
+				request.productPhotos.forEach(function(photo){
+					if(photo.file){
+						formData.append("file",photo.file.file);			
+					}
+				})
+			}
+			
+			//Add the product object as blog so that the context type can be set.
+			formData.append("product",new Blob([JSON.stringify(product)],{type: 'application/json'}));
+			
+			$log.debug("doTransformRequest:: transformed product - ",formData.get("product"));			
+
+			//$log.debug("doTransformRequest:: transformed product - ",JSON.stringify(formData));
+
+			return formData;
 
 		}
 	}

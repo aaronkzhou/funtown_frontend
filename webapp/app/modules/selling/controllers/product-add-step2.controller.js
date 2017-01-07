@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http','CatalogFactory','AttributeService',
-	function($log,$scope,$http,CatalogFactory,AttributeService) {
+angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http','CatalogFactory','AttributeService','AlertsService',
+	function($log,$scope,$http,CatalogFactory,AttributeService,AlertsService) {
 		$log.debug('AddProductStep2::controller',$scope.cache.product);
 		
 		var STEP_NO = 2;
@@ -23,8 +23,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			if($scope.cache.product.catalog){
 				getPoster(); 
 			}
-			if(!$scope.cache.product.photos){
-				$scope.cache.product.photos =[{},{},{}];
+			if(!$scope.cache.product.productPhotos){
+				$scope.cache.product.productPhotos =[{},{},{}];
 				$scope.photoCount = 0;				
 			}else{
 				$scope.photoCount = getPhotoCount();
@@ -126,7 +126,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		$scope.photoAdded = function(file,event,flow) {
 			$log.debug("photoAdded",file);
 
-			var photos = $scope.cache.product.photos;
+			var photos = $scope.cache.product.productPhotos;
 			//store the flow so that it can be used to call upload when product is saved.
 			if(!$scope.cache.state.photosFlow){
 				$scope.cache.state.photosFlow = flow;
@@ -144,9 +144,19 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		  	event.preventDefault();//prevent file from uploading
 		}	
 
+		$scope.photoRemove = function(id){
+			$log.debug("photoRemove",id);
+			$log.debug("photoRemove",$scope.cache.state.photosFlow);
+			var photos = $scope.cache.product.productPhotos;
+			var flowFiles = $scope.cache.state.photosFlow;
+			delete photos[id].file;
+			delete flowFiles.files.splice(id,1);
+			$scope.photoCount--;
+		}
+
 		//get the count of photos product has
 		function getPhotoCount(){
-			 return $scope.cache.product.photos.filter(function(photo){
+			 return $scope.cache.product.productPhotos.filter(function(photo){
 			 	 return photo.file;
 			 }).length
 		}

@@ -24,6 +24,14 @@ a {
 .ft-card-padded {
   padding: 15px; }
 
+#notification-container {
+  position: fixed;
+  top: 135px;
+  right: 30px;
+  width: 300px; }
+  #notification-container .alert {
+    border-radius: 4px !important; }
+
 .alerts-container {
   position: relative;
   padding: 15px 0;
@@ -35,12 +43,17 @@ a {
   right: 0;
   left: 0;
   margin: 0;
-  bottom: 0;
-  border: 0;
   border-top: 2px solid;
-  line-height: 2; }
-  .alert.alert-warning {
-    border-top: 2px solid #faebcc; }
+  line-height: 2;
+  min-height: 60px;
+  background: #000;
+  color: #fff;
+  border: 0;
+  border-radius: 0; }
+  .alert .close {
+    text-shadow: none;
+    color: #fff;
+    opacity: 0.5; }
 
 .suppress {
   color: #cccccc; }
@@ -109,12 +122,18 @@ label {
   display: inline-block;
   width: auto; }
 
+main {
+  position: absolute;
+  top: 120px;
+  width: 100%; }
+
 .ft-header {
-  position: relative;
+  position: fixed;
   width: 100%;
   height: 70px;
   background-color: #fff;
-  border-bottom: 1px solid #e9e9e9; }
+  border-bottom: 1px solid #e9e9e9;
+  z-index: 1000; }
   .ft-header .header-left {
     position: relative;
     float: left;
@@ -162,6 +181,10 @@ label {
     border-radius: 0 3px 3px 0; }
 
 .navbar {
+  position: fixed;
+  top: 70px;
+  width: 100%;
+  z-index: 1000;
   background: #fff;
   border-radius: 0;
   border: 0;
@@ -182,10 +205,9 @@ label {
           background: transparent; }
 
 .ft-side-nav {
-  top: 120px;
   position: absolute;
   width: 230px;
-  margin: 6px 15px; }
+  margin: 5px 15px; }
   .ft-side-nav .ft-side-nav-group li {
     border-left: 3px solid transparent;
     margin: 0 -15px;
@@ -414,14 +436,20 @@ label {
   height: 180px;
   display: inline-block;
   margin-right: 10px;
-  border: 1px solid #e9e9e9; }
+  border: 1px solid #e9e9e9;
+  text-align: left; }
+  .ft-catalog-photo a {
+    display: inline-block;
+    position: absolute;
+    bottom: -20px; }
 
 .ft-catalog-preview {
   display: table-cell;
   text-align: center;
   margin: auto;
   vertical-align: middle;
-  color: #e6e6e6; }
+  color: #e6e6e6;
+  margin-bottom: 30px; }
 
 .ft-col {
   display: table-cell;

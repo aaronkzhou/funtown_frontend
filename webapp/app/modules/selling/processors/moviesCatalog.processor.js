@@ -1,3 +1,4 @@
+'use strict';
 var MoviesCatalog = function(movieDbCatalogService,funtownCatalogService,log,q){
 	var moviesCatalog = this;
 	var movieDbCatalogService = movieDbCatalogService; 

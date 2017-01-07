@@ -38,11 +38,22 @@
                         <label class="col-md-4 ft-details-label" data-ng-bind="attribute.attributeType"></label>
                         <div class="ft-details-data" data-ng-class="attribute.attributeType" data-ng-bind="attribute.attributeValue"></div>
                     </div>
+                    <div class="row">   
+                        <label class="col-md-4 ft-details-label">
+                             Photos
+                        </label>
+                        <div class="ft-catalog-preview  no-padding" flow-init>                       
+                            <div class="ft-catalog-photo" data-ng-repeat="photo in cache.product.productPhotos">
+                                <img flow-img="photo.file" class="img-responsive" data-ng-if="photo.file.file"/>                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="ft-catalog-preview col-md-4">
                     <img class="ft-catalog-poster" data-ng-src="{{poster}}">
                 </div>      
             </div>
+
             <div class="separator"></div>
             <div>
                 <b><a class="active" ui-sref="manage.{title}}Product.step3">Product Information</a></b><br>

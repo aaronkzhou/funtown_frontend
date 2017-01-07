@@ -1,3 +1,4 @@
+'use strict';
 var GamesCatalog = function(funtownCatalogService,log,q){
 	var gamesCatalog = this;
 
