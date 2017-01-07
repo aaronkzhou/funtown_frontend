@@ -1,4 +1,5 @@
-angular.module('funtown').directive('confirmAlert', ['$alert',function($alert){
+'use strict';
+angular.module('alerts').directive('confirmAlert', ['$alert',function($alert){
 	return {		
 		// scope: {}, // {} = isolate, true = child, false/undefined = no change		
 		restrict: 'A',			

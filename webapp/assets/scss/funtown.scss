@@ -27,6 +27,17 @@ a{
 .ft-card-padded{	
 	padding: 15px;
 }
+#notification-container{
+	position: fixed;
+    top: 135px;
+    right: 30px;
+    width: 300px;
+
+    .alert{
+		border-radius: 4px!important;
+	}
+}
+
 .alerts-container{
 	position: relative;
 	padding: 15px 0;
@@ -38,13 +49,19 @@ a{
 	right: 0;
 	left: 0; 
 	margin:0;
-	bottom: 0;
-	border: 0;	
 	border-top: 2px solid;
 	line-height: 2;
-	&.alert-warning{
-		border-top: 2px solid #faebcc;
-	}
+	min-height: 60px;
+	background: #000;
+	color: #fff;
+	border: 0;
+	border-radius:0; 
+		
+	.close{
+			text-shadow:none;
+			color: #fff;
+			opacity: 0.5;
+		}
 
 }
 
@@ -131,12 +148,19 @@ label{
 	width: auto;
 }
 
+main{
+	position: absolute;	
+	top:120px;
+	width: 100%;
+}
+
 .ft-header{
-	position: relative;
+	position: fixed;
 	width: 100%;
 	height: 70px;
 	background-color:#fff;
 	border-bottom: 1px solid #e9e9e9; 
+	z-index: 1000;
 
 	.header-left{
 		position: relative;
@@ -198,6 +222,10 @@ label{
 }
 
 .navbar{
+	position: fixed;
+	top:70px;
+	width: 100%;
+	z-index: 1000;
 	background: #fff;
 	border-radius: 0;
 	border: 0;
@@ -230,10 +258,9 @@ label{
 }
 
 .ft-side-nav{
-	top: 120px;
 	position: absolute;
 	width: 230px;
-	margin: 6px 15px;		
+	margin: 5px 15px;		
 	
 	.ft-side-nav-group li{
 		border-left: 3px solid transparent;
@@ -545,6 +572,12 @@ label{
 	display: inline-block;
 	margin-right: 10px;
 	border: 1px solid #e9e9e9;	
+	text-align: left;	
+	a{
+		display: inline-block;
+    	position: absolute;   
+    	bottom: -20px;
+	}
 }
 .ft-catalog-preview{
 	display: table-cell;
@@ -552,6 +585,7 @@ label{
     margin: auto;
     vertical-align: middle;
     color:#e6e6e6;
+    margin-bottom: 30px;
 }
 .ft-col{
 	display: table-cell;

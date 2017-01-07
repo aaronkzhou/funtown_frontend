@@ -51,7 +51,8 @@
             </nav>                                 
             <main>            
                 <div data-ui-view></div>
-            </main>
+                <div id="notification-container"></div>
+            </main>            
         </div>
         <!--build:js assets/js/funtown.min.js -->            
             <script src="assets/lib/angular/angular.js"></script>            
@@ -66,6 +67,10 @@
 
             <script src="app/modules/manage/manage.module.js"></script>    
             <script src="app/modules/manage/manage.routes.js"></script>
+    
+            <script src="app/modules/alerts/alerts.module.js"></script>   
+            <script src="app/modules/alerts/services/alerts.service.js"></script> 
+            <script src="app/modules/alerts/directives/confirmAlert.directive.js"></script>   
 
             <script src="app/modules/account/account.module.js"></script>    
             <script src="app/modules/account/account.routes.js"></script>
@@ -97,7 +102,7 @@
             <script src="app/factories/catalog.factory.js"></script> 
 
             <script src="app/directives/numberInput.directive.js"></script> 
-            <script src="app/directives/confirmAlert.directive.js"></script> 
+
 
         <!-- endbuild -->
     </body>

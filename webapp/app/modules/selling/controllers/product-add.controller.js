@@ -1,6 +1,7 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','ProductService','$state',
-	function($log,$scope,$http,ProductService,$state) {	
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$state',
+	'ProductService','AlertsService',
+	function($log,$scope,$http,$state,ProductService,AlertsService) {	
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
@@ -92,12 +93,16 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 
 		$scope.saveDraft = function(){
 			$log.debug("saveDraft");
+			var progressAlert = AlertsService.notify("Saving as draft...");
 			ProductService.saveProduct($scope.cache.product).then(function(response){
 				$scope.cache.product.productId = response.data;
+				progressAlert.hide();
+				AlertsService.notify("Product draft saved.","success");
+			},function(error){
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to save as draft.","error");
 			})			
-			if($scope.cache.state.photosFlow){
-				$scope.cache.state.photosFlow.upload();
-			}
 		}
 
 

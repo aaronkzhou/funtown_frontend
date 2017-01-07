@@ -16,6 +16,9 @@ angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 	            	deferred.resolve(response.data);     	
 	            	categories = response.data; 
 	            	$log.debug("AddProductService::categories=",categories);  
+	        	},function(error){
+	        		$log.error(error);
+	        		AlertsService.notify("Unable get categories.","error");
 	        	})		
 			}
         	return deferred.promise;
@@ -35,7 +38,10 @@ angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 					deferred.resolve(response.data);
 					categories.push.apply(categories,response.data); 
 					$log.debug("AddProductService::categories=" , categories);
-				})
+				},function(error){
+	        		$log.error(error);
+	        		AlertsService.notify("Unable get categories.","error");
+	        	})
 			}	
 			return deferred.promise;		
 		}

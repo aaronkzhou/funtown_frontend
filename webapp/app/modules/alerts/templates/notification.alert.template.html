@@ -1,0 +1,6 @@
+<div class="alert">
+  <button type="button" class="close" ng-if="dismissable" ng-click="$hide()">&times;</button>
+  <i class="fa fa-meh-o fa-lg " data-ng-if="type==='error'"></i>  
+  <span data-ng-if="type==='error'">Something went wrong!<br></span>
+  <span ng-bind-html="content"></span>  
+</div>
