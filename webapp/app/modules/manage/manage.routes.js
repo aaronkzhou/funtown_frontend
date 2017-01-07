@@ -114,9 +114,12 @@ angular.module('manage').config(['$stateProvider',
 				AttributeService: function(AttributeService){
 					return AttributeService;
 				}
+			},
+			params:{
+				title:'Add'
 			}
 		})
-		.state('manage.addProduct.step1',{	
+		.state('manage.addProduct.step1',{
 			url:'/addProduct/step1',
 			controller:'AddProductStep1',		
 			templateUrl:'app/modules/selling/views/products-add-step1.view.html'
@@ -156,6 +159,9 @@ angular.module('manage').config(['$stateProvider',
 				AttributeService: function(AttributeService){
 					return AttributeService;
 				}
+			},
+			params:{
+				title:'Edit'
 			}
 		})
 		.state('manage.editProduct.step1',{
@@ -179,14 +185,14 @@ angular.module('manage').config(['$stateProvider',
 			templateUrl:'app/modules/selling/views/products-add-step4.view.html'
 		})
 		.state('manage.editProduct.step5',{
-			url:'/editProduct/step4',
+			url:'/editProduct/step5',
 			controller:'AddProductStep5',
 			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
 		})
 		.state('manage.editProduct.step6',{
-			url:'/editProduct/step4',
+			url:'/editProduct/step6',
 			controller:'AddProductStep6',
-			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
+			templateUrl:'app/modules/selling/views/products-add-step6.view.html'
 		})
 	}
 ])
