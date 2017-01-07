@@ -116,7 +116,7 @@ angular.module('manage').config(['$stateProvider',
 				}
 			},
 			params:{
-				title:'Add'
+				title:'add'
 			}
 		})
 		.state('manage.addProduct.step1',{
@@ -161,7 +161,7 @@ angular.module('manage').config(['$stateProvider',
 				}
 			},
 			params:{
-				title:'Edit'
+				title:'edit'
 			}
 		})
 		.state('manage.editProduct.step1',{

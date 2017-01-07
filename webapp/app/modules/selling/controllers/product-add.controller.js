@@ -6,7 +6,8 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 		
 		function init(){		
 			$log.debug('AddProduct controller::init');
-
+			$scope.title = $stateParams.title;
+			$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
 			$scope.alertMessage={};
 			$scope.alertMessage.confirm = "You will lose all unsaved changes."
 			//Cache object
@@ -35,7 +36,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','Pro
 				{value: 'mustPickup', display: "Buyer must pick-up"}
 			]
 		}
-		$scope.title = $stateParams.title;
+		
 		$scope.updoStepCompleted = function(step){
 			$scope.stepsCompleted = step-1;	
 		}		
