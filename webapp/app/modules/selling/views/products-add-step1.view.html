@@ -12,7 +12,7 @@
                     <ul class="ft-multiselect-selected">
                         <li data-ng-repeat="path in cache.state.categoryPath">
                         	<i class="fa fa-angle-right" data-ng-if="$index"></i>
-                            <a  href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)">
+                            <a href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)">
                                 <span data-ng-bind="path.categoryName"></span>
                             </a>                    
                         </li>
@@ -35,7 +35,7 @@
             <button class="btn" confirm-alert>
                 <i class="fa fa-eraser"></i> Reset
             </button>
-            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.addProduct.step2">
+            <button class="btn" data-ng-disabled="isNextDisabled()" ui-sref="manage.{{title}}Product.step2">
                 Next <i class="fa fa-chevron-right"></i>
             </button>
         </div>

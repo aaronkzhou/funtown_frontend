@@ -1,15 +1,15 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$state',
-	'ProductService','AlertsService',
-	function($log,$scope,$http,$state,ProductService,AlertsService) {	
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','ProductService','$state','$stateParams',
+	function($log,$scope,$http,ProductService,$state,$stateParams) {
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
 		function init(){		
 			$log.debug('AddProduct controller::init');
-
+			$scope.title = $stateParams.title;
+			$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
 			$scope.alertMessage={};
-			$scope.alertMessage.confirm = "You will loose all unsaved changes."
+			$scope.alertMessage.confirm = "You will lose all unsaved changes."
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
@@ -36,7 +36,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				{value: 'mustPickup', display: "Buyer must pick-up"}
 			]
 		}
-
+		
 		$scope.updoStepCompleted = function(step){
 			$scope.stepsCompleted = step-1;	
 		}		
@@ -82,7 +82,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 					categoryName:'All categories'
 				}
 			];	
-			$log.debug("$scope.cache.product ",$scope.cache)
+			$log.debug("$scope.cache.product",$scope.cache)
 			if($state.current.name ==="manage.addProduct.step1"){
 				$state.reload();	
 			}else{

@@ -6,7 +6,7 @@
                 <div class="col-md-8">
                     <div class="row">
                         <label class="col-md-4 ft-details-label">
-                            <a class="active" ui-sref="manage.addProduct.step1">Category</a>
+                            <a class="active" ui-sref="manage.{{title}}Product.step1">Category</a>
                         </label>
                         <div class="ft-details-data">
                             <ul class="ft-multiselect-selected">
@@ -24,7 +24,7 @@
             </div>        
             <div class="separator"></div>
             <div>
-                <b><a class="active" ui-sref="manage.addProduct.step2">Product</a></b><br>
+                <b><a class="active" ui-sref="manage.{title}}Product.step2">Product</a></b><br>
             </div>       
             <div class="row">                         
                 <div class="col-md-8">                    
@@ -56,7 +56,7 @@
 
             <div class="separator"></div>
             <div>
-                <b><a class="active" ui-sref="manage.addProduct.step3">Product Information</a></b><br>
+                <b><a class="active" ui-sref="manage.{title}}Product.step3">Product Information</a></b><br>
             </div>       
             <div class="row">                         
                 <div class="col-md-8">   
@@ -112,7 +112,7 @@
             </div>
             <div class="separator"></div>
             <div>
-                <b><a class="active" ui-sref="manage.addProduct.step4">Pricing & Payment</a></b><br>
+                <b><a class="active" ui-sref="manage.{title}}Product.step4">Pricing & Payment</a></b><br>
             </div>       
             <div class="row">                         
                 <div class="col-md-8">   
@@ -148,7 +148,7 @@
             </div>        
             <div class="separator"></div>
             <div>
-                <b><a class="active" ui-sref="manage.addProduct.step5">Shipping Options</a></b><br>
+                <b><a class="active" ui-sref="manage.{{title}}Product.step5">Shipping Options</a></b><br>
             </div>       
             <div class="row">                         
                 <div class="col-md-8">   
@@ -198,7 +198,7 @@
             </div>
         </div>
 		<div class="ft-card-footer col-md-12 text-center">
-            <button class="btn" ui-sref="manage.addProduct.step5">
+            <button class="btn" ui-sref="manage.{{title}}Product.step5">
                 <i class="fa fa-chevron-left"></i> Previous 
             </button>
             <button class="btn" data-ng-click="saveDraft()">
