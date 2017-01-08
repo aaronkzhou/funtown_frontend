@@ -158,6 +158,9 @@ angular.module('manage').config(['$stateProvider',
 			resolve:{
 				AttributeService: function(AttributeService){
 					return AttributeService;
+				},
+				ProductService: function(ProductService){
+					return ProductService;
 				}
 			},
 			params:{
@@ -165,7 +168,7 @@ angular.module('manage').config(['$stateProvider',
 			}
 		})
 		.state('manage.editProduct.step1',{
-			url:'/step1',
+			url:'/step1?pid',
 			controller:'AddProductStep1',
 			templateUrl:'app/modules/selling/views/products-add-step1.view.html'
 		})

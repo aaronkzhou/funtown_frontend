@@ -34,7 +34,10 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				{value: 'noPickUp', display: "No pick-up"},
 				{value: 'canPickUp', display: "Buyer can pick-up"},
 				{value: 'mustPickup', display: "Buyer must pick-up"}
-			]
+			];
+			ProductService.getSpecifyProduct($state.params.pid).then(function(response){
+				$scope.specifyProduct = response.data;
+			});
 		}
 		
 		$scope.updoStepCompleted = function(step){
@@ -116,7 +119,13 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			}
 		}
 
+		$scope.getSpecifyProduct = function(){
+			$log.debug("get specify product info");
+			ProductService.getSpecifyProduct(pid).then(function(response){
+				return response.data;
+			})
+		}
+
 		init();
-	
  	}
 ])

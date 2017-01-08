@@ -16,6 +16,13 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				}
 			})
 		}
+		this.getSpecifyProduct = function(pid){
+			$log.debug("ProductService::getSpecifyProduct - PID -", pid);
+			return $http({
+				method:'GET',
+				url: '/rest/api/products/' + pid
+			});
+		}
 
 		function doTransformRequest(request){
 			$log.debug("doTransformRequest");
