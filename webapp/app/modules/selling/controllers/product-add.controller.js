@@ -111,12 +111,17 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 
 		$scope.create = function(){
 			$log.debug("create");
+			var progressAlert = AlertsService.notify("Saving product...");
 			ProductService.saveProduct($scope.cache.product).then(function(response){
+				$scope.cache.product.productId = response.data;
+				progressAlert.hide();
+				AlertsService.notify("Product added.","success");
 				$state.go('manage.products.' + $scope.cache.product.status);
-			})			
-			if($scope.cache.state.photosFlow){
-				$scope.cache.state.photosFlow.upload();
-			}
+			},function(error){
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to save product.","error");
+			})	
 		}
 
 		$scope.getSpecifyProduct = function(){
