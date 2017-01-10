@@ -1,21 +1,26 @@
 'use strict';
-angular.module('selling').controller('AddProductStep5', ['$log','$scope','AttributeService',
-	function($log,$scope,AttributeService){
+angular.module('selling').controller('AddProductStep5', ['$log','$scope','AttributeService','ShippingTempalateService',
+	function($log,$scope,AttributeService,ShippingTempalateService){
 		$log.debug('AddProductStep5 controller');
-
 		var STEP_NO = 5;		
 		var pickUpOption       = {cost: 0,description: "pickUp"};
-		var freeShippingOption = {cost: 0,description: "freeShipping",freeLabel: true};
-		
-		function init(){
+		var freeShippingOption = {cost: 0,description: "freeShipping"};
+			function init(){
 			$log.debug("AddProductStep5::init");
 
+			$scope.addTemplate = false;
+			$scope.templateReadOnly = true;			
+			
 			if($scope.cache.product.category){
 				$scope.shippingRates = AttributeService.getAttributesFor('shippingRates',$scope.cache.product.category.categoryId);
 			}else{
 				$log.warn("Category not yet set.");
 			}			
 			
+			ShippingTempalateService.getShippingTemplates().then(function(response){
+				$scope.templates = response;
+			});
+
 			//Add inital object if not present
 			if(!$scope.cache.product.shippingCosts){
 				//Shipping options in final product
@@ -30,7 +35,58 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}	
 		}
 
+		$scope.addShippingTemplate = function(){
+			$scope.addTemplate = true;
+			$scope.templateOperator = "Create a new shipping template";
+			$scope.addTemplate = {};
+			$scope.processSpecificCost();
 
+		}
+
+		$scope.postTemplate = function(){
+			$log.debug("postShippingTemplate");
+			$scope.addTemplate.shippingCosts = [];
+			$scope.cache.state.shippingCosts.forEach(function(shippingCost){
+				$scope.addTemplate.shippingCosts.push(shippingCost);
+			});
+
+			ShippingTempalateService.postTemplate($scope.addTemplate).then(function(response){
+				$scope.templates.push(response);
+			});
+			$scope.cache.state.shippingCosts = [];
+			$scope.addTemplate = false;
+		}
+		
+		$scope.cancelAddTemplate = function(){
+			$scope.cache.state.shippingCosts = [];
+			$scope.addTemplate = false;
+		}
+
+		$scope.processEditTemplate = function(){
+			$scope.templateReadOnly = false;
+		}
+
+		$scope.editTemplateAddCost = function(){
+			$scope.cache.templateDisplay.shippingCosts.push({});
+		}
+
+		$scope.editTemplateRemoveCost = function(shippingCost){
+			var costIndex = $scope.cache.templateDisplay.shippingCosts.indexOf(shippingCost);
+			$scope.cache.templateDisplay.shippingCosts.splice(costIndex, 1);
+		}
+
+		$scope.saveEditTemplate = function(){
+			var oldTemplateIndex = $scope.templates.findIndex(function(template){
+				return template.templateId === $scope.cache.templateDisplay.templateId;
+			});
+			$scope.templates.splice(oldTemplateIndex,1);
+			ShippingTempalateService.saveEditTemplate($scope.cache.templateDisplay)
+			.then(function(response){
+				$scope.templates.push(response);
+				$log.debug('new templates',$scope.templates)
+			});	
+			$scope.templateReadOnly = true;		
+		}
 		$scope.isNotOnlyPick = function(){
 			return $scope.cache.state.pickUp !== 'mustPickup';
 		}
@@ -123,6 +179,6 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}) 
 	  
 		init();
+	
 	}
-
 ])

@@ -21,7 +21,7 @@
 				<button class="btn btn-select" type="button" name="pickUp" data-ng-model="cache.state.pickUp" bs-options="pickUp.value as pickUp.display for pickUp in pickUps" bs-select bs-on-select="processPickUp" required><span class="caret"></span></button>
 			</div>
 			<div class="row">
-				<label class="col-md-3" for="shippingRates">
+				<label class="col-md-3" for="shippingType">
 					Costs
 					<div class="error" ng-messages="shippingInfo.shippingType.$error">
 			    		<p ng-message="required">Required</p>
@@ -30,44 +30,142 @@
 				<fieldset class="ft-shipping-costs col-md-9" data-ng-disabled="shippingDisabled">
 					<div class="row">
 						<label>							
-							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="free" ng-required="isNotOnlyPick()" data-ng-click="processFreeShipping()" >&nbsp;&nbsp;<span>Free shipping within New Zealand</span>							
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="free" data-ng-required="isNotOnlyPick()" data-ng-click="processFreeShipping()" >&nbsp;&nbsp;<span>Free shipping within New Zealand</span>							
 						</label>
 						<br>
 						<label>
-							<div class="error" ng-messages="shippingInfo.shippingOptions.$error">
-				    			<p ng-message="required">Required</p>
-							</div>
-							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" ng-required="isNotOnlyPick()"  data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>							
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" data-ng-required="isNotOnlyPick()"  data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>			
 						</label>
-					</div>
-					<fieldset data-ng-if="hasSpecificShipping()">
-						<fieldset data-ng-repeat="shippingCost in cache.state.shippingCosts">
-							<div>
-								<div class="ft-col">
-									NZ$
-									<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>		
-									<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
-						    			<p ng-message="required">Required</p>
-									</span>
-								</div>
-								<div class="ft-col">									
-									<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
-									<span class="error" ng-messages="shippingInfo['desc' + $index].$error">
-						    			<p ng-message="required">Required</p>
-									</span>										
-								</div>
-								<div class="ft-col" data-ng-if="$index>0">
-									<a href="" data-ng-click="removeCostOption(shippingCost)">
-										<i class="icon fa fa-minus-circle"></i>
-									</a>									
-								</div>
-							</div>	
+						<fieldset data-ng-if="hasSpecificShipping()">
+							<fieldset data-ng-repeat="shippingCost in cache.state.shippingCosts">
+								<div>
+									<div class="ft-col">
+										NZ$
+										<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>		
+										<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
+							    			<p ng-message="required">Required</p>
+										</span>
+									</div>
+									<div class="ft-col">									
+										<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
+										<span class="error" ng-messages="shippingInfo['desc' + $index].$error">
+							    			<p ng-message="required">Required</p>
+										</span>										
+									</div>
+									<div class="ft-col" data-ng-if="$index>0">
+										<a href="" data-ng-click="removeCostOption(shippingCost)">
+											<i class="icon fa fa-minus-circle"></i>
+										</a>									
+									</div>
+								</div>	
+							</fieldset>
+							<a href="" data-ng-click="addCostOption()">
+								<i class="icon fa fa-plus-circle"></i>
+								Add another shipping option
+							</a>		
 						</fieldset>
-						<a href="" data-ng-click="addCostOption()">
-							<i class="icon fa fa-plus-circle"></i>
-							Add another shipping option
-						</a>		
-					</fieldset>
+						<br>
+						<label>
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="template" data-ng-required="isNotOnlyPick()">&nbsp;&nbsp;<span>Use shipping templates</span>
+						</label>										
+						<fieldset data-ng-if="hasShippingTemplate()">
+							<br>
+							<button type="button" name="templateDisplay" class="btn btn-select" data-ng-model="cache.templateDisplay" bs-options="template as template.templateName for template in templates" bs-select>Template name<span class="caret"></span>
+							</button>
+							<div class="pull-right">
+								<button class="btn" data-ng-click="addShippingTemplate()">Add a new template</button>								
+							</div>	
+							<br>
+							<div data-ng-if="cache.templateDisplay">
+								<fieldset data-ng-disabled="templateReadOnly">
+									<div class="row">
+										<label class="col-md-3">
+											Template name:
+										</label>
+										<input type="text" class="form-control" data-ng-model="cache.templateDisplay.templateName" required>
+										<span class="error" ng-messages="shippingInfo.editShippingTemplateName.$error">
+							    			<p ng-message="required">Required</p>
+										</span>
+									</div>
+									<fieldset data-ng-repeat="shippingCost in cache.templateDisplay.shippingCosts">
+										<div>
+											<div class="ft-col">
+												NZ$
+												<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>
+												<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
+									    			<p ng-message="required">Required</p>
+												</span>
+											</div>
+											<div class="ft-col">
+												<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
+												<span class="error" ng-messages="shippingInfo['desc' + $index].$error">
+									    			<p ng-message="required">Required</p>
+												</span>										
+											</div>
+											<div class="ft-col" data-ng-if="$index>0">
+												<a href="" data-ng-click="editTemplateRemoveCost(shippingCost)">
+													<i class="icon fa fa-minus-circle"></i>
+												</a>									
+											</div>
+										</div>	
+									</fieldset>
+									<a href="" data-ng-click="editTemplateAddCost()">
+										<i class="icon fa fa-plus-circle"></i>
+										Add another shipping option
+									</a>								
+								</fieldset>
+								<button class="btn" data-ng-click="processEditTemplate()">Edit this template</button>
+								<button class="btn" data-ng-click="saveEditTemplate()">Save</button>
+							</div>	
+							<fieldset data-ng-if="addTemplate">
+								<div class="separator"></div>
+								<h4 data-ng-bind="templateOperator"></h4>
+								<div>
+									<div class="row">
+										<label class="col-md-3" for="addShippingTemplateName">
+											Template name:
+										</label>
+										<input type="text" class="form-control" placeholder="Template 1" data-ng-model="addTemplate.templateName" required>
+										<span class="error" ng-messages="shippingInfo.addShippingTemplateName.$error">
+							    			<p ng-message="required">Required</p>
+										</span>
+									</div>
+									<fieldset data-ng-repeat="shippingCost in cache.state.shippingCosts">
+										<div>
+											<div class="ft-col">
+												NZ$
+												<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>		
+												<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
+									    			<p ng-message="required">Required</p>
+												</span>
+											</div>
+											<div class="ft-col">	
+												<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
+												<span class="error" ng-messages="shippingInfo['desc' + $index].$error">
+									    			<p ng-message="required">Required</p>
+												</span>										
+											</div>
+											<div class="ft-col" data-ng-if="$index>0">
+												<a href="" data-ng-click="removeCostOption(shippingCost)">
+													<i class="icon fa fa-minus-circle"></i>
+												</a>									
+											</div>
+										</div>
+									</fieldset>
+									<a href="" data-ng-click="addCostOption()">
+										<i class="icon fa fa-plus-circle"></i>
+										Add another shipping option
+									</a>
+								</div>
+								<button class="btn" ng-click="postTemplate()">
+									Add
+								</button>
+								<button class="btn" ng-click="cancelAddTemplate()">
+									Cancel
+								</button>	
+							</fieldset>
+						</fieldset>
+					</div>
 				</fieldset>
 			</div>
 		</form>	

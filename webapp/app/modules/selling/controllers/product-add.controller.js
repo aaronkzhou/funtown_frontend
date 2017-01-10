@@ -72,6 +72,10 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			return $scope.cache.state.shippingType === "free";
 		}
 
+		$scope.hasShippingTemplate = function(){
+			return $scope.cache.state.shippingType === "template";
+		}
+
 		$scope.cancelChanges = function(){
 			$log.debug("cancelChanges");
 			$log.debug("currentstate ",$state.current.name)
