@@ -17,11 +17,35 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			})
 		}
 		this.getSpecifyProduct = function(pid){
-			$log.debug("ProductService::getSpecifyProduct - PID -", pid);
-			return $http({
+			$log.debug("ProductService::getSpecifyProduct - PID - ", pid);
+			var specifyProductDetail = $http({
 				method:'GET',
-				url: '/rest/api/products/' + pid
+				url: '/rest/api/products/' + pid,
+				transformResponse:doTransformDatabaseCall
 			});
+			return specifyProductDetail;
+		}
+
+		function doTransformDatabaseCall(response){
+			$log.debug("doTransformDatabaseCall");
+			if(response === null){
+				return "no related data found";
+			}
+			var product = angular.copy(JSON.parse(response));
+			product.rootCategory = {
+				categoryId : product.category.parentId,
+				childrenCount : product.category.parentId == 1?3:3,
+				parentId : 0
+			};
+			var productAttributes ={
+				classfication:product.productAttributes[0].attributeValue,
+				region:product.productAttributes[1].attributeValue,
+				discs:product.productAttributes[2].attributeValue,
+				condition:product.productAttributes[3].attributeValue
+			};
+			product.productAttributes=productAttributes;
+			console.log(product);
+			return product;
 		}
 
 		function doTransformRequest(request){

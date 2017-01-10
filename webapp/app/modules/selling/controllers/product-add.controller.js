@@ -3,7 +3,6 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 	function($log,$scope,$http,$state,$stateParams,ProductService,AlertsService) {
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
-		
 		function init(){		
 			$log.debug('AddProduct controller::init');
 			$scope.title = $stateParams.title;
@@ -36,12 +35,12 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				{value: 'mustPickup', display: "Buyer must pick-up"}
 			];
 			ProductService.getSpecifyProduct($state.params.pid).then(function(response){
-				$scope.specifyProduct = response.data;
+				$scope.cache.product = response.data;
 			});
 		}
 		
 		$scope.updoStepCompleted = function(step){
-			$scope.stepsCompleted = step-1;	
+			$scope.stepsCompleted = step - 1;	
 		}		
 
 		$scope.stepCompleted = function(step){
@@ -111,19 +110,15 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 
 		$scope.create = function(){
 			$log.debug("create");
+			console.log($scope.cache.product);
 			ProductService.saveProduct($scope.cache.product).then(function(response){
 				$state.go('manage.products.' + $scope.cache.product.status);
-			})			
+				console.log($scope.cache.product);
+
+			});			
 			if($scope.cache.state.photosFlow){
 				$scope.cache.state.photosFlow.upload();
 			}
-		}
-
-		$scope.getSpecifyProduct = function(){
-			$log.debug("get specify product info");
-			ProductService.getSpecifyProduct(pid).then(function(response){
-				return response.data;
-			})
 		}
 
 		init();

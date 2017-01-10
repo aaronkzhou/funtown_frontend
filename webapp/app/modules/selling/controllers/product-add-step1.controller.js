@@ -11,11 +11,13 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 			//else get the root categories.
 			if($scope.cache.product.category){
 				getPathCategories($scope.cache.state.categoryPath[$scope.cache.state.categoryPath.length-1]);
+
 			}else{
 				CategoryService.getRootCategories().then(function(categories){
 					$scope.categories  = categories
 				});
-			}			
+			}
+			console.log($scope.cache.product);
 		}
 
 		// select the category if no children present or drill down to child categories
@@ -35,7 +37,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 			}else {
 				$scope.cache.product.category = category;
 				$scope.cache.product.rootCategory = rootCategory;
-			}	
+			}
 	    }
 
 	    // goTo the selected parent category and show its child categories
