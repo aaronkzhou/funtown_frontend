@@ -182,7 +182,7 @@
 	            <button class="btn" data-ng-click="storeShippingCosts(true)">
 	                <i class="fa fa-file-text"></i> Save Draft 
 	            </button>
-	            <button class="btn"  confirm-alert>
+	            <button class="btn" confirm-alert details={{alertMessage.confirm}}>
 	                <i class="fa fa-eraser"></i> Reset
 	            </button>
 	            <button class="btn" data-ng-disabled="isNextDisabled" data-ng-click="storeShippingCosts()" ui-sref="manage.{{title}}Product.step6">

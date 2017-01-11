@@ -15,7 +15,12 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$scope.title = $stateParams.title;
 			$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
 			$scope.alertMessage={};
-			$scope.alertMessage.confirm = "You will lose all unsaved changes."
+			$scope.alertMessage.confirm = {
+											message: "You will lose all unsaved changes.",
+										  	buttons:[
+										  		{name:'Yes',action:"cancelChanges"},
+										  		{name:'No'}]
+										  };
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
