@@ -51,9 +51,9 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				offerPrice: product.productPriceDetails[0].offerPrice,
 				offerDuration: product.productPriceDetails[0].offerDuration,
 			}
-			$scope.paymentMethods.forEach(function(item, index){
-				item.selected = true;
-			})
+			// $scope.paymentMethods.forEach(function(item, index){
+			// 	item.selected = true;
+			// })
 			product.productAttributes=productAttributes;
 			product.productPriceDetails=productPriceDetails;
 			console.log(product);

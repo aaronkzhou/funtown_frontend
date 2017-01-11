@@ -6,20 +6,13 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 		
 		function init(){		
 			$log.debug('AddProduct controller::init');
-<<<<<<< HEAD
 			$scope.title = $stateParams.mode;
 			$scope.headTitle = $stateParams.mode + " Product";
-			//$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
-=======
 			
 			//Render the child view
 			if($state.current.name==='manage.addProduct'){
 				$state.go("manage.addProduct.step1");
 			}
-			
-			$scope.title = $stateParams.title;
-			$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
->>>>>>> af7f383874088fa5096403b34e5a3eda0c1d95d6
 			$scope.alertMessage={};
 			$scope.alertMessage.confirm = {
 											message: "You will lose all unsaved changes.",
