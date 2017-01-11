@@ -5,7 +5,5 @@
     <strong ng-bind="title"></strong>&nbsp;<span ng-bind-html="content"></span>
   </span>
   <span ng-if="!title" ng-bind-html="content"></span>
-  
-  <button class="btn btn-rounded" ng-click="cancelChanges()">Yes</button>
-  <button class="btn btn-rounded" ng-click="$hide()">No</button>
+  <button data-ng-repeat="button in buttons"  class="btn btn-rounded" data-ng-click="button.action?this[button.action]():'';$hide()" data-ng-bind="button.name"></button>
 </div>

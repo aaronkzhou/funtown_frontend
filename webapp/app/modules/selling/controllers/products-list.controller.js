@@ -6,13 +6,18 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 		$scope.btnIsVisible = true;
 		$scope.productsChosen = [];
 
-		$scope.init = function(){
+		function init(){
 			var status = $scope.products[0].status;
 			if(status === "In-Draft"){
 				$scope.btnIsVisible = false;
 			}
 			$scope.alertMessage={};
-			$scope.alertMessage.confirm = "You want to delete the selected products permanently."
+			$scope.alertMessage.confirm = {
+											message: "You want to delete the selected products permanently.",
+										  	buttons:[
+										  		{name:'Yes',action:"deleteProducts"},
+										  		{name:'No'}]
+										  };
 		}
 
 		$scope.changeSelectedProducts = function(product){			
@@ -81,10 +86,9 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 				}
 			});	
 		}
-
+		//since use the same confirm alert, function"cancelChanges" is equal to function"deleteProducts".
 		$scope.cancelChanges = function(){
-			$scope.deleteProducts();
-			$state.reload();
+			$scope.deleteProducts();			
 		}
 		
 		$scope.deleteProducts = function(){
@@ -96,6 +100,6 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 			});
 			$scope.productsChosen = [];			
 		}
-		$scope.init();
+		init();
 	}
 ])

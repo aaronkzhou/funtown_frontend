@@ -10,7 +10,7 @@
 			<button class="btn" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
 				<i class="fa fa-stop"></i> De-Activate
 			</button>
-			<button class="btn"  ng-disabled="productsChosen.length === 0" confirm-alert>
+			<button class="btn"  ng-disabled="productsChosen.length === 0" confirm-alert details={{alertMessage.confirm}}>
 				<i class="fa fa-trash"></i> Delete
 			</button>
 		</div>

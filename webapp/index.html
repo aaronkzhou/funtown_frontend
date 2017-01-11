@@ -42,9 +42,9 @@
                     <div class="container">
                         <ul class="navbar-nav nav">     
                             <li class="col-md-3" ui-sref-active="active"><a ui-sref="buy">Buy</a></li>
-                            <li class="col-md-3" ui-sref-active="active"><a ui-sref="manage.addProduct.step1">Sell</a></li>
-                            <li class="col-md-3"  ui-sref-active="active"><a ui-sref="look"="">Look For</a></li>
-                            <li class="col-md-3" ui-sref-active="active"><a ui-sref="manage.home">My Funtown</a></li>
+                            <li class="col-md-3" ><a ui-sref="manage.addProduct.step1">Sell</a></li>
+                            <li class="col-md-3"  ui-sref-active="active"><a ui-sref="look">Look For</a></li>
+                            <li class="col-md-3" ui-sref-active="active"><a ui-sref="manage">My Funtown</a></li>
                         </ul>   
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <div id="notification-container"></div>
             </main>            
         </div>
-        <!--build:js assets/js/funtown.min.js -->            
+        <!--build:js assets/js/funtown.min.js -->             
             <script src="assets/lib/angular/angular.js"></script>            
             <script src="assets/lib/angular/angular-ui-router.js"></script>            
             <script src="assets/lib/angular/angular-messages.js"></script>
@@ -66,6 +66,7 @@
             <script src="app/application.js"></script>
 
             <script src="app/modules/manage/manage.module.js"></script>    
+            <script src="app/modules/manage/controllers/manage.controller.js"></script>
             <script src="app/modules/manage/manage.routes.js"></script>
     
             <script src="app/modules/alerts/alerts.module.js"></script>   
@@ -81,6 +82,7 @@
             <script src="app/modules/selling/selling.module.js"></script> 
             <script src="app/modules/selling/controllers/products-list.controller.js"></script> 
             <script src="app/modules/selling/services/products-list.view.service.js"></script> 
+            <script src="app/modules/selling/services/shipping.service.js"></script>
 
             <script src="app/modules/selling/controllers/product-add.controller.js"></script> 
             <script src="app/modules/selling/controllers/product-add-step1.controller.js"></script>

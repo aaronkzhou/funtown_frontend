@@ -240,6 +240,8 @@ main{
 			&.active a,&.active a:hover,&.active a:focus{
 				color:#f60;
 				background: transparent;
+				cursor: default;
+				pointer-events: none;
 			}
 		
 			a{
@@ -273,10 +275,17 @@ main{
 	ul{
 		margin: 10px 0;
 	}
+
+	li.linked{
+		border-left: 3px solid transparent;
+		padding: 5px 12px; 
+	}
 	
 	li.active {		
 		border-left: 3px solid #f60;
     	background-color: #f2f2f2;		
+    	cursor: default;
+		pointer-events: none;
     	a{
     		color:#f60;
     	}

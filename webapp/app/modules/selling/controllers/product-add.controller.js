@@ -6,11 +6,27 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 		
 		function init(){		
 			$log.debug('AddProduct controller::init');
+<<<<<<< HEAD
 			$scope.title = $stateParams.mode;
 			$scope.headTitle = $stateParams.mode + " Product";
 			//$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
+=======
+			
+			//Render the child view
+			if($state.current.name==='manage.addProduct'){
+				$state.go("manage.addProduct.step1");
+			}
+			
+			$scope.title = $stateParams.title;
+			$scope.upperTitle = $stateParams.title.charAt(0).toUpperCase() + $stateParams.title.slice(1);
+>>>>>>> af7f383874088fa5096403b34e5a3eda0c1d95d6
 			$scope.alertMessage={};
-			$scope.alertMessage.confirm = "You will lose all unsaved changes."
+			$scope.alertMessage.confirm = {
+											message: "You will lose all unsaved changes.",
+										  	buttons:[
+										  		{name:'Yes',action:"cancelChanges"},
+										  		{name:'No'}]
+										  };
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
@@ -77,6 +93,10 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			return $scope.cache.state.shippingType === "free";
 		}
 
+		$scope.hasShippingTemplate = function(){
+			return $scope.cache.state.shippingType === "template";
+		}
+
 		$scope.cancelChanges = function(){
 			$log.debug("cancelChanges");
 			$log.debug("currentstate ",$state.current.name)
@@ -101,9 +121,11 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 
 		$scope.saveDraft = function(){
 			$log.debug("saveDraft");
+			$scope.cache.product.status="IN_DRAFT";
+			$scope.cache.product.draftStage = $scope.stepsCompleted;
 			var progressAlert = AlertsService.notify("Saving as draft...");
 			ProductService.saveProduct($scope.cache.product).then(function(response){
-				$scope.cache.product.productId = response.data;
+				$scope.cache.product.productId = response.data;				
 				progressAlert.hide();
 				AlertsService.notify("Product draft saved.","success");
 			},function(error){

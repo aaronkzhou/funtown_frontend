@@ -46,26 +46,26 @@
 		<div class="ft-card ft-card-ht">
 			<h4 class="ft-card-title">Selling</h4>
 			<ul class="list-unstyled">
-				<li><a ui-sref-active="active" ui-sref="manage.addProduct.step1">List New Product</a></li>
+				<li><a ui-sref-active="active" ui-sref="manage.addProduct">List New Product</a></li>
 				<li>
 					<a ui-sref-active="active" ui-sref="manage.products.ACTIVE">Products I Am Selling</a>
-					<div class="ft-badge">0</div>
+					<div class="ft-badge" data-ng-bind="getProductCount('ACTIVE').productCount"></div>
 				</li>
 				<li>
 					<a ui-sref-active="active" ui-sref="manage.products.SOLD">Products Sold</a>
-					<div class="ft-badge">0</div>
+					<div class="ft-badge" data-ng-bind="getProductCount('SOLD').productCount"></div>
 				</li>
 				<li>
 					<a ui-sref-active="active" ui-sref="manage.products.OUT_OF_STOCK">Products Out Of Stock</a>
-					<div class="ft-badge">0</div>
+					<div class="ft-badge" data-ng-bind="getProductCount('OUT_OF_STOCK').productCount"></div>
 				</li>
 				<li>
 					<a ui-sref-active="active" ui-sref="manage.products.DE_ACTIVE">De-active Products</a>
-					<div class="ft-badge">0</div>
+					<div class="ft-badge" data-ng-bind="getProductCount('DE_ACTIVE').productCount"></div>
 				</li>
 				<li>
 					<a ui-sref-active="active" ui-sref="manage.products.IN_DRAFT">Products In Draft</a>
-					<div class="ft-badge">0</div>
+					<div class="ft-badge" data-ng-bind="getProductCount('IN_DRAFT').productCount"></div>
 				</li>
 			</ul>
 		</div>
