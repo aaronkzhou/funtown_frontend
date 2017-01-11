@@ -492,3 +492,6 @@ ol {
 
 .ft-table-header {
   background: #f2f2f2; }
+
+h3[data-ng-bind="headTitle"] {
+  text-transform: capitalize; }

@@ -17,8 +17,15 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 					$scope.categories  = categories
 				});
 			}
-			console.log($scope.cache.product);
+			if ($scope.pid){
+				//var element = angular.element();
+			    setTimeout(function(){
+			    	//angular.element.triggerHandler("click");
+			    },0);
+			    
+			}
 		}
+
 
 		// select the category if no children present or drill down to child categories
 		$scope.selectCategory = function(category){	

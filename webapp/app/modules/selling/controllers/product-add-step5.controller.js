@@ -108,6 +108,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				})
 			}			
 			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
+			$scope.saveDraft();
 		}
 
 		// check if the next button should be enabled

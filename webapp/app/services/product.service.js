@@ -35,15 +35,27 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			product.rootCategory = {
 				categoryId : product.category.parentId,
 				childrenCount : product.category.parentId == 1?3:3,
+				categoryName: product.category.parentId == 1 ?"Movies":"Games",
 				parentId : 0
 			};
 			var productAttributes ={
-				classfication:product.productAttributes[0].attributeValue,
+				classification:product.productAttributes[0].attributeValue,
 				region:product.productAttributes[1].attributeValue,
 				discs:product.productAttributes[2].attributeValue,
 				condition:product.productAttributes[3].attributeValue
 			};
+			var productPriceDetails = {
+				priceId: product.productPriceDetails[0].priceId,
+				productId: product.productPriceDetails[0].productId,
+				buyNowPrice: product.productPriceDetails[0].buyNowPrice,
+				offerPrice: product.productPriceDetails[0].offerPrice,
+				offerDuration: product.productPriceDetails[0].offerDuration,
+			}
+			$scope.paymentMethods.forEach(function(item, index){
+				item.selected = true;
+			})
 			product.productAttributes=productAttributes;
+			product.productPriceDetails=productPriceDetails;
 			console.log(product);
 			return product;
 		}
