@@ -3,12 +3,18 @@ angular.module('manage').config(['$stateProvider',
 	function($stateProvider) {
 		$stateProvider
 		.state('manage',{
-			url:'/manage',		
-			abstract : true,	
-			templateUrl:'app/modules/manage/views/manage-side-nav.view.html'			
+			url:'/manage',			
+			controller:function($state){
+			 	//Render child view			
+				if($state.current.name==='manage'){
+					$state.go("manage.home");	
+				}		
+			}, 					
+			templateUrl:'app/modules/manage/views/manage-side-nav.view.html'					
 		})
 		.state('manage.home',{
-			url:'',
+			url:'/home',
+			controller:'ManageController',
 			templateUrl:'app/modules/manage/views/manage.view.html'				
 		})
 		//Accounts
@@ -42,7 +48,7 @@ angular.module('manage').config(['$stateProvider',
 			templateUrl:'app/modules/selling/views/products-list-tabs.view.html',
 			resolve:{
 				tabs : function(ProductsListService){
-					return ProductsListService.getTablist()
+					return ProductsListService.getProductCount()
 				}
 			},
 			controller:function($scope,tabs){
@@ -107,8 +113,7 @@ angular.module('manage').config(['$stateProvider',
 		//addProduct
 		.state('manage.addProduct',{
 			url:'/addProduct',
-			controller:'AddProduct',
-			abstract : true,
+			controller:'AddProduct',			
 			templateUrl:'app/modules/selling/views/products-add.view.html',
 			resolve:{
 				AttributeService: function(AttributeService){

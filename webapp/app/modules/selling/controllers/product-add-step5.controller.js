@@ -154,7 +154,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 
 		// when click "save" or "next", add the "cache.shippingCosts" into product
-		$scope.storeShippingCosts = function(){
+		$scope.storeShippingCosts = function(saveDraft){
 			$log.debug("storeShippingCosts");
 			if($scope.cache.state.shippingType === "specific"){
 				$scope.cache.state.shippingCosts.filter(function(shippingCost){
@@ -164,7 +164,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				})
 			}			
 			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
-			$scope.saveDraft();
+			if(saveDraft){
+				$scope.saveDraft();
+			}
 		}
 
 		// check if the next button should be enabled

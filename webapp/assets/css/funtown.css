@@ -196,7 +196,9 @@ main {
       text-align: center; }
       .navbar .navbar-nav li.active a, .navbar .navbar-nav li.active a:hover, .navbar .navbar-nav li.active a:focus {
         color: #f60;
-        background: transparent; }
+        background: transparent;
+        cursor: default;
+        pointer-events: none; }
       .navbar .navbar-nav li a {
         color: #333;
         background: transparent; }
@@ -216,9 +218,14 @@ main {
     margin: 0; }
   .ft-side-nav ul {
     margin: 10px 0; }
+  .ft-side-nav li.linked {
+    border-left: 3px solid transparent;
+    padding: 5px 12px; }
   .ft-side-nav li.active {
     border-left: 3px solid #f60;
-    background-color: #f2f2f2; }
+    background-color: #f2f2f2;
+    cursor: default;
+    pointer-events: none; }
     .ft-side-nav li.active a {
       color: #f60; }
 

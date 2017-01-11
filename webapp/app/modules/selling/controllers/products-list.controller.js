@@ -6,7 +6,7 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 		$scope.btnIsVisible = true;
 		$scope.productsChosen = [];
 
-		$scope.init = function(){
+		function init(){
 			var status = $scope.products[0].status;
 			if(status === "In-Draft"){
 				$scope.btnIsVisible = false;
@@ -96,6 +96,6 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 			});
 			$scope.productsChosen = [];			
 		}
-		$scope.init();
+		init();
 	}
 ])
