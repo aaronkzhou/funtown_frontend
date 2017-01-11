@@ -81,10 +81,9 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 				}
 			});	
 		}
-
+		//since use the same confirm alert, function"cancelChanges" is equal to function"deleteProducts".
 		$scope.cancelChanges = function(){
-			$scope.deleteProducts();
-			$state.reload();
+			$scope.deleteProducts();			
 		}
 		
 		$scope.deleteProducts = function(){

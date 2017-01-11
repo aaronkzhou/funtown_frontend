@@ -20,7 +20,9 @@ angular.module('funtown').service('ShippingTempalateService', ['$log','$http',
 
 		this.deleteTemplate = function(templateId){
 			$log.debug('delete',templateId);
-			$http.delete('/rest/api/selling/templates/' + templateId)
+			return $http.delete('/rest/api/selling/templates/' + templateId).then(function(response){
+				return response.data;
+			});
 		}
 
 		this.saveEditTemplate = function(modifiedTemplate){

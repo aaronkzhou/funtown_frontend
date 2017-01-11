@@ -114,8 +114,14 @@
 										Add another shipping option
 									</a>								
 								</fieldset>
-								<button class="btn" data-ng-click="processEditTemplate()">Edit this template</button>
-								<button class="btn" data-ng-click="saveEditTemplate()">Save</button>
+								<div>
+									<button class="btn" data-ng-if="templateReadOnly" data-ng-click="processEditTemplate()"><i class="fa fa-pencil"></i>
+									 Edit</button>
+									<button class="btn" data-ng-if="templateReadOnly" data-ng-click="deleteTemplate()"><i class="fa fa-trash"></i>
+									 Delete</button>
+									<button class="btn" data-ng-if="!templateReadOnly" data-ng-click="saveEditTemplate()">Save</button>
+									<button class="btn" data-ng-if="!templateReadOnly" data-ng-click="cancelEditTemplate()">Cancel</button>	
+								</div>								
 							</div>	
 							<fieldset data-ng-if="addTemplate">
 								<div class="separator"></div>

@@ -1,13 +1,18 @@
 'use strict';
-angular.module('selling').controller('AddProductStep5', ['$log','$scope','AttributeService','ShippingTempalateService',
-	function($log,$scope,AttributeService,ShippingTempalateService){
+angular.module('selling').controller('AddProductStep5', ['$log','$scope','AttributeService','ShippingTempalateService','AlertsService',
+	function($log,$scope,AttributeService,ShippingTempalateService,AlertsService){
 		$log.debug('AddProductStep5 controller');
 		var STEP_NO = 5;		
 		var pickUpOption       = {cost: 0,description: "pickUp"};
 		var freeShippingOption = {cost: 0,description: "freeShipping"};
-			function init(){
+		var oldTemplate = {};
+		
+		 	function init(){
 			$log.debug("AddProductStep5::init");
 
+			// $scope.alertMessage={};
+			// $scope.alertMessage.confirm = "You want to delete this template."
+			
 			$scope.addTemplate = false;
 			$scope.templateReadOnly = true;			
 			
@@ -45,6 +50,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 		$scope.postTemplate = function(){
 			$log.debug("postShippingTemplate");
+			var progressAlert = AlertsService.notify("Create a new template...");
 			$scope.addTemplate.shippingCosts = [];
 			$scope.cache.state.shippingCosts.forEach(function(shippingCost){
 				$scope.addTemplate.shippingCosts.push(shippingCost);
@@ -52,6 +58,12 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 			ShippingTempalateService.postTemplate($scope.addTemplate).then(function(response){
 				$scope.templates.push(response);
+				progressAlert.hide();
+				AlertsService.notify("New template added.","success");
+			},function(error){
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to add new template.","error");
 			});
 			$scope.cache.state.shippingCosts = [];
 			$scope.addTemplate = false;
@@ -62,8 +74,35 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			$scope.addTemplate = false;
 		}
 
+		//since use the same confirm alert, function"cancelChanges" is equal to function"deleteTemplate".
+		// $scope.cancelChanges = function(){
+		// 	//$log.debug('cancelChanges')
+		// 	$scope.deleteTemplate();			
+		// }
+
+		$scope.deleteTemplate = function(){
+			$log.debug("deleteTemplate");
+			var progressAlert = AlertsService.notify("Delete template...");
+			
+			ShippingTempalateService.deleteTemplate($scope.cache.templateDisplay.templateId)
+			.then(function(response){
+				$scope.templates = response;
+				$scope.cache.templateDisplay = false;
+				progressAlert.hide();
+				AlertsService.notify("Template deleted.","success");
+			},function(error){
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to delete this template.","error");
+			});
+		}
+
 		$scope.processEditTemplate = function(){
 			$scope.templateReadOnly = false;
+			oldTemplate = $scope.templates.filter(function(template){
+				return template.templateId === $scope.cache.templateDisplay.templateId;
+			});
+			$log.debug('oldTemplate',oldTemplate);			
 		}
 
 		$scope.editTemplateAddCost = function(){
@@ -76,6 +115,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 
 		$scope.saveEditTemplate = function(){
+			$log.debug("EditTemplate");
+			var progressAlert = AlertsService.notify("Modify template as...");
+			
 			var oldTemplateIndex = $scope.templates.findIndex(function(template){
 				return template.templateId === $scope.cache.templateDisplay.templateId;
 			});
@@ -83,10 +125,22 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			ShippingTempalateService.saveEditTemplate($scope.cache.templateDisplay)
 			.then(function(response){
 				$scope.templates.push(response);
-				$log.debug('new templates',$scope.templates)
+				progressAlert.hide();
+				AlertsService.notify("Tempalte is edited.","success");
+			},function(error){
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to edit this template.","error");
 			});	
 			$scope.templateReadOnly = true;		
 		}
+
+		$scope.cancelEditTemplate = function(){
+			$log.debug('oldTemplate',oldTemplate)
+			$scope.cache.templateDisplay = oldTemplate;
+			$scope.templateReadOnly = true;
+		}
+
 		$scope.isNotOnlyPick = function(){
 			return $scope.cache.state.pickUp !== 'mustPickup';
 		}
