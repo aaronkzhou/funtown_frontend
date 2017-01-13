@@ -34,7 +34,7 @@
 						</label>
 						<br>
 						<label>
-							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" data-ng-required="isNotOnlyPick()"  data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>			
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" data-ng-required="isNotOnlyPick()" data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>			
 						</label>
 						<fieldset data-ng-if="hasSpecificShipping()">
 							<fieldset data-ng-repeat="shippingCost in cache.state.shippingCosts">
@@ -66,14 +66,18 @@
 						</fieldset>
 						<br>
 						<label>
-							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="template" data-ng-required="isNotOnlyPick()">&nbsp;&nbsp;<span>Use shipping templates</span>
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="template" data-ng-required="isNotOnlyPick()" data-ng-click="processUseTemplate()">&nbsp;&nbsp;<span>Use shipping templates</span>
 						</label>										
 						<fieldset data-ng-if="hasShippingTemplate()">
+							<div data-ng-if="haveNoTemplate">
+								<br>
+								<p>You have no shipping template yet.      Create a new one <a data-ng-click="addShippingTemplate()">here.</a></p>
+							</div>
 							<br>
-							<button type="button" name="templateDisplay" class="btn btn-select" data-ng-model="cache.templateDisplay" bs-options="template as template.templateName for template in templates" bs-select>Template name<span class="caret"></span>
-							</button>
-							<div class="pull-right">
-								<button class="btn" data-ng-click="addShippingTemplate()">Add a new template</button>								
+							<div data-ng-if="!haveNoTemplate">
+								<button type="button" name="templateDisplay" class="btn btn-select" data-ng-model="cache.templateDisplay" bs-options="template as template.templateName for template in templates" bs-select>Template name<span class="caret"></span>
+								</button>							
+								<button class="btn" data-ng-click="addShippingTemplate()">Add another template</button>								
 							</div>	
 							<br>
 							<div data-ng-if="cache.templateDisplay">
@@ -117,9 +121,9 @@
 								<div>
 									<button class="btn" data-ng-if="templateReadOnly" data-ng-click="processEditTemplate()"><i class="fa fa-pencil"></i>
 									 Edit</button>
-									<button class="btn" data-ng-if="templateReadOnly" data-ng-click="deleteTemplate()"><i class="fa fa-trash"></i>
+									<button class="btn" data-ng-if="templateReadOnly" confirm-alert details={{alertMessage.delete}}><i class="fa fa-trash"></i>
 									 Delete</button>
-									<button class="btn" data-ng-if="!templateReadOnly" data-ng-click="saveEditTemplate()">Save</button>
+									<button class="btn" data-ng-if="!templateReadOnly" confirm-alert details={{alertMessage.save}}>Save</button>
 									<button class="btn" data-ng-if="!templateReadOnly" data-ng-click="cancelEditTemplate()">Cancel</button>	
 								</div>								
 							</div>	
@@ -163,7 +167,7 @@
 										Add another shipping option
 									</a>
 								</div>
-								<button class="btn" ng-click="postTemplate()">
+								<button class="btn" ng-click="postNewTemplate()">
 									Add
 								</button>
 								<button class="btn" ng-click="cancelAddTemplate()">

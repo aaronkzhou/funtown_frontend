@@ -185,6 +185,26 @@
                                         <td data-ng-bind="cost.cost | currency:''" class="text-right"></td>
                                     </tr>
                                 </table>
+                            </div>
+                            <div data-ng-if="hasShippingTemplate()">
+                                <label class="col-md-6 ft-details-label">
+                                    Template name
+                                </label>
+                                <div class="ft-details-data" data-ng-bind="cache.product.shippingCosts.templateName"></div>
+                                <table class="table table-topped">
+                                    <tr>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th class="text-right">
+                                            Cost (NZ$)
+                                        </th>
+                                    </tr>
+                                    <tr data-ng-repeat="cost in cache.product.shippingCosts.shippingCosts" >
+                                        <td data-ng-bind="cost.description"  class="text-capitalize"></td>
+                                        <td data-ng-bind="cost.cost | currency:''" class="text-right"></td>
+                                    </tr>
+                                </table>
                             </div>    
                         </div>
                     </div>
