@@ -2,10 +2,8 @@
 angular.module('funtown').service('ProductService', ['$log','$http', 
 	function($log,$http){
 		$log.debug("ProductService");
-
 		this.saveProduct = function(product){
 			$log.debug("ProductService::saveProduct - ",product);
-
 			return $http({
 				method:'POST',
 				url: '/rest/api/selling/products',
@@ -28,6 +26,9 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 
 		function doTransformDatabaseCall(response){
 			$log.debug("doTransformDatabaseCall");
+			var productAttributes = {};
+			var attribute = "";
+			var productPriceDetails = {};
 			if(response === null){
 				return "no related data found";
 			}
@@ -38,25 +39,22 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				categoryName: product.category.parentId == 1 ?"Movies":"Games",
 				parentId : 0
 			};
-			var productAttributes ={
-				classification:product.productAttributes[0].attributeValue,
-				region:product.productAttributes[1].attributeValue,
-				discs:product.productAttributes[2].attributeValue,
-				condition:product.productAttributes[3].attributeValue
-			};
-			var productPriceDetails = {
+			
+			product.productAttributes.forEach(function(item){
+				productAttributes[item.attributeType] = parseInt(item.attributeValue);
+				console.log("aaron");
+			});
+
+			console.log(productAttributes);
+			productPriceDetails = {
 				priceId: product.productPriceDetails[0].priceId,
 				productId: product.productPriceDetails[0].productId,
 				buyNowPrice: product.productPriceDetails[0].buyNowPrice,
 				offerPrice: product.productPriceDetails[0].offerPrice,
 				offerDuration: product.productPriceDetails[0].offerDuration,
-			}
-			// $scope.paymentMethods.forEach(function(item, index){
-			// 	item.selected = true;
-			// })
-			product.productAttributes=productAttributes;
-			product.productPriceDetails=productPriceDetails;
-			console.log(product);
+			};
+			product.productAttributes = productAttributes;
+			product.productPriceDetails = productPriceDetails;
 			return product;
 		}
 

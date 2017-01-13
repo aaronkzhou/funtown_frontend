@@ -1,14 +1,16 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$state','$stateParams','ProductService','AlertsService',
-	function($log,$scope,$http,$state,$stateParams,ProductService,AlertsService) {
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$state','$stateParams','ProductService','AlertsService','editProduct',
+	function($log,$scope,$http,$state,$stateParams,ProductService,AlertsService,editProduct) {
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
 		function init(){		
-			$log.debug('AddProduct controller::init');
+			$log.debug('AddProduct controller::init',editProduct);
 			$scope.title = $stateParams.mode;
 			$scope.headTitle = $stateParams.mode + " Product";
 			
+
+
 			//Render the child view
 			if($state.current.name==='manage.addProduct'){
 				$state.go("manage.addProduct.step1");
@@ -23,7 +25,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
-			$scope.cache.product = {};			
+			$scope.cache.product = editProduct;			
 
 			//Cache states across steps
 			$scope.cache.state = {};
@@ -47,10 +49,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			];
 			$scope.pid = $state.params.pid;
 			if ($scope.pid) {	
-				ProductService.getSpecifyProduct($state.params.pid).then(function(response){
-					$scope.cache.product = response.data;
-					console.log($scope.cache.product);
-				});
+				
 			}
 		}
 		

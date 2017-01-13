@@ -118,6 +118,9 @@ angular.module('manage').config(['$stateProvider',
 			resolve:{
 				AttributeService: function(AttributeService){
 					return AttributeService;
+				},
+				editProduct:function(){
+					return {};
 				}
 			},
 			params:{
@@ -156,7 +159,7 @@ angular.module('manage').config(['$stateProvider',
 		})
 		//edit product
 		.state('manage.editProduct',{
-			url:'/editProduct',
+			url:'/editProduct?pid',
 			controller:'AddProduct',
 			abstract : true,
 			templateUrl:'app/modules/selling/views/products-add.view.html',
@@ -164,8 +167,12 @@ angular.module('manage').config(['$stateProvider',
 				AttributeService: function(AttributeService){
 					return AttributeService;
 				},
-				ProductService: function(ProductService){
-					return ProductService;
+				editProduct : function(ProductService,$stateParams){
+					console.log("EditProduct --",$stateParams.pid);
+					return ProductService.getSpecifyProduct($stateParams.pid).then(function(response){
+						console.log("EditProduct - product",response.data);
+						return response.data;
+					});
 				}
 			},
 			params:{
@@ -173,32 +180,32 @@ angular.module('manage').config(['$stateProvider',
 			}
 		})
 		.state('manage.editProduct.step1',{
-			url:'/step1?pid',
+			url:'',
 			controller:'AddProductStep1',
 			templateUrl:'app/modules/selling/views/products-add-step1.view.html'
 		})
 		.state('manage.editProduct.step2',{
-			url:'/step2',
+			url:'',
 			controller:'AddProductStep2',
 			templateUrl:'app/modules/selling/views/products-add-step2.view.html'
 		})
 		.state('manage.editProduct.step3',{
-			url:'/step3',
+			url:'',
 			controller:'AddProductStep3',
 			templateUrl:'app/modules/selling/views/products-add-step3.view.html'
 		})
 		.state('manage.editProduct.step4',{
-			url:'/step4',
+			url:'',
 			controller:'AddProductStep4',
 			templateUrl:'app/modules/selling/views/products-add-step4.view.html'
 		})
 		.state('manage.editProduct.step5',{
-			url:'/step5',
+			url:'',
 			controller:'AddProductStep5',
 			templateUrl:'app/modules/selling/views/products-add-step5.view.html'
 		})
 		.state('manage.editProduct.step6',{
-			url:'/step6',
+			url:'',
 			controller:'AddProductStep6',
 			templateUrl:'app/modules/selling/views/products-add-step6.view.html'
 		})
