@@ -12,11 +12,15 @@ angular.module('selling').controller('AddProductStep4', ['$log','$scope','Attrib
 					$scope.cache.product.paymentMethods.map(function(paymentMethod){
 						return paymentMethod.selected = false;
 					})
+				}else{
+					$scope.cache.product.paymentMethods.forEach(function(item, index){
+						item.selected = true;
+					})
 				}
 				$scope.offerDurations = AttributeService.getAttributesFor('offerDurations',$scope.cache.product.category.categoryId);
 			}else{
 				$log.warn("Category not yet set.");
-			}	
+			}
 		}
 		
 

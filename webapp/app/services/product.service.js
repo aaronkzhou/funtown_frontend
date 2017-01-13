@@ -42,10 +42,8 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			
 			product.productAttributes.forEach(function(item){
 				productAttributes[item.attributeType] = parseInt(item.attributeValue);
-				console.log("aaron");
 			});
 
-			console.log(productAttributes);
 			productPriceDetails = {
 				priceId: product.productPriceDetails[0].priceId,
 				productId: product.productPriceDetails[0].productId,
