@@ -2,7 +2,6 @@
 angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 	function($log,$http,$q){
 		var categories = [];
-		
 		this.getRootCategories = function(){
 			var deferred = $q.defer();
 			if(categories.length){
@@ -19,22 +18,22 @@ angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 	        	},function(error){
 	        		$log.error(error);
 	        		AlertsService.notify("Unable get categories.","error");
-	        	})		
+	        	})
 			}
         	return deferred.promise;
-		}	
-
-		this.getCategories = function(category){	
-			var deferred = $q.defer();			
-			var children = getChildren(category.categoryId);
+		}
+		this.getCategories = function(category,lookParent){	
+			var deferred = $q.defer();	
+			var id = lookParent ? category.parentId : category.categoryId;		
+			var children = getChildren(id);
 			
 			if(children && children.length){
 				$log.debug("returning child categories from cache");
-				$log.debug(children);				
+				$log.debug(children);
 				deferred.resolve(children);
 			}else if(category){				
 				$log.debug("obtaining child categories from server");	
-				$http.get('/rest/api/categories/' + category.categoryId).then(function(response){
+				$http.get('/rest/api/categories/' + id).then(function(response){
 					deferred.resolve(response.data);
 					categories.push.apply(categories,response.data); 
 					$log.debug("AddProductService::categories=" , categories);
@@ -42,14 +41,14 @@ angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 	        		$log.error(error);
 	        		AlertsService.notify("Unable get categories.","error");
 	        	})
-			}	
+			}
 			return deferred.promise;		
 		}
 
 		function getChildren(parentId){
 			return categories.filter(function(category){
 				return category.parentId === parentId;
-			})
+			});
 		}
 	}
 ])

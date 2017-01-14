@@ -8,20 +8,19 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$log.debug('AddProduct controller::init',editProduct);
 			$scope.title = $stateParams.mode;
 			$scope.headTitle = $stateParams.mode + " Product";
-			
-
-
 			//Render the child view
 			if($state.current.name==='manage.addProduct'){
 				$state.go("manage.addProduct.step1");
 			}
 			$scope.alertMessage={};
-			$scope.alertMessage.confirm = {
-											message: "You will lose all unsaved changes.",
-										  	buttons:[
-										  		{name:'Yes',action:"cancelChanges"},
-										  		{name:'No'}]
-										  };
+			$scope.alertMessage.confirm = 
+			{
+				message: "You will lose all unsaved changes.",
+			  	buttons:[
+			  		{name:'Yes',action:"cancelChanges"},
+			  		{name:'No'}
+			  	]
+			};
 			//Cache object
 			$scope.cache = {}			
 			//Cache product

@@ -170,7 +170,6 @@ angular.module('manage').config(['$stateProvider',
 				editProduct : function(ProductService,$stateParams){
 					console.log("EditProduct --",$stateParams.pid);
 					return ProductService.getSpecifyProduct($stateParams.pid).then(function(response){
-						console.log("EditProduct - product",response.data);
 						return response.data;
 					});
 				}

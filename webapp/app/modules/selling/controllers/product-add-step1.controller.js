@@ -9,20 +9,27 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 		function init(){
 			//if category is alreday set get the child categories for the last path 
 			//else get the root categories.
+
 			if($scope.cache.product.category){
 				getPathCategories($scope.cache.state.categoryPath[$scope.cache.state.categoryPath.length-1]);
-
+				$log.debug('AddProductStep1::categories',$scope.cache.product.category);
+				CategoryService.getCategories($scope.cache.product.category,true).then(function(categories){
+					$scope.categories  = categories;
+				});
 			}else{
 				CategoryService.getRootCategories().then(function(categories){
-					$scope.categories  = categories
+					$scope.categories  = categories;
+				});
+				CategoryService.test().then(function(a){
+					$scope.test = a;
 				});
 			}
-			if ($scope.pid){
+			
+			if($scope.pid){
 				//var element = angular.element();
 			    setTimeout(function(){
 			    	//angular.element.triggerHandler("click");
-			    },0);
-			    
+			    },0); 
 			}
 		}
 
@@ -58,7 +65,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 	    // get categories for a path
 	    function getPathCategories(path){
 	    	CategoryService.getCategories(path).then(function(categories){
-				$scope.categories  = categories
+				$scope.categories  = categories;
 			});
 	    }				
 	    
