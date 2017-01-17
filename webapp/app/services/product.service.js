@@ -45,17 +45,6 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				productAttributes[item.attributeType] = parseInt(item.attributeValue);
 			});
 
-			// if(product.productPriceDetails){
-			// 		productPriceDetails = {
-			// 				priceId: product.productPriceDetails[0].priceId,
-			// 				productId: product.productPriceDetails[0].productId,
-			// 				buyNowPrice: product.productPriceDetails[0].buyNowPrice,
-			// 				offerPrice: product.productPriceDetails[0].offerPrice,
-			// 				offerDuration: product.productPriceDetails[0].offerDuration,
-							
-			// }}else{
-			// 	productPriceDetails = {};
-			// }
 			product.productPriceDetails =  responseProduct.productPriceDetails.length>0 ? responseProduct.productPriceDetails[0] : {};
 
 			product.shippingRateId = parseInt(responseProduct.shippingRateId);

@@ -27,8 +27,8 @@ angular.module('funtown').service('AttributeService', ['$log','$http',
 			$log.debug("getAttributesFor - ",name,matchId)
 			$log.debug(attributes);
 			if(attributes[name]){
-				return attributes[name].filter(function(atribute){
-					return (atribute.includeMatches==='None' || atribute.includeMatches.indexOf(matchId) > -1); 
+				return attributes[name].filter(function(attribute){
+					return (attribute.includeMatches==='None' || attribute.includeMatches.indexOf(matchId) > -1); 
 				});
 			}else{
 				$log.warn("No arributes found for name = " ,name);

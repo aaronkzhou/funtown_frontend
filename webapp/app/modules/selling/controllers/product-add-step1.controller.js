@@ -24,6 +24,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 				CategoryService.getRootCategories().then(function(categories){
 					$scope.categories  = categories;
 				});
+
 			}
 			console.log($scope.cache.state);
 		}
@@ -41,12 +42,11 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 				rootCategory = category;
 			}
 			if(category.childrenCount > 0){
-				console.log(category);
 				$scope.cache.state.categoryPath.push(category);
 				CategoryService.getCategories(category).then(function(categories){
 					$scope.categories  = categories
 				});
-			}else {
+			}else{
 				$scope.cache.product.category = category;
 				$scope.cache.product.rootCategory = rootCategory;
 			}

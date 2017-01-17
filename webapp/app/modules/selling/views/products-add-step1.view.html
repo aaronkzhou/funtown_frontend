@@ -12,7 +12,7 @@
                     <ul class="ft-multiselect-selected">
                         <li data-ng-repeat="path in cache.state.categoryPath">
                         	<i class="fa fa-angle-right" data-ng-if="$index"></i>
-                            <a href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)">
+                            <a href="" data-ng-click="goTo(path)" data-ng-disabled="isLastPath($index)" >
                                 <span data-ng-bind="path.categoryName"></span>
                             </a>                    
                         </li>

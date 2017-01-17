@@ -6,16 +6,23 @@ angular.module('selling').controller('AddProductStep4', ['$log','$scope','Attrib
 
 		function init(){
 			$log.debug("AddProductStep4::init");
+			var selectedPayment;
 			if($scope.cache.product.category){
-				if(!$scope.cache.product.paymentMethods){					
-					$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
+				if($scope.cache.product.paymentMethods){
+					selectedPayment = $scope.cache.product.paymentMethods;	
+				}
+				$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
 					$scope.cache.product.paymentMethods.map(function(paymentMethod){
 						return paymentMethod.selected = false;
-					})
-				}else{
-					$scope.cache.product.paymentMethods.forEach(function(item, index){
-						item.selected = true;
-					})
+					});
+				if(selectedPayment){
+					$scope.cache.product.paymentMethods.forEach(function(item){
+						selectedPayment.forEach(function(selectedItem){
+							if(selectedItem.attributeId == item.attributeId){
+								item.selected = true;
+							}
+						})	
+					});
 				}
 				$scope.offerDurations = AttributeService.getAttributesFor('offerDurations',$scope.cache.product.category.categoryId);
 			}else{
