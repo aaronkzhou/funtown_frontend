@@ -5,12 +5,11 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		var STEP_NO = 5;		
 		var pickUpOption       = {cost: 0,description: "pickUp"};
 		var freeShippingOption = {cost: 0,description: "freeShipping"};
-		var oldTemplate = {};
+		var oldTemplate = null;
 		
 		 	function init(){
 			$log.debug("AddProductStep5::init");
 
-			$scope.alertMessage={};
 			$scope.alertMessage.save = {
 											message: "You want to save the modifications to this template.",
 										  	buttons:[
@@ -24,8 +23,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 										  		{name:'Yes',action:"deleteTemplate"},
 										  		{name:'No'}]
 										 };
-			
-			$scope.addTemplate = false;
+						
 			$scope.templateReadOnly = true;			
 			
 			if($scope.cache.product.category){
@@ -92,9 +90,23 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		}
 
 		$scope.processUseTemplate = function(){
-			$scope.cache.state.shippingCosts = [];
+			$scope.cache.state.shippingCosts = [];			
 			removeShippingOptions(freeShippingOption);		
 		}
+
+		$scope.addShippingTemplate = function(){
+			// $scope.addTemplate = true;
+			// $scope.templateOperator = "Create a new shipping template";
+			// $scope.addTemplate = {};
+			// $scope.processSpecificCost();
+			$scope.cache.templateDisplay = {};
+			$scope.cache.templateDisplay.templateName = null;
+			$scope.cache.templateDisplay.shippingCosts = [];
+			$scope.cache.templateDisplay.shippingCosts.push({});
+			$scope.templateReadOnly = false;
+			$scope.mode = "Add";
+		}
+
 
 		$scope.addCostOption = function(){
 			$scope.cache.state.shippingCosts.push({});
@@ -105,7 +117,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			$scope.cache.state.shippingCosts.splice(index, 1);
 		}
 
-		var removeShippingOptions = function(option){
+		function removeShippingOptions(option){
 			var index = $scope.cache.product.shippingCosts.findIndex(function(shippingCost){				
 				return (shippingCost.cost === option.cost && shippingCost.description === option.description );
 			});
@@ -129,13 +141,6 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			$scope.cache.product.shippingCosts = [];
 		}
 
-		$scope.addShippingTemplate = function(){
-			$scope.addTemplate = true;
-			$scope.templateOperator = "Create a new shipping template";
-			$scope.addTemplate = {};
-			$scope.processSpecificCost();
-
-		}
 
 		$scope.postNewTemplate = function(){
 			$log.debug("postShippingTemplate");
@@ -151,18 +156,18 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				$scope.haveNoTemplate = false;
 				progressAlert.hide();
 				AlertsService.notify("New template added.","success");
+				$scope.cache.state.shippingCosts = [];				
+				$scope.mode = null;
 			},function(error){
 				$log.error(error);
 				progressAlert.hide();
 				AlertsService.notify("Unable to add new template.","error");
-			});
-			$scope.cache.state.shippingCosts = [];
-			$scope.addTemplate = false;
+			});			
 		}
 		
 		$scope.cancelAddTemplate = function(){
-			$scope.cache.state.shippingCosts = [];
-			$scope.addTemplate = false;
+			$scope.cache.state.shippingCosts = [];			
+			$scope.mode = null;
 		}
 
 		
@@ -188,6 +193,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 		$scope.processEditTemplate = function(){
 			$scope.templateReadOnly = false;
+			$scope.mode = "Edit";
 			oldTemplate = angular.copy($scope.cache.templateDisplay);		
 		}
 
@@ -213,18 +219,21 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				$scope.templates.push(response);
 				progressAlert.hide();
 				AlertsService.notify("Tempalte is edited.","success");
+				$scope.mode = null;
+				$scope.templateReadOnly = true;	
 			},function(error){
 				$log.error(error);
 				progressAlert.hide();
 				AlertsService.notify("Unable to edit this template.","error");
 			});	
-			$scope.templateReadOnly = true;		
 		}
 
 		$scope.cancelEditTemplate = function(){
 			$scope.cache.templateDisplay = oldTemplate;
-			$scope.templateReadOnly = true;
+			$scope.templateReadOnly = true;	
+			$scope.mode = null;		
 		}
+
 
 		// when click "save" or "next", add the "cache.shippingCosts" into product
 		$scope.storeShippingCosts = function(saveDraft){
@@ -255,6 +264,15 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 	    		$scope.isNextDisabled = true;
 	    	}	
 		}) 
+
+		// check if the save button should be enabled
+		$scope.$watch("template.$valid",function(validity){		
+			if($scope.template){
+				$log.debug("$scope.template.$valid = ", $scope.template.$valid);	
+				$scope.cannotSave = !$scope.template.$valid;
+
+			}
+		})
 	  
 		init();
 	
