@@ -24,8 +24,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			//Cache object
 			$scope.cache = {}			
 			//Cache product
-			$scope.cache.product = editProduct;			
-
+			$scope.cache.product = editProduct;		
 			//Cache states across steps
 			$scope.cache.state = {};
 
@@ -47,9 +46,6 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				{value: 'mustPickup', display: "Buyer must pick-up"}
 			];
 			$scope.pid = $state.params.pid;
-			if ($scope.pid) {	
-				
-			}
 		}
 		
 		$scope.updoStepCompleted = function(step){

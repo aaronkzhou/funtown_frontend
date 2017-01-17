@@ -26,7 +26,6 @@ angular.module('funtown').service('CategoryService', ['$log','$http', '$q',
 			var deferred = $q.defer();	
 			var id = lookParent ? category.parentId : category.categoryId;		
 			var children = getChildren(id);
-			
 			if(children && children.length){
 				$log.debug("returning child categories from cache");
 				$log.debug(children);
