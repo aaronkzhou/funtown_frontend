@@ -247,7 +247,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}			
 			$log.debug("storeShippingCosts",$scope.cache.product.shippingCosts);
 			if($scope.cache.state.shippingType === "template"){
-				$scope.cache.product.shippingCosts = $scope.cache.templateDisplay;
+				$scope.cache.product.shippingTemplateId = $scope.cache.templateDisplay.templateId;
 			}
 			if(saveDraft){
 				$scope.saveDraft();
