@@ -100,6 +100,12 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 			});
 			$scope.productsChosen = [];			
 		}
+
+		$scope.editProduct = function(productId){
+			$log.debug('editProduct',productId);
+			$state.go("manage.editProduct.step1",{pid:productId})
+		}
+
 		init();
 	}
 ])
