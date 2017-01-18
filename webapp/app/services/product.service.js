@@ -44,7 +44,10 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			product.productAttributes.forEach(function(item){
 				productAttributes[item.attributeType] = parseInt(item.attributeValue);
 			});
-
+			if(product.stock == -1){
+				delete product.stock;
+				product.unlimited = true;
+			}
 			product.productPriceDetails =  responseProduct.productPriceDetails.length>0 ? responseProduct.productPriceDetails[0] : {};
 
 			product.shippingRateId = parseInt(responseProduct.shippingRateId);

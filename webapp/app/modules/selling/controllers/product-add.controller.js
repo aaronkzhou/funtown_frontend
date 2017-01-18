@@ -46,7 +46,8 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				{value: 'mustPickup', display: "Buyer must pick-up"}
 			];
 			$scope.pid = $state.params.pid;
-
+			if($scope.pid){
+				
 			if($scope.cache.product.shippingCosts.filter.length == 0){
 				$scope.cache.state.pickUp = "noPickUp";
 			}
@@ -56,11 +57,11 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			if(($scope.cache.product.shippingCosts.length > 1 && $scope.cache.product.shippingCosts.filter.length !== 0) || $scope.cache.product.shippingTemplateId !== null){
 				$scope.cache.state.pickUp = "canPickUp";
 			}
+			}
 
 			function checkNoPickUp(shippingCost){
 				return shippingCost.cost == 0 && shippingCost.description == "pickUp";
 			}
-			
 		}
 		
 		$scope.updoStepCompleted = function(step){
