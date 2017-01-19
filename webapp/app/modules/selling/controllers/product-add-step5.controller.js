@@ -109,6 +109,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 
 		$scope.addCostOption = function(){
+            console.log($scope.cache.state.shippingCosts);
 			$scope.cache.state.shippingCosts.push({});
 		}
 
@@ -262,8 +263,8 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 	    	}else{
 	    		$scope.updoStepCompleted(STEP_NO);	    	
 	    		$scope.isNextDisabled = true;
-	    	}	
-		}) 
+	    	}
+		})
 
 		// check if the save button should be enabled
 		$scope.$watch("template.$valid",function(validity){		

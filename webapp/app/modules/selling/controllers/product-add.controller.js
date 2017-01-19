@@ -4,7 +4,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
-		function init(){		
+		function init(){
 			$log.debug('AddProduct controller::init',editProduct);
 			$scope.title = $stateParams.mode;
 			$scope.headTitle = $stateParams.mode + " Product";
@@ -48,18 +48,30 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$scope.pid = $state.params.pid;
 			if($scope.pid){
 
-			if($scope.cache.product.shippingCosts.filter.length == 0){
-				$scope.cache.state.pickUp = "noPickUp";
+				if($scope.cache.product.shippingCosts.filter.length == 0){
+					$scope.cache.state.pickUp = "noPickUp";
+				}
+				if($scope.cache.product.shippingCosts.length == 1 && $scope.cache.product.shippingCosts[0].description == "pickUp"){
+					$scope.cache.state.pickUp = "mustPickup";
+				}
+				if(($scope.cache.product.shippingCosts.length > 1 && $scope.cache.product.shippingCosts.filter.length !== 0) || $scope.cache.product.shippingTemplateId !== null){
+					$scope.cache.state.pickUp = "canPickUp";
+				}
+				if($scope.cache.product.shippingCosts.length == 0 && $scope.cache.product.shippingTemplateId !== null){
+					$scope.cache.state.shippingType = "template";
+				}
+				if($scope.cache.product.shippingCosts.length == 0 && $scope.cache.product.shippingTemplateId == null){
+					$scope.cache.state.shippingType = "free";
+				}
+				if($scope.cache.product.shippingCosts.length !== 0 && $scope.cache.product.shippingTemplateId == null){
+					$scope.cache.state.shippingType = "specific";
+				}
+				$scope.stepsCompleted =6;
+				$scope.cache.state.shippingCosts = $scope.cache.product.shippingCosts.filter(function(item){
+					return item.description !== "pickUp";
+				})
 			}
-			if($scope.cache.product.shippingCosts.length == 1 && $scope.cache.product.shippingCosts[0].description == "pickUp"){
-				$scope.cache.state.pickUp = "mustPickup";
-			}
-			if(($scope.cache.product.shippingCosts.length > 1 && $scope.cache.product.shippingCosts.filter.length !== 0) || $scope.cache.product.shippingTemplateId !== null){
-				$scope.cache.state.pickUp = "canPickUp";
-			}
-			$scope.stepsCompleted =6;
-
-			}
+			
 
 			function checkNoPickUp(shippingCost){
 				return shippingCost.cost == 0 && shippingCost.description == "pickUp";
