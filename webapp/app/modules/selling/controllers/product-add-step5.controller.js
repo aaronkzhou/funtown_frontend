@@ -6,7 +6,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		var pickUpOption       = {cost: 0,description: "pickUp"};
 		var freeShippingOption = {cost: 0,description: "freeShipping"};
 		var oldTemplate = null;
-		
+		var specificShippingTemplate;
 		 	function init(){
 			$log.debug("AddProductStep5::init");
 
@@ -38,6 +38,10 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				if(response.length === 0){
 					$scope.haveNoTemplate = true;
 				}
+                specificShippingTemplate = $scope.templates.filter(function(item){
+                    return item.templateId == $scope.cache.product.shippingTemplateId;
+                });
+                $scope.cache.templateDisplay = specificShippingTemplate[0];
 			});
 
 			//Add inital object if not present
@@ -52,6 +56,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			if($scope.cache.state.pickUp === 'mustPickup'){
 				$scope.shippingDisabled = true;
 			}	
+
 		}
 
 
