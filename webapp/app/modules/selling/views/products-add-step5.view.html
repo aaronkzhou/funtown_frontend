@@ -131,9 +131,9 @@
 							<div  class="alers-container" data-ng-show="cache.templateDisplay">
 								<a class="ft-col"  href="" data-ng-show="templateReadOnly" data-ng-click="processEditTemplate()"><i class="fa fa-pencil"></i>
 								 Edit</a>
-								<a class="ft-col" href="" data-ng-show="templateReadOnly" data-ng-click="deleteTemplate()" confirm-alert details={{alertMessage.delete}}><i class="fa fa-trash"></i>
+								<a class="ft-col" href="" data-ng-show="templateReadOnly" confirm-alert details={{alertMessage.delete}}><i class="fa fa-trash"></i>
 								 Delete</a>
-								<a class="ft-col" href="" data-ng-show="!templateReadOnly" data-ng-click="saveEditTemplate()" confirm-alert details={{alertMessage.save}} data-ng-disabled="cannotSave">Save</a>
+								<a class="ft-col" href="" data-ng-show="!templateReadOnly" confirm-alert details={{alertMessage.save}} data-ng-disabled="cannotSave">Save</a>
 								<a class="ft-col" href="" data-ng-show="!templateReadOnly" data-ng-click="cancelEditTemplate()">Cancel</a>	
 							</div>								
 						</div>	
