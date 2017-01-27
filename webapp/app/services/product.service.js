@@ -22,7 +22,7 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				data:product,
 				transformRequest:doTransformRequest,
 				headers:{
-					'Content-Type':undefined;
+					'Content-Type':undefined
 				}
 			})
 		}

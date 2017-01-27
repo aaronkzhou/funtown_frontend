@@ -7,9 +7,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var MAX_PHOTO_COUNT = 3;
 		var rootCategory,catalogProcessor;
 
-		function init(){						
+		function init(){			
 			rootCategory = $scope.cache.state.rootCategory;
-			
 			$log.debug('AddProductStep2::init - ',rootCategory);
 			//Get the correct catalog processor
 			catalogProcessor = new CatalogFactory(rootCategory);
@@ -21,7 +20,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			}	
 
 			if($scope.cache.product.catalog){
-				getPoster(); 
+				getPosterFromLocal(); 
 			}
 			if(!$scope.cache.product.productPhotos){
 				$scope.cache.product.productPhotos =[{},{},{}];
@@ -53,7 +52,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		}
 
 		function getPoster(){
-			$log.debug("getPoster");
+			$log.debug("getPoster from remote");
 			$scope.poster = '';
 			if($scope.cache.product.catalog && $scope.cache.product.catalog.catalogAttributes){
 				$scope.cache.product.catalog.catalogAttributes.forEach(function(catalogAttribute){					
@@ -63,6 +62,17 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 				})
 			}	
 			$log.debug($scope.poster);		
+		}
+		function getPosterFromLocal(){
+			$log.debug("getPoster from local");
+			$scope.poster = '';
+			if($scope.cache.product.catalog && $scope.cache.product.catalog.catalogAttributes){
+				$scope.cache.product.catalog.catalogAttributes.forEach(function(catalogAttribute){					
+					if(catalogAttribute.attributeType === 'poster'){
+						$scope.poster = "imageRepo/" + catalogAttribute.attributeValue;
+					}
+				})
+			}	
 		}
 
 		//check if the catalogue has been chosen
