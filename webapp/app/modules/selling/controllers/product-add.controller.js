@@ -66,7 +66,11 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				if($scope.cache.product.shippingCosts.length !== 0 && $scope.cache.product.shippingTemplateId == null){
 					$scope.cache.state.shippingType = "specific";
 				}
-				$scope.stepsCompleted =6;
+				if($scope.cache.product.draftStage){
+					$scope.stepsCompleted = $scope.cache.product.draftStage
+				}else{
+					$scope.stepsCompleted =6;
+				}
 				$scope.cache.state.shippingCosts = $scope.cache.product.shippingCosts.filter(function(item){
 					return item.description !== "pickUp";
 				})
@@ -134,7 +138,6 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				$state.go('manage.editProduct.step1').then(function(){
 					$state.reload();
 				});
-				
 			}else{
 				$state.go('manage.addProduct.step1');
 			}
