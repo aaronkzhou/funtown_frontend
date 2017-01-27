@@ -19,6 +19,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 				});
 				if ($scope.cache.product.rootCategory && $scope.cache.state.categoryPath[$scope.cache.state.categoryPath.length-1].categoryName !== $scope.cache.product.rootCategory.categoryName) {
 					$scope.cache.state.categoryPath[$scope.cache.state.categoryPath.length] = $scope.cache.product.rootCategory;
+					$scope.cache.state.rootCategory = $scope.cache.product.rootCategory.categoryName;
 				}
 			}else{
 				CategoryService.getRootCategories().then(function(categories){
@@ -26,7 +27,7 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 				});
 
 			}
-			console.log($scope.cache.state);
+			console.log($scope.cache.product);
 		}
 
 

@@ -130,6 +130,11 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$log.debug("$scope.cache.product",$scope.cache)
 			if($state.current.name ==="manage.addProduct.step1"){
 				$state.reload();	
+			}else if($scope.pid){
+				$state.go('manage.editProduct.step1').then(function(){
+					$state.reload();
+				});
+				
 			}else{
 				$state.go('manage.addProduct.step1');
 			}

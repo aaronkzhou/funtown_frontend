@@ -29,7 +29,6 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 				$scope.photoCount = getPhotoCount();
 			}
 			$scope.maxPhotos = MAX_PHOTO_COUNT;
-			console.log($scope.cache.product);
 		}
 
 		// search title
