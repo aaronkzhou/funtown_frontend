@@ -4,7 +4,10 @@ angular.module('account').config(['$stateProvider',
 		$stateProvider
 			.state('account',{
 				url:'/account',
-				templateUrl:'app/modules/account/views/account.view.html'
+				templateUrl:'app/modules/account/views/account.view.html',
+				data: {
+					authRequired: true
+	            }
 			})
 			
 	}

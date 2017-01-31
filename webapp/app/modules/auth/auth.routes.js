@@ -10,5 +10,12 @@ angular.module('auth').config(['$stateProvider',
 				authRequired: false
             }
 		})
+		.state('logout',{
+			url:'/logout',
+			controller:'LogoutController',
+			data: {
+				authRequired: false
+            }
+		})
 	}
 ])
