@@ -4,7 +4,10 @@ angular.module('buying').config(['$stateProvider',
 		$stateProvider
 		.state('buy',{
 			url:'/',
-			templateUrl:'app/modules/buying/views/buy.view.html'
+			templateUrl:'app/modules/buying/views/buy.view.html',
+			data: {
+				authRequired: false
+            }
 		})
 	}
 ])

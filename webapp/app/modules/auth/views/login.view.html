@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="login ft-card">
+		<div class="success" data-ng-if="success">
+    		<p data-ng-bind="success"></p>
+		</div>
+		<div class="error" data-ng-if="error">
+    		<p data-ng-bind="error"></p>
+		</div>
+		<div class="error" ng-messages="login.$submitted && login.username.$error">
+    		<p ng-message="required">Please enter your email address or member ID.</p>
+		</div>
+		<div class="error" ng-messages="login.$submitted && login.password.$error">
+    		<p ng-message="required">Please enter your password.</p>
+		</div>
+		<form name="login" novalidate ng-submit="authenticate()">
+			<div>	
+				<label>
+					Account:
+				</label>
+				<input type="text" name="username" data-ng-model="credentials.username" placeholder="Email address or member ID" class="form-control" required>
+			</div>
+			<br>
+			<div>	
+				<label>
+					Password:
+					<a href="" class="active pull-right"><small>Forgot Password?</small></a>
+				</label>
+				<input type="password" name="password" data-ng-model="credentials.password" placeholder="Password" class="form-control" required>
+			</div>
+			<br>	
+			<button type="submit" class="btn">Sign In</button>
+		</form>
+		<div class="separator"></div>
+		<a href="" class="active pull-right"><small>Join free now!</small></a>
+	</div>
+</div>

@@ -9,7 +9,7 @@
         <!-- endbuild -->
     </head>
     <body ng-cloak flow-prevent-drop flow-drag-enter="dropClass='drop-enter'" flow-drag-leave="dropClass=''">
-        <div>            
+        <div data-ng-controller="MainController">            
             <header class="ft-header">
                 <div class="container">
                     <div class="header-left">
@@ -22,8 +22,15 @@
                                 <span class="ft-cart-text sm-hidden">Cart</span>
                                 <span class="ft-badge ft-badge-cart">0</span>
                             </a>
-                            <a ui-sref="login">
+                            <a ui-sref="login" data-ng-if="!isAuthenticated()">
                                 <img class="icon" src="assets/images/user.png">Login
+                            </a> 
+                            <a ui-sref="logout" data-ng-if="isAuthenticated()">
+                                <img class="icon" src="assets/images/exit.png">
+                                <span class="user">
+                                    <span data-ng-bind="'Hi! ' + username()"></span>
+                                    <div>Logout</div>
+                                </span>    
                             </a>    
                         </div>                        
                     </div>
@@ -64,6 +71,13 @@
             <script src="assets/lib/ng-flow.js"></script> 
 
             <script src="app/application.js"></script>
+            <script src="app/main.controller.js"></script>
+
+            <script src="app/modules/auth/auth.module.js"></script>   
+            <script src="app/modules/auth/auth.routes.js"></script>   
+            <script src="app/modules/auth/services/auth.service.js"></script>   
+            <script src="app/modules/auth/controllers/login.controller.js"></script>  
+            <script src="app/modules/auth/controllers/logout.controller.js"></script>   
 
             <script src="app/modules/manage/manage.module.js"></script>    
             <script src="app/modules/manage/controllers/manage.controller.js"></script>
