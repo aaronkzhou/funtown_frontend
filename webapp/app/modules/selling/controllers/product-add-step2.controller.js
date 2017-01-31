@@ -19,8 +19,10 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 				$log.warn("Category not yet set.");
 			}	
 
-			if($scope.cache.product.catalog){
+			if($scope.cache.product.catalog && $scope.pid){
 				getPosterFromLocal(); 
+			}else{
+				getPoster();
 			}
 			if(!$scope.cache.product.productPhotos){
 				$scope.cache.product.productPhotos =[{},{},{}];

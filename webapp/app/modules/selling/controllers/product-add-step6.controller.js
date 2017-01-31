@@ -16,8 +16,11 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 			$scope.shippingRate = getProductAttributesById("shippingRates",$scope.cache.product.shippingRateId);
 			$scope.pickUp = getPickUpDisplay($scope.cache.state.pickUp);
 			$scope.cache.product.status="ACTIVE";
-			
-			getPoster();
+			if($scope.cache.product.catalog && $scope.pid){
+				getPosterFromLocal(); 
+			}else{
+				getPoster();
+			}
 		};
 
 		function getPoster(){
@@ -31,6 +34,18 @@ angular.module('selling').controller('AddProductStep6', ['$log','$scope','Attrib
 				})
 			}	
 			$log.debug($scope.poster);		
+		}
+
+		function getPosterFromLocal(){
+			$log.debug("getPoster from local");
+			$scope.poster = '';
+			if($scope.cache.product.catalog && $scope.cache.product.catalog.catalogAttributes){
+				$scope.cache.product.catalog.catalogAttributes.forEach(function(catalogAttribute){					
+					if(catalogAttribute.attributeType === 'poster'){
+						$scope.poster = "imageRepo/" + catalogAttribute.attributeValue;
+					}
+				})
+			}	
 		}
 
 		//check if the attribute should be shown on the screen

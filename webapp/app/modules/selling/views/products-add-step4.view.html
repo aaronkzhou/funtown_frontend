@@ -48,7 +48,7 @@
             <button class="btn" ui-sref="manage.{{title}}Product.step3">
                 <i class="fa fa-chevron-left"></i> Previous 
             </button>
-            <button class="btn" data-ng-click="saveDraft()">
+            <button class="btn" data-ng-click="saveDraft()" data-ng-if="isDraftMode">
                 <i class="fa fa-file-text"></i> Save Draft 
             </button>
             <button class="btn" confirm-alert details={{alertMessage.confirm}}>

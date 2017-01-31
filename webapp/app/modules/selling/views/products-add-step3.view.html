@@ -82,9 +82,12 @@
             <button class="btn" ui-sref="manage.{{title}}Product.step2">
                 <i class="fa fa-chevron-left"></i> Previous 
             </button>
-            <button class="btn" data-ng-click="saveDraft()">
+            <button class="btn" data-ng-click="saveDraft()" data-ng-if="isDraftMode">
                 <i class="fa fa-file-text"></i> Save Draft 
             </button>
+            <button class="btn" data-ng-click="edit()" data-ng-if="!isDraftMode">
+                <i class="fa fa fa-check-circle"></i> Save
+            </button>     
             <button class="btn" confirm-alert details={{alertMessage.confirm}}>
                 <i class="fa fa-eraser"></i> Reset
             </button>
