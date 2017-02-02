@@ -18,7 +18,6 @@ angular.module('auth').controller('LoginController', ['$log','$scope', 'AuthServ
 			}else{
 				return false;
 			}	
-		}			
-		
+		}		
 	}
 ])

@@ -38,7 +38,7 @@ angular.module('auth').service('AuthService', ['$http','$log',
 		}
 
 		this.getUserName = function(){
-			return user.name;
+			return user.username;
 		}
 	}
 ])
