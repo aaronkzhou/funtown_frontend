@@ -151,8 +151,8 @@ angular.module('manage').config(['$stateProvider',
 		
 		//addProduct
 		.state('manage.addProduct',{
-			url:'/addProduct',
 			controller:'AddProduct',			
+			url:'/addProduct',
 			templateUrl:'app/modules/selling/views/products-add.view.html',
 			resolve:{
 				AttributeService: function(AttributeService){
@@ -170,7 +170,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step1',{
-			url:'/step1',
 			controller:'AddProductStep1',		
 			templateUrl:'app/modules/selling/views/products-add-step1.view.html',
 			data: {
@@ -178,7 +177,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step2',{
-			url:'/step2',
 			controller:'AddProductStep2',	
 			templateUrl:'app/modules/selling/views/products-add-step2.view.html',
 			data: {
@@ -186,7 +184,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step3',{
-			url:'/step3',
 			controller:'AddProductStep3',
 			templateUrl:'app/modules/selling/views/products-add-step3.view.html',
 			data: {
@@ -194,7 +191,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step4',{
-			url:'/step4',
 			controller:'AddProductStep4',
 			templateUrl:'app/modules/selling/views/products-add-step4.view.html',
 			data: {
@@ -202,7 +198,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step5',{
-			url:'/step5',
 			controller:'AddProductStep5',
 			templateUrl:'app/modules/selling/views/products-add-step5.view.html',
 			data: {
@@ -210,7 +205,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step6',{
-			url:'/step6',
 			controller:'AddProductStep6',
 			templateUrl:'app/modules/selling/views/products-add-step6.view.html',
 			data: {
@@ -250,7 +244,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.editProduct.step2',{
-			url:'',
 			controller:'AddProductStep2',
 			templateUrl:'app/modules/selling/views/products-add-step2.view.html',
 			data: {
@@ -258,7 +251,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.editProduct.step3',{
-			url:'',
 			controller:'AddProductStep3',
 			templateUrl:'app/modules/selling/views/products-add-step3.view.html',
 			data: {
@@ -266,7 +258,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.editProduct.step4',{
-			url:'',
 			controller:'AddProductStep4',
 			templateUrl:'app/modules/selling/views/products-add-step4.view.html',
 			data: {
@@ -274,7 +265,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.editProduct.step5',{
-			url:'',
 			controller:'AddProductStep5',
 			templateUrl:'app/modules/selling/views/products-add-step5.view.html',
 			data: {
@@ -282,7 +272,6 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.editProduct.step6',{
-			url:'',
 			controller:'AddProductStep6',
 			templateUrl:'app/modules/selling/views/products-add-step6.view.html',
 			data: {

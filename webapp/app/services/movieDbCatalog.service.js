@@ -7,8 +7,9 @@ angular.module('funtown').service('MovieDbCatalogService', ['$log','$http', '$q'
 
 		//search the title in themoviedb.org
 		this.getCatalog = function(search) {
-			$log.debug("movieDbCatalogService::getCatalogue - ",search);			
-			return $http.get('http://api.themoviedb.org/3/search/movie?api_key=2f789345b59491d1513056e609ee3c84&query=' + search )			
+			$log.debug("movieDbCatalogService::getCatalogue - ",search);						
+			delete $http.defaults.headers.common["X-Requested-With"];
+			return $http.get('http://api.themoviedb.org/3/search/movie?api_key=2f789345b59491d1513056e609ee3c84&query=' + search)			
 		}
 
 		//get movie details from themoviedb.org
