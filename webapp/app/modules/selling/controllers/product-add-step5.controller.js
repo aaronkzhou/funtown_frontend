@@ -7,6 +7,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		var freeShippingOption = {cost: 0,description: "freeShipping"};
 		var oldTemplate = null;
 		var specificShippingTemplate;
+		var selectedPayment;
 		 	function init(){
 			$log.debug("AddProductStep5::init");
 
@@ -56,6 +57,26 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			if($scope.cache.state.pickUp === 'mustPickup'){
 				$scope.shippingDisabled = true;
 			}	
+			if($scope.cache.product.category){
+				if($scope.cache.product.paymentMethods){
+					selectedPayment = $scope.cache.product.paymentMethods;	
+				}
+				$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
+					$scope.cache.product.paymentMethods.map(function(paymentMethod){
+						return paymentMethod.selected = false;
+					});
+				if(selectedPayment){
+					$scope.cache.product.paymentMethods.forEach(function(item){
+						selectedPayment.forEach(function(selectedItem){
+							if(selectedItem.attributeId == item.attributeId){
+								item.selected = true;
+							}
+						})	
+					});
+				}
+			}else{
+				$log.warn("Category not yet set.");
+			}
 
 		}
 
@@ -258,6 +279,13 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			if(saveDraft){
 				$scope.saveDraft();
 			}
+		}
+
+		//check if atleast on payment method is selected
+		$scope.atleastOneChecked = function(){
+			return !$scope.cache.product.paymentMethods.some(function(paymentMethod){
+				return paymentMethod.selected;
+			})				
 		}
 
 		// check if the next button should be enabled

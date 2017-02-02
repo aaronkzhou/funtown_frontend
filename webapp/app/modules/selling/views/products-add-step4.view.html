@@ -1,6 +1,6 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
-		<h4>Pricing & Payment</h4>
+		<h4>Pricing</h4>
 		<form name="priceInfo" class="ft-data-form" novalidate>		
 			<div class="row">				
 				<label class="col-md-3">
@@ -29,19 +29,6 @@
 				</label>
 				<button type="button" class="btn btn-select" name="offerDuration" ng-model="cache.product.productPriceDetails.offerDuration" bs-options="offerDuration.attributeId as offerDuration.display for offerDuration in offerDurations" ng-required="isOfferPresent()" data-ng-disabled="!isOfferPresent()" bs-select>
   				 Offer Duration<span class="caret"></span>
-			</div>
-			<div class="separator"></div>		
-			<div class="row">
-				<label class="col-md-12">
-					Accepted Payment Types
-					<div class="error" ng-messages="priceInfo.paymentType.$error">
-			    		<p ng-message="required">Required</p>
-			    	</div>
-				</label>
-				<div class="ft-form-list col-md-12" data-ng-repeat="paymentMethod in cache.product.paymentMethods">
-					<input type="checkbox" ng-required="atleastOneChecked()" name="paymentType" data-ng-model="paymentMethod.selected" ng-checked="paymentMethod.selected">&nbsp;&nbsp;
-					<span data-ng-bind="paymentMethod.display"></span>
-				</div>
 			</div>
 	    </form>    
 	    <div class="ft-card-footer col-md-12 text-center">
