@@ -3,8 +3,8 @@ angular.module('auth').controller('LoginController', ['$log','$scope', 'AuthServ
 	function($log,$scope,AuthService,$state,AlertsService){
 		$log.debug("loginController");
 		$scope.credentials = {};
-		$scope.credentials.username="summer17";
-		$scope.credentials.password="summer17";
+		//$scope.credentials.username="summer17";
+		//$scope.credentials.password="summer17";
 				
 		$scope.authenticate = function(){				
 			$log.debug("login");
