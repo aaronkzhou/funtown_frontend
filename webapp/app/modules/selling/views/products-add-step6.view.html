@@ -227,9 +227,12 @@
             <button class="btn" confirm-alert details={{alertMessage.confirm}}>
                 <i class="fa fa-eraser"></i> Reset
             </button>
-            <button class="btn" data-ng-click="create()">
+            <button class="btn" data-ng-click="create()" data-ng-if="isDraftMode">
                 <i class="fa fa-check-circle"></i> Confirm
             </button>
+            <button class="btn" data-ng-click="edit(pid)" data-ng-if="!isDraftMode">
+                <i class="fa fa fa-check-circle"></i> Save
+            </button> 
     	</div>
 	</div>
 </div>

@@ -209,7 +209,7 @@
 	            <button class="btn" data-ng-click="storeShippingCosts(true)" data-ng-if="isDraftMode">
 	                <i class="fa fa-file-text"></i> Save Draft 
 	            </button>
-	            <button class="btn" data-ng-click="edit()" data-ng-if="!isDraftMode">
+	            <button class="btn" data-ng-click="edit(pid)" data-ng-if="!isDraftMode">
                 <i class="fa fa fa-check-circle"></i> Save
             	</button>     
 	            <button class="btn" confirm-alert details={{alertMessage.confirm}}>

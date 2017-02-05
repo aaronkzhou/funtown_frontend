@@ -46,6 +46,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				{value: 'mustPickup', display: "Buyer must pick-up"}
 			];
 			$scope.pid = $state.params.pid;
+			$scope.isDraftMode = true;
 			if($scope.pid){
 
 				if($scope.cache.product.shippingCosts.filter.length == 0){
@@ -70,7 +71,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 					$scope.stepsCompleted = $scope.cache.product.draftStage;
 					$scope.isDraftMode = true;
 				}else{
-					$scope.stepsCompleted =6;
+					$scope.stepsCompleted = 6;
 					$scope.isDraftMode = false;
 				}
 				$scope.cache.state.shippingCosts = $scope.cache.product.shippingCosts.filter(function(item){
@@ -191,6 +192,22 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				progressAlert.hide();
 				AlertsService.notify("Unable to save product.","error");
 			})	
+		}
+		$scope.edit = function(pid){
+			$log.debug("edit");
+			var progressAlert = AlertsService.notify("Updating product...");
+			ProductService.updateProduct($scope.cache.product, pid).then(function(response){
+				$scope.cache.product.productId = response.data;
+				progressAlert.hide();
+				AlertsService.notify("Product updaded.","success");
+				$state.go('manage.products.' + $scope.cache.product.status);
+				console.log($scope.cache.product);
+			},function(error){
+				console.log($scope.cache.product);
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to update product.","error");
+			})
 		}
 		init();
  	}

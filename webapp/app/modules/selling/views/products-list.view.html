@@ -41,20 +41,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr data-ng-repeat="product in products" class="row" data-ng-click="editProduct(product.productId)">
+				<tr data-ng-repeat="product in products" class="row">
 					<td>
 						<input type="checkbox" data-ng-model="product.selected" data-ng-checked="product.selected" data-ng-click="changeSelectedProducts(product)">
 					</td>
-					<td>
-						<b class="no-margin" data-ng-bind="product.title"></b>				
-						<p class="small no-margin">Code: <span data-ng-bind="product.productCode"></span></p>
-						<p class="small no-margin">SKU: <span data-ng-bind="product.sku"></span></p>
+					<td data-ng-click="editProduct(product.productId)">
+					<b class="no-margin" data-ng-bind="product.title"></b>				
+					<p class="small no-margin">Code: <span data-ng-bind="product.productCode"></span></p>
+					<p class="small no-margin">SKU: <span data-ng-bind="product.sku"></span></p>
 					</td>
-					<td data-ng-bind="product.status"></td>
-					<td data-ng-bind="product.stock" class="text-right"></td>
-					<td data-ng-bind="product.buyNowPrice" class="text-right"></td>
-					<td data-ng-bind="product.offerPrice" class="text-right"></td>
-					<td data-ng-bind="product.offerDuration"  class="text-right"></td>					
+					<td data-ng-bind="product.status" data-ng-click="editProduct(product.productId)"></td>
+					<td data-ng-bind="product.stock" class="text-right" data-ng-click="editProduct(product.productId)"></td>
+					<td data-ng-bind="product.buyNowPrice" class="text-right" data-ng-click="editProduct(product.productId)"></td>
+					<td data-ng-bind="product.offerPrice" class="text-right" data-ng-click="editProduct(product.productId)"></td>
+					<td data-ng-bind="product.offerDuration"  class="text-right" data-ng-click="editProduct(product.productId)"></td>	
 				</tr>
 			</tbody>
 		</table>
