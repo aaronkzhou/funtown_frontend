@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$state','$stateParams','ProductService','AlertsService','editProduct',
-	function($log,$scope,$http,$state,$stateParams,ProductService,AlertsService,editProduct) {
+angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$state','$stateParams','ProductService','AlertsService','editProduct','AttributeService',
+	function($log,$scope,$http,$state,$stateParams,ProductService,AlertsService,editProduct,AttributeService) {
 		var STEP_NO=0;
 		$log.debug("AddProduct controller");
 		
@@ -27,7 +27,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$scope.cache.product = editProduct;		
 			//Cache states across steps
 			$scope.cache.state = {};
-
+			$scope.cache.product.oldPaymentMethods = $scope.cache.product.paymentMethods;
 			$scope.cache.state.catalogType = 'auto';
 			$scope.cache.state.selectedCatalog = null;
 			$scope.cache.state.productAttributes = [];
@@ -49,7 +49,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$scope.isDraftMode = true;
 			if($scope.pid){
 
-				if($scope.cache.product.shippingCosts.filter.length == 0){
+				if($scope.cache.product.shippingCosts.length == 0){
 					$scope.cache.state.pickUp = "noPickUp";
 				}
 				if($scope.cache.product.shippingCosts.length == 1 && $scope.cache.product.shippingCosts[0].description == "pickUp"){
@@ -61,10 +61,10 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				if($scope.cache.product.shippingCosts.length == 0 && $scope.cache.product.shippingTemplateId !== null){
 					$scope.cache.state.shippingType = "template";
 				}
-				if($scope.cache.product.shippingCosts.length == 0 && $scope.cache.product.shippingTemplateId == null){
+				if($scope.cache.product.shippingCosts.length !== 0 && $scope.cache.product.shippingCosts[0].cost == 0 && $scope.cache.product.shippingTemplateId == null){
 					$scope.cache.state.shippingType = "free";
 				}
-				if($scope.cache.product.shippingCosts.length !== 0 && $scope.cache.product.shippingTemplateId == null){
+				if($scope.cache.product.shippingCosts.length !== 0 && $scope.cache.product.shippingCosts[0].cost !== 0 && $scope.cache.product.shippingTemplateId == null){
 					$scope.cache.state.shippingType = "specific";
 				}
 				if($scope.cache.product.draftStage){

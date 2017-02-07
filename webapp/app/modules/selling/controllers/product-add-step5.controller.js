@@ -8,9 +8,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		var oldTemplate = null;
 		var specificShippingTemplate;
 		var selectedPayment;
-		 	function init(){
+		var oldPaymentMethods;
+		function init(){
 			$log.debug("AddProductStep5::init");
-
 			$scope.alertMessage.save = {
 											message: "You want to save the modifications to this template.",
 										  	buttons:[
@@ -57,10 +57,12 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			if($scope.cache.state.pickUp === 'mustPickup'){
 				$scope.shippingDisabled = true;
 			}	
+
 			if($scope.cache.product.category){
-				if($scope.cache.product.paymentMethods){
-					selectedPayment = $scope.cache.product.paymentMethods;	
+				if($scope.cache.product.oldPaymentMethods){
+					selectedPayment = $scope.cache.product.oldPaymentMethods;	
 				}
+
 				$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
 					$scope.cache.product.paymentMethods.map(function(paymentMethod){
 						return paymentMethod.selected = false;
