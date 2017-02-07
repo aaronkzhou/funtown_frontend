@@ -197,8 +197,10 @@
 			    	</div>
 				</label>
 				<div class="ft-form-list col-md-12" data-ng-repeat="paymentMethod in cache.product.paymentMethods">
-					<input type="checkbox" ng-required="atleastOneChecked()" name="paymentType" data-ng-model="paymentMethod.selected" ng-checked="paymentMethod.selected">&nbsp;&nbsp;
-					<span data-ng-bind="paymentMethod.display"></span>
+					<fieldset data-ng-disabled="noCashPayment && paymentMethod.display == 'Cash'">
+						<input type="checkbox" ng-required="atleastOneChecked()" name="paymentType" data-ng-model="paymentMethod.selected" ng-checked="paymentMethod.selected">&nbsp;&nbsp;
+						<span data-ng-bind="paymentMethod.display"></span>
+					</fieldset>
 				</div>
 			</div>
 		</form>

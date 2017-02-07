@@ -91,7 +91,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		$scope.processPickUp = function(){
 			if($scope.cache.state.pickUp === 'noPickUp'){
 				$scope.shippingDisabled = false;
-				removeShippingOptions(pickUpOption)
+				$scope.noCashPayment = true;
+				removeShippingOptions(pickUpOption);
+				disableCashPayment();
 			}				
 			else if($scope.cache.state.pickUp === 'canPickUp'){
 				$scope.shippingDisabled = false;										
@@ -104,6 +106,13 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				$scope.cache.state.shippingType = null;
 				addShippingOptions(pickUpOption)
 			}
+		}
+		function disableCashPayment(){
+			cache.product.paymentMethods.forEach(function(item){
+				if(item.value == 'cash'){
+					item.selected = false;
+				}
+			});
 		}
 		
 		$scope.processFreeShipping = function(){
