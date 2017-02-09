@@ -79,7 +79,6 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}else{
 				$log.warn("Category not yet set.");
 			}
-
 		}
 
 
@@ -91,24 +90,26 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		$scope.processPickUp = function(){
 			if($scope.cache.state.pickUp === 'noPickUp'){
 				$scope.shippingDisabled = false;
-				$scope.noCashPayment = true;
+				$scope.cache.state.noCashPayment = true;
 				removeShippingOptions(pickUpOption);
-				disableCashPayment();
+				unselectCashPayment();
 			}				
 			else if($scope.cache.state.pickUp === 'canPickUp'){
-				$scope.shippingDisabled = false;										
+				$scope.shippingDisabled = false;
+				$scope.cache.state.noCashPayment = false;										
 				addShippingOptions(pickUpOption)
 			}
 			else if($scope.cache.state.pickUp === 'mustPickup'){
-				$scope.shippingDisabled = true;				
+				$scope.shippingDisabled = true;	
+				$scope.cache.state.noCashPayment = false;			
 				//reset product shipping options and add only pickup option
 				resetShippingOptions();
 				$scope.cache.state.shippingType = null;
 				addShippingOptions(pickUpOption)
 			}
 		}
-		function disableCashPayment(){
-			cache.product.paymentMethods.forEach(function(item){
+		function unselectCashPayment(){
+			$scope.cache.product.paymentMethods.forEach(function(item){
 				if(item.value == 'cash'){
 					item.selected = false;
 				}
@@ -146,7 +147,6 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 
 		$scope.addCostOption = function(){
-            console.log($scope.cache.state.shippingCosts);
 			$scope.cache.state.shippingCosts.push({});
 		}
 
