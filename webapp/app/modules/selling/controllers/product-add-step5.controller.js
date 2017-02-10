@@ -11,7 +11,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		var oldPaymentMethods;
 		function init(){
 			$log.debug("AddProductStep5::init");
-			$scope.alertMessage.save = {
+			$scope.alertMessage.edit = {
 											message: "You want to save the modifications to this template.",
 										  	buttons:[
 										  		{name:'Yes',action:"saveEditTemplate"},
@@ -244,28 +244,43 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			$scope.cache.templateDisplay.shippingCosts.splice(costIndex, 1);
 		}
 
-		$scope.saveEditTemplate = function(){
-			$log.debug("EditTemplate");
-			//add the "cache.shippingCosts" into product
-			storeShippingCosts(false);
-			
-			var progressAlert = AlertsService.notify("Modify template as...");
-			
-			var oldTemplateIndex = $scope.templates.findIndex(function(template){
-				return template.templateId === $scope.cache.templateDisplay.templateId;
-			});
-			$scope.templates.splice(oldTemplateIndex,1);
-			ShippingTempalateService.saveEditTemplate($scope.cache.templateDisplay)
+		$scope.createTemplate = function(){
+			var progressAlert = AlertsService.notify("Creating template...");
+			ShippingTempalateService.createTemplate($scope.cache.templateDisplay)
 			.then(function(response){
 				$scope.templates.push(response);
 				progressAlert.hide();
-				AlertsService.notify("Tempalte is edited.","success");
+				AlertsService.notify("Template created successfully.","success");
 				$scope.mode = null;
 				$scope.templateReadOnly = true;	
 			},function(error){
 				$log.error(error);
 				progressAlert.hide();
-				AlertsService.notify("Unable to edit this template.","error");
+				AlertsService.notify("Unable to create the template.","error");
+			});	
+		}
+
+		$scope.editTemplate = function(){
+			$log.debug("EditTemplate");			
+			
+			var progressAlert = AlertsService.notify("Updating template...");
+			
+			var oldTemplateIndex = $scope.templates.findIndex(function(template){
+				return template.templateId === $scope.cache.templateDisplay.templateId;
+			});
+			$scope.templates.splice(oldTemplateIndex,1);
+			
+			ShippingTempalateService.editTemplate($scope.cache.templateDisplay)
+			.then(function(response){
+				$scope.templates.push(response);
+				progressAlert.hide();
+				AlertsService.notify("Template updated successfully.","success");
+				$scope.mode = null;
+				$scope.templateReadOnly = true;	
+			},function(error){
+				$log.error(error);
+				progressAlert.hide();
+				AlertsService.notify("Unable to update the template.","error");
 			});	
 		}
 
@@ -275,6 +290,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			$scope.mode = null;		
 		}
 
+		$scope.isEdit = function(){
+			return $scope.mode === "Edit";
+		}
 
 		// when click "save" or "next", add the "cache.shippingCosts" into product
 		$scope.storeShippingCosts = function(saveDraft){
@@ -295,8 +313,11 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}
 		}
 
+
+
 		$scope.editProduct = function(){
 			$log.debug("editProduct");
+			//add the "cache.shippingCosts" into product
 			$scope.storeShippingCosts(false);
 			$scope.edit();
 		}

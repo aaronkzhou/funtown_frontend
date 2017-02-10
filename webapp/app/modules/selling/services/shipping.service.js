@@ -25,9 +25,16 @@ angular.module('funtown').service('ShippingTempalateService', ['$log','$http',
 			});
 		}
 
-		this.saveEditTemplate = function(modifiedTemplate){
-			$log.debug('put',modifiedTemplate);
+		this.editTemplate = function(modifiedTemplate){
+			$log.debug('editTemplate',modifiedTemplate);
 			return $http.put('/rest/api/selling/templates', modifiedTemplate).then(function(response){
+				return response.data;
+			});
+		}
+
+		this.createTemplate = function(modifiedTemplate){
+			$log.debug('createTemplate',modifiedTemplate);
+			return $http.post('/rest/api/selling/templates', modifiedTemplate).then(function(response){
 				return response.data;
 			});
 		}
