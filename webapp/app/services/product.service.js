@@ -18,7 +18,7 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			$log.debug("ProductService::updateProduct - ",product);
 			return $http({
 				method:'PUT',
-				url:'/rest/api/selling/products/'+pid,
+				url:'/rest/api/selling/products/',
 				data:product,
 				transformRequest:doTransformRequest,
 				headers:{

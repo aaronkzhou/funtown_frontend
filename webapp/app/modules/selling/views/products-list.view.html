@@ -48,7 +48,8 @@
 					<td data-ng-click="editProduct(product.productId)">
 					<b class="no-margin" data-ng-bind="product.title"></b>				
 					<p class="small no-margin">Code: <span data-ng-bind="product.productCode"></span></p>
-					<p class="small no-margin">SKU: <span data-ng-bind="product.sku"></span></p>
+					<p class="small no-margin">Created: <span data-ng-bind="product.createdDate | date: 'dd MMM yyyy hh:mma'"></span></p>
+					<p class="small no-margin">Last Modified: <span data-ng-bind="product.lastModifiedDate | date: 'dd MMM yyyy hh:mma'"></span></p>
 					</td>
 					<td data-ng-bind="product.status" data-ng-click="editProduct(product.productId)"></td>
 					<td data-ng-bind="product.stock" class="text-right" data-ng-click="editProduct(product.productId)"></td>

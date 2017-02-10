@@ -246,6 +246,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 
 		$scope.saveEditTemplate = function(){
 			$log.debug("EditTemplate");
+			//add the "cache.shippingCosts" into product
+			storeShippingCosts(false);
+			
 			var progressAlert = AlertsService.notify("Modify template as...");
 			
 			var oldTemplateIndex = $scope.templates.findIndex(function(template){
@@ -290,6 +293,12 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			if(saveDraft){
 				$scope.saveDraft();
 			}
+		}
+
+		$scope.editProduct = function(){
+			$log.debug("editProduct");
+			$scope.storeShippingCosts(false);
+			$scope.edit();
 		}
 
 		//check if atleast on payment method is selected
