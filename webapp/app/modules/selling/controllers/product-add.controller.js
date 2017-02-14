@@ -58,7 +58,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 				if(($scope.cache.product.shippingCosts.length > 1 && $scope.cache.product.shippingCosts.filter.length !== 0) || $scope.cache.product.shippingTemplateId !== null){
 					$scope.cache.state.pickUp = "canPickUp";
 				}
-				if($scope.cache.product.shippingCosts.length == 0 && $scope.cache.product.shippingTemplateId !== null){
+				if($scope.cache.product.shippingCosts.length == 1 && $scope.cache.product.shippingTemplateId !== null){
 					$scope.cache.state.shippingType = "template";
 				}
 				if($scope.cache.product.shippingCosts.length !== 0 && $scope.cache.product.shippingCosts[0].cost == 0 && $scope.cache.product.shippingTemplateId == null){
@@ -75,7 +75,7 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 					$scope.isDraftMode = false;
 				}
 				$scope.cache.state.shippingCosts = $scope.cache.product.shippingCosts.filter(function(item){
-					return item.description !== "pickUp";
+					return item.description !== "pickUp" && item.description !== "freeShipping";
 				})
 			}
 			

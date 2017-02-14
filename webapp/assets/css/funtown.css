@@ -545,3 +545,9 @@ h3[data-ng-bind="headTitle"] {
   vertical-align: middle; }
   .user span {
     font-size: 0.8em; }
+
+.top-buffer {
+  margin-top: 1em; }
+
+.buttom-buffer {
+  margin-buttom: 20px; }

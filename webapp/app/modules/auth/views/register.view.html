@@ -1,0 +1,203 @@
+<div class="container-fluid">
+	<div class="register row ft-card">
+		<div class="col-md-8 col-md-offset-2">
+			<div>
+				<h1>Register</h1>
+			</div>
+			<div class="separator"></div>
+			<form name="register" novalidate ng-submit="authenticate()">
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label for="email_address">
+							Email Address:
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="email" size="30" name="email" data-ng-model="email" placeholder="Email address" class="form-control" required>
+						<div class="error" for="email_input_error" ng-messages="register.email.$error">
+				    		<p ng-message="email && required">Please enter a vaild email address</p>
+						</div>
+						<div class="error" data-ng-if="email_exist">
+				    		<p>This email has been registered</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label for="username">
+							User Name:
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="username" data-ng-model="username" placeholder="User Name" class="form-control" required>
+						<div class="error" for="username_error" ng-messages="register.username.$error">
+				    		<p ng-message="required">Please enter a Username</p>
+						</div>
+						<div class="error" data-ng-if="username_exist">
+				    		<p>This username has been used</p>
+						</div>
+					</div>	
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label for="password">
+							Password:
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="password" size="30" name="password" data-ng-model="password" placeholder="Password" class="form-control" ng-minlength="6" ng-maxlength="16">
+						<div class="error" for="password_error" ng-messages="register.password.$error">
+				    		<p ng-message="required && minlength && maxlength">Please enter a 6-16 digit password</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label for="confirm_password">
+							Confirm Your Password:
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="password"  size="30" name="confirm_password" data-ng-model="confirm_password" placeholder="Confirm Your Password" class="form-control" required>
+						<div class="error" data-ng-if="confirm_password !== password">
+				    		<p>The password is unmatch with previous password</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label>
+							Full Name
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="fullName" placeholder="eg. David Bowie" class="form-control" required>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4" class="gender">
+						<label for="gender">Gender</label>
+					</div>
+					<div class="col-md-8 gender">
+						<input type="radio" name="genderOptions"> 
+						<label for="genderMale">Male</label>
+						<input type="radio" name="genderOptions">
+						<label for="genderFemale">Female</label>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please select your gender</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label>
+							Contact details:
+						</label>
+					</div>
+					<div class="col-md-3">
+						<button type="button" name="phoneAreaCode" class="btn btn-select">
+  					    <span class="caret"></span>
+  					    <div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+					
+					<div class="col-md-4">
+						<input type="text" size="20" name="phoneNum" placeholder="Contact Number" class="form-control" required>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>	
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label for="address_finder">
+							Address Finder
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="50" class="form-control" data-ng-model="selectedAddress" bs-options="address.formatted_address as address.formatted_address for address in getAddress($viewValue)" placeholder="Enter address" bs-on-select="populateAddress" bs-typeahead>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer" data-ng-if="address">
+					<div class="col-md-4">	
+						<label for="address">
+							Address
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="address" data-ng-model="address" class="form-control" required>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer" data-ng-if="surburb">
+					<div class="col-md-4">	
+						<label for="surburb">
+							Surburb
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="surburb" data-ng-model="surburb" class="form-control" required>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer" data-ng-if="city">
+					<div class="col-md-4">	
+						<label for="city">
+							City
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="city" data-ng-model="city" class="form-control" required>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer" data-ng-if="postcode">
+					<div class="col-md-4">	
+						<label for="postcode">
+							Post Code
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="postcode" data-ng-model="postcode" class="form-control" required>
+						<div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row top-buffer">
+					<div class="col-md-4">	
+						<label for="closestTown">
+							Closest Town:
+						</label>
+					</div>
+					<div class="col-md-4">
+						<button type="button"  name="closestTown" class="btn btn-select">
+  					    <span class="caret"></span> 
+  					    <div for="error" ng-messages="true">
+				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						</div> 
+					</div>
+				</div>
+				<div class="separator"></div>
+				<div class="text-center">
+					<button type="submit" class="btn buttom-buffer">Join Funtown</button>
+				</div>
+				<br>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

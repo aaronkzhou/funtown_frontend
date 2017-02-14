@@ -40,5 +40,12 @@ angular.module('auth').service('AuthService', ['$http','$log',
 		this.getUserName = function(){
 			return user.username;
 		}
+		this.getIfEmailExist = function(email){
+			//return $http.post('/rest/api/'+email);
+			return true;
+		}
+		this.getIfUserNameExist = function(username){
+			return true;
+		}
 	}
 ])

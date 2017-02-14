@@ -17,5 +17,15 @@ angular.module('auth').config(['$stateProvider',
 				authRequired: false
             }
 		})
+		.state('register',{
+			url:'/register',
+			controller:'RegisterController',
+			templateUrl:'app/modules/auth/views/register.view.html',
+			data:{
+				authrequired : false
+			}
+		}
+
+		)
 	}
 ])

@@ -9,6 +9,5 @@ angular.module('account').config(['$stateProvider',
 					authRequired: true
 	            }
 			})
-			
 	}
 ])

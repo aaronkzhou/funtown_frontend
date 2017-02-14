@@ -32,7 +32,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			}else{
 				$log.warn("Category not yet set.");
 			}			
-			
+			console.log($scope.cache.product);
 			ShippingTempalateService.getShippingTemplates().then(function(response){
 				$log.debug('getShippingTemplates');
 				$scope.templates = response;
