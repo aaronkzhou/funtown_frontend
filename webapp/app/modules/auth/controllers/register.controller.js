@@ -44,14 +44,15 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 		    delete $http.defaults.headers.common["X-Requested-With"];
 		    return $http.get('http://maps.googleapis.com/maps/api/geocode/json', {params: params})
 		    .then(function(res){
-		    	address_selected = res.data.results;
+		    	address_selected = res.data.results.filter(function(item){
+		    		return item.formatted_address.indexOf('New Zealand') !== -1;
+		    	});
 		    	return address_selected;
 		    });
 		};
 		$scope.populateAddress = function(){
 			new_res = $scope.selectedAddress.split(',');
 			city_postcode = new_res[2].trim().split(' ');
-			console.log(city_postcode)
 			$scope.address = new_res[0].trim();
 			$scope.surburb = new_res[1].trim();
 			$scope.city = city_postcode[0].trim();
