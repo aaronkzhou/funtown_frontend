@@ -13,6 +13,7 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			$scope.userRegister.email = "";
 			$scope.userRegister.username = "";
 			$scope.userRegister.password = "";
+			$scope.userRegister.fullName = "";
 			$scope.userRegister.confirm_password = "";
 			$scope.userRegister.selectedAddress = "";
 			$scope.userRegister.postcode = "";
@@ -20,23 +21,20 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			$scope.userRegister.city = "";
 			$scope.userRegister.address = "";
 			$scope.userRegister.additionalAddress = "";
+			$scope.userRegister.authenticated = false;
+			$scope.userRegister.genderOptions = "";
+			$scope.userRegister.LandlineAreaCode = getLandlineAreaCode();
+			$scope.userRegister.PhoneAreaCode = getPhoneAreaCode();
+			$scope.userRegister.PhoneCode = "";
+			$scope.userRegister.LandlineCode = "";
+			$scope.userRegister.TnCCheckbox = false;
 			initAutocomplete();
 		}
 		$scope.authenticate = function(){				
-			$log.debug("register");
-			AuthService.getIfEmailExist($scope.userRegister.email).then(function(){
-					$scope.userRegister.email_exist = false;
-				},function(err){
-					$scope.userRegister.email_exist = true;
-					//$scope.error = err.data.message;
-			});
-			AuthService.getIfUserNameExist($scope.userRegister.username).then(function(){
-					$scope.userRegister.username_exist = false;
-				},function(err){
-					$scope.userRegister.username_exist = true;
-					//$scope.error = err.data.message;
-			});
-
+			$log.debug("register:authenticate");
+			$scope.userRegister.authenticated = true;
+			AuthService.getIfEmailExist($scope.userRegister.email);
+			AuthService.getIfUserNameExist($scope.userRegister.username);
 		}
 		$scope.canNotFindYourAddress = function(){
 			$scope.userRegister.getFromGoogleApi = false;
@@ -84,6 +82,12 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 		  // When the user selects an address from the dropdown, populate the address
 		  // fields in the form.
 		  autocomplete.addListener('place_changed', populateAddress);
+		}
+		function getLandlineAreaCode(){
+			return ['1','2','3'];
+		}
+		function getPhoneAreaCode(){
+			return ['4','5','6'];
 		}
 
 		init();	

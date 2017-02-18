@@ -14,7 +14,7 @@
 					</div>
 					<div class="col-md-8">
 						<input type="email" size="30" name="email" data-ng-model="userRegister.email" placeholder="Email address" class="form-control" required>
-						<div class="error" for="email_input_error" ng-messages="register.email.$error">
+						<div class="error" for="email_input_error" ng-messages="register.email.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="email && required">Please enter a vaild email address</p>
 						</div>
 						<div class="error" data-ng-if="email_exist">
@@ -30,7 +30,7 @@
 					</div>
 					<div class="col-md-8">
 						<input type="text" size="30" name="username" data-ng-model="userRegister.username" placeholder="User Name" class="form-control" required>
-						<div class="error" for="username_error" ng-messages="register.username.$error">
+						<div class="error" for="username_error" ng-messages="register.username.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required">Please enter a Username</p>
 						</div>
 						<div class="error" data-ng-if="username_exist">
@@ -46,7 +46,7 @@
 					</div>
 					<div class="col-md-8">
 						<input type="password" size="30" name="password" data-ng-model="userRegister.password" placeholder="Password" class="form-control" ng-minlength="6" ng-maxlength="16">
-						<div class="error" for="password_error" ng-messages="register.password.$error">
+						<div class="error" for="password_error" ng-messages="register.password.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required && minlength && maxlength">Please enter a 6-16 digit password</p>
 						</div>
 					</div>
@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-md-8">
 						<input type="password"  size="30" name="confirm_password" data-ng-model="userRegister.confirm_password" placeholder="Confirm Your Password" class="form-control" required>
-						<div class="error" data-ng-if="userRegister.confirm_password !== userRegister.password">
+						<div class="error" data-ng-if="userRegister.confirm_password !== userRegister.password && userRegister.authenticated">
 				    		<p>The password is unmatch with previous password</p>
 						</div>
 					</div>
@@ -71,9 +71,9 @@
 						</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" size="30" name="fullName" placeholder="eg. David Bowie" class="form-control" required>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">Please enter your email address or member ID.</p>
+						<input type="text" size="30" name="fullName" placeholder="eg. David Bowie" class="form-control" data-ng-model="userRegister.fullName" required>
+						<div for="error" class="error" ng-messages="register.fullName.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">Please input your full name</p>
 						</div>
 					</div>
 				</div>
@@ -81,55 +81,61 @@
 					<div class="col-md-4" class="gender">
 						<label for="gender">Gender</label>
 					</div>
-					<div class="col-md-8 gender">
-						<input type="radio" name="genderOptions"> 
+					<div class="col-md-8">
+						<input type="radio" name="genderOptions" value="male" data-ng-model="userRegister.genderOptions" required> 
 						<label for="genderMale">Male</label>
-						<input type="radio" name="genderOptions">
+						<input type="radio" name="genderOptions" value="female" data-ng-model="userRegister.genderOptions" required>
 						<label for="genderFemale">Female</label>
-						<div for="error" ng-messages="true">
+						<div for="error" class="error" ng-messages="register.genderOptions.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required">Please select your gender</p>
 						</div>
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
-						<label>
+					<div class="col-md-4">
+						<label for="landline">
 							Landline details:
 						</label>
 					</div>
 					<div class="col-md-3">
-						<button type="button" name="landlineAreaCode" class="btn btn-select">
-  					    <span class="caret"></span>
-  					    <div for="error" ng-messages="true">
-				    		<p ng-message="required">landline area code cannot be none</p>
+						<div>
+							<button type="button" name="landlineAreaCode" class="btn btn-select" ng-model="userRegister.landlineCode" bs-options="LandlineAreaCode for LandlineAreaCode in userRegister.LandlineAreaCode" required bs-select>
+	  					    <span class="caret"></span>
+						</div>
+						<div for="error" class="error" ng-messages="register.landlineAreaCode.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
-					
 					<div class="col-md-4">
-						<input type="text" size="20" name="landlineNum" placeholder="Contact Number" class="form-control" required>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">landline number area code cannot be none</p>
+						<div>
+							<input type="text" size="20" name="landlineNum" placeholder="Contact Number" ng-model="userRegister.landlineNum" class="form-control" required>
+						</div>
+						<div for="error" class="error" ng-messages="register.landlineNum.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>	
 				</div>
 				<div class="row top-buffer">
 					<div class="col-md-4">	
-						<label>
+						<label for="phone">
 							Contact details:
 						</label>
 					</div>
 					<div class="col-md-3">
-						<button type="button" name="phoneAreaCode" class="btn btn-select">
-  					    <span class="caret"></span>
-  					    <div for="error" ng-messages="true">
-				    		<p ng-message="required">phone area code cannot be none</p>
+						<div>
+							<button type="button" name="phoneAreaCode" class="btn btn-select" ng-model="userRegister.PhoneCode" bs-options="PhoneAreaCode for PhoneAreaCode in userRegister.PhoneAreaCode" required bs-select>
+	  					    <span class="caret"></span>
 						</div>
-					</div>
-					
+  					    <div for="error" class="error" ng-messages="register.phoneAreaCode.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
+						</div>
+					</div>				
 					<div class="col-md-4">
-						<input type="text" size="20" name="phoneNum" placeholder="Contact Number" class="form-control" required>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">phone number area code cannot be none</p>
+						<div>
+							<input type="text" size="20" name="phoneNum" placeholder="Contact Number" ng-model="userRegister.phoneNum" class="form-control" required>
+						</div>
+						<div for="error" class="error" ng-messages="register.phoneNum.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>	
 				</div>
@@ -165,8 +171,8 @@
 						<div>
 							<input type="text" size="40" name="address" data-ng-model="userRegister.address" class="form-control"  ng-disabled="userRegister.getFromGoogleApi" required>
 						</div>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">address cannot be none.</p>
+						<div for="error" class="error" ng-messages="register.address.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
 				</div>
@@ -178,8 +184,8 @@
 					</div>
 					<div class="col-md-8">
 						<input type="text" size="30" name="surburb" data-ng-model="userRegister.surburb" class="form-control" ng-disabled="userRegister.getFromGoogleApi" required>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">surburb cannot be none</p>
+						<div for="error" class="error" ng-messages="register.surburb.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
 				</div>
@@ -191,8 +197,8 @@
 					</div>
 					<div class="col-md-8">
 						<input type="text" size="30" name="city" data-ng-model="userRegister.city" class="form-control" ng-disabled="userRegister.getFromGoogleApi" required>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">city cannot be none.</p>
+						<div for="error" class="error" ng-messages="register.city.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
 				</div>
@@ -204,8 +210,8 @@
 					</div>
 					<div class="col-md-8">
 						<input type="text" size="30" name="postcode" data-ng-model="userRegister.postcode" class="form-control" ng-disabled="userRegister.getFromGoogleApi" required>
-						<div for="error" ng-messages="true">
-				    		<p ng-message="required">postcode cannot be none.</p>
+						<div for="error" class="error" ng-messages="register.postcode.$error" data-ng-if="userRegister.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
 				</div>
@@ -218,6 +224,9 @@
 						I am over 18 and have read and accept Funtown's 
 						<a ui-sref="register.termsAndCondition" target="_blank">terms and conditions</a>
 					</p>
+					<div for="error" class="error" data-ng-if="!userRegister.TnCCheckbox && userRegister.authenticated">
+				    	<p class="text-center">*Please Read and Accept Funtown terms and conditions.</p>
+					</div>
 				</div>
 				<div class="text-center">
 					<button type="submit" class="btn buttom-buffer">Join Funtown</button>
