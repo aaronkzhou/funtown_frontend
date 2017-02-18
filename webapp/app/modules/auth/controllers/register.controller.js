@@ -38,6 +38,14 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			});
 
 		}
+		$scope.canNotFindYourAddress = function(){
+			$scope.userRegister.getFromGoogleApi = false;
+			$scope.userRegister.selectedAddress = "";
+			$scope.userRegister.postcode = "";
+			$scope.userRegister.surburb = "";
+			$scope.userRegister.city = "";
+			$scope.userRegister.address = "";
+		}
 		// $scope.getAddress = function(viewValue) {
 		//     params = {
 		//     	address: viewValue, 
@@ -55,7 +63,6 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 		// };
 		function populateAddress(){
 			googleAPIaddress = autocomplete.getPlace().address_components;
-			console.log(googleAPIaddress);
 			$scope.userRegister.address = googleAPIaddress[0].long_name + ' ' + googleAPIaddress[1].long_name;
 			$scope.userRegister.surburb = googleAPIaddress[2].long_name;
 			$scope.userRegister.city = googleAPIaddress[4].long_name;
@@ -64,10 +71,10 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			$scope.$apply();
 		}
 
-		function initAutocomplete() {
+		function initAutocomplete(){
 
 		  autocomplete = new google.maps.places.Autocomplete(
-		      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+		      /** @type {!HTMLInputElement} */(document.getElementById('addressAutoComplete')),
 		      {
 		      	types: ['address'],
 		      	componentRestrictions: {country: 'NZ'},

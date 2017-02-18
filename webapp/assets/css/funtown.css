@@ -557,3 +557,8 @@ h3[data-ng-bind="headTitle"] {
 
 #TnCContainer a {
   color: #337ab7 !important; }
+
+.canNotFindAddress {
+  font-size: 10px;
+  color: #337ab7;
+  cursor: pointer; }
