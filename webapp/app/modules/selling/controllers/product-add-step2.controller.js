@@ -17,7 +17,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			//Get the correct catalog processor
 			catalogProcessor = new CatalogFactory(rootCategory);
 			$scope.image = {};
-			$scope.image.errors = [];
+			$scope.image.errors = "";
 			if($scope.cache.product.category){
 				$scope.genres = AttributeService.getAttributesFor('genre',$scope.cache.product.category.categoryId);
 				$scope.regions = AttributeService.getAttributesFor('region',$scope.cache.product.category.categoryId);
@@ -33,9 +33,9 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			}else{
 				getPoster();
 			}
-			if(!$scope.cache.product.productPhotos){
-				$scope.cache.product.productPhotos =[{},{},{}];
-				$scope.photoCount = 0;				
+			if(!$scope.cache.product.productPhotos||$scope.cache.product.productPhotos.length === 0){
+				$scope.cache.product.productPhotos = [{},{},{}];
+				$scope.photoCount = 0;		
 			}else{
 				$scope.photoCount = getPhotoCount();
 			}
@@ -146,8 +146,12 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		//event hadler for photo add
 		$scope.photoAdded = function(file,event,flow) {
 			$log.debug("photoAdded",file);
+
+			console.log(imageValidate(file));
+			console.log($scope.image.errors);
 			if(imageValidate(file)){
 				var photos = $scope.cache.product.productPhotos;
+				console.log($scope.cache.product.productPhotos);
 				//store the flow so that it can be used to call upload when product is saved.
 				if(!$scope.cache.state.photosFlow){
 					$scope.cache.state.photosFlow = flow;
@@ -165,8 +169,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			  	event.preventDefault();//prevent file from uploading
 			}else{
 				AlertsService.notify($scope.image.errors,"error");
+				$scope.image.errors = "";
 			}
-
 		}	
 
 		$scope.photoRemove = function(id){
@@ -203,11 +207,15 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			    $scope.image.errors = "File cannot bigger than 1MB";
 			    return false;
 			}
-			if (!file_extension == 'png' || file_extension == 'jpg' || file_extension == 'jpeg'){
+			if (checkImageType()){
 				$scope.image.errors = "File can only be png,jpg,jpeg image file.";
 				return false;
 			}
 			return true;
+		}
+		//check image type to be png,jpg,jpeg
+		function checkImageType(file_extension){
+			return file_extension == 'png' || file_extension == 'jpg' || file_extension == 'jpeg';
 		}
 
 		init();
