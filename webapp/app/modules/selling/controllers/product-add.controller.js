@@ -48,15 +48,12 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$scope.pid = $state.params.pid;
 			$scope.isDraftMode = true;
 			if($scope.pid){
-
-				if($scope.cache.product.shippingCosts.length == 0){
-					$scope.cache.state.pickUp = "noPickUp";
-				}
 				if($scope.cache.product.shippingCosts.length == 1 && $scope.cache.product.shippingCosts[0].description == "pickUp"){
 					$scope.cache.state.pickUp = "mustPickup";
-				}
-				if(($scope.cache.product.shippingCosts.length > 1 && $scope.cache.product.shippingCosts.filter.length !== 0) || $scope.cache.product.shippingTemplateId !== null){
+				}else if(($scope.cache.product.shippingCosts.length > 1 && $scope.cache.product.shippingCosts.filter.length !== 0) || $scope.cache.product.shippingTemplateId !== null){
 					$scope.cache.state.pickUp = "canPickUp";
+				}else{
+					$scope.cache.state.pickUp = "noPickUp";
 				}
 				if($scope.cache.product.shippingCosts.length == 1 && $scope.cache.product.shippingTemplateId !== null){
 					$scope.cache.state.shippingType = "template";

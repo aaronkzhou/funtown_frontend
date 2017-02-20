@@ -8,6 +8,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var rootCategory,catalogProcessor;
 		var attribute,catalogAttribute;
 		var MAX_DISCS_COUNT = 10;
+		var file_extension;
 
 		function init(){			
 			rootCategory = $scope.cache.state.rootCategory;
@@ -15,7 +16,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			$scope.discs=getDiscAttribute(MAX_DISCS_COUNT);
 			//Get the correct catalog processor
 			catalogProcessor = new CatalogFactory(rootCategory);
-
+			$scope.image = {};
+			$scope.image.errors = [];
 			if($scope.cache.product.category){
 				$scope.genres = AttributeService.getAttributesFor('genre',$scope.cache.product.category.categoryId);
 				$scope.regions = AttributeService.getAttributesFor('region',$scope.cache.product.category.categoryId);
@@ -144,23 +146,27 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		//event hadler for photo add
 		$scope.photoAdded = function(file,event,flow) {
 			$log.debug("photoAdded",file);
-
-			var photos = $scope.cache.product.productPhotos;
-			//store the flow so that it can be used to call upload when product is saved.
-			if(!$scope.cache.state.photosFlow){
-				$scope.cache.state.photosFlow = flow;
+			if(imageValidate(file)){
+				var photos = $scope.cache.product.productPhotos;
+				//store the flow so that it can be used to call upload when product is saved.
+				if(!$scope.cache.state.photosFlow){
+					$scope.cache.state.photosFlow = flow;
+				}
+				//add uploaded files to photos for quick display
+				photos.some(function(photo){
+					if(!photo.file){
+						photo.file = file;
+						$scope.photoCount++;
+						return true;
+					}				
+					return false;
+				})
+				$log.debug("photo count: ",$scope.photoCount);
+			  	event.preventDefault();//prevent file from uploading
+			}else{
+				AlertsService.notify($scope.image.errors,"error");
 			}
-			//add uploaded files to photos for quick display
-			photos.some(function(photo){
-				if(!photo.file){
-					photo.file = file;
-					$scope.photoCount++;
-					return true;
-				}				
-				return false;
-			})
-			$log.debug("photo count: ",$scope.photoCount);
-		  	event.preventDefault();//prevent file from uploading
+
 		}	
 
 		$scope.photoRemove = function(id){
@@ -190,6 +196,19 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		    discs[d] = max + "+";
 		    return discs
 	    }
+	    //upload image validation
+	    function imageValidate(file){
+	    	file_extension = file.getExtension();
+			if (file.size > 1024*1024) {
+			    $scope.image.errors = "File cannot bigger than 1MB";
+			    return false;
+			}
+			if (!file_extension == 'png' || file_extension == 'jpg' || file_extension == 'jpeg'){
+				$scope.image.errors = "File can only be png,jpg,jpeg image file.";
+				return false;
+			}
+			return true;
+		}
 
 		init();
 	 }
