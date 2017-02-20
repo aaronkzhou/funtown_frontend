@@ -37,7 +37,7 @@
 			</div>
 			<!-- Manual details form-->
 			<div data-ng-if="showManualDetails()">								
-					<div  class="col-md-8">
+					<div class="col-md-8">
 						<div class="row">	
 							<label class="col-md-3">
 								Title
@@ -46,6 +46,12 @@
 			    				</div>
 							</label>
 							<input size="50" type="text" class="form-control" name="title" ng-model="cache.product.catalog.title" required>
+						</div>
+						<div class="row">	
+							<label class="col-md-3">
+								Year
+							</label>
+							<input size="50" type="text" class="form-control" name="year" ng-model="cache.product.manualcatalog.year" placeholder="Optional">
 						</div>
 						<div class="row">
 							<label for="genre" class="col-md-3">
@@ -56,6 +62,33 @@
 							</label>
 							<button type="button"  name="genre" class="btn btn-select" ng-model="cache.state.manualcatalog.genre" bs-options="genre.value as genre.display for genre in genres" required bs-select>
   				 			Genre<span class="caret"></span>
+						</div>
+						<div class="row">	
+							<label class="col-md-3">
+								Plot
+							</label>
+							<input size="50" type="text" class="form-control" name="plot" ng-model="cache.product.manualcatalog.plot" placeholder="Optional">
+						</div>
+						<div class="row">	
+							<label class="col-md-3">
+								Director
+								<div class="error" ng-messages="configProduct.director.$error">
+			    					<p ng-message="required">Required</p>
+			    				</div>
+							</label>
+							<input size="50" type="text" class="form-control" name="director" ng-model="cache.product.catalog.director" required>
+						</div>
+						<div class="row">	
+							<label class="col-md-3">
+								Starring
+							</label>
+							<input size="50" type="text" class="form-control" name="starring" ng-model="cache.product.manualcatalog.starring" placeholder="Optional">
+						</div>
+						<div class="row">	
+							<label class="col-md-3">
+								Runtime
+							</label>
+							<input size="50" type="text" class="form-control" name="runtime" ng-model="cache.product.manualcatalog.runtime" placeholder="Optional">
 						</div>
 						<div class="row">	
 							<label class="col-md-3">
@@ -70,9 +103,54 @@
 					<div class="ft-catalog-preview"></div>
 			</div>			
 			<div class="col-md-12 separator"></div>
-			<div class="col-md-12" flow-init			
-				flow-file-added="photoAdded($file, $event, $flow)"				
-			>								
+			<div  class="col-md-8">
+				<div class="row">
+					<label class="col-md-3 required" for="region">
+						Region
+						<div class="error" ng-messages="productInfo.region.$error">
+				    		<p ng-message="required">Required</p>
+						</div>
+					</label>
+					<button type="button"  name="region" class="btn btn-select" ng-model="cache.product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" required bs-select>
+	  				 Region<span class="caret"></span>  				
+				</div>
+				<div class="row">
+					<label class="col-md-3 required" for="discs">
+						No. of discs
+						<div class="error" ng-messages="productInfo.discs.$error">
+				    		<p ng-message="required">Required</p>
+						</div>
+					</label>
+					<button type="button" name="discs" class="btn btn-select" ng-model="cache.product.productAttributes.discs" bs-options="disc as disc for disc in discs" required bs-select>
+	  				 Discs<span class="caret"></span>
+	  				 <div class="row" ng-messages="productInfo.discs.$error">
+			    		<p ng-message="required">This field is required</p>
+					</div>
+				</div>
+				<div class="row">
+					<label class="col-md-3 required" for="condition">
+						Condition
+						<div class="error" ng-messages="productInfo.condition.$error">
+				    		<p ng-message="required">Required</p>
+						</div>
+					</label>
+					<button type="button" name="condition" class="btn btn-select" ng-model="cache.product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" required bs-select>
+	  				 Condition<span class="caret"></span>
+				</div>
+				<div class="row">
+					<label class="col-md-3 required" for="classification">
+						NZ Classification
+						<div class="error" ng-messages="productInfo.classification.$error">
+				    		<p ng-message="required">Required</p>
+						</div>
+					</label>
+					<button type="button" name="classification" class="btn btn-select" ng-model="cache.product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" required bs-select>
+	  				 NZ Classifications<span class="caret"></span>
+				</div>
+			</div>
+			<div class="col-md-12 separator"></div>
+			<div class="col-md-12" flow-init flow-file-added="photoAdded($file, $event, $flow)">	
+
 				<div class="row">
 					<label class="col-md-2 no-padding" for="extraDetails">
 						Photos

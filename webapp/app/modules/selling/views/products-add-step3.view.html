@@ -33,50 +33,6 @@
 				</label>
 				<textarea class="form-control" cols="40" rows="6" name="extraDetails" ng-model="cache.product.extraDetail"></textarea>
 			</div>		
-			<div class="separator"></div>
-			<div class="row">
-				<label class="col-md-3 required" for="region">
-					Region
-					<div class="error" ng-messages="productInfo.region.$error">
-			    		<p ng-message="required">Required</p>
-					</div>
-				</label>
-				<button type="button"  name="region" class="btn btn-select" ng-model="cache.product.productAttributes.region" bs-options="region.attributeId as region.display for region in regions" required bs-select>
-  				 Region<span class="caret"></span>  				
-			</div>
-			<div class="row">
-				<label class="col-md-3 required" for="discs">
-					No. of discs
-					<div class="error" ng-messages="productInfo.discs.$error">
-			    		<p ng-message="required">Required</p>
-					</div>
-				</label>
-				<button type="button" name="discs" class="btn btn-select" ng-model="cache.product.productAttributes.discs" bs-options="disc as disc for disc in discs" required bs-select>
-  				 Discs<span class="caret"></span>
-  				 <div class="row" ng-messages="productInfo.discs.$error">
-		    		<p ng-message="required">This field is required</p>
-				</div>
-			</div>
-			<div class="row">
-				<label class="col-md-3 required" for="condition">
-					Condition
-					<div class="error" ng-messages="productInfo.condition.$error">
-			    		<p ng-message="required">Required</p>
-					</div>
-				</label>
-				<button type="button" name="condition" class="btn btn-select" ng-model="cache.product.productAttributes.condition" bs-options="condition.attributeId as condition.display for condition in conditions" required bs-select>
-  				 Condition<span class="caret"></span>
-			</div>
-			<div class="row">
-				<label class="col-md-3 required" for="classification">
-					NZ Classification
-					<div class="error" ng-messages="productInfo.classification.$error">
-			    		<p ng-message="required">Required</p>
-					</div>
-				</label>
-				<button type="button" name="classification" class="btn btn-select" ng-model="cache.product.productAttributes.classification" bs-options="classification.attributeId as classification.display for classification in classifications" required bs-select>
-  				 NZ Classifications<span class="caret"></span>
-			</div>
 		</form>	
 		<div class="ft-card-footer col-md-12 text-center">
             <button class="btn" ui-sref="manage.{{title}}Product.step2">

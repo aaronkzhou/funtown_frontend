@@ -18,7 +18,6 @@ angular.module('selling').controller('AddProductStep3', ['$log','$scope','Attrib
 			}else{
 				$log.warn("Category not yet set.");
 			}			
-			console.log("AddProductStep3:product ",$scope.cache.product);
 		}
 
 		// check if the catalog is created manual or using existing catalog (auto)

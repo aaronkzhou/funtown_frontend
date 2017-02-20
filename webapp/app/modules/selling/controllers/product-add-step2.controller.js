@@ -6,15 +6,22 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var STEP_NO = 2;
 		var MAX_PHOTO_COUNT = 3;
 		var rootCategory,catalogProcessor;
+		var attribute,catalogAttribute;
+		var MAX_DISCS_COUNT = 10;
 
 		function init(){			
 			rootCategory = $scope.cache.state.rootCategory;
 			$log.debug('AddProductStep2::init - ',rootCategory);
+			$scope.discs=getDiscAttribute(MAX_DISCS_COUNT);
 			//Get the correct catalog processor
 			catalogProcessor = new CatalogFactory(rootCategory);
 
 			if($scope.cache.product.category){
 				$scope.genres = AttributeService.getAttributesFor('genre',$scope.cache.product.category.categoryId);
+				$scope.regions = AttributeService.getAttributesFor('region',$scope.cache.product.category.categoryId);
+				$scope.conditions = AttributeService.getAttributesFor('condition',$scope.cache.product.category.categoryId);
+				$scope.classifications = AttributeService.getAttributesFor('NZClassification',$scope.cache.product.category.categoryId);
+				$scope.discs=getDiscAttribute(10);
 			}else{
 				$log.warn("Category not yet set.");
 			}	
@@ -126,8 +133,8 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 				if($scope.cache.product.catalog){
 					$scope.cache.product.catalog.catalogAttributes = [];					
 				}
-				for(var attribute in $scope.cache.state.manualcatalog){
-					var catalogAttribute = {"attributeType": attribute, "attributeValue": $scope.cache.state.manualcatalog[attribute]};
+				for(attribute in $scope.cache.state.manualcatalog){
+					catalogAttribute = {"attributeType": attribute, "attributeValue": $scope.cache.state.manualcatalog[attribute]};
 					$scope.cache.product.catalog.catalogAttributes.push(catalogAttribute);
 				}
 			}
@@ -172,6 +179,17 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 			 	 return photo.file;
 			 }).length
 		}
+		//get the array of discs
+		function getDiscAttribute(max){
+	    	var d =0;
+	    	var discs=[];
+			while ( d < max) {
+		      discs[d] = d+1;
+		      d++;
+		    }
+		    discs[d] = max + "+";
+		    return discs
+	    }
 
 		init();
 	 }
