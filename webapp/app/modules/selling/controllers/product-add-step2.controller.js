@@ -10,7 +10,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var MAX_DISCS_COUNT = 10;
 		var file_extension;
 
-		function init(){			
+		function init(){	
 			rootCategory = $scope.cache.state.rootCategory;
 			$log.debug('AddProductStep2::init - ',rootCategory);
 			$scope.discs=getDiscAttribute(MAX_DISCS_COUNT);

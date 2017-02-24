@@ -1,16 +1,22 @@
-<div class="nav-tab-body">	
+<div class="nav-tab-body" data-ng-if="!getProductCount()">
+	<div  class="ft-card ft-card-padded">
+		No related products found.
+	</div>
+</div>
+
+<div class="nav-tab-body" data-ng-if="getProductCount()">	
 	<div  class="ft-card ft-card-padded">
 		Sort / Search
 	</div>
 	<div  class="ft-card ft-card-padded">
 		<div class="alerts-container">
-			<button class="btn" data-ng-click="activateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
+			<button class="btn" data-ng-click="activateProduct()" ng-disabled="checkLength(productsChosen)" data-ng-if="btnIsVisible && mode !== 'activate'">
 				<i class="fa fa-play"></i> Activate
 			</button>
-			<button class="btn" data-ng-click="deactivateProduct()" ng-disabled="productsChosen.length === 0" ng-if="btnIsVisible">
+			<button class="btn" data-ng-click="deactivateProduct()" ng-disabled="checkLength(productsChosen)" data-ng-if="btnIsVisible && mode !== 'deactivate'">
 				<i class="fa fa-stop"></i> De-Activate
 			</button>
-			<button class="btn"  ng-disabled="productsChosen.length === 0" confirm-alert details={{alertMessage.confirm}}>
+			<button class="btn"  ng-disabled="checkLength(productsChosen)" confirm-alert details={{alertMessage.confirm}}>
 				<i class="fa fa-trash"></i> Delete
 			</button>
 		</div>
@@ -41,7 +47,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr data-ng-repeat="product in products" class="row">
+				<tr data-ng-repeat="product in products" class="row" data-ng-if = "products.length !== 0">
 					<td>
 						<input type="checkbox" data-ng-model="product.selected" data-ng-checked="product.selected" data-ng-click="changeSelectedProducts(product)">
 					</td>
@@ -52,7 +58,7 @@
 					<p class="small no-margin">Last Modified: <span data-ng-bind="product.lastModifiedDate | date: 'dd MMM yyyy hh:mma'"></span></p>
 					</td>
 					<td data-ng-bind="product.status" data-ng-click="editProduct(product.productId)"></td>
-					<td data-ng-bind="product.stock" class="text-right" data-ng-click="editProduct(product.productId)"></td>
+					<td data-ng-bind="product.stock==-1?'Unlimited':product.stock" class="text-right" data-ng-click="editProduct(product.productId)"></td>
 					<td data-ng-bind="product.buyNowPrice" class="text-right" data-ng-click="editProduct(product.productId)"></td>
 					<td data-ng-bind="product.offerPrice" class="text-right" data-ng-click="editProduct(product.productId)"></td>
 					<td data-ng-bind="product.offerDuration"  class="text-right" data-ng-click="editProduct(product.productId)"></td>	
