@@ -27,7 +27,6 @@ angular.module('selling').controller('AddProduct', ['$log','$scope','$http','$st
 			$scope.cache.product = editProduct;		
 			//Cache states across steps
 			$scope.cache.state = {};
-			$scope.cache.product.oldPaymentMethods = $scope.cache.product.paymentMethods;
 			$scope.cache.state.catalogType = 'auto';
 			$scope.cache.state.selectedCatalog = null;
 			$scope.cache.state.productAttributes = [];
