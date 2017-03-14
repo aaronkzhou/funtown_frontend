@@ -1,4 +1,4 @@
-body{	
+body{
 	font-size: 16px;
 	background-color: #F2F2F2;
     color: #333;
@@ -7,7 +7,7 @@ body{
     position: relative;
     min-height: 100%;
     top: 0px;
-    overflow-x:hidden 
+    overflow-x:hidden
 }
 
 a{
@@ -21,10 +21,10 @@ a{
 	&[disabled]{
 				color: #e6e6e6;
 				cursor: not-allowed;
-				pointer-events: none;	
-			}	
+				pointer-events: none;
+			}
 }
-.ft-card-padded{	
+.ft-card-padded{
 	padding: 15px;
 }
 #notification-container{
@@ -47,7 +47,7 @@ a{
 	position: absolute;
 	top:-2px;
 	right: 0;
-	left: 0; 
+	left: 0;
 	margin:0;
 	border-top: 2px solid;
 	line-height: 2;
@@ -55,8 +55,8 @@ a{
 	background: #000;
 	color: #fff;
 	border: 0;
-	border-radius:0; 
-		
+	border-radius:0;
+
 	.close{
 			text-shadow:none;
 			color: #fff;
@@ -110,14 +110,14 @@ label{
 .dropdown-menu > li a{
 	cursor: pointer;
 
-	&:hover{		
+	&:hover{
 		background: transparent;
 		color:#f60;
 	}
 }
 .dropdown-menu > li.active{
-	a, a:hover{		
-		background-color: #f2f2f2;		
+	a, a:hover{
+		background-color: #f2f2f2;
 	   	color:#f60;
 	}
 }
@@ -129,7 +129,7 @@ label{
     border-radius:0;
 }
 .btn-rounded,.btn-rounded:focus,.btn-rounded:hover,.btn-rounded[diabled]:hover{
-	border-radius:30px 
+	border-radius:30px
 }
 .btn-select,.btn-select:focus,.btn-select:hover,.btn-select[diabled]:hover{
 	background: #fff;
@@ -154,7 +154,7 @@ label{
 }
 
 main{
-	position: absolute;	
+	position: absolute;
 	top:120px;
 	width: 100%;
 }
@@ -164,21 +164,21 @@ main{
 	width: 100%;
 	height: 70px;
 	background-color:#fff;
-	border-bottom: 1px solid #e9e9e9; 
+	border-bottom: 1px solid #e9e9e9;
 	z-index: 1000;
 
 	.header-left{
 		position: relative;
 		float: left;
 		color: #e62e04;
-		font-size: 1.5em;	
+		font-size: 1.5em;
 		width: 250px;
 		padding-top: 20px;
 		z-index: 100;
 	}
 	.header-middle{
 		position: relative;
-		padding:15px 0;		    	
+		padding:15px 0;
 	}
 
 	.header-right{
@@ -205,8 +205,8 @@ main{
 
 .search-box{
 	display: table;
-	text-align: center;		
-	padding:0; 	
+	text-align: center;
+	padding:0;
 	height: 40px;
 	width: 50%;
 	input{
@@ -216,7 +216,7 @@ main{
 		padding-left: 15px;
 		border:1px solid #cbcbcb;
 		border-radius: 3px 0 0 3px;
-		border-right:0; 
+		border-right:0;
 		outline: 0;
 	}
 	.search-button{
@@ -242,41 +242,41 @@ main{
 	margin-bottom: 0;
 	.navbar-nav{
 		width: 100%;
-		
+
 		li{
 			text-align: center;
-			
+
 			&.active a,&.active a:hover,&.active a:focus{
 				color:#f60;
 				background: transparent;
 				cursor: default;
 				pointer-events: none;
 			}
-		
+
 			a{
 				color: #333;
 				background: transparent;
-			
+
 				&:hover, &:focus{
 					color:#f60;
 					background: transparent;
-				}	
-				
-			}	
-						
-		}	
+				}
+
+			}
+
+		}
 	}
 }
 
 .ft-side-nav{
 	position: absolute;
 	width: 230px;
-	margin: 5px 15px;		
-	
+	margin: 5px 15px;
+
 	.ft-side-nav-group li{
 		border-left: 3px solid transparent;
 		margin: 0 -15px;
-		padding: 5px 30px; 
+		padding: 5px 30px;
 	}
 	.ft-side-nav-group ul{
 		margin: 0;
@@ -287,12 +287,12 @@ main{
 
 	li.linked{
 		border-left: 3px solid transparent;
-		padding: 5px 12px; 
+		padding: 5px 12px;
 	}
-	
-	li.active {		
+
+	li.active {
 		border-left: 3px solid #f60;
-    	background-color: #f2f2f2;		
+    	background-color: #f2f2f2;
     	cursor: default;
 		pointer-events: none;
     	a{
@@ -320,11 +320,11 @@ main{
 	}
 }
 
-.ft-card{	
+.ft-card{
 	display: block;
 	width: 100%;
 	margin:15px 0;
-	background: #fff;	 
+	background: #fff;
 	border: 1px solid #e9e9e9;
 
 	h4{
@@ -335,7 +335,7 @@ main{
 	    margin: 0;
 	    margin-bottom: 15px;
 	    padding: 10px 0;
-	    background: #f2f2f2;	    
+	    background: #f2f2f2;
 	    background: #e62e04;
 	    color: #fff;
 	}
@@ -343,7 +343,7 @@ main{
 	.ft-card-footer{
 		padding: 15px;
 		width: calc(100% + 30px);
-		margin: 15px 0px -15px -15px;	
+		margin: 15px 0px -15px -15px;
 		border-top: 2px solid #e9e9e9;
 		background: #fafafa;
 	}
@@ -359,7 +359,7 @@ main{
 	}
 
 	.ft-profile{
-		padding: 15px;		
+		padding: 15px;
 	}
 	.ft-profile-member{
 		min-height: 115px;
@@ -368,7 +368,7 @@ main{
 	}
 
 	li{
-		padding: 5px 15px; 
+		padding: 5px 15px;
 	}
 
 }
@@ -377,7 +377,7 @@ main{
 	margin: 15px 0;
 	width: 100%;
 	display: block;
-	border-bottom: 1px solid #e9e9e9; 
+	border-bottom: 1px solid #e9e9e9;
 }
 
 .ft-steps{
@@ -398,23 +398,23 @@ main{
 			vertical-align: middle;
 			text-align: center;
 			width: 25px;
-			height: 25px;	
+			height: 25px;
 	    	line-height: 1.6em;
 	    	background: #f2f2f2;
-			border: 1px solid #e6e6e6;			
-			border-radius:50%; 
-			margin: auto;	
-			
-	    }    
+			border: 1px solid #e6e6e6;
+			border-radius:50%;
+			margin: auto;
+
+	    }
 		.ft-step-text{
 			margin-top: 5px;
 			display: block;
 		}
-		
+
     	&:hover,&:active{
     		.ft-step-num{
-    			
-    		}	
+
+    		}
     	}
 
     	&.active,&.active:hover{
@@ -432,7 +432,7 @@ main{
     	border-right: 0;
     }
 
-    
+
 }
 
 .ft-badge{
@@ -444,7 +444,7 @@ main{
     border-radius: 8px;
     background-color: #e62e04;
     color: #fff;
-    font-size: 12px; 
+    font-size: 12px;
 }
 
 .active .ft-badge{
@@ -461,35 +461,35 @@ main{
 .nav-tabs{
 	margin-top: 15px;
 	border: 0;
-	
-	li{		
+
+	li{
 		margin:0 -1px 0 0;
 		a{
 			padding: 8px 20px;
 			background: #fff;
 			font-size: 0.8em;
 			border-radius:0;
-			border:1px solid #e9e9e9;			
-			margin: 0;		
+			border:1px solid #e9e9e9;
+			margin: 0;
 
 			&:hover,&:focus{
 				background: #fff;
-				border:1px solid #e9e9e9;				
+				border:1px solid #e9e9e9;
 			}
 		}
 
-	}	
-		
+	}
+
 	li.active a,li.active a:hover,li.active a:focus{
 		background: #e62e04;
 		color: #fff;
 		border:1px solid #e62e04;
-		margin: 0;	
+		margin: 0;
 	}
 
 }
 .nav-tab-body{
-	border-top: 2px solid #e62e04;	
+	border-top: 2px solid #e62e04;
 }
 .ft-data-form{
 	padding: 0 15px;
@@ -511,9 +511,9 @@ main{
 .ft-multiselect{
 	margin: 0px 0px;
 	.ft-multiselect-title{
-		background: #e9e9e9;		
-		padding:15px;		
-	}	
+		background: #e9e9e9;
+		padding:15px;
+	}
 	.ft-multiselect-options {
 		list-style: none;
 		border:1px solid #e9e9e9;
@@ -521,46 +521,46 @@ main{
     	padding: 0;
     	max-height: 300px;
     	overflow: hidden;
-    	overflow: scroll; 
+    	overflow: scroll;
 
 		li {
 			padding:0;
-			a{			
+			a{
 				display: block;
 				width: 100%;
 				border-bottom:1px solid #e9e9e9;
 				padding:15px;
 			}
 			a.active{
-		    	background-color: #f2f2f2;		
+		    	background-color: #f2f2f2;
     			color:#f60;
-			}			
-		}	
-	}	
+			}
+		}
+	}
 	.ft-multiselect-selected{
 		background: #fafafa;
 		border:1px solid #e9e9e9;
-		padding: 0 10px; 
+		padding: 0 10px;
 		li {
 			padding:0;
-			a{			
+			a{
 				display: inline-block;
 				padding: 15px 5px 15px 0;
-			}		
+			}
 			a[disabled]{
-				color: #f60;				
-			}		
+				color: #f60;
+			}
 		}
 	}
 }
 .ft-multiselect-selected{
-	list-style: none;	
-	margin: 0;	
+	list-style: none;
+	margin: 0;
 	padding:0;
 	li {
 		padding: 0px 5px 0 0;
-		display: inline-block;					
-	}		
+		display: inline-block;
+	}
 }
 .credit{
 	display: block;
@@ -582,18 +582,18 @@ main{
 	}
 }
 .ft-catalog-poster{
-	border: 1px solid #e9e9e9;    
+	border: 1px solid #e9e9e9;
 }
-.ft-catalog-photo{	
+.ft-catalog-photo{
 	width: 120px;
-	height: 180px;	
+	height: 180px;
 	display: inline-block;
 	margin-right: 10px;
-	border: 1px solid #e9e9e9;	
-	text-align: left;	
+	border: 1px solid #e9e9e9;
+	text-align: left;
 	a{
 		display: inline-block;
-    	position: absolute;   
+    	position: absolute;
     	bottom: -20px;
 	}
 }
@@ -612,7 +612,7 @@ main{
 }
 
 .ft-fieldset-light{
-	background: #fafafa;	
+	background: #fafafa;
 }
 
 .readOnly .form-control{
@@ -623,10 +623,10 @@ main{
 
 .ft-col{
 	display: table-cell;
-	padding: 8px;	
+	padding: 8px;
 	.error{
 		display: block;
-		margin-top:2px; 
+		margin-top:2px;
 	}
 }
 .ft-shipping-costs[disabled]{
@@ -635,7 +635,7 @@ main{
 ol{
 	padding: 0px;
 	list-style-position: inside;
-	
+
 	li{
 		padding: 5px 0!important;
 	}
@@ -648,15 +648,15 @@ ol{
 	text-transform: capitalize;
 
 	h4{
-		font-size: 1.3em;	    
-	    padding: 25px;	
+		font-size: 1.3em;
+	    padding: 25px;
 	    line-height: 1.5
 	}
 
-	small{		
+	small{
 		display: inline-block;
 		color: #ccc;
-		margin:10px 0; 
+		margin:10px 0;
 	}
 }
 
@@ -665,7 +665,7 @@ ol{
 	color:#f60
 }
 .file-upload{
-	visibility: hidden; 
+	visibility: hidden;
 	position: absolute;
 }
 .ft-table-header{
@@ -697,7 +697,7 @@ h3[data-ng-bind="headTitle"]{
 	display: inline-block;
 	vertical-align: middle;
 	span{
-		font-size:0.8em; 
+		font-size:0.8em;
 	}
 }
 .top-buffer{
@@ -716,4 +716,12 @@ h3[data-ng-bind="headTitle"]{
 	font-size: 10px;
 	color: #337ab7;
 	cursor:pointer;
+}
+.mandatoryStar{
+  color: red;
+}
+.dropdown-menu{
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
 }

@@ -7,9 +7,9 @@
 			<div class="separator"></div>
 			<form name="register" novalidate ng-submit="authenticate()">
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="email_address">
-							Email Address:
+							Email Address:<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-8">
@@ -23,9 +23,9 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="username">
-							User Name:
+							User Name:<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-8">
@@ -36,12 +36,12 @@
 						<div class="error" data-ng-if="username_exist">
 				    		<p>This username has been used</p>
 						</div>
-					</div>	
+					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="password">
-							Password:
+							Password:<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-8">
@@ -52,9 +52,9 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="confirm_password">
-							Confirm Your Password:
+							Confirm Your Password:<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-8">
@@ -65,13 +65,13 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label>
-							Full Name
+							Full Name<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" size="30" name="fullName" placeholder="eg. David Bowie" class="form-control" data-ng-model="userRegister.fullName" required>
+						<input type="text" size="30" name="fullName" placeholder="e.g. David Bowie" class="form-control" data-ng-model="userRegister.fullName" required>
 						<div for="error" class="error" ng-messages="register.fullName.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required">Please input your full name</p>
 						</div>
@@ -79,10 +79,10 @@
 				</div>
 				<div class="row top-buffer">
 					<div class="col-md-4" class="gender">
-						<label for="gender">Gender</label>
+						<label for="gender">Gender<span class = "mandatoryStar">*</span></label>
 					</div>
 					<div class="col-md-8">
-						<input type="radio" name="genderOptions" value="male" data-ng-model="userRegister.genderOptions" required> 
+						<input type="radio" name="genderOptions" value="male" data-ng-model="userRegister.genderOptions" required>
 						<label for="genderMale">Male</label>
 						<input type="radio" name="genderOptions" value="female" data-ng-model="userRegister.genderOptions" required>
 						<label for="genderFemale">Female</label>
@@ -92,9 +92,32 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
+					<div class="col-md-4" class = "dateOfBirth">
+						<label for "dateOfBirth">Date of birth <span class="mandatoryStar">*</span></label>
+					</div>
+					<div class="col-md-3">
+							<button type="button" name="months" class="btn btn-select" placeholder="Month of your birthday" ng-model="userRegister.months" bs-options="monthsFunc for monthsFunc in userRegister.monthsFunc" required bs-select>
+					</div>
+					<div class="col-md-3">
+							<button type="button" name="days" class="btn btn-select" placeholder="Date of your birthday" ng-model="userRegister.days" bs-options="daysFunc for daysFunc in userRegister.daysFunc"  required bs-select>
+					</div>
+					<div class="col-md-1">
+						<input type="text" size="20" name="yearOfBirthday" placeholder="Year of your birthday" ng-model="userRegister.years" class="form-control" required>
+						<div for="error" class="error" ng-messages="register.yearOfBirthday.$error" data-ng-if="userRegister.authenticated">
+							<p ng-message="required">*required</p>
+						</div>
+					</div>
+					<div class="test">
+						<img class="test1">
+
+						</img>
+					</div>
+
+				</div>
+				<div class="row top-buffer">
 					<div class="col-md-4">
 						<label for="landline">
-							Landline details:
+							Landline details:<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-3">
@@ -113,12 +136,12 @@
 						<div for="error" class="error" ng-messages="register.landlineNum.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required">*required</p>
 						</div>
-					</div>	
+					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="phone">
-							Contact details:
+							Mobile Phone Number<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-3">
@@ -129,7 +152,7 @@
   					    <div for="error" class="error" ng-messages="register.phoneAreaCode.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required">*required</p>
 						</div>
-					</div>				
+					</div>
 					<div class="col-md-4">
 						<div>
 							<input type="text" size="20" name="phoneNum" placeholder="Contact Number" ng-model="userRegister.phoneNum" class="form-control" required>
@@ -137,10 +160,10 @@
 						<div for="error" class="error" ng-messages="register.phoneNum.$error" data-ng-if="userRegister.authenticated">
 				    		<p ng-message="required">*required</p>
 						</div>
-					</div>	
+					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="address_finder">
 							Address Finder
 						</label>
@@ -158,7 +181,7 @@
 					</div>
 				</div>
 				<div class="row top-buffer" data-ng-if="userRegister.address||userRegister.getFromGoogleApi==false">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="address">
 							Address
 						</label>
@@ -177,7 +200,7 @@
 					</div>
 				</div>
 				<div class="row top-buffer" data-ng-if="userRegister.surburb||userRegister.getFromGoogleApi==false">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="surburb">
 							Surburb
 						</label>
@@ -190,7 +213,7 @@
 					</div>
 				</div>
 				<div class="row top-buffer" data-ng-if="userRegister.city||userRegister.getFromGoogleApi==false">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="city">
 							City
 						</label>
@@ -203,7 +226,7 @@
 					</div>
 				</div>
 				<div class="row top-buffer" data-ng-if="userRegister.postcode||userRegister.getFromGoogleApi==false">
-					<div class="col-md-4">	
+					<div class="col-md-4">
 						<label for="postcode">
 							Post Code
 						</label>
@@ -220,8 +243,8 @@
 					<p id="TnCContainer" align="center">
 						<span name="TnCCheckbox">
 							<input id="TnCCheckbox" type="checkbox" name="TnCCheckbox" data-ng-model="userRegister.TnCCheckbox">
-						</span> 
-						I am over 18 and have read and accept Funtown's 
+						</span>
+						I am over 18 and have read and accept Funtown's
 						<a ui-sref="register.termsAndCondition" target="_blank">terms and conditions</a>
 					</p>
 					<div for="error" class="error" data-ng-if="!userRegister.TnCCheckbox && userRegister.authenticated">
@@ -232,6 +255,9 @@
 					<button type="submit" class="btn buttom-buffer">Join Funtown</button>
 				</div>
 				<br>
+
+
+
 
 			</form>
 		</div>
