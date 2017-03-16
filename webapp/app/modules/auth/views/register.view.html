@@ -108,26 +108,7 @@
 					</div>
 					<div class="col-md-3">
 						<div>
-							<button type="button" name="DateOfBirthDay" class="btn btn-select" ng-model="userRegister.BirthDay" bs-options="DateOfBirthDay for DateOfBirthDay in userRegister.DateOfBirthDay" required bs-select>
-						</div>
-						<div for="error" class="error" ng-messages="register.DateOfBirthDay.$error" data-ng-if="userRegister.authenticated">
-								<p ng-message="required">*required</p>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div>
-							<button type="button" name="DateOfBirthMonth" class="btn btn-select" ng-model="userRegister.BirthMonth" bs-options="DateOfBirthMonth for DateOfBirthMonth in userRegister.DateOfBirthMonth" required bs-select>
-						</div>
-						<div for="error" class="error" ng-messages="register.DateOfBirthMonth.$error" data-ng-if="userRegister.authenticated">
-								<p ng-message="required">*required</p>
-						</div>
-					</div>
-					<div class="col-md-2">
-						<div>
-							<input type="text" size="20" name="DateOfBirthYear" placeholder="Year" ng-model="userRegister.BirthYear" class="form-control" required>
-						</div>
-						<div for="error" class="error" ng-messages="register.DateOfBirthYear.$error" data-ng-if="userRegister.authenticated">
-								<p ng-message="required">*required</p>
+							<input type="date" size="20" name="datepicker" class="form-control" ng-model="userRegister.dateOfBirth" required>
 						</div>
 					</div>
 			  </div>
