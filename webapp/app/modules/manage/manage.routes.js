@@ -90,6 +90,9 @@ angular.module('manage').config(['$stateProvider',
 					return ProductsListService.getProductsOfStatus("ACTIVE");
 				}
 			},
+			params:{
+				activateMode:'activate'
+			},
 			controller:'ProductsList',
 			data: {
 				authRequired: true
@@ -129,6 +132,9 @@ angular.module('manage').config(['$stateProvider',
 				products: function(ProductsListService){
 					return ProductsListService.getProductsOfStatus("DE_ACTIVE");
 				}
+			},
+			params:{
+				activateMode:'deactivate'
 			},
 			controller:'ProductsList',
 			data: {

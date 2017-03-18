@@ -565,8 +565,3 @@ h3[data-ng-bind="headTitle"] {
 
 .mandatoryStar {
   color: red; }
-
-.dropdown-menu {
-  max-height: 400px;
-  overflow: hidden;
-  overflow-y: auto; }

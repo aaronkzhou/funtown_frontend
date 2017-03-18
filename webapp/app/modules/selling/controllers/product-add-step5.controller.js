@@ -8,7 +8,8 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		var oldTemplate = null;
 		var specificShippingTemplate;
 		var selectedPayment;
-		var oldPaymentMethods;
+		var selectedPaymentMethods;
+
 		function init(){
 			$log.debug("AddProductStep5::init");
 			$scope.alertMessage.edit = {
@@ -25,14 +26,30 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 										  		{name:'No'}]
 										 };
 						
-			$scope.templateReadOnly = true;			
-			
+			$scope.templateReadOnly = true;	
+
+			if(!$scope.pid && !$scope.cache.product.paymentMethods){
+				$scope.cache.product.paymentMethods = [];
+				$scope.cache.product.paymentMethods.cached = false;	
+				selectedPayment = $scope.cache.product.paymentMethods;
+				console.log(selectedPayment)
+			}
+			if (!$scope.cache.product.paymentMethods.cached) {
+				$scope.cache.product.paymentMethods.cached = false;	
+				selectedPayment = $scope.cache.product.paymentMethods;
+				console.log(selectedPayment)
+				
+			}
+
+			// if($scope.cache.product.selectedPaymentMethods){
+			// 	selectedPayment = $scope.cache.product.selectedPaymentMethods;
+			// 	console.log(selectedPayment)
+			// }
 			if($scope.cache.product.category){
 				$scope.shippingRates = AttributeService.getAttributesFor('shippingRates',$scope.cache.product.category.categoryId);
 			}else{
 				$log.warn("Category not yet set.");
 			}			
-			console.log($scope.cache.product);
 			ShippingTempalateService.getShippingTemplates().then(function(response){
 				$log.debug('getShippingTemplates');
 				$scope.templates = response;
@@ -50,34 +67,49 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				//Shipping options in final product
 				$scope.cache.product.shippingCosts = [];
 				//Shipping cost options added by user - state level
-				$scope.cache.state.shippingCosts = []	
+				$scope.cache.state.shippingCosts = [];
 			}
 						
 			//hide shipping options if chose "must pick-up" in last version
 			if($scope.cache.state.pickUp === 'mustPickup'){
 				$scope.shippingDisabled = true;
 			}	
-
-			if($scope.cache.product.category){
-				if($scope.cache.product.oldPaymentMethods){
-					selectedPayment = $scope.cache.product.oldPaymentMethods;	
+			if ($scope.pid){
+				if($scope.cache.product.category && !$scope.cache.product.paymentMethods.cached){
+					$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
+					$scope.cache.product.paymentMethods.map(function(paymentMethod){
+					return paymentMethod.selected = false;
+					});
+					if(selectedPayment){
+						$scope.cache.product.paymentMethods.forEach(function(item){
+							selectedPayment.forEach(function(selectedItem){
+								if(selectedItem.attributeId == item.attributeId){
+									item.selected = true;
+								}
+							})	
+						});
+					}
+					$scope.cache.product.paymentMethods.cached = true;
 				}
-
-				$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
+			}else{
+				if($scope.cache.product.category && !$scope.cache.product.paymentMethods.cached){
+					$scope.cache.product.paymentMethods = AttributeService.getAttributesFor('paymentMethods',$scope.cache.product.category.categoryId);
 					$scope.cache.product.paymentMethods.map(function(paymentMethod){
 						return paymentMethod.selected = false;
 					});
-				if(selectedPayment){
-					$scope.cache.product.paymentMethods.forEach(function(item){
-						selectedPayment.forEach(function(selectedItem){
-							if(selectedItem.attributeId == item.attributeId){
-								item.selected = true;
-							}
-						})	
-					});
+					if(selectedPayment.length !== 0){
+						$scope.cache.product.paymentMethods.forEach(function(item){
+							selectedPayment.forEach(function(selectedItem){
+								if(selectedItem.attributeId == item.attributeId){
+									item.selected = true;
+								}
+							})	
+						});
+					}
+					$scope.cache.product.paymentMethods.cached = true
+				}else{
+					$log.warn("Category not yet set.");
 				}
-			}else{
-				$log.warn("Category not yet set.");
 			}
 		}
 

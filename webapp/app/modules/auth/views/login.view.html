@@ -13,21 +13,21 @@
     		<p ng-message="required">Please enter your password.</p>
 		</div>
 		<form name="login" novalidate ng-submit="authenticate()">
-			<div>	
+			<div>
 				<label>
 					Account:
 				</label>
 				<input type="text" name="username" data-ng-model="credentials.username" placeholder="Email address or member ID" class="form-control" required>
 			</div>
 			<br>
-			<div>	
+			<div>
 				<label>
 					Password:
-					<a href="" class="active pull-right"><small>Forgot Password?</small></a>
+					<a ui-sref="passwordRemainder" class="active pull-right"><small>Forgot Password?</small></a>
 				</label>
 				<input type="password" name="password" data-ng-model="credentials.password" placeholder="Password" class="form-control" required>
 			</div>
-			<br>	
+			<br>
 			<button type="submit" class="btn">Sign In</button>
 		</form>
 		<div class="separator"></div>

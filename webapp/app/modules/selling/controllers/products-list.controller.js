@@ -1,23 +1,27 @@
 'use strict';
-angular.module('selling').controller('ProductsList', ['$log','$scope','$state','ProductsListService','products',
-	function($log,$scope,$state,ProductsListService,products){
+angular.module('selling').controller('ProductsList', ['$log','$scope','$state','ProductsListService','products','$stateParams',
+	function($log,$scope,$state,ProductsListService,products,$stateParams){
 		$log.debug("ProductsList controller::init");
 		$scope.products = products;
 		$scope.btnIsVisible = true;
 		$scope.productsChosen = [];
+        $scope.mode = $stateParams.activateMode;
 
 		function init(){
-			var status = $scope.products[0].status;
+            if($scope.products.length !== 0){
+			     var status = $scope.products[0].status;
+            }
 			if(status === "In-Draft"){
 				$scope.btnIsVisible = false;
 			}
 			$scope.alertMessage={};
 			$scope.alertMessage.confirm = {
-											message: "You want to delete the selected products permanently.",
-										  	buttons:[
-										  		{name:'Yes',action:"deleteProducts"},
-										  		{name:'No'}]
-										  };
+				message: "You want to delete the selected products permanently.",
+			  	buttons:[
+			  		{name:'Yes',action:"deleteProducts"},
+			  		{name:'No'}]
+			};
+
 		}
 
 		$scope.changeSelectedProducts = function(product){			
@@ -105,6 +109,12 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 			$log.debug('editProduct',productId);
 			$state.go("manage.editProduct.step1",{pid:productId})
 		}
+        $scope.checkLength = function(productsChosen){
+            return productsChosen.length === 0;
+        }
+        $scope.getProductCount = function(){
+            return $scope.products.length == 0?false:true;
+        }
 
 		init();
 	}

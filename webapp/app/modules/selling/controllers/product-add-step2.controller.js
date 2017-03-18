@@ -10,7 +10,7 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		var MAX_DISCS_COUNT = 10;
 		var file_extension;
 
-		function init(){			
+		function init(){	
 			rootCategory = $scope.cache.state.rootCategory;
 			$log.debug('AddProductStep2::init - ',rootCategory);
 			$scope.discs=getDiscAttribute(MAX_DISCS_COUNT);
@@ -115,17 +115,17 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 
 		// check if the next button should be enabled
 		$scope.isNextDisabled = function(){
-			if($scope.cache.state.catalogType === 'auto' && $scope.cache.product.catalog && $scope.cache.product.catalog!==null){
+			if($scope.cache.state.catalogType === 'auto' && $scope.cache.product.catalog && $scope.cache.product.catalog!==null && $scope.cache.product.productAttributes.classification && $scope.cache.product.productAttributes.condition && $scope.cache.product.productAttributes.discs && $scope.cache.product.productAttributes.region){
 				$scope.stepCompleted(STEP_NO);
 				return false;
-			}else if($scope.cache.state.catalogType === 'manual' && $scope.configProduct && $scope.configProduct.$valid){
+			}else if($scope.cache.state.catalogType === 'manual' && $scope.configProduct && $scope.configProduct.$valid && $scope.cache.product.productAttributes.classification && $scope.cache.product.productAttributes.condition && $scope.cache.product.productAttributes.discs && $scope.cache.product.productAttributes.region){
 				$scope.stepCompleted(STEP_NO);
 				storeManualCatalog();
 				return false;
 			}else{
 				$scope.updoStepCompleted(STEP_NO);
-				return true;	
-			}			
+				return true;
+			}	
 		}
 
 		//store the manualcatalog into product

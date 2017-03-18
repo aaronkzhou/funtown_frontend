@@ -27,5 +27,15 @@ angular.module('auth').config(['$stateProvider',
 		}
 
 		)
+		.state('passwordRemainder',{
+			url:'/passwordRemainder',
+			controller:'passwordRemainderController',
+			templateUrl:'app/modules/auth/views/passwordRemainder.view.html',
+			data:{
+				authrequired : false
+			}
+		}
+
+		)
 	}
 ])
