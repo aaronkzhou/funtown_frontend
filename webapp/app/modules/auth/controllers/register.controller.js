@@ -48,6 +48,7 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			$scope.userRegister.surburb = "";
 			$scope.userRegister.city = "";
 			$scope.userRegister.address = "";
+			$scope.userRegister.myDate = "";
 		}
 		// $scope.getAddress = function(viewValue) {
 		//     params = {

@@ -92,28 +92,20 @@
 					</div>
 				</div>
 				<div class="row top-buffer">
-					<div class="col-md-4" class = "dateOfBirth">
-						<label for "dateOfBirth">Date of birth <span class="mandatoryStar">*</span></label>
-					</div>
-					<div class="col-md-3">
-							<button type="button" name="months" class="btn btn-select" placeholder="Month of your birthday" ng-model="userRegister.months" bs-options="monthsFunc for monthsFunc in userRegister.monthsFunc" required bs-select>
-					</div>
-					<div class="col-md-3">
-							<button type="button" name="days" class="btn btn-select" placeholder="Date of your birthday" ng-model="userRegister.days" bs-options="daysFunc for daysFunc in userRegister.daysFunc"  required bs-select>
-					</div>
-					<div class="col-md-1">
-						<input type="text" size="20" name="yearOfBirthday" placeholder="Year of your birthday" ng-model="userRegister.years" class="form-control" required>
-						<div for="error" class="error" ng-messages="register.yearOfBirthday.$error" data-ng-if="userRegister.authenticated">
-							<p ng-message="required">*required</p>
-						</div>
-					</div>
-					<div class="test">
-						<img class="test1">
-
-						</img>
-					</div>
-
+					<div class="col-md-4">
+						<label >Date of birth <span class="mandatoryStar">*</span></label>
 				</div>
+				<div class="col-md-3">
+					<div>
+						<input type="date" size="20" name = "datePanel" class="form-control" ng-model = 'userRegister.myDate'>
+					</div>
+				</div>
+				<div>
+					<div for="error" class="error" ng-messages="register.myDate.$error" data-ng-if="userRegister.authenticated">
+					<p ng-message="required">*required</p>
+					</div>
+				</div>
+			</div>
 				<div class="row top-buffer">
 					<div class="col-md-4">
 						<label for="landline">
