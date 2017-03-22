@@ -1,9 +1,9 @@
-<div class="alert" ng-class="[type ? 'alert-' + type : null]">
+<div class="alert" ng-class="[type ? 'alert-' + type : null]" data-ng-init="content = contentTransfer(content)">
   <button type="button" class="close" ng-if="dismissable" ng-click="$hide()">&times;</button>
   <i class="fa fa-exclamation-triangle fa-lg "></i>
   <span ng-if="title">
-    <strong ng-bind="title"></strong>&nbsp;<span ng-bind-html="content"></span>
+    <strong ng-bind="title"></strong>&nbsp;<span ng-bind-html = "content.message"></span>
   </span>
-  <span ng-if="!title" ng-bind-html="content"></span>
-  <button data-ng-repeat="button in buttons"  class="btn btn-rounded" data-ng-click="button.action?this[button.action]():'';$hide()" data-ng-bind="button.name"></button>
+  <span ng-if="!title" ng-bind-html="content.message"></span>
+  <button data-ng-repeat="button in content.buttons"  class="btn btn-rounded" data-ng-click="button.action?this[button.action]():'';$hide()" data-ng-bind="button.name"></button>
 </div>

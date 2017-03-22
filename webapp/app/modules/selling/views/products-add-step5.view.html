@@ -122,11 +122,13 @@
 											<i class="icon fa fa-minus-circle"></i>
 										</a>									
 									</div>
-								</div>	
+								</div>
+								<div>
 									<a class="ft-col" href="" data-ng-click="editTemplateAddCost()" data-ng-show="!templateReadOnly">
 										<i class="icon fa fa-plus-circle"></i>
 										Add another shipping option
 									</a>
+								</div>
 							</fieldset>
 							<div  class="alerts-container" data-ng-show="cache.templateDisplay">
 								<a class="ft-col"  href="" data-ng-show="templateReadOnly" data-ng-click="processEditTemplate()"><i class="fa fa-pencil"></i>
@@ -134,7 +136,7 @@
 								<a class="ft-col" href="" data-ng-show="templateReadOnly" confirm-alert details={{alertMessage.delete}}><i class="fa fa-trash"></i>
 								 Delete</a>
 								
-								<a class="ft-col" href="" data-ng-show="!isEdit()" data-ng-disabled="cannotSave" data-ng-click="createTemplate()">Create</a>
+								<a class="ft-col" href="" data-ng-show="!isEdit() && mode" data-ng-disabled="cannotSave" data-ng-click="createTemplate()">Create</a>
 
 								<a class="ft-col" href="" data-ng-show="!templateReadOnly && isEdit()" confirm-alert details={{alertMessage.edit}} data-ng-disabled="cannotSave">Update</a>
 								<a class="ft-col" href="" data-ng-show="!templateReadOnly" data-ng-click="cancelEditTemplate()">Cancel</a>	

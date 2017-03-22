@@ -13,18 +13,18 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 		function init(){
 			$log.debug("AddProductStep5::init");
 			$scope.alertMessage.edit = {
-											message: "You want to save the modifications to this template.",
-										  	buttons:[
-										  		{name:'Yes',action:"saveEditTemplate"},
-										  		{name:'No'}]
-										  };
+				message: "You want to save the modifications to this template.",
+			  	buttons:[
+			  		{name:'Yes',action:"saveEditTemplate"},
+			  		{name:'No'}]
+			};
 
 			$scope.alertMessage.delete = {
-										  message: "You want to delete this template.",
-										  buttons:[
-										  		{name:'Yes',action:"deleteTemplate"},
-										  		{name:'No'}]
-										 };
+				message: "You want to delete this template.",
+				buttons:[
+						{name:'Yes',action:"deleteTemplate"},
+						{name:'No'}]
+			};
 						
 			$scope.templateReadOnly = true;	
 
@@ -360,7 +360,9 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				return paymentMethod.selected;
 			})				
 		}
-
+		$scope.contentTransfer = function(content){
+			return JSON.parse(content)
+		}
 		// check if the next button should be enabled
 		$scope.$watch("shippingInfo.$valid",function(validity){
 			if($scope.shippingInfo.$valid){

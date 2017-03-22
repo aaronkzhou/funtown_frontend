@@ -12,7 +12,6 @@ angular.module('selling').controller('AddProductStep1', ['$log','$scope','Catego
 			if($scope.cache.product.category){
 
 				getPathCategories($scope.cache.state.categoryPath[$scope.cache.state.categoryPath.length-1]);
-				console.log($scope.cache.state.categoryPath);
 				$log.debug('AddProductStep1::categories',$scope.cache.product.category);
 				CategoryService.getCategories($scope.cache.product.category,true).then(function(categories){
 					$scope.categories  = categories;
