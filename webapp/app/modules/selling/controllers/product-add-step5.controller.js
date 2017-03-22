@@ -15,7 +15,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			$scope.alertMessage.edit = {
 				message: "You want to save the modifications to this template.",
 			  	buttons:[
-			  		{name:'Yes',action:"saveEditTemplate"},
+			  		{name:'Yes',action:"editTemplate"},
 			  		{name:'No'}]
 			};
 
@@ -361,7 +361,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 			})				
 		}
 		$scope.contentTransfer = function(content){
-			return JSON.parse(content)
+			return JSON.parse(content);
 		}
 		// check if the next button should be enabled
 		$scope.$watch("shippingInfo.$valid",function(validity){
