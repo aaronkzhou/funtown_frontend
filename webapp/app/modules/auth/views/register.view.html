@@ -9,8 +9,7 @@
 				<div class="row top-buffer">
 					<div class="col-md-4">
 						<label for="email_address">
-							Email Address:
-							<span class="mandatoryStar">*</span>
+							Email Address:<span class = "mandatoryStar">*</span>
 						</label>
 					</div>
 					<div class="col-md-8">
@@ -112,6 +111,21 @@
 						</div>
 					</div>
 			  </div>
+				<div class="row top-buffer">
+					<div class="col-md-4">
+						<label >Date of birth <span class="mandatoryStar">*</span></label>
+				</div>
+				<div class="col-md-3">
+					<div>
+						<input type="date" size="20" name = "datePanel" class="form-control" ng-model = 'userRegister.myDate'>
+					</div>
+				</div>
+				<div>
+					<div for="error" class="error" ng-messages="register.myDate.$error" data-ng-if="userRegister.authenticated">
+					<p ng-message="required">*required</p>
+					</div>
+				</div>
+			</div>
 				<div class="row top-buffer">
 					<div class="col-md-4">
 						<label for="landline">
@@ -255,6 +269,9 @@
 					<button type="submit" class="btn buttom-buffer">Join Funtown</button>
 				</div>
 				<br>
+
+
+
 
 			</form>
 		</div>

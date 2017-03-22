@@ -102,7 +102,8 @@ label {
   background: #e62e04;
   color: #fff;
   border: 1px solid #e62e04;
-  border-radius: 0; }
+  border-radius: 0;
+  margin-bottom: 9px; }
 
 .btn-rounded, .btn-rounded:focus, .btn-rounded:hover, .btn-rounded[diabled]:hover {
   border-radius: 30px; }
@@ -565,3 +566,8 @@ h3[data-ng-bind="headTitle"] {
 
 .mandatoryStar {
   color: red; }
+
+.dropdown-menu {
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: auto; }

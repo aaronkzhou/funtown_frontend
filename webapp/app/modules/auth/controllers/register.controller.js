@@ -29,6 +29,11 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			$scope.userRegister.PhoneCode = "";
 			$scope.userRegister.LandlineCode = "";
 			$scope.userRegister.TnCCheckbox = false;
+			$scope.userRegister.monthsFunc = getMonths();
+			$scope.userRegister.months= "";
+			$scope.userRegister.daysFunc = getDays();
+			$scope.userRegister.days= "";
+
 			initAutocomplete();
 		}
 		$scope.authenticate = function(){
@@ -44,6 +49,7 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 			$scope.userRegister.surburb = "";
 			$scope.userRegister.city = "";
 			$scope.userRegister.address = "";
+			$scope.userRegister.myDate = "";
 		}
 		// $scope.getAddress = function(viewValue) {
 		//     params = {
