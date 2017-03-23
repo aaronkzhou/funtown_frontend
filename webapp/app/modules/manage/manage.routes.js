@@ -3,17 +3,17 @@ angular.module('manage').config(['$stateProvider',
 	function($stateProvider) {
 		$stateProvider
 		.state('manage',{
-			url:'/manage',			
+			url:'/manage',
 			controller:function($state){
-			 	//Render child view			
+			 	//Render child view
 				if($state.current.name==='manage'){
-					$state.go("manage.home");	
-				}		
-			}, 					
+					$state.go("manage.home");
+				}
+			},
 			templateUrl:'app/modules/manage/views/manage-side-nav.view.html',
 			data: {
 				authRequired: true
-            }				
+            }
 		})
 		.state('manage.home',{
 			url:'/home',
@@ -21,7 +21,14 @@ angular.module('manage').config(['$stateProvider',
 			templateUrl:'app/modules/manage/views/manage.view.html',
 			data: {
 				authRequired: true
-            }				
+            }
+		})
+		.state('manage.changePassword',{
+			url:'/changePassword',
+			templateUrl:'app/modules/manage/views/changePassword.view.html',
+			data: {
+				authRequired: true
+            }
 		})
 		//Accounts
 		.state('manage.funtownAccount',{
@@ -83,7 +90,7 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.products.ACTIVE',{
-			url:'/selling',			
+			url:'/selling',
 			templateUrl:'app/modules/selling/views/products-list.view.html',
 			resolve:{
 				products: function(ProductsListService){
@@ -97,10 +104,10 @@ angular.module('manage').config(['$stateProvider',
 			data: {
 				authRequired: true
             }
-			
+
 		})
 		.state('manage.products.SOLD',{
-			url:'/sold',			
+			url:'/sold',
 			templateUrl:'app/modules/selling/views/products-list.view.html',
 			resolve:{
 				products: function(ProductsListService){
@@ -154,10 +161,10 @@ angular.module('manage').config(['$stateProvider',
 				authRequired: true
             }
 		})
-		
+
 		//addProduct
 		.state('manage.addProduct',{
-			controller:'AddProduct',			
+			controller:'AddProduct',
 			url:'/addProduct',
 			templateUrl:'app/modules/selling/views/products-add.view.html',
 			resolve:{
@@ -176,14 +183,14 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 		.state('manage.addProduct.step1',{
-			controller:'AddProductStep1',		
+			controller:'AddProductStep1',
 			templateUrl:'app/modules/selling/views/products-add-step1.view.html',
 			data: {
 				authRequired: true
             }
 		})
 		.state('manage.addProduct.step2',{
-			controller:'AddProductStep2',	
+			controller:'AddProductStep2',
 			templateUrl:'app/modules/selling/views/products-add-step2.view.html',
 			data: {
 				authRequired: true
