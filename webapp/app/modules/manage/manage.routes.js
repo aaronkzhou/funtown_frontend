@@ -21,7 +21,14 @@ angular.module('manage').config(['$stateProvider',
 			templateUrl:'app/modules/manage/views/manage.view.html',
 			data: {
 				authRequired: true
-            }				
+            }
+		})
+		.state('manage.editProfile',{
+			url:'/editProfile',
+			templateUrl:'app/modules/manage/views/editProfile.view.html',
+			data: {
+				authRequired: true
+            }
 		})
 		//Accounts
 		.state('manage.funtownAccount',{
