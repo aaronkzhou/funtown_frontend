@@ -36,7 +36,7 @@ angular.module('manage').config(['$stateProvider',
 			data: {
 				authRequired: true
       }
-		})
+      })
 		//Accounts
 		.state('manage.funtownAccount',{
 			url:'/funtownAccount',
