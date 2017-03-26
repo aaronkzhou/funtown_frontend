@@ -360,9 +360,7 @@ angular.module('selling').controller('AddProductStep5', ['$log','$scope','Attrib
 				return paymentMethod.selected;
 			})				
 		}
-		$scope.contentTransfer = function(content){
-			return JSON.parse(content);
-		}
+		
 		// check if the next button should be enabled
 		$scope.$watch("shippingInfo.$valid",function(validity){
 			if($scope.shippingInfo.$valid){
