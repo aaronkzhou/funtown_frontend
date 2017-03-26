@@ -27,7 +27,8 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 		}
 
 		$scope.changeSelectedProducts = function(product){	
-		$log.debug('changeSelectedProducts');		
+		$log.debug('changeSelectedProducts');
+		$log.debug('select',product.selected);		
 			//select one product
 			if(product.selected === true && $scope.productsChosen.indexOf(product) === -1){
 				$scope.productsChosen.push(product);
@@ -39,7 +40,7 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 			}//unselect products
 			else if(product.selected === false && $scope.productsChosen.indexOf(product) !== -1){
 				$scope.productsChosen.splice($scope.productsChosen.indexOf(product),1);
-				//$scope.chooseAll = false;
+				$scope.chooseAll = false;
 				$log.debug('SelectedProducts',$scope.productsChosen);
 			}			
 		}
@@ -47,9 +48,16 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 		$scope.selectAll = function(){
 			if($scope.productsChosen.length === $scope.products.length){
 				$scope.productsChosen = [];
+				$scope.products.forEach(function(product){
+					product.selected = false;
+				})
 				$log.debug('unselectAll',$scope.productsChosen);
 			}else {
-				$scope.productsChosen = $scope.products;
+				$scope.productsChosen = [];
+				$scope.products.forEach(function(product){
+					$scope.productsChosen.push(product);
+					product.selected = true;
+				})
 				$log.debug('selectAll',$scope.productsChosen);
 			}
 		}
