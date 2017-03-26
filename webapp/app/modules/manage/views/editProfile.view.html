@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="ft-card row">
+    <div class="col-md-12">
+      <div>
+				<h1>Edit Profile</h1>
+			</div>
+      <div class="separator"></div>
+      <form name="profile" novalidate ng-submit="authenticate()">
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="fullname">
+							Full Name:
+							<span class="mandatoryStar">*</span>
+						</label>
+					</div>
+					<div class="col-md-4">
+						<input type="text" size="30" name="fullname" value="Kedar Krishnan" class="form-control" required>
+					</div>
+				</div>
+        <div class="row top-buffer">
+					<div class="col-md-3" class="gender">
+						<label for="gender">
+							Gender
+							<span class="mandatoryStar">*</span>
+						</label>
+					</div>
+          <div class="col-md-4">
+            <input type="radio" name="genderOptions" value="male" checked="checked" required>
+						<label for="genderMale">Male</label>
+						<input type="radio" name="genderOptions" value="female" required>
+						<label for="genderFemale">Female</label>
+          </div>
+        </div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="landline">
+							Landline details:
+							<span class="mandatoryStar">*</span>
+						</label>
+					</div>
+          <div class="col-md-2">
+            <div>
+							<button type="button" name="landlineAreaCode" class="btn btn-select" required bs-select>
+	  					    <span class="caret"></span>
+						</div>
+          </div>
+          <div class="col-md-3">
+						<div>
+							<input type="text" size="20" name="landlineNum" placeholder="Contact Number" class="form-control" required>
+						</div>
+					</div>
+        </div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="phone">
+							Mobile Phone Number:
+							<span class="mandatoryStar">*</span>
+						</label>
+					</div>
+          <div class="col-md-2">
+						<div>
+              <button type="button" name="phoneAreaCode" class="btn btn-select" required bs-select>
+	  					    <span class="caret"></span>
+            </div>
+					</div>
+          <div class="col-md-3">
+            <div>
+							<input type="text" size="20" name="phoneNum" value="4315111" class="form-control" required>
+						</div>
+					</div>
+        </div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="address_finder">
+							Address Finder
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input id="addressAutoComplete" class="form-control" placeholder="Enter your address" type="text" size="40">
+						<div for="canNotFindAddress">
+							<a class="canNotFindAddress" data-ng-click="canNotFindYourAddress()">Cannot Find your address?</a>
+						</div>
+					</div>
+				</div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="address">
+							Address
+              <span class="mandatoryStar">*</span>
+						</label>
+					</div>
+          <div class="col-md-8">
+						<div>
+							<input type="text" size="40" name="address" value="116" class="form-control" disabled="true" required>
+						</div>
+						<br>
+						<div>
+							<input type="text" size="40" name="address" value="10 Ronayne Street" class="form-control" disabled="true" required>
+						</div>
+					</div>
+        </div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="surburb">
+							Surburb
+              <span class="mandatoryStar">*</span>
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="surburb" value="Auckland Central" class="form-control" disabled="true" required>
+					</div>
+				</div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="city">
+							City
+              <span class="mandatoryStar">*</span>
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="city" value="Auckland" class="form-control" disabled="true" required>
+					</div>
+				</div>
+        <div class="row top-buffer">
+					<div class="col-md-3">
+						<label for="postcode">
+							Post Code
+              <span class="mandatoryStar">*</span>
+						</label>
+					</div>
+					<div class="col-md-8">
+						<input type="text" size="30" name="postcode" value="1010" class="form-control" disabled="true" required>
+					</div>
+				</div>
+        <div class="separator"></div>
+        <div class="text-center">
+					<button type="submit" class="btn buttom-buffer">Finish</button>
+				</div>
+				<br>
+      </form>
+    </div>
+  </div>
+</div>
