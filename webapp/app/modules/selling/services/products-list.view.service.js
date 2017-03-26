@@ -21,16 +21,28 @@ angular.module('funtown').service('ProductsListService', ['$log','$http',
 			});					
 		}
 
-		this.activateProduct = function(product){
-			$log.debug('ProductsListService-activateProduct',product);
+		this.activateProduct = function(activateProducts){
+			$log.debug('ProductsListService-activateProduct',activateProducts);
+			return $http.put('/rest/api/selling/products/update?status=ACTIVE', activateProducts)
+					.then(function(response){
+						return response.data;
+					})
 		}
 
-		this.deactivateProduct = function(product){
-			$log.debug('ProductsListService-deactivateProduct',product);
+		this.deactivateProduct = function(deactivateProducts){
+			$log.debug('ProductsListService-deactivateProduct',deactivateProducts);
+			return $http.put('/rest/api/selling/products/update?status=DE_ACTIVE', deactivateProducts)
+					.then(function(response){
+						return response.data;
+					})
 		}
 
-		this.deleteProducts = function(product){
-			$log.debug('ProductsListService-deleteProducts',product);
+		this.deleteProducts = function(productId){
+			$log.debug('ProductsListService-deleteProducts',productId);
+			return $http.delete('/rest/api/selling/products/' + productId)
+					.then(function(response){
+						return response.data;
+					})
 		}
 
 	}

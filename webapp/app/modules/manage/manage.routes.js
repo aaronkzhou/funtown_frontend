@@ -80,6 +80,7 @@ angular.module('manage').config(['$stateProvider',
 		//Products List
 		.state('manage.products',{
 			url:'/products',
+			controller:'ProductsList',
 			templateUrl:'app/modules/selling/views/products-list-tabs.view.html',
 			resolve:{
 				tabs : function(ProductsListService){

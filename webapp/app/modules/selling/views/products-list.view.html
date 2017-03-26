@@ -49,7 +49,7 @@
 			<tbody>
 				<tr data-ng-repeat="product in products" class="row" data-ng-if = "products.length !== 0">
 					<td>
-						<input type="checkbox" data-ng-model="product.selected" data-ng-checked="product.selected" data-ng-click="changeSelectedProducts(product)">
+						<input type="checkbox" data-ng-model="product.selected" data-ng-checked="chooseAll" data-ng-click="changeSelectedProducts(product)">
 					</td>
 					<td data-ng-click="editProduct(product.productId)">
 					<b class="no-margin" data-ng-bind="product.title"></b>				
