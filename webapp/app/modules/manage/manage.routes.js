@@ -80,7 +80,6 @@ angular.module('manage').config(['$stateProvider',
 		//Products List
 		.state('manage.products',{
 			url:'/products',
-			controller:'ProductsList',
 			templateUrl:'app/modules/selling/views/products-list-tabs.view.html',
 			resolve:{
 				tabs : function(ProductsListService){
@@ -88,10 +87,17 @@ angular.module('manage').config(['$stateProvider',
 				}
 			},
 			controller:function($scope,tabs){
-				$scope.tabs = tabs;
-				$scope.tabs.forEach(function(tab){
-					tab.state = "manage.products." + tab.statusCode;
-				});
+				loadTabs(tabs);
+				$scope.$on("statusChanged",function(event,tabs){
+					loadTabs(tabs);
+				})
+
+				function loadTabs(tabs){
+					$scope.tabs = tabs;
+					$scope.tabs.forEach(function(tab){
+						tab.state = "manage.products." + tab.statusCode;
+					});
+				}
 			},
 			data: {
 				authRequired: true

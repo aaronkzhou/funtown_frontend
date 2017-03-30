@@ -1,6 +1,6 @@
 'use strict';
-angular.module('selling').controller('ProductsList', ['$log','$scope','$state','ProductsListService','products','$stateParams',
-	function($log,$scope,$state,ProductsListService,products,$stateParams){
+angular.module('selling').controller('ProductsList', ['$log','$rootScope','$scope','$state','ProductsListService','products','$stateParams',
+	function($log,$rootScope,$scope,$state,ProductsListService,products,$stateParams){
 		$log.debug("ProductsList controller::init");
 		$scope.products = products;
 		$scope.btnIsVisible = true;
@@ -61,28 +61,23 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 				$log.debug('selectAll',$scope.productsChosen);
 			}
 		}
-
-		$scope.refreshTabs = function(){
-			$log.debug('refreshTabs');
-			$scope.tabs = ProductsListService.getProductCount();
-			$log.debug('tabs',$scope.tabs)
-		}
 		
 		$scope.activateProduct = function(){
 			$log.debug('activateProduct',$scope.productsChosen);
 			$scope.productsChosen.forEach(function(product){
 				if(product.status !== "Selling"){
 					$scope.products.splice($scope.products.indexOf(product),1);
-					//$scope.chooseAll = false;
 					activateProducts.push({productId:product.productId});
 				}else{					
 					alert("they are already active.");
 					event.preventDefault();
 				}
 			});	
-			ProductsListService.activateProduct(activateProducts);
-			$scope.productsChosen = [];
-			$scope.refreshTabs();
+			ProductsListService.activateProduct(activateProducts)
+			.then(function(response){
+				$rootScope.$broadcast("statusChanged",response);
+			});
+			$scope.productsChosen = [];			
 			
 		}
 
@@ -98,25 +93,30 @@ angular.module('selling').controller('ProductsList', ['$log','$scope','$state','
 					event.preventDefault();
 				}
 			});	
-			ProductsListService.deactivateProduct(deactivateProducts);
+			ProductsListService.deactivateProduct(deactivateProducts).then(function(response){
+				$rootScope.$broadcast("statusChanged",response);
+				
+			});
 			$scope.productsChosen = [];
-			$scope.refreshTabs();
+			
 		}
 		//since use the same confirm alert, function"cancelChanges" is equal to function"deleteProducts".
 		$scope.cancelChanges = function(){
 			$scope.deleteProducts();
-			$scope.refreshTabs();			
+						
 		}
 		
 		$scope.deleteProducts = function(){
 			$log.debug('deleteProducts',$scope.productsChosen);
 			$scope.productsChosen.forEach(function(product){
 				$scope.products.splice($scope.products.indexOf(product),1);
-				ProductsListService.deleteProducts(product.productId);
+				ProductsListService.deleteProducts(product.productId).then(function(response){
+				$rootScope.$broadcast("statusChanged",response);
+			});
 				$scope.chooseAll = false;
 			});
 			$scope.productsChosen = [];	
-			$scope.refreshTabs();		
+					
 		}
 
 		$scope.editProduct = function(productId){
