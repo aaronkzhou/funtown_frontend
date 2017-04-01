@@ -183,14 +183,16 @@ main{
 		padding-top: 20px;
 		z-index: 100;
 	}
+	.header-left#logo{
+		width: 100px;
+	}
+	.header-left#smallLeftHeader{
+		width: 150px;
+	}
 	.header-middle{
 		position: relative;
 		padding:15px 0;
 	}
-	.header-middle#searchBar{
-
-	}
-
 	.header-right{
 		position: relative;
 		float: right;

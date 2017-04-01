@@ -152,6 +152,10 @@ main {
     width: 250px;
     padding-top: 20px;
     z-index: 100; }
+  .ft-header .header-left#logo {
+    width: 100px; }
+  .ft-header .header-left#smallLeftHeader {
+    width: 150px; }
   .ft-header .header-middle {
     position: relative;
     padding: 15px 0; }
