@@ -1,7 +1,7 @@
 <div class="col-md-12">
 	<div class="ft-card ft-card-no-margin">
 		<h4>Shipping & Payment</h4>
-		<form name="shippingInfo" class="ft-data-form" novalidate>		
+		<form name="shippingInfo" class="ft-data-form" novalidate>
 			<div class="row">
 				<label class="col-md-3" for="shippingRateId">
 					Shipping Rate
@@ -9,7 +9,7 @@
 			    		<p ng-message="required">Required</p>
 					</div>
 				</label>
-				<button type="button" class="btn btn-select" name="shippingRateId" data-ng-model="cache.product.shippingRateId" bs-options="shippingRate.attributeId as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>				
+				<button type="button" class="btn btn-select" name="shippingRateId" data-ng-model="cache.product.shippingRateId" bs-options="shippingRate.attributeId as shippingRate.display for shippingRate in shippingRates" required bs-select>Shipping rate<span class="caret"></span></button>
 			</div>
 			<div class="row">
 				<label class="col-md-3" for="pickUp">
@@ -26,28 +26,28 @@
 					<div class="error" ng-messages="shippingInfo.shippingType.$error">
 			    		<p ng-message="required">Required</p>
 					</div>
-				</label>					
-				<fieldset class="col-md-6 ft-shipping-costs col-md-9" data-ng-disabled="shippingDisabled">
+				</label>
+				<fieldset class="ft-shipping-costs col-md-9" data-ng-disabled="shippingDisabled">
 					<div class="row no-padding">
-						<label>							
-							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="free" data-ng-required="isNotOnlyPick()" data-ng-click="processFreeShipping()" >&nbsp;&nbsp;<span>Free shipping within New Zealand</span>							
+						<label>
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="free" data-ng-required="isNotOnlyPick()" data-ng-click="processFreeShipping()" >&nbsp;&nbsp;<span>Free shipping within New Zealand</span>
 						</label>
 					</div>
 					<div class="row no-padding">
 						<label>
-							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" data-ng-required="isNotOnlyPick()" data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>			
+							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="specific" data-ng-required="isNotOnlyPick()" data-ng-click="processSpecificCost()">&nbsp;&nbsp;<span>Specify shipping costs</span>
 						</label>
 						<fieldset class="ft-fieldset" data-ng-if="hasSpecificShipping()">
 							<div data-ng-repeat="shippingCost in cache.state.shippingCosts">
-								<div class="ft-col">									
+								<div class="ft-col">
 									<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
 									<span class="error" ng-messages="shippingInfo['desc' + $index].$error">
 						    			<div ng-message="required">Required</div>
-									</span>										
+									</span>
 								</div>
 								<div class="ft-col">
 									NZ$
-									<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>		
+									<input type="number" class="form-control" name="cost{{$index}}" number-input placeholder="Cost" data-ng-model="shippingCost.cost" required>
 									<span class="error" ng-messages="shippingInfo['cost' + $index].$error">
 						    			<div ng-message="required">Required</div>
 									</span>
@@ -55,20 +55,20 @@
 								<div class="ft-col" data-ng-if="cache.state.shippingCosts.length>1">
 									<a href="" data-ng-click="removeCostOption(shippingCost)">
 										<i class="icon fa fa-minus-circle"></i>
-									</a>									
+									</a>
 								</div>
-							</div>							
+							</div>
 							<a class="ft-col"  href="" data-ng-click="addCostOption()">
 								<i class="icon fa fa-plus-circle"></i>
 								Add another shipping option
-							</a>		
+							</a>
 						</fieldset>
 					</div>
 					<div class="row no-padding">
 						<ng-form name="template">
 						<label>
 							<input type="radio" name="shippingType" data-ng-model="cache.state.shippingType" value="template" data-ng-required="isNotOnlyPick()" data-ng-click="processUseTemplate()">&nbsp;&nbsp;<span>Use shipping templates</span>
-						</label>						
+						</label>
 						<div class="ft-fieldset" data-ng-if="hasShippingTemplate()">
 							<div class="ft-col" data-ng-if="haveNoTemplate">
 								<div data-ng-show="mode">
@@ -90,9 +90,9 @@
 									<a href="" data-ng-click="addShippingTemplate()">
 										<i class="icon fa fa-plus-circle"></i>
 										Add a new template
-									</a>		
-								</span>					
-							</div>							
+									</a>
+								</span>
+							</div>
 							<fieldset class="ft-fieldset-light" data-ng-if="cache.templateDisplay" data-ng-disabled="templateReadOnly" data-ng-class="{readOnly:templateReadOnly}">
 								<div class="ft-col" data-ng-show="!templateReadOnly">
 									<label>
@@ -108,7 +108,7 @@
 										<input type="text" class="form-control" name="desc{{$index}}" size="25" placeholder="Description" data-ng-model="shippingCost.description" required>
 										<span class="error" ng-messages="template['desc' + $index].$error">
 							    			<p ng-message="required">Required</p>
-										</span>										
+										</span>
 									</div>
 									<div class="ft-col">
 										NZ$
@@ -120,7 +120,7 @@
 									<div class="ft-col" data-ng-if="cache.templateDisplay.shippingCosts.length>1 && !templateReadOnly">
 										<a href="" data-ng-click="editTemplateRemoveCost(shippingCost)">
 											<i class="icon fa fa-minus-circle"></i>
-										</a>									
+										</a>
 									</div>
 								</div>
 								<div>
@@ -135,18 +135,18 @@
 								 Edit</a>
 								<a class="ft-col" href="" data-ng-show="templateReadOnly" confirm-alert details={{alertMessage.delete}}><i class="fa fa-trash"></i>
 								 Delete</a>
-								
+
 								<a class="ft-col" href="" data-ng-show="!isEdit() && mode" data-ng-disabled="cannotSave" data-ng-click="createTemplate()">Create</a>
 
 								<a class="ft-col" href="" data-ng-show="!templateReadOnly && isEdit()" confirm-alert details={{alertMessage.edit}} data-ng-disabled="cannotSave">Update</a>
-								<a class="ft-col" href="" data-ng-show="!templateReadOnly" data-ng-click="cancelEditTemplate()">Cancel</a>	
-							</div>								
-						</div>								
-						</ng-form> 
+								<a class="ft-col" href="" data-ng-show="!templateReadOnly" data-ng-click="cancelEditTemplate()">Cancel</a>
+							</div>
+						</div>
+						</ng-form>
 					</div>
 				</fieldset>
 			</div>
-			<div class="separator"></div>		
+			<div class="separator"></div>
 			<div class="row">
 				<label class="col-md-12">
 					Accepted Payment Types
@@ -164,14 +164,14 @@
 		</form>
 		<div class="ft-card-footer col-md-12 text-center">
 	            <button class="btn" ui-sref="manage.{{title}}Product.step4">
-	                <i class="fa fa-chevron-left"></i> Previous 
+	                <i class="fa fa-chevron-left"></i> Previous
 	            </button>
 	            <button class="btn" data-ng-click="storeShippingCosts(true)" data-ng-if="isDraftMode">
-	                <i class="fa fa-file-text"></i> Save Draft 
+	                <i class="fa fa-file-text"></i> Save Draft
 	            </button>
 	            <button class="btn" data-ng-click="editProduct()" data-ng-if="!isDraftMode">
                 <i class="fa fa fa-check-circle"></i> Save
-            	</button>     
+            	</button>
 	            <button class="btn" confirm-alert details={{alertMessage.confirm}}>
 	                <i class="fa fa-eraser"></i> Reset
 	            </button>
@@ -179,5 +179,5 @@
 	                Next <i class="fa fa-chevron-right"></i>
 	            </button>
 	    </div>
-	</div>    
+	</div>
 </div>
