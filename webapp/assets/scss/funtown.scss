@@ -11,6 +11,9 @@ body{
     top: 0px;
     overflow-x: scroll;
 }
+div.container{
+	z-index: 1001;
+}
 
 a{
 	color: #333;
@@ -200,7 +203,6 @@ main{
 		.ft-top-nav{
 			display: table;
 			padding-top: 10px;
-
 			a{
 				display: table-cell;
 				padding-right: 10px;
@@ -242,9 +244,9 @@ main{
 
 .navbar{
 	position: fixed;
+	z-index: 999;
 	top:70px;
 	width: 100%;
-	z-index: 1000;
 	background: #fff;
 	border-radius: 0;
 	border: 0;

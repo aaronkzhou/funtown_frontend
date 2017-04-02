@@ -1,7 +1,29 @@
 'use strict';
-angular.module('funtown').service('ProductService', ['$log','$http', 
+angular.module('funtown').service('ProductService', ['$log','$http',
 	function($log,$http){
 		$log.debug("ProductService");
+		this.searchProductForCatalog = function(product){
+			$log.debug("ProductService::searchProductForCatalog - ",product);
+			return $http({
+				method:'GET',
+				url: '/rest/api/products/search/q?title=' + product,
+				transformResponse:searchOverviewTransformRequest,
+				headers:{
+					'Content-Type':undefined
+				}
+			});
+		}
+		this.searchProductDetailsInSelectedCategory = function(product,categoryId){
+			$log.debug("ProductService::searchProductDetailsInSelectedCategory - ",product);
+			return $http({
+				method:'GET',
+				url: '/rest/api/products/' + categoryId + '/search/q?title=' + product,
+				transformResponse:searchDetailTransformRequest,
+				headers:{
+					'Content-Type':undefined
+				}
+			});
+		}
 		this.saveProduct = function(product){
 			$log.debug("ProductService::saveProduct - ",product);
 			return $http({
@@ -66,6 +88,13 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			product.productAttributes = productAttributes;
 			$log.debug("transformed product",product);
 			return product;
+		}
+
+		function searchOverviewTransformRequest(response){
+			return (JSON.parse(response));
+		}
+		function searchDetailTransformRequest(request){
+
 		}
 
 		function doTransformRequest(request){

@@ -9,13 +9,5 @@ angular.module('buying').config(['$stateProvider',
 				authRequired: true
             }
 		})
-		.state('buy.funtownVideo',{
-			url:'/funtownVideo',
-			templateUrl:'app/modules/buying/views/funtownVideo.view.html',
-			data: {
-				authRequired: true
-            }
-		})
-
 	}
 ])

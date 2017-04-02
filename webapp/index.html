@@ -34,13 +34,13 @@
                             </a>
                         </div>
                     </div>
-                    <div class="header-middle" id = "searchBar">
-                            <div class="search-box">
-                                <input type="text" placeholder="Search funtown">
-                                <div class="search-button">
-                                    <i class="fa fa-lg fa-search"></i>
-                                </div>
+                    <div class="header-middle">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search Funtown" name="searchBox" data-animation="am-flip-x" data-ng-model="searchBox.productName" bs-options="productCatalog for productCatalog in searchProductForCatalog($viewValue)"  data-limit="8" data-trim-value="false" data-ng-trim="false" bs-typeahead>
+                            <div class="search-button">
+                                <i class="fa fa-lg fa-search"></i>
                             </div>
+                        </div>
                     </div>
                 </div>
             </header>

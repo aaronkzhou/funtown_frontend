@@ -43,8 +43,11 @@ angular.module('selling').controller('AddProductStep2', ['$log','$scope','$http'
 		}
 
 		// search title
-		$scope.searchCatalogue = function(search) {		
+		$scope.searchCatalogue = function(search) {	
 			if(search.length > 0){
+				catalogProcessor.searchCatalogue(search,rootCategory).then(function(response){
+					console.log(response);
+				});
 				return catalogProcessor.searchCatalogue(search,rootCategory);	
 			}	
 		}
