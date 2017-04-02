@@ -87,10 +87,17 @@ angular.module('manage').config(['$stateProvider',
 				}
 			},
 			controller:function($scope,tabs){
-				$scope.tabs = tabs;
-				$scope.tabs.forEach(function(tab){
-					tab.state = "manage.products." + tab.statusCode;
-				});
+				loadTabs(tabs);
+				$scope.$on("statusChanged",function(event,tabs){
+					loadTabs(tabs);
+				})
+
+				function loadTabs(tabs){
+					$scope.tabs = tabs;
+					$scope.tabs.forEach(function(tab){
+						tab.state = "manage.products." + tab.statusCode;
+					});
+				}
 			},
 			data: {
 				authRequired: true
