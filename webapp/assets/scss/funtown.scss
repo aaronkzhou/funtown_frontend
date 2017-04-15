@@ -283,6 +283,10 @@ main{
 
 		}
 	}
+	
+}
+nav[role="navigation"] > div.collapse {
+  display: block;
 }
 
 .ft-side-nav{

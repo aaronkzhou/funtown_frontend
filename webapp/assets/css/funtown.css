@@ -230,6 +230,9 @@ main {
           color: #f60;
           background: transparent; }
 
+nav[role="navigation"] > div.collapse {
+  display: block; }
+
 .ft-side-nav {
   position: absolute;
   width: 230px;
