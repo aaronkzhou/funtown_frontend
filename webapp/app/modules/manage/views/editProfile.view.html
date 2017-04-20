@@ -14,8 +14,14 @@
 						</label>
 					</div>
 					<div class="col-md-4">
-						<input type="text" size="30" name="fullname" value="Kedar Krishnan" class="form-control" required>
-					</div>
+						<input type="text" size="30" name="fullname" placeholder="Full name" data-ng-model="editProfile.fullname" class="form-control" required>
+            <div for="error" class="error" ng-messages="editProfile.fullName.$error" data-ng-if="ueditProfile.authenticated">
+				    		<p ng-message="required">Please input your full name</p>
+						</div>
+          </div>
+          <div class="error" for="username_error" ng-messages="register.username.$error" data-ng-if="userRegister.authenticated">
+              <p ng-message="required">Please enter a Username</p>
+          </div>
 				</div>
         <div class="row top-buffer">
 					<div class="col-md-3" class="gender">
@@ -25,9 +31,9 @@
 						</label>
 					</div>
           <div class="col-md-4">
-            <input type="radio" name="genderOptions" value="male" checked="checked" required>
+            <input type="radio" name="genderOptions" value="male" data-ng-model="editProfile.genderOptions" required>
 						<label for="genderMale">Male</label>
-						<input type="radio" name="genderOptions" value="female" required>
+						<input type="radio" name="genderOptions" value="female" data-ng-model="editProfile.genderOptions" required>
 						<label for="genderFemale">Female</label>
           </div>
         </div>
@@ -40,13 +46,16 @@
 					</div>
           <div class="col-md-2">
             <div>
-							<button type="button" name="landlineAreaCode" class="btn btn-select" required bs-select>
+							<button type="button" name="landlineAreaCode" class="btn btn-select" ng-model="editProfile.landlineCode" bs-options="LandlineAreaCode for LandlineAreaCode in editProfile.LandlineAreaCode" required bs-select>
 	  					    <span class="caret"></span>
 						</div>
           </div>
           <div class="col-md-3">
 						<div>
-							<input type="text" size="20" name="landlineNum" placeholder="Contact Number" class="form-control" required>
+							<input type="text" size="20" name="landlineNum" placeholder="Contact Number" data-ng-model="editProfile.LandlineCode" class="form-control" required>
+						</div>
+            <div for="error" class="error" ng-messages="editProfile.landlineNum.$error" data-ng-if="editProfile.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
         </div>
@@ -59,13 +68,16 @@
 					</div>
           <div class="col-md-2">
 						<div>
-              <button type="button" name="phoneAreaCode" class="btn btn-select" required bs-select>
+              <button type="button" name="phoneAreaCode" class="btn btn-select" ng-model="editProfile.phoneCode" bs-options="PhoneAreaCode for PhoneAreaCode in editProfile.PhoneAreaCode" required bs-select>
 	  					    <span class="caret"></span>
             </div>
 					</div>
           <div class="col-md-3">
             <div>
-							<input type="text" size="20" name="phoneNum" value="4315111" class="form-control" required>
+							<input type="text" size="20" name="phoneNum" placeholder="Phone Number" data-ng-model="editProfile.PhoneCode" class="form-control" required>
+						</div>
+            <div for="error" class="error" ng-messages="editProfile.phoneNum.$error" data-ng-if="editProfile.authenticated">
+				    		<p ng-message="required">*required</p>
 						</div>
 					</div>
         </div>
@@ -76,13 +88,15 @@
 						</label>
 					</div>
 					<div class="col-md-8">
-						<input id="addressAutoComplete" class="form-control" placeholder="Enter your address" type="text" size="40">
+						<input id="addressAutoComplete" class="form-control" data-ng-model="editProfile.selectedAddress" placeholder="Enter your address" type="text" size="40">
 						<div for="canNotFindAddress">
 							<a class="canNotFindAddress" data-ng-click="canNotFindYourAddress()">Cannot Find your address?</a>
 						</div>
+            <!-- api previously -->
+						<!-- <input type="text" size="50" class="form-control" data-ng-model="editProfile.selectedAddress" bs-options="address.formatted_address as address.formatted_address for address in getAddress($viewValue)" placeholder="Enter address" bs-on-select="populateAddress" bs-typeahead> -->
 					</div>
 				</div>
-        <div class="row top-buffer">
+        <div class="row top-buffer" data-ng-if="editProfile.address||editProfile.getFromGoogleApi==false">
 					<div class="col-md-3">
 						<label for="address">
 							Address
@@ -91,15 +105,15 @@
 					</div>
           <div class="col-md-8">
 						<div>
-							<input type="text" size="40" name="address" value="116" class="form-control" disabled="true" required>
+							<input type="text" size="40" name="address" placeholder="Additional details (unit, company, floor, etc)" data-ng-model="editProfile.additionalAddress" class="form-control" ng-disabled="editProfile.getFromGoogleApi" required>
 						</div>
 						<br>
 						<div>
-							<input type="text" size="40" name="address" value="10 Ronayne Street" class="form-control" disabled="true" required>
+							<input type="text" size="40" name="address" data-ng-model="editProfile.address" class="form-control" ng-disabled="editProfile.getFromGoogleApi" required>
 						</div>
 					</div>
         </div>
-        <div class="row top-buffer">
+        <div class="row top-buffer" data-ng-if="editProfile.surburb||editProfile.getFromGoogleApi==false">
 					<div class="col-md-3">
 						<label for="surburb">
 							Surburb
@@ -107,10 +121,10 @@
 						</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" size="30" name="surburb" value="Auckland Central" class="form-control" disabled="true" required>
+						<input type="text" size="30" name="surburb" data-ng-model="editProfile.surburb" class="form-control" ng-disabled="editProfile.getFromGoogleApi" required>
 					</div>
 				</div>
-        <div class="row top-buffer">
+        <div class="row top-buffer" data-ng-if="editProfile.city||editProfile.getFromGoogleApi==false">
 					<div class="col-md-3">
 						<label for="city">
 							City
@@ -118,10 +132,10 @@
 						</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" size="30" name="city" value="Auckland" class="form-control" disabled="true" required>
+						<input type="text" size="30" name="city" data-ng-model="editProfile.city" class="form-control" ng-disabled="editProfile.getFromGoogleApi" required>
 					</div>
 				</div>
-        <div class="row top-buffer">
+        <div class="row top-buffer" data-ng-if="editProfile.postcode||editProfile.getFromGoogleApi==false">
 					<div class="col-md-3">
 						<label for="postcode">
 							Post Code
@@ -129,7 +143,7 @@
 						</label>
 					</div>
 					<div class="col-md-8">
-						<input type="text" size="30" name="postcode" value="1010" class="form-control" disabled="true" required>
+						<input type="text" size="30" name="postcode" data-ng-model="editProfile.postcode" class="form-control" ng-disabled="editProfile.getFromGoogleApi" required>
 					</div>
 				</div>
         <div class="separator"></div>

@@ -32,6 +32,7 @@ angular.module('manage').config(['$stateProvider',
 		})
 		.state('manage.editProfile',{
 			url:'/editProfile',
+			controller:'editProfileController',
 			templateUrl:'app/modules/manage/views/editProfile.view.html',
 			data: {
 				authRequired: true
