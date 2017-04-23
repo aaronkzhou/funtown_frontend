@@ -109,10 +109,6 @@ label{
 	// }
 }
 
-.dropdown-menu{
-	z-index: 10;
-}
-
 .dropdown-menu > li{
 	padding: 0px!important;
 }
@@ -251,6 +247,10 @@ main{
 
 }
 
+.search-box .dropdown-menu{
+	z-index: 1002;
+}
+
 .navbar{
 	position: fixed;
 	z-index: 999;
@@ -289,6 +289,11 @@ main{
 	}
 	
 }
+
+.navbar.navbar-default[role="navigation"], .ft-header {
+  z-index: 1001;
+}
+
 nav[role="navigation"] > div.collapse {
   display: block;
 }

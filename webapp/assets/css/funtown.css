@@ -90,9 +90,6 @@ a {
 label {
   color: #333; }
 
-.dropdown-menu {
-  z-index: 10; }
-
 .dropdown-menu > li {
   padding: 0px !important; }
 
@@ -207,6 +204,9 @@ main {
     border: 1px solid #e62e04;
     border-radius: 0 3px 3px 0; }
 
+.search-box .dropdown-menu {
+  z-index: 1002; }
+
 .navbar {
   position: fixed;
   z-index: 999;
@@ -232,6 +232,9 @@ main {
         .navbar .navbar-nav li a:hover, .navbar .navbar-nav li a:focus {
           color: #f60;
           background: transparent; }
+
+.navbar.navbar-default[role="navigation"], .ft-header {
+  z-index: 1001; }
 
 nav[role="navigation"] > div.collapse {
   display: block; }
