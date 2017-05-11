@@ -597,3 +597,7 @@ h3[data-ng-bind="headTitle"] {
   font-size: smaller;
   color: gray;
   padding-top: 2px; }
+
+.pos_up {
+  position: relative;
+  top: -7px; }

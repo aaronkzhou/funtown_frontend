@@ -32,11 +32,13 @@
                                 <img class="icon" src="assets/images/user.png">Login
                             </a>
                             <a ui-sref="logout" data-ng-if="isAuthenticated()">
-                                <img class="icon" src="assets/images/exit.png">
-                                <span class="user">
-                                    <span data-ng-bind="'Hi! ' + username()"></span>
-                                    <div>Logout</div>
-                                </span>
+                                <div class="pos_up">
+                                    <img class="icon" src="assets/images/exit.png">
+                                    <span class="user">
+                                        <span data-ng-bind="'Hi! ' + username()"></span>
+                                        <div>Logout</div>
+                                    </span>
+                                </div>
                             </a>
                         </div>
                     </div>
