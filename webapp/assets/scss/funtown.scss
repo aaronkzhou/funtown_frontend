@@ -261,6 +261,13 @@ main{
 	border: 0;
 	border-bottom: 1px solid #e9e9e9;
 	margin-bottom: 0;
+    @media (min-width: 0px) and (max-width: 338px) {
+    top:170px;
+    }
+    @media (min-width: 339px) and (max-width: 646px) {
+    top:100px;
+    }
+    
 	.navbar-nav{
 		width: 100%;
 
