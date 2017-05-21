@@ -64,12 +64,16 @@ angular.module('auth').controller('RegisterController', ['$log','$scope', 'AuthS
 		// };
 		function populateAddress(){
 			googleAPIaddress = autocomplete.getPlace().address_components;
+			$log.debug(googleAPIaddress);
+			if (googleAPIaddress[6]!=null){
 			$scope.userRegister.address = googleAPIaddress[0].long_name + ' ' + googleAPIaddress[1].long_name;
 			$scope.userRegister.surburb = googleAPIaddress[2].long_name;
 			$scope.userRegister.city = googleAPIaddress[4].long_name;
 			$scope.userRegister.postcode = googleAPIaddress[6].long_name;
 			$scope.userRegister.getFromGoogleApi = true;
-			$scope.$apply();
+			$scope.$apply();}
+			else{alert("You must enter your address number at first!");
+			}
 		}
 
 		function initAutocomplete(){
