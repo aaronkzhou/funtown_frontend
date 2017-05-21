@@ -1,8 +1,22 @@
 'use strict';
 angular.module('funtown').service('ProductService', ['$log','$http',
 	function($log,$http){
+		var test = this;
 		$log.debug("ProductService");
+		 this.searchProductFromSearchIcon = function(productName){
+				this.searchProductForCatalog(productName).then(function(response){
+					test.searchProductDetailsInSelectedCategory(productName,response.data[0].categoryId).then(function(response){
+						//console.log(response.data[0]);
+						test.getSpecifyProduct(response.data[0].productId).then(function(response){
+							console.log(response.data)
+						});
+
+					});
+				})
+		 }
+
 		this.searchProductForCatalog = function(product){
+			console.log("goinside");
 			$log.debug("ProductService::searchProductForCatalog - ",product);
 			return $http({
 				method:'GET',
@@ -18,7 +32,7 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			return $http({
 				method:'GET',
 				url: '/rest/api/products/' + categoryId + '/search/q?title=' + product,
-				transformResponse:searchDetailTransformRequest,
+				// transformResponse:searchDetailTransformRequest,
 				headers:{
 					'Content-Type':undefined
 				}
@@ -74,7 +88,7 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 				categoryName: product.category.parentId == 1 ?"Movies":"Games",
 				parentId : 0
 			};
-			
+
 			product.productAttributes.forEach(function(item){
 				productAttributes[item.attributeType] = parseInt(item.attributeValue);
 			});
@@ -91,16 +105,17 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 		}
 
 		function searchOverviewTransformRequest(response){
+			//response.productName = productName;
 			return (JSON.parse(response));
 		}
 		function searchDetailTransformRequest(request){
-
+			return (JSON.parse(request));
 		}
 
 		function doTransformRequest(request){
 			$log.debug("doTransformRequest");
 
-			var productAttributes = [];	
+			var productAttributes = [];
 			var product = angular.copy(request);//JSON.parse(JSON.stringify(request));
 
 			var productAttributesObj =  request.productAttributes;
@@ -113,23 +128,23 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			productAttributesObj = null;
 
 			//send only selected payment methods
-			if(request.paymentMethods){				
+			if(request.paymentMethods){
 				product.paymentMethods = request.paymentMethods.filter(function(paymentMethod){
 					return paymentMethod.selected;
 				})
 			}
-			
+
 			//Convert productPriceDetails from object to array of productPriceDetails objects
 			product.productPriceDetails = request.productPriceDetails ? [request.productPriceDetails] : [];
-			
+
 			//Add rootCategory to catalog instead of directly in product object
-			if(!product.catalog){				
-				product.catalog = {}				
+			if(!product.catalog){
+				product.catalog = {}
 			}
 			product.catalog.rootCategory = request.rootCategory;
-			delete product.rootCategory;			
+			delete product.rootCategory;
 
-			
+
 			product.stock = request.unlimited ? -1 : request.stock;
 
 			//Add shipping cost if not present
@@ -143,26 +158,26 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			}
 
 			product.status = request.status || "IN_DRAFT";
-			
 
-			$log.debug("product.productPhotos 	",product.productPhotos);					
 
-			delete product.productPhotos;	
+			$log.debug("product.productPhotos 	",product.productPhotos);
+
+			delete product.productPhotos;
 
 			var formData = new FormData();
-		
+
 			if(request.productPhotos){
 				request.productPhotos.forEach(function(photo){
 					if(photo.file){
-						formData.append("file",photo.file.file);			
+						formData.append("file",photo.file.file);
 					}
 				})
 			}
-			
+
 			//Add the product object as blog so that the context type can be set.
 			formData.append("product",new Blob([JSON.stringify(product)],{type: 'application/json'}));
-			
-			$log.debug("doTransformRequest:: transformed product - ",formData.get("product"));			
+
+			$log.debug("doTransformRequest:: transformed product - ",formData.get("product"));
 
 			//$log.debug("doTransformRequest:: transformed product - ",JSON.stringify(formData));
 
@@ -170,5 +185,5 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 
 		}
 	}
-	
+
 ]);

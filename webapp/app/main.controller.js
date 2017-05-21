@@ -17,18 +17,27 @@ angular.module('funtown').controller('MainController', ['$scope','$log','AuthSer
 		$scope.contentTransfer = function(content){
 			return JSON.parse(content);
 		}
-		$scope.searchProductForCatalog = function(productName){
-			productCatalog = [];
-			if(productName.length > 0){
-				ProductService.searchProductForCatalog(productName).then(function(response){
-					response.data.forEach(function(item){
-						productCatalog.push(item.categoryName);
-					});
 
-					console.log(productCatalog)
-					return productCatalog;
-				});
-			}
+		$scope.searchProductFromSearchIcon = function(productName){
+			ProductService.searchProductFromSearchIcon(productName);
+		}
+		$scope.searchProductForCatalog = function(productName){
+			// productCatalog = [];
+			// ProductService.test();
+			// if(productName.length > 0){
+			// 	ProductService.searchProductForCatalog(productName).then(function(response){
+			// 		().then(){().then(){}}
+					// response.data.forEach(function(item){
+					// 	productCatalog.push(item.categoryName);
+					// });
+
+					// console.log(response.data);
+					// return response.data;
+				// });
+			// }
+		}
+		$scope.showCatalogDetail = function(){
+			$log.debug("mainSearch::showCatalogDetail ",$scope.productCatalog);
 		}
 		init();
 	}

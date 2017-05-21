@@ -319,9 +319,6 @@ nav[role="navigation"] > div.collapse {
   .ft-card li {
     padding: 5px 15px; }
 
-.ft-card.ft-card-buy {
-  display: none; }
-
 .separator {
   margin: 15px 0;
   width: 100%;
