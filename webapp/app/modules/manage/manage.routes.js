@@ -76,6 +76,15 @@ angular.module('manage').config(['$stateProvider',
             }
 		})
 
+		.state('manage.itemDetail',{
+			url:'/itemDetail?pid',
+			templateUrl:'app/modules/buying/views/itemDetail.view.html',
+			controller:'ItemDetail',
+			data: {
+				authRequired: true
+            }
+		})
+
 		//Selling
 
 		//Products List
