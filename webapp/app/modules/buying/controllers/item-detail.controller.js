@@ -12,7 +12,7 @@ angular.module('buying').controller('ItemDetail', ['$log', '$scope', '$http', '$
 
         // rearrange the order in a cloned array (this is selective)
         $scope.specifiedItemCatalogAttributes = ProductService.cloneArray($scope.specifiedItem.catalog.catalogAttributes);
-        ProductService.reorderArreyByAttributeId($scope.specifiedItemCatalogAttributes);
+        ProductService.reorderArrayByAttributeId($scope.specifiedItemCatalogAttributes);
         console.log($scope.specifiedItemCatalogAttributes);        
 
         // Display url

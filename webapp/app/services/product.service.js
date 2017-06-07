@@ -177,7 +177,7 @@ angular.module('funtown').service('ProductService', ['$log','$http', function($l
             }
         }
 
-        this.reorderArreyByAttributeId = function (arr) {
+        this.reorderArrayByAttributeId = function (arr) {
             arr.sort(function(a, b){return a.attributeId - b.attributeId});
         }
 
