@@ -1,7 +1,6 @@
 'use strict';
-angular.module('funtown').service('ProductService', ['$log','$http',
-	function($log,$http){
-		var test = this;
+
+angular.module('funtown').service('ProductService', ['$log','$http', function($log,$http){
 		$log.debug("ProductService");
 		 this.searchProductFromSearchIcon = function(productName){
 				this.searchProductForCatalog(productName).then(function(response){
@@ -184,6 +183,23 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			return formData;
 
 		}
+
+		this.findAttributeType = function (attriType, arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].attributeType == attriType){
+                    return arr[i].attributeValue;
+                }
+            }
+        }
+
+        this.reorderArrayByAttributeId = function (arr) {
+            arr.sort(function(a, b){return a.attributeId - b.attributeId});
+        }
+
+        this.cloneArray = function (arr) {
+            var cloneOfA = JSON.parse(JSON.stringify(arr));
+            return cloneOfA;
+        }
 	}
 
 ]);
