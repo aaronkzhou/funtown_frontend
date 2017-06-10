@@ -19,7 +19,25 @@ angular.module('funtown').controller('MainController', ['$scope','$log','AuthSer
 		}
 
 		$scope.searchProductFromSearchIcon = function(productName){
-			ProductService.searchProductFromSearchIcon(productName);
+			productName=productName.trim();
+			if (productName != ""){
+				$scope.$broadcast('to-child', ProductService.searchProductFromSearchIcon(
+					productName));
+			}
+
+
+
+
+			//console.log(ProductService.searchProductFromSearchIcon(productName));
+
+			// return ProductService.searchProductFromSearchIcon(productName).then(function(response){
+			// 	return ProductService.searchProductDetailsInSelectedCategory(productName,response.data[0].categoryId).then(function(response){
+			// 		return ProductService.getSpecifyProduct.then(function(response){
+			// 			return response.data;
+			// 		});
+			// 	});
+			// }
+			//)
 		}
 		$scope.searchProductForCatalog = function(productName){
 			// productCatalog = [];

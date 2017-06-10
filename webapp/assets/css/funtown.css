@@ -604,3 +604,10 @@ h3[data-ng-bind="headTitle"] {
 .pos_up {
   position: relative;
   top: -7px; }
+
+.a-size-small {
+  font-size: 12px !important;
+  line-height: 1.5 !important; }
+
+.a-color-secondary {
+  color: #999 !important; }

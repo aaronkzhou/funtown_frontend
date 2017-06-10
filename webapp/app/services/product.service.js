@@ -1,19 +1,21 @@
 'use strict';
 angular.module('funtown').service('ProductService', ['$log','$http',
 	function($log,$http){
-		var test = this;
+		var service = this;
 		$log.debug("ProductService");
-		 this.searchProductFromSearchIcon = function(productName){
-				this.searchProductForCatalog(productName).then(function(response){
-					test.searchProductDetailsInSelectedCategory(productName,response.data[0].categoryId).then(function(response){
-						//console.log(response.data[0]);
-						test.getSpecifyProduct(response.data[0].productId).then(function(response){
-							console.log(response.data)
-						});
+		this.searchProductFromSearchIcon = function(productName){
+			 return this.searchProductForCatalog(productName).then(function(response){
+				 return	service.searchProductDetailsInSelectedCategory(productName,response.data[0].categoryId).then(function(response){
+					 console.log(response);
+							 return	service.getBatchProduct(response.data);
+							//  .then(function(response){
+							// 	 console.log(response);
+							// 	 return response;
+							//  });
+					 });
 
-					});
-				})
-		 }
+		 });
+		}
 
 		this.searchProductForCatalog = function(product){
 			console.log("goinside");
@@ -71,6 +73,38 @@ angular.module('funtown').service('ProductService', ['$log','$http',
 			});
 			return specifyProductDetail;
 		}
+		this.getBatchProduct = function(response){
+			console.log(response.length);
+			var specifyProductList = [];
+			for (var i = 0; i < response.length;i++){
+				// console.log(response[0].productId);
+				specifyProductList.push($http({
+					method:'GET',
+					url: '/rest/api/products/' + response[i].productId,
+					transformResponse:doTransformDatabaseCall
+				}));
+			}
+			console.log(specifyProductList);
+			return specifyProductList;
+		}
+
+		this.findAttributeType = function (attriType, arr) {
+				for (var i = 0; i < arr.length; i++) {
+						if (arr[i].attributeType == attriType){
+								return arr[i].attributeValue;
+						}
+				}
+		}
+
+		this.reorderArrayByAttributeId = function (arr) {
+				arr.sort(function(a, b){return a.attributeId - b.attributeId});
+		}
+
+		this.cloneArray = function (arr) {
+				var cloneOfA = JSON.parse(JSON.stringify(arr));
+				return cloneOfA;
+		}
+
 
 		function doTransformDatabaseCall(response){
 			$log.debug("doTransformDatabaseCall");
