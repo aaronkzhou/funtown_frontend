@@ -31,8 +31,7 @@ angular.module('buying').controller('ItemDetail', ['$log', '$scope', '$http', '$
         $scope.itemDetail.extra = $scope.specifiedItem.extraDetail;        
         $scope.itemDetail.sellerID = $scope.specifiedItem.sellerId;
         $scope.itemDetail.stock = $scope.specifiedItem.sku;
-        $scope.itemDetail.poster = ProductService.findAttributeType("poster", $scope.specifiedItem.catalog.catalogAttributes);
-
+        $scope.itemDetail.poster = ProductService.getPoster(ProductService.findAttributeType("poster", $scope.specifiedItem.catalog.catalogAttributes));
 
     },function(error){
         $log.error(error);

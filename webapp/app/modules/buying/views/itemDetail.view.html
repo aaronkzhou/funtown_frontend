@@ -40,14 +40,9 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <!-- <div class="ft-catalog-photo" data-ng-repeat="photo in cache.product.productPhotos"> -->
                     <div class="itemdetail-profile thumbnail">
-                        <img src="/assets/images/SamplePic.jpg" class="img-responsive">
-                        <!-- <img src="{{itemDetail.poster}}" class="img-responsive"> -->
-                        <div class="caption">
-                            <p>{{itemDetail.poster}}</p>
-                            <p class="small toBeDeleted">(still do not know how to get a pic here)</p>
-                        </div>
+                        <img ng-src={{itemDetail.poster}} class="itemDetail-poster">
+                            <p>{{itemDetail.title}}</p>
                     </div>
                     <div class="itemdetail-checkoutbox thumbnail">
                         <dl class="dl-horizontal">
@@ -79,7 +74,7 @@
                             </button>
                         </div>
                     </div>
-                </div>              
+                </div>
             </div>
         </div>
     </div>

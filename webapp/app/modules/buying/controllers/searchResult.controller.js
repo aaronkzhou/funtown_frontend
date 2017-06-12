@@ -27,7 +27,7 @@ angular.module('buying').controller('searchResultController', ['$log','$scope', 
 								response["runtime"] = ProductService.findAttributeType("runtime", response.data.catalog.catalogAttributes);
 								response["starring"] = ProductService.findAttributeType("starring", response.data.catalog.catalogAttributes);
 								response["director"] = ProductService.findAttributeType("director", response.data.catalog.catalogAttributes);
-								response["poster"] = getPoster(ProductService.findAttributeType("poster", response.data.catalog.catalogAttributes));
+								response["poster"] = ProductService.getPoster(ProductService.findAttributeType("poster", response.data.catalog.catalogAttributes));
 								response["year"] = ProductService.findAttributeType("year", response.data.catalog.catalogAttributes);
 								$scope.searchResult.resultList.push(response);
 							}));
@@ -35,10 +35,6 @@ angular.module('buying').controller('searchResultController', ['$log','$scope', 
 
 					})
 			});
-			function getPoster(posterURL){
-				return "http://image.tmdb.org/t/p/w185" + posterURL;
-			}
-
 		}
 
 		function getProductAttributesById(attributeName, attributeId){

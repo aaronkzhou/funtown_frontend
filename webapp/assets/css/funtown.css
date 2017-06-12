@@ -644,3 +644,12 @@ h3[data-ng-bind="headTitle"] {
   background-color: #ea8e8e;
   color: #f2dede;
   border: 2px solid #f2dede; }
+
+.itemdetail-profile .itemDetail-poster {
+  display: block;
+  width: 100%;
+  height: auto; }
+
+.itemdetail-profile p {
+  margin: 4px;
+  text-align: center; }

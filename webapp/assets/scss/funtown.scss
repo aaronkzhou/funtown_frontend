@@ -821,5 +821,18 @@ top:-7px;
 		color: #f2dede;
 		border: 2px solid #f2dede;
 	}
-
 }
+
+.itemdetail-profile {
+	.itemDetail-poster {
+		display: block;
+	    width: 100%;
+	    height: auto;
+	}
+
+	p {
+		margin: 4px;
+		text-align: center;
+	}
+}
+

@@ -107,6 +107,9 @@ angular.module('funtown').service('ProductService', ['$log','$http', function($l
 				return cloneOfA;
 		}
 
+		this.getPoster = function (posterURL){
+			return "http://image.tmdb.org/t/p/w185" + posterURL;
+		}
 
 		function doTransformDatabaseCall(response){
 			$log.debug("doTransformDatabaseCall");
@@ -220,23 +223,6 @@ angular.module('funtown').service('ProductService', ['$log','$http', function($l
 			return formData;
 
 		}
-
-		this.findAttributeType = function (attriType, arr) {
-            for (var i = 0; i < arr.length; i++) {
-                if (arr[i].attributeType == attriType){
-                    return arr[i].attributeValue;
-                }
-            }
-        }
-
-        this.reorderArrayByAttributeId = function (arr) {
-            arr.sort(function(a, b){return a.attributeId - b.attributeId});
-        }
-
-        this.cloneArray = function (arr) {
-            var cloneOfA = JSON.parse(JSON.stringify(arr));
-            return cloneOfA;
-        }
 	}
 
 ]);
